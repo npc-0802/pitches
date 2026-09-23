@@ -1,10 +1,7 @@
-# TCL Recovery Calculator
+# pitches
 
-Interactive revenue calculator for the ROAST x TCL Black Friday 2026 proposal.
-Slide recovered organic visits, conversion rate and average order value to see
-what the ~160K November visits at risk are worth.
+Interactive pages that accompany ROAST pitch decks. Static HTML, served with GitHub Pages.
 
-Single static page (`index.html`), no build step. Hosted with GitHub Pages.
-
-Traffic basis: Ahrefs Site Explorer (US organic), SimilarWeb paid-visit cost.
-Conversion and AOV defaults are placeholders until TCL confirms its own figures.
+| Page | Path |
+| --- | --- |
+| TCL Recovery Calculator — what the ~160K recovered Black Friday visits are worth | `tcl-recovery-calculator/` |
