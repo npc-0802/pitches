@@ -7,139 +7,190 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;900&family=Public+Sans:wght@400;500;600&display=swap">
 <style>
 :root{
-  --bg:#ffffff; --ink:#111214; --muted:#5f6370; --line:#e5e3d9;
-  --yellow:#FFD100; --yellow-ink:#111214; --card:#f7f6f1; --accent:#111214; --good:#1f7a3a; --track:#e8e6dd;
+  --bg:#ffffff; --ink:#111214; --muted:#5b5e66; --line:#e6e4dc; --panel:#f6f5f0;
+  --yellow:#FFD100; --yellow-deep:#e6bc00; --on-yellow:#111214; --on-yellow-muted:#4a4630;
+  --track:#e3e1d8; --ok:#1f7a3a;
   color-scheme:light;
 }
 @media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){ --bg:#141416; --ink:#f3f2ec; --muted:#a3a49c; --line:#2c2c30; --card:#1d1d21; --accent:#FFD100; --track:#2f2f34; color-scheme:dark; }
+  :root:not([data-theme="light"]){ --bg:#111214; --ink:#f4f3ee; --muted:#a6a79f; --line:#2a2b2f; --panel:#1b1c20; --track:#33343a; color-scheme:dark; }
 }
-:root[data-theme="dark"]{ --bg:#141416; --ink:#f3f2ec; --muted:#a3a49c; --line:#2c2c30; --card:#1d1d21; --accent:#FFD100; --track:#2f2f34; color-scheme:dark; }
+:root[data-theme="dark"]{ --bg:#111214; --ink:#f4f3ee; --muted:#a6a79f; --line:#2a2b2f; --panel:#1b1c20; --track:#33343a; color-scheme:dark; }
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:"Public Sans",system-ui,-apple-system,Segoe UI,Helvetica,Arial,sans-serif;font-size:15px;line-height:1.45}
-.wrap{max-width:1040px;margin:0 auto;padding-block:28px 40px;padding-inline:20px;display:grid;gap:22px}
-header{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:10px}
-h1{font-family:"Archivo",system-ui,sans-serif;font-weight:900;font-size:clamp(24px,3.4vw,34px);letter-spacing:-.01em;margin:0;text-wrap:balance}
-.sub{color:var(--muted);max-width:60ch;margin:0}
-.eyebrow{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:600}
-.grid{display:grid;grid-template-columns:1.05fr 1fr;gap:22px}
-@media (max-width:760px){.grid{grid-template-columns:1fr}}
-.panel{background:var(--card);border-radius:18px;padding:22px}
-.hero{background:var(--yellow);color:var(--yellow-ink);border-radius:18px;padding:26px 24px;display:grid;gap:14px;align-content:start}
-.hero .big{font-family:"Archivo",sans-serif;font-weight:900;font-size:clamp(44px,7vw,74px);line-height:1;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
-.hero .eyebrow{color:#3a3a2a}
-.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-@media (max-width:520px){.tiles{grid-template-columns:1fr 1fr}}
-.tile{background:rgba(255,255,255,.55);border-radius:12px;padding:12px 12px 10px}
-.tile .v{font-family:"Archivo",sans-serif;font-weight:700;font-size:22px;font-variant-numeric:tabular-nums}
-.tile .l{font-size:12px;color:#3a3a2a;margin-top:2px}
-.ctl{display:grid;gap:6px;padding-block:14px;border-top:1px solid var(--line)}
-.ctl:first-of-type{border-top:0;padding-top:4px}
-.ctl .row{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Public Sans",system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;font-size:15px;line-height:1.45}
+.wrap{max-width:1080px;margin:0 auto;padding-block:22px 44px;padding-inline:20px;display:grid;gap:18px}
+.brand{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-bottom:6px}
+.wordmark{font-family:Georgia,"Times New Roman",serif;font-weight:700;font-size:26px;letter-spacing:.02em}
+.wordmark span{font-family:"Public Sans",sans-serif;font-weight:500;font-size:15px;color:var(--muted);margin-left:10px;letter-spacing:0}
+.deadline{font-size:13px;color:var(--muted);text-align:right}
+.deadline b{color:var(--ink);font-variant-numeric:tabular-nums}
+h1{font-family:"Archivo",system-ui,sans-serif;font-weight:900;font-size:clamp(28px,4vw,42px);line-height:1.05;letter-spacing:-.015em;margin:0;text-wrap:balance;max-width:20ch}
+.lede{color:var(--muted);max-width:66ch;margin:6px 0 0}
+.grid{display:grid;grid-template-columns:1.05fr .95fr;gap:18px;align-items:start}
+@media (max-width:780px){.grid{grid-template-columns:1fr}}
+.panel{background:var(--panel);border-radius:22px;padding:22px 22px 8px}
+.ctl{display:grid;gap:8px;padding-block:16px;border-top:1px solid var(--line)}
+.ctl:first-child{border-top:0;padding-top:2px}
+.ctl .row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
 .ctl label{font-weight:600}
-.ctl output{font-family:"Archivo",sans-serif;font-weight:700;font-size:20px;font-variant-numeric:tabular-nums}
-.ctl .hint{font-size:12.5px;color:var(--muted)}
-input[type=range]{width:100%;accent-color:var(--accent);height:28px;margin:0}
-input[type=range]:focus-visible{outline:2px solid var(--accent);outline-offset:4px;border-radius:6px}
-.scen{display:grid;gap:8px}
-.scen table{width:100%;border-collapse:collapse;font-size:14px}
-.scen th,.scen td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums}
-.scen th{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600}
-.scen td:last-child,.scen th:last-child{text-align:right;font-weight:600}
-.note{font-size:13px;color:var(--muted);max-width:75ch}
-.chips{display:flex;flex-wrap:wrap;gap:8px}
-.chip{border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-size:13px;background:transparent;color:var(--ink);cursor:pointer;font-family:inherit}
-.chip:hover,.chip:focus-visible{border-color:var(--ink);outline:none}
-.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.ctl output{font-family:"Archivo",sans-serif;font-weight:700;font-size:22px;font-variant-numeric:tabular-nums}
+.ctl output small{font-family:"Public Sans",sans-serif;font-weight:500;font-size:13px;color:var(--muted);margin-left:8px}
+.ctl .why{font-size:13px;color:var(--muted);max-width:60ch}
+.band{font-size:13px;font-weight:600;padding:5px 10px;border-radius:999px;background:var(--yellow);color:var(--on-yellow);width:max-content;max-width:100%}
+.band.low{background:var(--track);color:var(--ink)}
+input[type=range]{width:100%;accent-color:var(--ink);height:30px;margin:0}
+input[type=range]:focus-visible{outline:2px solid var(--ink);outline-offset:4px;border-radius:6px}
+.presets{display:flex;flex-wrap:wrap;gap:8px;padding-block:16px;border-top:1px solid var(--line)}
+.preset{border:1.5px solid var(--line);border-radius:12px;padding:8px 12px;font-size:13px;background:transparent;color:var(--ink);cursor:pointer;font-family:inherit;text-align:left;line-height:1.25}
+.preset b{display:block;font-weight:700}
+.preset:hover,.preset:focus-visible{border-color:var(--ink);outline:none}
+.preset[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.result{background:var(--yellow);color:var(--on-yellow);border-radius:22px;padding:24px 24px 20px;display:grid;gap:16px}
+.result .label{font-weight:600;font-size:14px;color:var(--on-yellow-muted)}
+.result .big{font-family:"Archivo",sans-serif;font-weight:900;font-size:clamp(46px,7.5vw,80px);line-height:.95;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.result .sub{font-size:14px;color:var(--on-yellow-muted);max-width:44ch}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+@media (max-width:520px){.stats{grid-template-columns:1fr 1fr}}
+.stat{background:rgba(255,255,255,.5);border-radius:14px;padding:12px 12px 10px}
+.stat .v{font-family:"Archivo",sans-serif;font-weight:700;font-size:21px;font-variant-numeric:tabular-nums;line-height:1.1}
+.stat .l{font-size:12px;color:var(--on-yellow-muted);margin-top:4px;line-height:1.3}
+.bars{display:grid;gap:8px;margin-top:4px}
+.bars .t{font-weight:600;font-size:13px;color:var(--on-yellow-muted)}
+.bar{display:grid;grid-template-columns:150px 1fr 64px;gap:10px;align-items:center;font-size:13px}
+@media (max-width:520px){.bar{grid-template-columns:110px 1fr 56px}}
+.bar .fill{height:14px;border-radius:7px;background:rgba(17,18,20,.25);position:relative;overflow:hidden}
+.bar .fill i{position:absolute;inset:0;width:0;background:var(--on-yellow);border-radius:7px;transition:width .25s ease}
+.bar .fill i.gain{background:#ffffff;left:auto}
+.bar .n{text-align:right;font-variant-numeric:tabular-nums;font-weight:600}
+@media (prefers-reduced-motion: reduce){.bar .fill i{transition:none}}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th,td{text-align:left;padding:7px 4px;border-bottom:1px solid rgba(17,18,20,.18);font-variant-numeric:tabular-nums}
+th{font-size:12px;color:var(--on-yellow-muted);font-weight:600}
+td:last-child,th:last-child{text-align:right;font-weight:700}
+.foot{font-size:13px;color:var(--muted);max-width:80ch;display:grid;gap:4px}
+.foot a{color:var(--ink)}
 </style>
 </head>
 <body>
 
 <div class="wrap">
-  <header>
-    <div>
-      <div class="eyebrow">ROAST × TCL · Black Friday 2026</div>
-      <h1>What the recovered traffic is worth</h1>
-    </div>
-    <p class="sub">Slide the three inputs during the pitch. The visits figure starts at the ~160K November organic visits at risk (312K last year vs ~150K on today's base). Conversion and order value are TCL's to confirm.</p>
-  </header>
+  <div class="brand">
+    <div class="wordmark">ROAST<span>× TCL · Black Friday 2026</span></div>
+    <div class="deadline"><b id="days">—</b> days to Black Friday (Nov 27)</div>
+  </div>
+
+  <div>
+    <h1>What the recovered traffic is worth</h1>
+    <p class="lede">The January move to us.tcl.com cut US organic traffic in half. Last November the old site peaked at 312K visits; on today's base the same seasonal lift delivers about 150K. That 160K gap is what the plan recovers. Set how much of it comes back, then TCL's own conversion rate and order value.</p>
+  </div>
 
   <div class="grid">
-    <section class="panel" aria-label="Inputs">
-      <div class="eyebrow" style="margin-bottom:6px">Inputs</div>
+    <section class="panel" aria-label="Assumptions">
 
       <div class="ctl">
-        <div class="row"><label for="visits">Recovered organic visits (November)</label><output id="visitsOut" for="visits">160,000</output></div>
-        <input type="range" id="visits" min="20000" max="320000" step="5000" value="160000">
-        <div class="hint">Range covers a partial recovery (40–60% of the gap is realistic inside the Black Friday window) up to a full return to last year's 312K peak.</div>
+        <div class="row"><label for="visits">Recovered November visits</label><output id="visitsOut" for="visits">80,000<small id="pct">50% of the gap</small></output></div>
+        <input type="range" id="visits" min="0" max="192000" step="4000" value="80000">
+        <div class="band" id="band">Realistic inside the Black Friday window</div>
+        <div class="why" id="visitsWhy">40–60% of the gap is what 301s live by Oct 9 and the hub indexed by Oct 15 can return before deals start, given Google's 4–8 week reprocessing lag.</div>
       </div>
 
       <div class="ctl">
         <div class="row"><label for="cvr">Site conversion rate</label><output id="cvrOut" for="cvr">1.0%</output></div>
         <input type="range" id="cvr" min="0.2" max="4" step="0.1" value="1">
-        <div class="hint">Consumer-electronics DTC sites typically convert 0.5–2% of sessions; Black Friday traffic converts higher. Ask TCL for their Shopify figure.</div>
+        <div class="why">Placeholder until TCL shares its Shopify figure. The schema, stock-signal and PDP fixes in Tiers 1–2 lift this too; Black Friday sessions convert above the annual average.</div>
       </div>
 
       <div class="ctl">
         <div class="row"><label for="aov">Average order value</label><output id="aovOut" for="aov">$900</output></div>
         <input type="range" id="aov" min="200" max="2500" step="25" value="900">
-        <div class="hint">us.tcl.com sale prices run from $449 (55" QM6K) to $3,999 (98" QM8K); the QM7K/QM8K 65–75" band clusters around $750–$1,400.</div>
+        <div class="why">Current us.tcl.com sale prices: $449 (55" QM6K) to $3,999 (98" QM8K). The 65–75" QM7K/QM8K band, which carries most of the TV traffic, sits at $750–$1,400.</div>
       </div>
 
-      <div class="ctl">
-        <div class="eyebrow" style="margin-bottom:8px">Presets</div>
-        <div class="chips" role="group" aria-label="Scenario presets">
-          <button class="chip" type="button" data-p="64000,0.8,800">Conservative</button>
-          <button class="chip" type="button" data-p="160000,1,900" aria-pressed="true">Base</button>
-          <button class="chip" type="button" data-p="240000,1.5,1100">Upside</button>
-          <button class="chip" type="button" data-p="312000,2,1200">Full peak</button>
-        </div>
+      <div class="presets" role="group" aria-label="Scenarios tied to the plan">
+        <button class="preset" type="button" data-p="64000,0.8,800"><b>Redirects only</b>40% of the gap, no conversion lift</button>
+        <button class="preset" type="button" data-p="80000,1,900" aria-pressed="true"><b>Tier 1 lands</b>50%, schema and stock fixed</button>
+        <button class="preset" type="button" data-p="96000,1.3,1000"><b>Tiers 1 + 2 land</b>60%, hub and PDP lift</button>
+        <button class="preset" type="button" data-p="160000,1.6,1100"><b>Back to last year's peak</b>100% of the gap</button>
       </div>
     </section>
 
-    <section class="hero" aria-live="polite" aria-label="Results">
-      <div class="eyebrow">Revenue from recovered traffic</div>
-      <div class="big" id="rev">$1.44M</div>
-      <div class="tiles">
-        <div class="tile"><div class="v" id="orders">1,600</div><div class="l">orders</div></div>
-        <div class="tile"><div class="v" id="paid">$147K</div><div class="l">paid-search equivalent at $0.92 / visit</div></div>
-        <div class="tile"><div class="v" id="rpv">$9.00</div><div class="l">revenue per visit</div></div>
+    <section class="result" aria-live="polite" aria-label="Outcome">
+      <div>
+        <div class="label">November revenue on us.tcl.com from recovered visits</div>
+        <div class="big" id="rev">$720K</div>
+        <div class="sub" id="revSub"></div>
       </div>
-      <div class="scen">
-        <table aria-label="Sensitivity">
-          <thead><tr><th>If conversion is…</th><th>Orders</th><th>Revenue</th></tr></thead>
-          <tbody id="sens"></tbody>
-        </table>
+
+      <div class="stats">
+        <div class="stat"><div class="v" id="orders">800</div><div class="l">orders</div></div>
+        <div class="stat"><div class="v" id="paid">$74K</div><div class="l">what the same visits cost in paid search at $0.92 each</div></div>
+        <div class="stat"><div class="v" id="rpv">$9.00</div><div class="l">revenue per visit</div></div>
       </div>
-      <p class="note" style="color:#3a3a2a">Revenue = visits × conversion × order value. Counts only sales on us.tcl.com; retailer sell-through influenced by TCL.com answers is on top of this.</p>
+
+      <div class="bars">
+        <div class="t">November US organic visits</div>
+        <div class="bar"><span>Last year's peak</span><div class="fill"><i style="width:100%"></i></div><span class="n">312K</span></div>
+        <div class="bar"><span>This year, nothing fixed</span><div class="fill"><i id="baseBar"></i></div><span class="n">150K</span></div>
+        <div class="bar"><span>This year, with recovery</span><div class="fill"><i id="baseBar2"></i><i class="gain" id="gainBar"></i></div><span class="n" id="withN">230K</span></div>
+      </div>
+
+      <table aria-label="Conversion sensitivity">
+        <thead><tr><th>If conversion is</th><th>Orders</th><th>Revenue</th></tr></thead>
+        <tbody id="sens"></tbody>
+      </table>
     </section>
   </div>
 
-  <p class="note">Traffic basis: Ahrefs Site Explorer, US organic, Sep 2025 run-rate ~207K, Nov 2025 peak ~312K, Sep 2026 ~100K. Paid-visit cost: SimilarWeb estimate, $79K/month at $0.92 per paid visit. Conversion and AOV defaults are placeholders, not TCL data.</p>
+  <div class="foot">
+    <div>Traffic: Ahrefs Site Explorer, US organic — ~207K/month before the move (Sep 2025), 312K November 2025 peak, ~100K in Sep 2026. Paid cost: SimilarWeb, ~$79K/month at $0.92 per paid visit. Recovered visits are counted on top of the ~150K the site would do anyway.</div>
+    <div>Counts only sales on us.tcl.com. Retailer sell-through influenced by TCL.com answers, and everything captured on new terms (size pages, comparisons, the Black Friday hub), is on top.</div>
+  </div>
 </div>
 
 <script>
 (function(){
   const $=id=>document.getElementById(id);
+  const GAP=160000, BASE=150000, PEAK=312000, CPV=0.92;
   const visits=$('visits'),cvr=$('cvr'),aov=$('aov');
   const fmtI=n=>Math.round(n).toLocaleString('en-US');
+  const fmtK=n=>n>=1e6?(n/1e6).toFixed(2)+'M':Math.round(n/1e3)+'K';
   const fmtM=n=>n>=1e6?'$'+(n/1e6).toFixed(2)+'M':n>=1e3?'$'+Math.round(n/1e3)+'K':'$'+Math.round(n);
-  const chips=[...document.querySelectorAll('.chip')];
+  const presets=[...document.querySelectorAll('.preset')];
+
+  // days to Black Friday, Nov 27 2026 (local time)
+  const bf=new Date(2026,10,27), now=new Date();
+  const days=Math.max(0,Math.ceil((bf-new Date(now.getFullYear(),now.getMonth(),now.getDate()))/86400000));
+  $('days').textContent=days;
+
+  function bandFor(pct){
+    if(pct===0) return ['low','Nothing recovered: the 160K gap stays open'];
+    if(pct<40) return ['low','Below the realistic band: redirects alone, or applied late'];
+    if(pct<=60) return ['','Realistic inside the Black Friday window'];
+    if(pct<100) return ['','Needs Tiers 1 and 2 live on schedule and Google reprocessing fast'];
+    if(pct===100) return ['','Back to last year\'s peak (312K)'];
+    return ['','Above last year\'s peak: recovery plus new demand captured'];
+  }
   function render(){
-    const v=+visits.value,c=+cvr.value/100,a=+aov.value;
-    $('visitsOut').value=fmtI(v);$('cvrOut').value=(+cvr.value).toFixed(1)+'%';$('aovOut').value='$'+fmtI(a);
+    const v=+visits.value,c=+cvr.value/100,a=+aov.value,pct=Math.round(v/GAP*100);
+    $('visitsOut').firstChild.textContent=fmtI(v);
+    $('pct').textContent=pct+'% of the gap';
+    const [cls,msg]=bandFor(pct); $('band').className='band '+cls; $('band').textContent=msg;
+    $('cvrOut').value=(+cvr.value).toFixed(1)+'%'; $('aovOut').value='$'+fmtI(a);
     const orders=v*c,rev=orders*a;
-    $('rev').textContent=fmtM(rev);$('orders').textContent=fmtI(orders);
-    $('paid').textContent=fmtM(v*0.92);$('rpv').textContent='$'+(rev/v).toFixed(2);
-    const rows=[Math.max(0.2,+cvr.value-0.5),+cvr.value,+cvr.value+0.5].map(x=>{
-      const o=v*x/100;return `<tr><td>${x.toFixed(1)}%</td><td>${fmtI(o)}</td><td>${fmtM(o*a)}</td></tr>`;});
-    $('sens').innerHTML=rows.join('');
-    chips.forEach(ch=>{const [pv,pc,pa]=ch.dataset.p.split(',');ch.setAttribute('aria-pressed',String(+pv===v&&+pc===+cvr.value&&+pa===a));});
-    try{localStorage.setItem('tcl-calc',JSON.stringify({v,c:+cvr.value,a}));}catch(e){}
+    $('rev').textContent=fmtM(rev);
+    $('revSub').textContent=v?`${fmtI(v)} visits × ${(+cvr.value).toFixed(1)}% × $${fmtI(a)}. Every one of those visits would otherwise cost $${CPV.toFixed(2)} to buy.`:'Move the first slider to see a value.';
+    $('orders').textContent=fmtI(orders); $('paid').textContent=fmtM(v*CPV); $('rpv').textContent=v?'$'+(rev/v).toFixed(2):'$0.00';
+    const withV=BASE+v; $('withN').textContent=fmtK(withV);
+    const b=BASE/PEAK*100, g=Math.min(100,withV/PEAK*100);
+    $('baseBar').style.width=b+'%'; $('baseBar2').style.width=b+'%';
+    const gain=$('gainBar'); gain.style.left=b+'%'; gain.style.width=Math.max(0,g-b)+'%';
+    $('sens').innerHTML=[Math.max(0.2,+cvr.value-0.5),+cvr.value,+cvr.value+0.5].map(x=>{const o=v*x/100;return `<tr><td>${x.toFixed(1)}%</td><td>${fmtI(o)}</td><td>${fmtM(o*a)}</td></tr>`;}).join('');
+    presets.forEach(p=>{const [pv,pc,pa]=p.dataset.p.split(',');p.setAttribute('aria-pressed',String(+pv===v&&+pc===+cvr.value&&+pa===a));});
+    try{localStorage.setItem('tcl-calc-v2',JSON.stringify({v,c:+cvr.value,a}));}catch(e){}
   }
   [visits,cvr,aov].forEach(el=>el.addEventListener('input',render));
-  chips.forEach(ch=>ch.addEventListener('click',()=>{const [pv,pc,pa]=ch.dataset.p.split(',');visits.value=pv;cvr.value=pc;aov.value=pa;render();}));
-  try{const s=JSON.parse(localStorage.getItem('tcl-calc'));if(s){visits.value=s.v;cvr.value=s.c;aov.value=s.a;}}catch(e){}
+  presets.forEach(p=>p.addEventListener('click',()=>{const [pv,pc,pa]=p.dataset.p.split(',');visits.value=pv;cvr.value=pc;aov.value=pa;render();}));
+  try{const s=JSON.parse(localStorage.getItem('tcl-calc-v2'));if(s){visits.value=s.v;cvr.value=s.c;aov.value=s.a;}}catch(e){}
   render();
 })();
 </script>
