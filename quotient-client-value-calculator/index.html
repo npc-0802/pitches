@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Quotient Client-Value Calculator</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;900&family=Public+Sans:wght@400;500;600&display=swap">
+<style>
+:root{
+  --bg:#ffffff; --ink:#111214; --muted:#5b5e66; --line:#e6e4dc; --panel:#f6f5f0;
+  --yellow:#FFD100; --yellow-deep:#e6bc00; --on-yellow:#111214; --on-yellow-muted:#4a4630;
+  --track:#e3e1d8; --ok:#1f7a3a;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){ --bg:#111214; --ink:#f4f3ee; --muted:#a6a79f; --line:#2a2b2f; --panel:#1b1c20; --track:#33343a; color-scheme:dark; }
+}
+:root[data-theme="dark"]{ --bg:#111214; --ink:#f4f3ee; --muted:#a6a79f; --line:#2a2b2f; --panel:#1b1c20; --track:#33343a; color-scheme:dark; }
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Public Sans",system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;font-size:15px;line-height:1.45}
+.wrap{max-width:1080px;margin:0 auto;padding-block:22px 44px;padding-inline:20px;display:grid;gap:18px}
+.brand{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-bottom:6px}
+.wordmark{font-family:Georgia,"Times New Roman",serif;font-weight:700;font-size:26px;letter-spacing:.02em}
+.wordmark span{font-family:"Public Sans",sans-serif;font-weight:500;font-size:15px;color:var(--muted);margin-left:10px;letter-spacing:0}
+.deadline{font-size:13px;color:var(--muted);text-align:right}
+.deadline b{color:var(--ink);font-variant-numeric:tabular-nums}
+h1{font-family:"Archivo",system-ui,sans-serif;font-weight:900;font-size:clamp(28px,4vw,42px);line-height:1.05;letter-spacing:-.015em;margin:0;text-wrap:balance;max-width:22ch}
+.lede{color:var(--muted);max-width:70ch;margin:6px 0 0}
+.grid{display:grid;grid-template-columns:1.05fr .95fr;gap:18px;align-items:start}
+@media (max-width:780px){.grid{grid-template-columns:1fr}}
+.panel{background:var(--panel);border-radius:22px;padding:22px 22px 8px}
+.ctl{display:grid;gap:8px;padding-block:14px;border-top:1px solid var(--line)}
+.ctl:first-child{border-top:0;padding-top:2px}
+.ctl .row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.ctl label{font-weight:600}
+.ctl output{font-family:"Archivo",sans-serif;font-weight:700;font-size:22px;font-variant-numeric:tabular-nums}
+.ctl output small{font-family:"Public Sans",sans-serif;font-weight:500;font-size:13px;color:var(--muted);margin-left:8px}
+.ctl .why{font-size:13px;color:var(--muted);max-width:60ch}
+.band{font-size:13px;font-weight:600;padding:5px 10px;border-radius:999px;background:var(--yellow);color:var(--on-yellow);width:max-content;max-width:100%}
+.band.low{background:var(--track);color:var(--ink)}
+input[type=range]{width:100%;accent-color:var(--ink);height:30px;margin:0}
+input[type=range]:focus-visible{outline:2px solid var(--ink);outline-offset:4px;border-radius:6px}
+.presets{display:flex;flex-wrap:wrap;gap:8px;padding-block:16px;border-top:1px solid var(--line)}
+.preset{border:1.5px solid var(--line);border-radius:12px;padding:8px 12px;font-size:13px;background:transparent;color:var(--ink);cursor:pointer;font-family:inherit;text-align:left;line-height:1.25}
+.preset b{display:block;font-weight:700}
+.preset:hover,.preset:focus-visible{border-color:var(--ink);outline:none}
+.preset[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.result{background:var(--yellow);color:var(--on-yellow);border-radius:22px;padding:24px 24px 20px;display:grid;gap:16px}
+.result .label{font-weight:600;font-size:14px;color:var(--on-yellow-muted)}
+.result .big{font-family:"Archivo",sans-serif;font-weight:900;font-size:clamp(46px,7.5vw,80px);line-height:.95;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.result .sub{font-size:14px;color:var(--on-yellow-muted);max-width:46ch}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+@media (max-width:520px){.stats{grid-template-columns:1fr 1fr}}
+.stat{background:rgba(255,255,255,.5);border-radius:14px;padding:12px 12px 10px}
+.stat .v{font-family:"Archivo",sans-serif;font-weight:700;font-size:21px;font-variant-numeric:tabular-nums;line-height:1.1}
+.stat .l{font-size:12px;color:var(--on-yellow-muted);margin-top:4px;line-height:1.3}
+.bars{display:grid;gap:8px;margin-top:4px}
+.bars .t{font-weight:600;font-size:13px;color:var(--on-yellow-muted)}
+.bar{display:grid;grid-template-columns:150px 1fr 64px;gap:10px;align-items:center;font-size:13px}
+@media (max-width:520px){.bar{grid-template-columns:110px 1fr 56px}}
+.bar .fill{height:14px;border-radius:7px;background:rgba(17,18,20,.25);position:relative;overflow:hidden}
+.bar .fill i{position:absolute;inset:0;width:0;background:var(--on-yellow);border-radius:7px;transition:width .25s ease}
+.bar .fill i.gain{background:#ffffff;left:auto}
+.bar .n{text-align:right;font-variant-numeric:tabular-nums;font-weight:600}
+@media (prefers-reduced-motion: reduce){.bar .fill i{transition:none}}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th,td{text-align:left;padding:7px 4px;border-bottom:1px solid rgba(17,18,20,.18);font-variant-numeric:tabular-nums}
+th{font-size:12px;color:var(--on-yellow-muted);font-weight:600}
+td:last-child,th:last-child{text-align:right;font-weight:700}
+.inaction{background:var(--panel);border-radius:22px;padding:20px 22px;display:grid;gap:6px}
+.inaction h2{font-family:"Archivo",sans-serif;font-weight:700;font-size:18px;margin:0}
+.inaction p{margin:0;color:var(--muted);max-width:80ch}
+.inaction b{color:var(--ink)}
+.foot{font-size:13px;color:var(--muted);max-width:80ch;display:grid;gap:4px}
+.foot a{color:var(--ink)}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="brand">
+    <div class="wordmark">ROAST<span>× Quotient Wealth Partners · Q4 2026</span></div>
+    <div class="deadline"><b id="days">—</b> days to the first Peec read (Oct 1)</div>
+  </div>
+
+  <div>
+    <h1>What a few more clients from search and AI are worth</h1>
+    <p class="lede">Quotient already out-ranks every Dallas boutique but Tolleson, yet its prospect audience is only about 2,000–3,500 visits a month and AI assistants rarely name it. The unit of value here is a client, not a visit: one $500k+ client pays fees for a decade. Set how much prospect traffic the plan adds, then Quotient's own conversion and fee figures.</p>
+  </div>
+
+  <div class="grid">
+    <section class="panel" aria-label="Assumptions">
+
+      <div class="ctl">
+        <div class="row"><label for="visits">Extra prospect visits a month</label><output id="visitsOut" for="visits">2,300<small id="pct">Tiers 2 + 3</small></output></div>
+        <input type="range" id="visits" min="0" max="4000" step="50" value="2300">
+        <div class="band" id="band">Tiers 2 + 3: local signals plus the QCD, 83(b) and employer pages at top 3</div>
+        <div class="why" id="visitsWhy">Tier 2 (Business Profiles, D Magazine, directories) adds ~150–400 high-intent local visits; Tier 3 (eight page-2 keywords, ~18,000 searches a month, to the top 3) adds ~1,500–2,700 at an 8–15% click share under AI Overviews.</div>
+      </div>
+
+      <div class="ctl">
+        <div class="row"><label for="consult">Visit to consultation</label><output id="consultOut" for="consult">0.25%</output></div>
+        <input type="range" id="consult" min="0.05" max="2" step="0.05" value="0.25">
+        <div class="why">Placeholder until Quotient shares GA4 and Zoom-scheduler figures. Informational content (QCD, 83(b)) converts around 0.2%; local, high-intent visits closer to 1%. The default blends the two.</div>
+      </div>
+
+      <div class="ctl">
+        <div class="row"><label for="close">Consultation to client</label><output id="closeOut" for="close">20%</output></div>
+        <input type="range" id="close" min="5" max="50" step="1" value="20">
+        <div class="why">Placeholder until Quotient shares its close rate. Advisory firms typically convert 20–35% of first meetings with qualified prospects.</div>
+      </div>
+
+      <div class="ctl">
+        <div class="row"><label for="aum">Average new-client investable assets</label><output id="aumOut" for="aum">$750K</output></div>
+        <input type="range" id="aum" min="250000" max="2000000" step="25000" value="750000">
+        <div class="why">Quotient's stated minimum is $500,000. Corporate executives with equity compensation and pre-retirees rolling over 401(k)s often arrive above $1M.</div>
+      </div>
+
+      <div class="ctl">
+        <div class="row"><label for="fee">Advisory fee</label><output id="feeOut" for="fee">1.00%</output></div>
+        <input type="range" id="fee" min="0.4" max="1.5" step="0.05" value="1">
+        <div class="why">Placeholder: blended fee on AUM. Tax preparation, planning and family office services on top are not counted.</div>
+      </div>
+
+      <div class="ctl">
+        <div class="row"><label for="tenure">Client tenure</label><output id="tenureOut" for="tenure">8 years</output></div>
+        <input type="range" id="tenure" min="3" max="15" step="1" value="8">
+        <div class="why">Placeholder: years a new client stays. Independent RIAs commonly retain clients 7–10+ years; growth in assets over that period is not counted.</div>
+      </div>
+
+      <div class="presets" role="group" aria-label="Scenarios tied to the plan">
+        <button class="preset" type="button" data-p="0,0.25,20,750000,1,8"><b>Tier 1 only</b>Fixes protect today's traffic; nothing added</button>
+        <button class="preset" type="button" data-p="300,1,20,750000,1,8"><b>Tier 2 lands</b>Local and directory signals, +300 high-intent visits</button>
+        <button class="preset" type="button" data-p="2000,0.2,20,750000,1,8"><b>Tier 3 lands</b>QCD, 83(b) and employer pages at top 3, +2,000 visits</button>
+        <button class="preset" type="button" data-p="2300,0.25,20,750000,1,8" aria-pressed="true"><b>Tiers 2 + 3</b>The headline scenario</button>
+        <button class="preset" type="button" data-p="3500,0.3,22,900000,1,10"><b>Highest ambition (ceiling)</b>The cited answer for executives, all six markets</button>
+      </div>
+    </section>
+
+    <section class="result" aria-live="polite" aria-label="Outcome">
+      <div>
+        <div class="label">Lifetime fees from one year of new clients won through search and AI</div>
+        <div class="big" id="ltv">$580K</div>
+        <div class="sub" id="ltvSub"></div>
+      </div>
+
+      <div class="stats">
+        <div class="stat"><div class="v" id="clients">9.7</div><div class="l">new clients a year</div></div>
+        <div class="stat"><div class="v" id="arr">$72K</div><div class="l">recurring annual fees added by that cohort</div></div>
+        <div class="stat"><div class="v" id="paid">$28K</div><div class="l">what the same visits would cost a month in paid search at <span id="cpcLbl">$15</span> a click</div></div>
+      </div>
+
+      <div class="bars">
+        <div class="t">Prospect visits a month</div>
+        <div class="bar"><span>Today (est.)</span><div class="fill"><i id="baseBar"></i></div><span class="n">2,750</span></div>
+        <div class="bar"><span>With the plan</span><div class="fill"><i id="baseBar2"></i><i class="gain" id="gainBar"></i></div><span class="n" id="withN">5,050</span></div>
+        <div class="bar"><span>August run-rate</span><div class="fill"><i id="augBar"></i></div><span class="n">1,350</span></div>
+      </div>
+
+      <table aria-label="Close-rate sensitivity">
+        <thead><tr><th>If consultation-to-client is</th><th>Clients / yr</th><th>Lifetime fees</th></tr></thead>
+        <tbody id="sens"></tbody>
+      </table>
+    </section>
+  </div>
+
+  <div class="inaction">
+    <h2>What doing nothing costs</h2>
+    <p>August organic ran about <b>1,400 visits a month below July's peak</b> (3,116 → 1,734, Similarweb). At the rates above that is <b id="lostConsults">4.9</b> fewer consultations a month, <b id="lostClients">12</b> fewer clients a year and <b id="lostLtv">$700K</b> in lifetime fees per year the run-rate holds. Google AI Overviews now sit on every keyword Quotient ranks for and cite it zero times, and Dallas AI answers are being written from D Magazine, Wealthtender, the CFP Board directory and Google reviews — lists Quotient is not on yet. Firms that get onto those lists first tend to stay in the answer.</p>
+  </div>
+
+  <div class="foot">
+    <div>Traffic: Similarweb, US, Jun–Aug 2026 (organic 1,887 / 3,116 / 1,734; ~2,000–3,500 prospect visits a month once client logins are excluded — an inference, to confirm in GA4). Keywords: Similarweb positions Aug 2026 and Ahrefs Sep 23 2026 (qcd 6,010; qcd limit 2026 4,200; qcd meaning 2,020; qualified charitable distribution 1,590; 83b election 1,520; microsoft 401k match 1,240; intel benefits 830; dividend reinvesting + tax-loss harvesting 780). Competitors and AI citations: Ahrefs Site Explorer and AI responses, Sep 23 2026.</div>
+    <div>Formula: visits × consultation rate × close rate × 12 = clients a year; clients × assets × fee × tenure = lifetime fees. Counts advisory fees only; growth in assets, tax and planning fees, referrals from new clients, and calls or directions that never touch the site are on top. Paid-equivalent cost uses a $15 financial-services CPC (placeholder until real CPCs are pulled); it is what the traffic would cost, not what it earns — the two are not added together.</div>
+    <div>Part of the ROAST × Quotient current-state brief, September 2026. Companion to the <a href="../tcl-recovery-calculator/">TCL Recovery Calculator</a>.</div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const $=id=>document.getElementById(id);
+  const BASE=2750, AUG=1350, CPC=15, LOST=1400;
+  const visits=$('visits'),consult=$('consult'),close=$('close'),aum=$('aum'),fee=$('fee'),tenure=$('tenure');
+  const fmtI=n=>Math.round(n).toLocaleString('en-US');
+  const fmt1=n=>(Math.round(n*10)/10).toLocaleString('en-US',{minimumFractionDigits:1,maximumFractionDigits:1});
+  const fmtM=n=>n>=1e6?'$'+(n/1e6).toFixed(2)+'M':n>=1e3?'$'+Math.round(n/1e3)+'K':'$'+Math.round(n);
+  const presets=[...document.querySelectorAll('.preset')];
+
+  const peec=new Date(2026,9,1), now=new Date();
+  const days=Math.max(0,Math.ceil((peec-new Date(now.getFullYear(),now.getMonth(),now.getDate()))/86400000));
+  $('days').textContent=days;
+
+  function bandFor(v){
+    if(v===0) return ['low','Nothing added: Tier 1 protects what exists, the gap stays open'];
+    if(v<=400) return ['','Tier 2 range: Business Profiles, D Magazine and directories'];
+    if(v<1500) return ['','Between Tier 2 and Tier 3: partial content wins'];
+    if(v<=3100) return ['','Tiers 2 + 3: local signals plus the QCD, 83(b) and employer pages at top 3'];
+    return ['','Ambition range: employer prompts, all six markets, national executive answers'];
+  }
+  function tierLabel(v){
+    if(v===0) return 'Tier 1';
+    if(v<=400) return 'Tier 2';
+    if(v<1500) return 'Tiers 2 → 3';
+    if(v<=3100) return 'Tiers 2 + 3';
+    return 'Tier 4';
+  }
+  function model(v,cr,cl,a,f,t){
+    const consults=v*cr/100, clientsYr=consults*cl/100*12;
+    const perClientYr=a*f/100, ltv=clientsYr*perClientYr*t;
+    return {consults,clientsYr,perClientYr,ltv,arr:clientsYr*perClientYr};
+  }
+  function render(){
+    const v=+visits.value,cr=+consult.value,cl=+close.value,a=+aum.value,f=+fee.value,t=+tenure.value;
+    $('visitsOut').firstChild.textContent=fmtI(v);
+    $('pct').textContent=tierLabel(v);
+    const [cls,msg]=bandFor(v); $('band').className='band '+cls; $('band').textContent=msg;
+    $('consultOut').value=cr.toFixed(2)+'%'; $('closeOut').value=cl+'%';
+    $('aumOut').value=fmtM(a); $('feeOut').value=f.toFixed(2)+'%'; $('tenureOut').value=t+' years';
+    const m=model(v,cr,cl,a,f,t);
+    $('ltv').textContent=fmtM(m.ltv);
+    $('ltvSub').textContent=v?`${fmtI(v)} visits × ${cr.toFixed(2)}% × ${cl}% × 12 = ${fmt1(m.clientsYr)} clients; each worth ${fmtM(m.perClientYr)} a year for ${t} years.`:'Move the first slider to see a value.';
+    $('clients').textContent=fmt1(m.clientsYr); $('arr').textContent=fmtM(m.arr);
+    $('paid').textContent=fmtM(v*CPC); $('cpcLbl').textContent='$'+CPC;
+    const withV=BASE+v, max=Math.max(withV,BASE)*1.05;
+    $('withN').textContent=fmtI(withV);
+    const b=BASE/max*100, g=withV/max*100;
+    $('baseBar').style.width=b+'%'; $('baseBar2').style.width=b+'%';
+    const gain=$('gainBar'); gain.style.left=b+'%'; gain.style.width=Math.max(0,g-b)+'%';
+    $('augBar').style.width=(AUG/max*100)+'%';
+    $('sens').innerHTML=[Math.max(5,cl-10),cl,Math.min(50,cl+10)].map(x=>{const mm=model(v,cr,x,a,f,t);return `<tr><td>${x}%</td><td>${fmt1(mm.clientsYr)}</td><td>${fmtM(mm.ltv)}</td></tr>`;}).join('');
+    const lost=model(LOST,cr,cl,a,f,t);
+    $('lostConsults').textContent=fmt1(lost.consults); $('lostClients').textContent=fmt1(lost.clientsYr); $('lostLtv').textContent=fmtM(lost.ltv);
+    presets.forEach(p=>{const q=p.dataset.p.split(',').map(Number);p.setAttribute('aria-pressed',String(q[0]===v&&q[1]===cr&&q[2]===cl&&q[3]===a&&q[4]===f&&q[5]===t));});
+    try{localStorage.setItem('quotient-calc-v1',JSON.stringify({v,cr,cl,a,f,t}));}catch(e){}
+  }
+  [visits,consult,close,aum,fee,tenure].forEach(el=>el.addEventListener('input',render));
+  presets.forEach(p=>p.addEventListener('click',()=>{const q=p.dataset.p.split(',');[visits,consult,close,aum,fee,tenure].forEach((el,i)=>el.value=q[i]);render();}));
+  try{const s=JSON.parse(localStorage.getItem('quotient-calc-v1'));if(s){visits.value=s.v;consult.value=s.cr;close.value=s.cl;aum.value=s.a;fee.value=s.f;tenure.value=s.t;}}catch(e){}
+  render();
+})();
+</script>
+</body>
+</html>
