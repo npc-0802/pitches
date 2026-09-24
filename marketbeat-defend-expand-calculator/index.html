@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>MarketBeat Defend & Expand Calculator</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;900&family=Public+Sans:wght@400;500;600&display=swap">
+<style>
+:root{
+  --bg:#ffffff; --ink:#111214; --muted:#5b5e66; --line:#e6e4dc; --panel:#f6f5f0;
+  --yellow:#FFD100; --yellow-deep:#e6bc00; --on-yellow:#111214; --on-yellow-muted:#4a4630;
+  --track:#e3e1d8; --ok:#1f7a3a;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){ --bg:#111214; --ink:#f4f3ee; --muted:#a6a79f; --line:#2a2b2f; --panel:#1b1c20; --track:#33343a; color-scheme:dark; }
+}
+:root[data-theme="dark"]{ --bg:#111214; --ink:#f4f3ee; --muted:#a6a79f; --line:#2a2b2f; --panel:#1b1c20; --track:#33343a; color-scheme:dark; }
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Public Sans",system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;font-size:15px;line-height:1.45}
+.wrap{max-width:1080px;margin:0 auto;padding-block:22px 44px;padding-inline:20px;display:grid;gap:18px}
+.brand{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-bottom:6px}
+.wordmark{font-family:Georgia,"Times New Roman",serif;font-weight:700;font-size:26px;letter-spacing:.02em}
+.wordmark span{font-family:"Public Sans",sans-serif;font-weight:500;font-size:15px;color:var(--muted);margin-left:10px;letter-spacing:0}
+.deadline{font-size:13px;color:var(--muted);text-align:right}
+.deadline b{color:var(--ink);font-variant-numeric:tabular-nums}
+h1{font-family:"Archivo",system-ui,sans-serif;font-weight:900;font-size:clamp(28px,4vw,42px);line-height:1.05;letter-spacing:-.015em;margin:0;text-wrap:balance;max-width:20ch}
+.lede{color:var(--muted);max-width:66ch;margin:6px 0 0}
+.grid{display:grid;grid-template-columns:1.05fr .95fr;gap:18px;align-items:start}
+@media (max-width:780px){.grid{grid-template-columns:1fr}}
+.panel{background:var(--panel);border-radius:22px;padding:22px 22px 8px}
+.ctl{display:grid;gap:8px;padding-block:16px;border-top:1px solid var(--line)}
+.ctl:first-child{border-top:0;padding-top:2px}
+.ctl .row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.ctl label{font-weight:600}
+.ctl output{font-family:"Archivo",sans-serif;font-weight:700;font-size:22px;font-variant-numeric:tabular-nums}
+.ctl output small{font-family:"Public Sans",sans-serif;font-weight:500;font-size:13px;color:var(--muted);margin-left:8px}
+.ctl .why{font-size:13px;color:var(--muted);max-width:60ch}
+.band{font-size:13px;font-weight:600;padding:5px 10px;border-radius:999px;background:var(--yellow);color:var(--on-yellow);width:max-content;max-width:100%}
+.band.low{background:var(--track);color:var(--ink)}
+input[type=range]{width:100%;accent-color:var(--ink);height:30px;margin:0}
+input[type=range]:focus-visible{outline:2px solid var(--ink);outline-offset:4px;border-radius:6px}
+.presets{display:flex;flex-wrap:wrap;gap:8px;padding-block:16px;border-top:1px solid var(--line)}
+.preset{border:1.5px solid var(--line);border-radius:12px;padding:8px 12px;font-size:13px;background:transparent;color:var(--ink);cursor:pointer;font-family:inherit;text-align:left;line-height:1.25}
+.preset b{display:block;font-weight:700}
+.preset:hover,.preset:focus-visible{border-color:var(--ink);outline:none}
+.preset[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.result{background:var(--yellow);color:var(--on-yellow);border-radius:22px;padding:24px 24px 20px;display:grid;gap:16px}
+.result .label{font-weight:600;font-size:14px;color:var(--on-yellow-muted)}
+.result .big{font-family:"Archivo",sans-serif;font-weight:900;font-size:clamp(46px,7.5vw,80px);line-height:.95;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.result .sub{font-size:14px;color:var(--on-yellow-muted);max-width:44ch}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+@media (max-width:520px){.stats{grid-template-columns:1fr 1fr}}
+.stat{background:rgba(255,255,255,.5);border-radius:14px;padding:12px 12px 10px}
+.stat .v{font-family:"Archivo",sans-serif;font-weight:700;font-size:21px;font-variant-numeric:tabular-nums;line-height:1.1}
+.stat .l{font-size:12px;color:var(--on-yellow-muted);margin-top:4px;line-height:1.3}
+.bars{display:grid;gap:8px;margin-top:4px}
+.bars .t{font-weight:600;font-size:13px;color:var(--on-yellow-muted)}
+.bar{display:grid;grid-template-columns:150px 1fr 64px;gap:10px;align-items:center;font-size:13px}
+@media (max-width:520px){.bar{grid-template-columns:110px 1fr 56px}}
+.bar .fill{height:14px;border-radius:7px;background:rgba(17,18,20,.25);position:relative;overflow:hidden}
+.bar .fill i{position:absolute;inset:0;width:0;background:var(--on-yellow);border-radius:7px;transition:width .25s ease}
+.bar .fill i.gain{background:#ffffff;left:auto}
+.bar .n{text-align:right;font-variant-numeric:tabular-nums;font-weight:600}
+@media (prefers-reduced-motion: reduce){.bar .fill i{transition:none}}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th,td{text-align:left;padding:7px 4px;border-bottom:1px solid rgba(17,18,20,.18);font-variant-numeric:tabular-nums}
+th{font-size:12px;color:var(--on-yellow-muted);font-weight:600}
+td:last-child,th:last-child{text-align:right;font-weight:700}
+.foot{font-size:13px;color:var(--muted);max-width:80ch;display:grid;gap:4px}
+.foot a{color:var(--ink)}
+.inaction{background:var(--panel);border-radius:22px;padding:20px 22px;display:grid;gap:6px}
+.inaction h2{font-family:"Archivo",sans-serif;font-weight:700;font-size:18px;margin:0}
+.inaction p{margin:0;color:var(--muted);max-width:80ch}
+.inaction b{color:var(--ink)}
+.grp{font-family:"Archivo",sans-serif;font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding-top:14px;border-top:2px solid var(--ink);margin-top:6px}
+.grp:first-child{border-top:0;margin-top:0;padding-top:0}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="brand">
+    <div class="wordmark">ROAST<span>× MarketBeat · Defend the fort, gain new territory</span></div>
+    <div class="deadline"><b id="days">—</b> days since Google organic peaked (Nov 2025)</div>
+  </div>
+
+  <div>
+    <h1>What defending and expanding search is worth</h1>
+    <p class="lede">MarketBeat's Google traffic fell 71% since November 2025, from 6.24M to 1.84M visits a month, in line with a sector-wide shift to AI answers and big brands. The full peak isn't coming back for anyone. The plan instead protects what is left and wins clicks where they still happen: quote pages, non-Google search, and tools and calendars that AI can't replace. Set each lever, then MarketBeat's own newsletter economics.</p>
+  </div>
+
+  <div class="grid">
+    <section class="panel" aria-label="Assumptions">
+
+      <div class="grp">Defend the fort</div>
+
+      <div class="ctl">
+        <div class="row"><label for="ng">Non-Google search visits kept</label><output id="ngOut" for="ng">59,000<small id="ngPct">50% of the erosion</small></output></div>
+        <input type="range" id="ng" min="0" max="118000" step="1000" value="59000">
+        <div class="why">DuckDuckGo, Yahoo and Bing bring ~590K visits a month (a third of search) and each fell 17–24% last year. At −20% a year, ~118K a month is gone within a year. Bing Webmaster Tools, IndexNow and non-Google rank tracking slow that; stopping half of it is the working assumption.</div>
+      </div>
+
+      <div class="ctl">
+        <div class="row"><label for="tk">Striking-distance tickers into the top 5</label><output id="tkOut" for="tk">40,000</output></div>
+        <input type="range" id="tk" min="0" max="67000" step="1000" value="40000">
+        <div class="why">Nine tickers at positions 5–15 (RGTI, UNH, WULF, CRCL, SNDK, IBRX, CAVA, TEAM, CVNA), 1.48M searches a month. Standard click curves give ~67K extra visits; 40K takes 40% off for AI Overviews.</div>
+      </div>
+
+      <div class="ctl">
+        <div class="row"><label for="qp">Quote-page lift (hub + recovered links)</label><output id="qpOut" for="qp">38,000<small id="qpPct">+25%</small></output></div>
+        <input type="range" id="qp" min="0" max="151000" step="1000" value="38000">
+        <div class="why">Quote pages earn 151K visits (9% of Google traffic) despite holding the most links. Redirecting deleted pages to them and making them the hub alerts point to is estimated at +25%; +50% is the stretch. An estimate, not a measured rate.</div>
+      </div>
+
+      <div class="ctl">
+        <div class="row"><label for="pd">Paid search cost per visit reduced by</label><output id="pdOut" for="pd">10%</output></div>
+        <input type="range" id="pd" min="0" max="25" step="1" value="10">
+        <div class="why">~$309K a month goes to Google Ads, ~90% to one PDF sign-up page, and cost per visit rose 18% in two months ($2.26 → $2.67). Landing-page tests and bid caps on rising-cost list terms. Counted as cash saved, not added to traffic value.</div>
+      </div>
+
+      <div class="grp">Gain new territory</div>
+
+      <div class="ctl">
+        <div class="row"><label for="ex">New visits from tools and data pages</label><output id="exOut" for="ex">10,000</output></div>
+        <input type="range" id="ex" min="0" max="23000" step="500" value="10000">
+        <div class="band" id="exBand">Inside the Ahrefs range</div>
+        <div class="why">Earnings calendar (91K searches, no AI Overview, no MarketBeat page in the top 100), options calculator, congress trades tracker, dividend-income lists, ticker dividend calculators and 13F pages. Ahrefs sizing: ~5K–23K visits a month. Small in volume, but repeat-use and high-intent.</div>
+      </div>
+
+      <div class="grp">MarketBeat's newsletter economics</div>
+
+      <div class="ctl">
+        <div class="row"><label for="su">Visit to newsletter sign-up</label><output id="suOut" for="su">1.0%</output></div>
+        <input type="range" id="su" min="0.2" max="4" step="0.1" value="1">
+        <div class="why">Placeholder until MarketBeat shares its sign-up rate. Tool and calendar users ("get earnings dates for your watchlist") should convert above the site average.</div>
+      </div>
+
+      <div class="ctl">
+        <div class="row"><label for="sv">Value of a new subscriber (first year)</label><output id="svOut" for="sv">$20</output></div>
+        <input type="range" id="sv" min="2" max="100" step="1" value="20">
+        <div class="why">Placeholder until MarketBeat shares it: newsletter ad revenue plus upgrades to paid tiers in a subscriber's first year. MarketBeat already pays $2.67 a visit to reach its sign-up page, so it values a sign-up well above that.</div>
+      </div>
+
+      <div class="presets" role="group" aria-label="Scenarios tied to the plan">
+        <button class="preset" type="button" data-p="59000,0,0,0,0"><b>Tier 1 · stop the leaks</b>Keep half the non-Google erosion</button>
+        <button class="preset" type="button" data-p="59000,40000,38000,10,0"><b>Tiers 1–2 · defend</b>+ tickers, quote-page hub, paid fixes</button>
+        <button class="preset" type="button" data-p="59000,40000,38000,10,10000" aria-pressed="true"><b>Tiers 1–3 · defend + expand</b>The headline scenario</button>
+        <button class="preset" type="button" data-p="118000,67000,75000,20,23000"><b>Highest ambition (ceiling)</b>All erosion stopped, no AI haircut, top of every range</button>
+      </div>
+    </section>
+
+    <section class="result" aria-live="polite" aria-label="Outcome">
+      <div>
+        <div class="label">Traffic value defended and gained, per month</div>
+        <div class="big" id="val">$111K</div>
+        <div class="sub" id="valSub"></div>
+      </div>
+
+      <div class="stats">
+        <div class="stat"><div class="v" id="visits">147K</div><div class="l">visits a month kept or won</div></div>
+        <div class="stat"><div class="v" id="cash">$31K</div><div class="l">cash saved a month on paid search</div></div>
+        <div class="stat"><div class="v" id="subs">1,470</div><div class="l">newsletter sign-ups a month from those visits (placeholder rate)</div></div>
+      </div>
+
+      <div class="bars">
+        <div class="t">Google organic visits a month (Ahrefs, US)</div>
+        <div class="bar"><span>Today (Aug 2026)</span><div class="fill"><i id="b1"></i></div><span class="n">1.84M</span></div>
+        <div class="bar"><span>With the plan</span><div class="fill"><i id="b2"></i><i class="gain" id="b2g"></i></div><span class="n" id="withN">1.93M</span></div>
+        <div class="bar"><span>Had it fallen like Motley Fool</span><div class="fill"><i id="b3"></i></div><span class="n">2.43M</span></div>
+      </div>
+
+      <table aria-label="Sign-up sensitivity">
+        <thead><tr><th>If sign-up is</th><th>Subscribers / month</th><th>Subscriber value / year</th></tr></thead>
+        <tbody id="sens"></tbody>
+      </table>
+    </section>
+  </div>
+
+  <div class="inaction">
+    <h2>What doing nothing costs</h2>
+    <p><b>~118K non-Google visits a month within a year</b> (~$89K a month in traffic value) if DuckDuckGo, Yahoo and Bing keep falling ~20% a year.</p>
+    <p><b>~3,700 referring domains a year</b>, net: 13,509 lost and 9,792 gained last year (about −12%), largely from deleted pages that Forbes, Fortune, MSN and TheStreet link to.</p>
+    <p><b>~$56K a month more</b> to hold today's paid volume if cost per visit rises another 18%.</p>
+    <p><b>One news alert carries ~636K visits</b> (~$480K a month in traffic value) and fades when the story does. 77% of Google traffic now rides short-lived alerts; quote pages earn 9%.</p>
+  </div>
+
+  <div class="foot">
+    <div>Traffic value: Ahrefs US organic, Aug 2026 — 1.84M visits worth $1.39M in Google Ads terms, $0.76 a visit. Peak: 6.24M (Nov 2025). Motley Fool fell 61% over the same period; at that rate MarketBeat would have ~2.43M. Non-Google search and paid: Similarweb, US, Jun–Aug 2026. Tools and data sizing: Ahrefs Keywords Explorer, Sep 24 2026 (position-3 click rates from Ahrefs, 40% off where AI Overviews show).</div>
+    <div>Formula: (non-Google visits kept + ticker gains + quote-page lift + new tool visits) × $0.76 = traffic value. Paid savings = $309K × % reduction, shown separately as cash. Subscribers = the same visits × sign-up rate; subscriber value = subscribers × 12 × value per subscriber. Traffic value (what the clicks would cost) and subscriber value (what they earn) are never added together.</div>
+    <div>Estimates, not forecasts: sign-up rate and subscriber value are placeholders until MarketBeat shares them; quote-page lift and non-Google retention are ROAST assumptions. Search Console access replaces these with real numbers.</div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const $=id=>document.getElementById(id);
+  const VPV=1.39e6/1.84e6, PAID=309000, NOW=1.84e6, PEER=2.4336e6, SCALE=2.6e6, EROSION=118000;
+  const ng=$('ng'),tk=$('tk'),qp=$('qp'),pd=$('pd'),ex=$('ex'),su=$('su'),sv=$('sv');
+  const fmtI=n=>Math.round(n).toLocaleString('en-US');
+  const fmtK=n=>n>=1e6?(n/1e6).toFixed(2)+'M':Math.round(n/1e3)+'K';
+  const fmtM=n=>n>=1e6?'$'+(n/1e6).toFixed(2)+'M':n>=1e3?'$'+Math.round(n/1e3)+'K':'$'+Math.round(n);
+  const presets=[...document.querySelectorAll('.preset')];
+  const peak=new Date(2025,10,30), now=new Date();
+  $('days').textContent=Math.max(0,Math.floor((new Date(now.getFullYear(),now.getMonth(),now.getDate())-peak)/86400000));
+
+  function render(){
+    const a=+ng.value,b=+tk.value,c=+qp.value,d=+pd.value,e=+ex.value,s=+su.value/100,v=+sv.value;
+    $('ngOut').firstChild.textContent=fmtI(a); $('ngPct').textContent=Math.round(a/EROSION*100)+'% of the erosion';
+    $('tkOut').value=fmtI(b); $('qpOut').firstChild.textContent=fmtI(c); $('qpPct').textContent='+'+Math.round(c/151000*100)+'%';
+    $('pdOut').value=d+'%'; $('exOut').value=fmtI(e); $('suOut').value=(+su.value).toFixed(1)+'%'; $('svOut').value='$'+v;
+    const band=$('exBand');
+    if(e===0){band.className='band low';band.textContent='Defend only: no new territory';}
+    else if(e<5000){band.className='band low';band.textContent='Below the Ahrefs range (5K–23K)';}
+    else {band.className='band';band.textContent=e>=20000?'Top of the Ahrefs range: earnings calendar in the top 3':'Inside the Ahrefs range (5K–23K)';}
+    const visits=a+b+c+e, val=visits*VPV, cash=PAID*d/100, subs=visits*s;
+    $('val').textContent=fmtM(val);
+    $('valSub').textContent=visits?`${fmtI(visits)} visits × $${VPV.toFixed(2)} a visit, about ${fmtM(val*12)} a year. That is what buying the same clicks in Google Ads would cost.`:'Move a slider to see a value.';
+    $('visits').textContent=fmtK(visits); $('cash').textContent=fmtM(cash); $('subs').textContent=fmtI(subs);
+    const withG=NOW+b+c+e; $('withN').textContent=fmtK(withG);
+    const w1=NOW/SCALE*100,w2=withG/SCALE*100;
+    $('b1').style.width=w1+'%'; $('b2').style.width=w1+'%'; $('b3').style.width=(PEER/SCALE*100)+'%';
+    const g=$('b2g'); g.style.left=w1+'%'; g.style.width=Math.max(0,w2-w1)+'%';
+    $('sens').innerHTML=[Math.max(0.2,+su.value/2),+su.value,+su.value*2].map(x=>{const n=visits*x/100;return `<tr><td>${x.toFixed(1)}%</td><td>${fmtI(n)}</td><td>${fmtM(n*12*v)}</td></tr>`;}).join('');
+    presets.forEach(p=>{const q=p.dataset.p.split(',').map(Number);p.setAttribute('aria-pressed',String(q[0]===a&&q[1]===b&&q[2]===c&&q[3]===d&&q[4]===e));});
+    try{localStorage.setItem('mb-calc-v1',JSON.stringify({a,b,c,d,e,s:+su.value,v}));}catch(err){}
+  }
+  [ng,tk,qp,pd,ex,su,sv].forEach(el=>el.addEventListener('input',render));
+  presets.forEach(p=>p.addEventListener('click',()=>{const q=p.dataset.p.split(',');ng.value=q[0];tk.value=q[1];qp.value=q[2];pd.value=q[3];ex.value=q[4];render();}));
+  try{const st=JSON.parse(localStorage.getItem('mb-calc-v1'));if(st){ng.value=st.a;tk.value=st.b;qp.value=st.c;pd.value=st.d;ex.value=st.e;su.value=st.s;sv.value=st.v;}}catch(err){}
+  render();
+})();
+</script>
+</body>
+</html>
