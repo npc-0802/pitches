@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>GayRealEstate Lead-Value Calculator</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;900&family=Public+Sans:wght@400;500;600&display=swap">
+<style>
+:root{
+  --bg:#ffffff; --ink:#111214; --muted:#5b5e66; --line:#e6e4dc; --panel:#f6f5f0;
+  --yellow:#FFD100; --yellow-deep:#e6bc00; --on-yellow:#111214; --on-yellow-muted:#4a4630;
+  --track:#e3e1d8; --ok:#1f7a3a;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){ --bg:#111214; --ink:#f4f3ee; --muted:#a6a79f; --line:#2a2b2f; --panel:#1b1c20; --track:#33343a; color-scheme:dark; }
+}
+:root[data-theme="dark"]{ --bg:#111214; --ink:#f4f3ee; --muted:#a6a79f; --line:#2a2b2f; --panel:#1b1c20; --track:#33343a; color-scheme:dark; }
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Public Sans",system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;font-size:15px;line-height:1.45}
+.wrap{max-width:1080px;margin:0 auto;padding-block:22px 44px;padding-inline:20px;display:grid;gap:18px}
+.brand{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-bottom:6px}
+.wordmark{font-family:Georgia,"Times New Roman",serif;font-weight:700;font-size:26px;letter-spacing:.02em}
+.wordmark span{font-family:"Public Sans",sans-serif;font-weight:500;font-size:15px;color:var(--muted);margin-left:10px;letter-spacing:0}
+.deadline{font-size:13px;color:var(--muted);text-align:right}
+.deadline b{color:var(--ink);font-variant-numeric:tabular-nums}
+h1{font-family:"Archivo",system-ui,sans-serif;font-weight:900;font-size:clamp(28px,4vw,42px);line-height:1.05;letter-spacing:-.015em;margin:0;text-wrap:balance;max-width:22ch}
+.lede{color:var(--muted);max-width:70ch;margin:6px 0 0}
+.grid{display:grid;grid-template-columns:1.05fr .95fr;gap:18px;align-items:start}
+@media (max-width:780px){.grid{grid-template-columns:1fr}}
+.panel{background:var(--panel);border-radius:22px;padding:22px 22px 8px}
+.ctl{display:grid;gap:8px;padding-block:14px;border-top:1px solid var(--line)}
+.ctl:first-child{border-top:0;padding-top:2px}
+.ctl .row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.ctl label{font-weight:600}
+.ctl output{font-family:"Archivo",sans-serif;font-weight:700;font-size:22px;font-variant-numeric:tabular-nums}
+.ctl output small{font-family:"Public Sans",sans-serif;font-weight:500;font-size:13px;color:var(--muted);margin-left:8px}
+.ctl .why{font-size:13px;color:var(--muted);max-width:60ch}
+.band{font-size:13px;font-weight:600;padding:5px 10px;border-radius:999px;background:var(--yellow);color:var(--on-yellow);width:max-content;max-width:100%}
+.band.low{background:var(--track);color:var(--ink)}
+input[type=range]{width:100%;accent-color:var(--ink);height:30px;margin:0}
+input[type=range]:focus-visible{outline:2px solid var(--ink);outline-offset:4px;border-radius:6px}
+.presets{display:flex;flex-wrap:wrap;gap:8px;padding-block:16px;border-top:1px solid var(--line)}
+.preset{border:1.5px solid var(--line);border-radius:12px;padding:8px 12px;font-size:13px;background:transparent;color:var(--ink);cursor:pointer;font-family:inherit;text-align:left;line-height:1.25}
+.preset b{display:block;font-weight:700}
+.preset:hover,.preset:focus-visible{border-color:var(--ink);outline:none}
+.preset[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.result{background:var(--yellow);color:var(--on-yellow);border-radius:22px;padding:24px 24px 20px;display:grid;gap:16px}
+.result .label{font-weight:600;font-size:14px;color:var(--on-yellow-muted)}
+.result .big{font-family:"Archivo",sans-serif;font-weight:900;font-size:clamp(46px,7.5vw,80px);line-height:.95;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.result .sub{font-size:14px;color:var(--on-yellow-muted);max-width:46ch}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+@media (max-width:520px){.stats{grid-template-columns:1fr 1fr}}
+.stat{background:rgba(255,255,255,.5);border-radius:14px;padding:12px 12px 10px}
+.stat .v{font-family:"Archivo",sans-serif;font-weight:700;font-size:21px;font-variant-numeric:tabular-nums;line-height:1.1}
+.stat .l{font-size:12px;color:var(--on-yellow-muted);margin-top:4px;line-height:1.3}
+.bars{display:grid;gap:8px;margin-top:4px}
+.bars .t{font-weight:600;font-size:13px;color:var(--on-yellow-muted)}
+.bar{display:grid;grid-template-columns:150px 1fr 64px;gap:10px;align-items:center;font-size:13px}
+@media (max-width:520px){.bar{grid-template-columns:110px 1fr 56px}}
+.bar .fill{height:14px;border-radius:7px;background:rgba(17,18,20,.25);position:relative;overflow:hidden}
+.bar .fill i{position:absolute;inset:0;width:0;background:var(--on-yellow);border-radius:7px;transition:width .25s ease}
+.bar .fill i.gain{background:#ffffff;left:auto}
+.bar .n{text-align:right;font-variant-numeric:tabular-nums;font-weight:600}
+@media (prefers-reduced-motion: reduce){.bar .fill i{transition:none}}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th,td{text-align:left;padding:7px 4px;border-bottom:1px solid rgba(17,18,20,.18);font-variant-numeric:tabular-nums}
+th{font-size:12px;color:var(--on-yellow-muted);font-weight:600}
+td:last-child,th:last-child{text-align:right;font-weight:700}
+.inaction{background:var(--panel);border-radius:22px;padding:20px 22px;display:grid;gap:6px}
+.inaction h2{font-family:"Archivo",sans-serif;font-weight:700;font-size:18px;margin:0}
+.inaction p{margin:0;color:var(--muted);max-width:80ch}
+.inaction b{color:var(--ink)}
+.foot{font-size:13px;color:var(--muted);max-width:80ch;display:grid;gap:4px}
+.foot a{color:var(--ink)}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="brand">
+    <div class="wordmark">ROAST<span>× GayRealEstate.com · Q4 2026</span></div>
+    <div class="deadline"><b id="days">—</b> days since organic search fell 70% (week of Aug 24)</div>
+  </div>
+
+  <div>
+    <h1>What LGBTQ+ home-buyer traffic is worth in referral fees</h1>
+    <p class="lede">GayRealEstate.com lost 42% of its traffic year on year and 70% of its organic search in three weeks in late August. Only about 9% of the organic clicks that remain are buyer or realtor searches, and 81% of paid clicks are generic "realtor", competitor brokerage and agent-name terms. The unit of value here is a closed referral, not a visit. Set how much traffic the plan adds and how much of it is buyer-intent, then GayRealEstate's own funnel numbers.</p>
+  </div>
+
+  <div class="grid">
+    <section class="panel" aria-label="Assumptions">
+
+      <div class="ctl">
+        <div class="row"><label for="visits">Extra visits a month from the plan</label><output id="visitsOut" for="visits">5,650<small id="pct">Tiers 2 + 3</small></output></div>
+        <input type="range" id="visits" min="0" max="10000" step="50" value="5650">
+        <div class="band" id="band">Tiers 2 + 3: organic recovery, the neighbourhood and gayest-cities clusters, directory pages rebuilt as buyer pages, GEO</div>
+        <div class="why" id="visitsWhy">Tier 2 recovers 50–70% of the 5,460-visit gap between Jul–Aug organic (8,883/month) and the September run-rate (3,420) and adds 500–700 from striking-distance clusters; Tier 3 adds 1,000–1,800 from ~300 rebuilt city directory pages and 300–500 from AI assistants.</div>
+      </div>
+
+      <div class="ctl">
+        <div class="row"><label for="hi">Share of those visits that are buyer-intent</label><output id="hiOut" for="hi">37%</output></div>
+        <input type="range" id="hi" min="5" max="80" step="1" value="37">
+        <div class="why">Today about 9% of organic clicks are realtor or buyer searches. Tier 2 lifts that modestly (neighbourhood pages); Tier 3's directory pages are buyer-intent by design, so the blended share rises to 35–40%.</div>
+      </div>
+
+      <div class="ctl">
+        <div class="row"><label for="leadHi">Buyer-intent visit to agent-match request</label><output id="leadHiOut" for="leadHi">2.0%</output></div>
+        <input type="range" id="leadHi" min="0.5" max="6" step="0.1" value="2">
+        <div class="why">Placeholder until GayRealEstate shares its request volume. Directory and "find an agent" pages on referral marketplaces typically convert 1–4% of visitors to a request.</div>
+      </div>
+
+      <div class="ctl">
+        <div class="row"><label for="leadInfo">Informational visit to agent-match request</label><output id="leadInfoOut" for="leadInfo">0.2%</output></div>
+        <input type="range" id="leadInfo" min="0" max="1" step="0.05" value="0.2">
+        <div class="why">Placeholder. City guides and blog posts with a visible agent CTA (Tier 1) convert a fraction of a percent; today most of them show no path to the directory at all.</div>
+      </div>
+
+      <div class="ctl">
+        <div class="row"><label for="close">Request to closed transaction</label><output id="closeOut" for="close">10%</output></div>
+        <input type="range" id="close" min="3" max="30" step="1" value="10">
+        <div class="why">Placeholder until GayRealEstate shares its close rate. Agent referral leads commonly close 8–20% within 6–12 months.</div>
+      </div>
+
+      <div class="ctl">
+        <div class="row"><label for="fee">Referral fee per closed side</label><output id="feeOut" for="fee">$2,600</output></div>
+        <input type="range" id="fee" min="500" max="8000" step="100" value="2600">
+        <div class="why">Placeholder: US median existing-home price ~$420K × 2.5% buyer-side commission × 25% referral share. If the business earns from agent membership or lead sales instead, set this to the value of a lead and the close rate to 100%.</div>
+      </div>
+
+      <div class="ctl">
+        <div class="row"><label for="paid">Paid budget re-aimed a month (Tier 1)</label><output id="paidOut" for="paid">$2,700</output></div>
+        <input type="range" id="paid" min="0" max="8000" step="100" value="2700">
+        <div class="why">Similarweb estimates ~$3.9K a month average PPC spend Jun–Aug 2026 ($7.5K in July) with 81% of paid clicks on non-LGBTQ+ terms. 60–80% of that spend can be re-aimed at LGBTQ+ realtor and relocation terms with city landing pages. Counted separately from the fees above.</div>
+      </div>
+
+      <div class="presets" role="group" aria-label="Scenarios tied to the plan">
+        <button class="preset" type="button" data-p="0,37,2,0.2,10,2600,2700"><b>Tier 1 only</b>Ads re-aimed, dead links fixed, CTAs added; nothing recovered yet</button>
+        <button class="preset" type="button" data-p="3850,13,2,0.2,10,2600,2700"><b>Tier 2 lands</b>Organic recovery plus the neighbourhood and gayest-cities clusters, +3,850 visits</button>
+        <button class="preset" type="button" data-p="5650,37,2,0.2,10,2600,2700" aria-pressed="true"><b>Tiers 2 + 3</b>The headline scenario: directory pages become the product</button>
+        <button class="preset" type="button" data-p="8150,38,2,0.2,10,2600,2700"><b>Highest ambition (ceiling)</b>LGBTQ+ Home Buying Index and agent-supply loop on top</button>
+      </div>
+    </section>
+
+    <section class="result" aria-live="polite" aria-label="Outcome">
+      <div>
+        <div class="label">Referral fees a year from the traffic the plan adds</div>
+        <div class="big" id="fees">$153K</div>
+        <div class="sub" id="feesSub"></div>
+      </div>
+
+      <div class="stats">
+        <div class="stat"><div class="v" id="leads">49</div><div class="l">agent-match requests a month</div></div>
+        <div class="stat"><div class="v" id="closings">59</div><div class="l">closed transactions a year</div></div>
+        <div class="stat"><div class="v" id="paidYr">$32K</div><div class="l">paid budget re-aimed a year (Tier 1)</div></div>
+      </div>
+
+      <div class="bars">
+        <div class="t">Organic and buyer-intent visits a month</div>
+        <div class="bar"><span>Jul–Aug organic</span><div class="fill"><i id="peakBar"></i></div><span class="n">8,883</span></div>
+        <div class="bar"><span>September run-rate</span><div class="fill"><i id="baseBar"></i></div><span class="n">3,420</span></div>
+        <div class="bar"><span>With the plan</span><div class="fill"><i id="baseBar2"></i><i class="gain" id="gainBar"></i></div><span class="n" id="withN">9,070</span></div>
+      </div>
+
+      <div class="stats">
+        <div class="stat"><div class="v" id="paidEq">$61K</div><div class="l">paid-equivalent a year at the site's own <span id="cpvLbl">$0.90</span> a visit</div></div>
+        <div class="stat"><div class="v" id="hiVisits">2,090</div><div class="l">buyer-intent visits a month added</div></div>
+        <div class="stat"><div class="v" id="perLead">$260</div><div class="l">value of one agent-match request at these rates</div></div>
+      </div>
+
+      <table aria-label="Close-rate sensitivity">
+        <thead><tr><th>If request-to-close is</th><th>Closings / yr</th><th>Referral fees / yr</th></tr></thead>
+        <tbody id="sens"></tbody>
+      </table>
+    </section>
+  </div>
+
+  <div class="inaction">
+    <h2>What doing nothing costs</h2>
+    <p>Organic search is already running about <b>5,460 visits a month below its July–August level</b> (8,883 → 3,420, Similarweb). Buying those visits back in Google Ads at the site's own $0.65–$1.20 per visit would cost <b>$42K–$79K a year</b>. At today's 9% buyer-intent share and the rates above, that traffic was worth <b id="lostLeads">20</b> agent-match requests a month, <b id="lostClosings">24</b> closings a year and <b id="lostFees">$61K</b> in referral fees per year the run-rate holds. Ahrefs' month-on-month trend (−39% Aug→Sep) implies another halving by November. Meanwhile the paid account keeps spending roughly <b id="wasteYr">$32K</b> a year on clicks that cannot become LGBTQ+ buyer leads, a 700-domain spam-link wave grows unaddressed, and the informational pages lose clicks to AI Overviews with no commercial page positioned to be cited instead.</p>
+  </div>
+
+  <div class="foot">
+    <div>Traffic: Similarweb, US, Jun–Aug 2026 monthly and weekly to 21 Sep (organic 8,972 / 8,794 in Jul / Aug; weeks of 24 Aug, 31 Aug and 7 Sep average ~790 organic a week; paid spend $2,117 / $7,478 / $2,059; cost per visit $3.34 / $1.20 / $0.65). Rankings and backlinks: Ahrefs Site Explorer, 24–25 Sep 2026 (organic 7,176 in May 2026 → 1,135 in Sep; top-3 keywords 657 → 157; referring domains 1,146 → 1,581 Aug→Sep). Intent classification: 1,178 Similarweb keywords, Jun–Aug 2026.</div>
+    <div>Formula: visits × buyer-intent share × request rate + visits × (1 − share) × informational request rate = requests a month; requests × 12 × close rate = closings a year; closings × referral fee = fees a year. Paid-equivalent cost uses $0.90 per visit, the midpoint of the site's own July and August cost per visit; it is what the traffic would cost, not what it earns — the two are not added together. Paid budget re-aimed is Tier 1 spend efficiency, shown separately.</div>
+    <div>Part of the ROAST × GayRealEstate.com integrated analysis, September 2026. Companion to the <a href="../tcl-recovery-calculator/">TCL Recovery Calculator</a> and the <a href="../quotient-client-value-calculator/">Quotient Client-Value Calculator</a>.</div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const $=id=>document.getElementById(id);
+  const PEAK=8883, BASE=3420, LOST=PEAK-BASE, CPV=0.90, TODAY_HI=9;
+  const visits=$('visits'),hi=$('hi'),leadHi=$('leadHi'),leadInfo=$('leadInfo'),close=$('close'),fee=$('fee'),paid=$('paid');
+  const fmtI=n=>Math.round(n).toLocaleString('en-US');
+  const fmt1=n=>(Math.round(n*10)/10).toLocaleString('en-US',{minimumFractionDigits:1,maximumFractionDigits:1});
+  const fmtM=n=>n>=1e6?'$'+(n/1e6).toFixed(2)+'M':n>=1e3?'$'+Math.round(n/1e3)+'K':'$'+Math.round(n);
+  const fmtD=n=>'$'+Math.round(n).toLocaleString('en-US');
+  const presets=[...document.querySelectorAll('.preset')];
+
+  const cliff=new Date(2026,7,24), now=new Date();
+  $('days').textContent=Math.max(0,Math.floor((new Date(now.getFullYear(),now.getMonth(),now.getDate())-cliff)/86400000));
+
+  function bandFor(v){
+    if(v===0) return ['low','Nothing added yet: Tier 1 re-aims paid spend and protects what exists'];
+    if(v<=4500) return ['','Tier 2 range: organic recovery plus the neighbourhood and gayest-cities clusters'];
+    if(v<=6800) return ['','Tiers 2 + 3: organic recovery, the neighbourhood and gayest-cities clusters, directory pages rebuilt as buyer pages, GEO'];
+    return ['','Ambition range: LGBTQ+ Home Buying Index, press and assistant citations, agent-supply loop'];
+  }
+  function tierLabel(v){
+    if(v===0) return 'Tier 1';
+    if(v<=4500) return 'Tier 2';
+    if(v<=6800) return 'Tiers 2 + 3';
+    return 'Tier 4';
+  }
+  function model(v,h,lh,li,cl,f){
+    const hiV=v*h/100, infoV=v-hiV;
+    const leads=hiV*lh/100+infoV*li/100;
+    const closings=leads*12*cl/100;
+    return {hiV,leads,closings,fees:closings*f,perLead:cl/100*f};
+  }
+  function render(){
+    const v=+visits.value,h=+hi.value,lh=+leadHi.value,li=+leadInfo.value,cl=+close.value,f=+fee.value,p=+paid.value;
+    $('visitsOut').firstChild.textContent=fmtI(v);
+    $('pct').textContent=tierLabel(v);
+    const [cls,msg]=bandFor(v); $('band').className='band '+cls; $('band').textContent=msg;
+    $('hiOut').value=h+'%'; $('leadHiOut').value=lh.toFixed(1)+'%'; $('leadInfoOut').value=li.toFixed(2).replace(/0$/,'')+'%';
+    $('closeOut').value=cl+'%'; $('feeOut').value=fmtD(f); $('paidOut').value=fmtD(p);
+    const m=model(v,h,lh,li,cl,f);
+    $('fees').textContent=fmtM(m.fees);
+    $('feesSub').textContent=v?`${fmtI(v)} visits, ${h}% buyer-intent → ${fmt1(m.leads)} requests a month × 12 × ${cl}% = ${fmt1(m.closings)} closings × ${fmtD(f)}.`:'Move the first slider to see a value. Tier 1 alone re-aims paid spend without adding visits.';
+    $('leads').textContent=fmt1(m.leads); $('closings').textContent=fmt1(m.closings);
+    $('paidYr').textContent=fmtM(p*12); $('wasteYr').textContent=fmtM(p*12);
+    $('paidEq').textContent=fmtM(v*CPV*12); $('cpvLbl').textContent='$'+CPV.toFixed(2);
+    $('hiVisits').textContent=fmtI(m.hiV); $('perLead').textContent=fmtD(m.perLead);
+    const withV=BASE+v, max=Math.max(withV,PEAK)*1.05;
+    $('withN').textContent=fmtI(withV);
+    const b=BASE/max*100, g=withV/max*100;
+    $('peakBar').style.width=(PEAK/max*100)+'%';
+    $('baseBar').style.width=b+'%'; $('baseBar2').style.width=b+'%';
+    const gain=$('gainBar'); gain.style.left=b+'%'; gain.style.width=Math.max(0,g-b)+'%';
+    $('sens').innerHTML=[Math.max(3,cl-5),cl,Math.min(30,cl+5)].map(x=>{const mm=model(v,h,lh,li,x,f);return `<tr><td>${x}%</td><td>${fmt1(mm.closings)}</td><td>${fmtM(mm.fees)}</td></tr>`;}).join('');
+    const lost=model(LOST,TODAY_HI,lh,li,cl,f);
+    $('lostLeads').textContent=fmt1(lost.leads); $('lostClosings').textContent=fmt1(lost.closings); $('lostFees').textContent=fmtM(lost.fees);
+    presets.forEach(pr=>{const q=pr.dataset.p.split(',').map(Number);pr.setAttribute('aria-pressed',String(q[0]===v&&q[1]===h&&q[2]===lh&&q[3]===li&&q[4]===cl&&q[5]===f&&q[6]===p));});
+    try{localStorage.setItem('gre-calc-v1',JSON.stringify({v,h,lh,li,cl,f,p}));}catch(e){}
+  }
+  [visits,hi,leadHi,leadInfo,close,fee,paid].forEach(el=>el.addEventListener('input',render));
+  presets.forEach(pr=>pr.addEventListener('click',()=>{const q=pr.dataset.p.split(',');[visits,hi,leadHi,leadInfo,close,fee,paid].forEach((el,i)=>el.value=q[i]);render();}));
+  try{const s=JSON.parse(localStorage.getItem('gre-calc-v1'));if(s){visits.value=s.v;hi.value=s.h;leadHi.value=s.lh;leadInfo.value=s.li;close.value=s.cl;fee.value=s.f;paid.value=s.p;}}catch(e){}
+  render();
+})();
+</script>
+</body>
+</html>
