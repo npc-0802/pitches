@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>TCS Booking-Value Calculator</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;900&family=Public+Sans:wght@400;500;600&display=swap">
+<style>
+:root{
+  --bg:#ffffff; --ink:#111214; --muted:#5b5e66; --line:#e6e4dc; --panel:#f6f5f0;
+  --yellow:#FFD100; --yellow-deep:#e6bc00; --on-yellow:#111214; --on-yellow-muted:#4a4630;
+  --track:#e3e1d8; --ok:#1f7a3a;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){ --bg:#111214; --ink:#f4f3ee; --muted:#a6a79f; --line:#2a2b2f; --panel:#1b1c20; --track:#33343a; color-scheme:dark; }
+}
+:root[data-theme="dark"]{ --bg:#111214; --ink:#f4f3ee; --muted:#a6a79f; --line:#2a2b2f; --panel:#1b1c20; --track:#33343a; color-scheme:dark; }
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Public Sans",system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;font-size:15px;line-height:1.45}
+.wrap{max-width:1440px;margin:0 auto;padding-block:22px 44px;padding-inline:clamp(16px,3vw,40px);display:grid;gap:22px}
+.brand{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-bottom:6px}
+.wordmark{display:flex;align-items:center;gap:12px}.wordmark .roast-logo{height:22px;width:auto;display:block;color:var(--ink)}
+.wordmark span{font-family:"Public Sans",sans-serif;font-weight:500;font-size:15px;color:var(--muted);letter-spacing:0}
+.deadline{font-size:13px;color:var(--muted);text-align:right}
+.deadline b{color:var(--ink);font-variant-numeric:tabular-nums}
+h1{font-family:"Archivo",system-ui,sans-serif;font-weight:900;font-size:clamp(28px,3.4vw,46px);line-height:1.05;letter-spacing:-.015em;margin:0;text-wrap:balance;max-width:26ch}
+.lede{color:var(--muted);max-width:78ch;margin:8px 0 0;font-size:clamp(14px,1.1vw,16px)}
+.grid{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,2fr);gap:22px;align-items:start}
+@media (max-width:900px){.grid{grid-template-columns:1fr}}
+.panel{background:var(--panel);border-radius:22px;padding:clamp(18px,2vw,28px) clamp(18px,2vw,28px) 10px;min-width:0;overflow:hidden}
+.ctl{display:grid;gap:8px;padding-block:14px;border-top:1px solid var(--line)}
+.ctl:first-child{border-top:0;padding-top:2px}
+.ctl .row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.ctl label{font-weight:600}
+.ctl output{font-family:"Archivo",sans-serif;font-weight:700;font-size:22px;font-variant-numeric:tabular-nums}
+.ctl output small{font-family:"Public Sans",sans-serif;font-weight:500;font-size:13px;color:var(--muted);margin-left:8px}
+.ctl .why{font-size:13px;color:var(--muted);max-width:72ch}
+.band{font-size:13px;font-weight:600;padding:5px 12px;border-radius:14px;background:var(--yellow);color:var(--on-yellow);width:fit-content;max-width:100%;line-height:1.3}
+.band.low{background:var(--track);color:var(--ink)}
+input[type=range]{width:100%;accent-color:var(--ink);height:30px;margin:0}
+input[type=range]:focus-visible{outline:2px solid var(--ink);outline-offset:4px;border-radius:6px}
+.presets{display:flex;flex-wrap:wrap;gap:8px;padding-block:16px;border-top:1px solid var(--line)}
+.preset{border:1.5px solid var(--line);border-radius:12px;padding:8px 12px;font-size:13px;background:transparent;color:var(--ink);cursor:pointer;font-family:inherit;text-align:left;line-height:1.25}
+.preset b{display:block;font-weight:700}
+.preset:hover,.preset:focus-visible{border-color:var(--ink);outline:none}
+.preset[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.result{background:var(--yellow);color:var(--on-yellow);border-radius:22px;padding:clamp(20px,2.2vw,32px);display:grid;gap:18px;min-width:0}
+.result .label{font-weight:600;font-size:14px;color:var(--on-yellow-muted)}
+.result .big{font-family:"Archivo",sans-serif;font-weight:900;font-size:clamp(48px,6vw,88px);line-height:.95;letter-spacing:-.02em;font-variant-numeric:tabular-nums;margin:6px 0}
+.result .sub{font-size:14px;color:var(--on-yellow-muted);max-width:52ch}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+@media (max-width:520px){.stats{grid-template-columns:1fr 1fr}}
+.stat{background:rgba(255,255,255,.5);border-radius:14px;padding:14px 14px 12px;min-width:0}
+.stat .v{font-family:"Archivo",sans-serif;font-weight:700;font-size:clamp(20px,1.8vw,26px);font-variant-numeric:tabular-nums;line-height:1.1}
+.stat .l{font-size:12.5px;color:var(--on-yellow-muted);margin-top:5px;line-height:1.3;text-wrap:balance}
+.bars{display:grid;gap:8px;margin-top:4px}
+.bars .t{font-weight:600;font-size:13px;color:var(--on-yellow-muted)}
+.bar{display:grid;grid-template-columns:minmax(120px,160px) 1fr 64px;gap:10px;align-items:center;font-size:13px}
+@media (max-width:520px){.bar{grid-template-columns:110px 1fr 56px}}
+.bar .fill{height:14px;border-radius:7px;background:rgba(17,18,20,.25);position:relative;overflow:hidden}
+.bar .fill i{position:absolute;inset:0;width:0;background:var(--on-yellow);border-radius:7px;transition:width .25s ease}
+.bar .fill i.gain{background:#ffffff;left:auto}
+.bar .n{text-align:right;font-variant-numeric:tabular-nums;font-weight:600}
+@media (prefers-reduced-motion: reduce){.bar .fill i{transition:none}}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th,td{text-align:left;padding:7px 4px;border-bottom:1px solid rgba(17,18,20,.18);font-variant-numeric:tabular-nums}
+th{font-size:12px;color:var(--on-yellow-muted);font-weight:600}
+td:last-child,th:last-child{text-align:right;font-weight:700}
+.inaction{background:var(--panel);border-radius:22px;padding:clamp(18px,2vw,28px);display:grid;gap:8px}
+.inaction h2{font-family:"Archivo",sans-serif;font-weight:700;font-size:18px;margin:0}
+.inaction p{margin:0;color:var(--muted);max-width:100ch;font-size:15px;line-height:1.55}
+.inaction b{color:var(--ink)}
+.foot{font-size:13px;color:var(--muted);max-width:110ch;display:grid;gap:6px}
+.foot a{color:var(--ink)}
+@media (min-width:901px){.result{position:sticky;top:16px}}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="brand">
+    <div class="wordmark"><svg class="roast-logo" fill="currentColor" aria-label="ROAST" role="img" viewBox="0 0 931.89 203.5" xmlns="http://www.w3.org/2000/svg" overflow="hidden"><path d="M30.4 4.59 0 4.59 0 0 93.33 0C128.29 0 166.29 7.45 166.29 50.73 166.29 85.7 123.42 94.87 101.23 97.45L101.23 98.02C136.19 100.89 154.74 108.05 159.3 145.89L163.56 180.86C165.69 197.77 174.2 198.92 179.37 198.92 184.84 198.92 188.79 197.2 191.84 196.05L193.66 199.78C187.58 201.79 179.98 203.51 168.73 203.51 131.64 203.51 129.51 184.88 125.25 151.92L123.12 134.72C120.99 116.66 115.52 100.32 81.17 100.32L61.41 100.32 61.41 198.92 92.42 198.92 92.42 203.51 0 203.51 0 198.92 30.4 198.92 30.4 4.59ZM61.41 95.73 76.61 95.73C112.48 95.73 133.46 83.98 133.46 50.73 133.46 27.8 125.25 4.58 82.08 4.58L61.41 4.58 61.41 95.73Z" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4"  fill-opacity="1"/><path d="M293.24 0.32C342.65 0.32 385.63 45.32 385.63 101.91 385.63 158.5 342.65 203.5 293.24 203.5 243.83 203.5 200.85 158.5 200.85 101.91 200.85 45.32 243.83 0.32 293.24 0.32ZM293.24 199.09C345.28 199.09 352.3 138.08 352.3 101.91 352.3 65.74 345.28 4.74 293.24 4.74 241.2 4.74 234.18 65.75 234.18 101.91 234.18 138.07 241.2 199.09 293.24 199.09Z" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4"  fill-opacity="1"/><path d="M501.23 135.93 438.66 135.93 424.96 175.38C422.91 180.89 420.57 187.51 420.57 192.19 420.57 196.05 424.08 199.08 433.43 199.08L448.63 199.08 448.63 203.49 388.4 203.49 388.4 199.08 397.76 199.08C406.82 199.08 410.62 198.25 416.18 182.82L480.77 0.32 483.99 0.32 556.81 199.09 581.08 199.09 581.08 203.5 495.42 203.5 495.42 199.09 524.07 199.09 501.24 135.93ZM469.66 48 469.08 48 440.43 131.52 499.78 131.52 469.67 48Z" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4"  fill-opacity="1"/><path d="M598 130.7 602.68 130.7C602.68 177.01 631.63 198.78 666.71 198.78 694.78 198.78 714.95 181.97 714.95 157.16 714.95 128.49 699.16 119.95 665.54 114.99 619.64 108.1 598 100.93 598 54.62 598 23.2 619.93 0.32 652.68 0.32 682.79 0.32 694.2 17.14 704.14 17.13 712.17 17.13 711.74 3.58 712.62-2.84217e-14L717.3-2.84217e-14 717.3 64.54 712.62 64.54C709.99 33.12 691.86 4.73 652.69 4.73 627.84 4.73 610.29 20.17 610.29 45.52 610.29 70.87 620.23 75.84 668.76 84.11 711.45 91.28 728.99 104.23 728.99 140.07 728.99 175.91 707.94 203.19 665.55 203.19 636.31 203.19 620.82 188.78 610 188.86 601.37 188.92 602.69 198.82 602.69 203.51L598.01 203.51 598.01 130.7Z" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4"  fill-opacity="1"/><path d="M752.96 0 752.96 64.54 757.64 64.54C757.64 24.77 766.71 6.75 804.33 4.79L804.33 147.44 829.12 147.44 829.12 4.41 855.73 4.41 855.73 147.44 880.52 147.44 880.52 4.78C918.11 6.71 927.21 24.7 927.21 64.54L931.89 64.54 931.89 0 752.96 0Z" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4"  fill-opacity="1"/></svg><span>× TCS World Travel · Q4 2026</span></div>
+    <div class="deadline"><b id="days">—</b> days until the 28 Nov <i>Around the World</i> departure ($175K a seat), still listed as available</div>
+  </div>
+
+  <div>
+    <h1>What a disciplined demand engine is worth in private-jet and custom-travel bookings</h1>
+    <p class="lede">US visits to tcsworldtravel.com fell 68% between late June and mid-September as paid search ($74K in June, $3K in August) and display were wound down. 41% of the paid clicks had come from other travel brands' names, and most display visits were mobile and gone in under 30 seconds. So the plan restarts only the high-intent half of paid search, then builds the organic and AI layer that doesn't switch off with the budget. The unit of value is a booking, not a visit: one seat on the 28 Nov departure is $175K. Pick a tier, then replace our placeholder rates with TCS's own.</p>
+  </div>
+
+  <div class="grid">
+    <section class="panel" aria-label="Assumptions">
+
+      <div class="ctl">
+        <div class="row"><label for="bud">Paid search budget a month</label><output id="budOut" for="bud">$39,750<small id="tierLbl">Tiers 1–3</small></output></div>
+        <input type="range" id="bud" min="0" max="100000" step="250" value="39750">
+        <div class="band" id="band">Tiers 1–3: disciplined paid search, fixes, conversion, then AI visibility and content</div>
+        <div class="why">Brand and high-intent terms only, on exact and phrase match with the off-intent names negated. At TCS's own June–July cost of $4.24 a visit, $39,750 buys about 9,380 on-intent visits, the on-intent half of what June–July bought for $67,900. About 1,500 on-intent paid visits a month run today.</div>
+      </div>
+
+      <div class="ctl">
+        <div class="row"><label for="org">Organic and AI high-intent visits added a month</label><output id="orgOut" for="org">2,323</output></div>
+        <input type="range" id="org" min="0" max="6000" step="1" value="2323">
+        <div class="why">Technical and link fixes 384 (a quarter of the commercial-page clicks lost since March) + near-page-one commercial pages 472 (Japan, Nile, Lizard Island, golf, anniversaries) + AI-assistant referrals 1,083 (half of August's 4,332, half counted high-intent) + destination-by-occasion content 385.</div>
+      </div>
+
+      <div class="ctl">
+        <div class="row"><label for="lift">Enquiry-rate lift from jet pages and the mobile enquiry path</label><output id="liftOut" for="lift">10%</output></div>
+        <input type="range" id="lift" min="0" max="30" step="1" value="10">
+        <div class="why">Placeholder. 88% of visits land on mobile and bounce 55–78%; desktop visitors stay 5 minutes and read 6 pages. Applies to every high-intent visit, today's and the plan's.</div>
+      </div>
+
+      <div class="ctl">
+        <div class="row"><label for="base">High-intent visits a month today</label><output id="baseOut" for="base">25,126</output></div>
+        <input type="range" id="base" min="5000" max="45000" step="1" value="25126">
+        <div class="why">Estimate from Similarweb's September run-rate: direct, email, referrals, 58.5% of paid, 40% of organic and half of Gen AI. Replace with GA4. It mainly drives the conversion-lift line.</div>
+      </div>
+
+      <div class="ctl">
+        <div class="row"><label for="enq">High-intent visit to enquiry</label><output id="enqOut" for="enq">0.6%</output></div>
+        <input type="range" id="enq" min="0.2" max="2" step="0.1" value="0.6">
+        <div class="why">Placeholder until TCS shares its form and call data. At these defaults a high-intent visit earns $52.50 in trip revenue and $10.50 in gross profit, above the ≥$7.24 TCS implicitly paid for each on-intent click in June–July.</div>
+      </div>
+
+      <div class="ctl">
+        <div class="row"><label for="close">Enquiry to booking</label><output id="closeOut" for="close">5%</output></div>
+        <input type="range" id="close" min="1" max="15" step="0.5" value="5">
+        <div class="why">Placeholder until TCS shares its numbers. Low by design: a $90K–$205K trip has a long consideration cycle and many enquiries are for future years.</div>
+      </div>
+
+      <div class="ctl">
+        <div class="row"><label for="bv">Average booking value</label><output id="bvOut" for="bv">$175,000</output></div>
+        <input type="range" id="bv" min="50000" max="400000" step="5000" value="175000">
+        <div class="why">Placeholder: one seat on the 28 Nov departure. A couple on a jet expedition is about $350K; a couple on a custom trip ($25K–$40K per person) is $50K–$80K.</div>
+      </div>
+
+      <div class="ctl">
+        <div class="row"><label for="mar">Gross margin</label><output id="marOut" for="mar">20%</output></div>
+        <input type="range" id="mar" min="10" max="35" step="1" value="20">
+        <div class="why">Placeholder, used only for the profit-after-media line. Revenue figures don't depend on it.</div>
+      </div>
+
+      <div class="presets" role="group" aria-label="Scenarios tied to the plan">
+        <button class="preset" type="button" data-p="39750,384,0"><b>Tier 1: restart and repair</b>Disciplined paid search, tracking, redirects, spam disavow</button>
+        <button class="preset" type="button" data-p="39750,856,10"><b>Tiers 1–2: convert</b>+ jet pages, mobile enquiry path, near-page-one pages</button>
+        <button class="preset" type="button" data-p="39750,2323,10" aria-pressed="true"><b>Tiers 1–3: the plan</b>The headline: + AI visibility and content breadth</button>
+        <button class="preset" type="button" data-p="39750,5456,25"><b>Tier 4 (ceiling)</b>Full organic recovery, AI back to August, half the Smithsonian gap</button>
+      </div>
+    </section>
+
+    <section class="result" aria-live="polite" aria-label="Outcome">
+      <div>
+        <div class="label">Trip revenue a year the plan adds (full run-rate)</div>
+        <div class="big" id="rev">$8.65M</div>
+        <div class="sub" id="revSub"></div>
+      </div>
+
+      <div class="stats">
+        <div class="stat"><div class="v" id="enqY">989</div><div class="l">extra enquiries a year</div></div>
+        <div class="stat"><div class="v" id="bkY">49</div><div class="l">extra bookings a year</div></div>
+        <div class="stat"><div class="v" id="perEnq">$8.8K</div><div class="l">value of one enquiry</div></div>
+      </div>
+
+      <div class="bars">
+        <div class="t">High-intent visits a month (US)</div>
+        <div class="bar"><span>June–July average</span><div class="fill"><i id="jjBar"></i></div><span class="n">43,415</span></div>
+        <div class="bar"><span>TCS today</span><div class="fill"><i id="baseBar"></i></div><span class="n" id="baseN">25,126</span></div>
+        <div class="bar"><span>TCS + plan</span><div class="fill"><i id="baseBar2"></i><i class="gain" id="gainBar"></i></div><span class="n" id="withN">35,324</span></div>
+      </div>
+
+      <div class="stats">
+        <div class="stat"><div class="v" id="gp">$1.25M</div><div class="l">gross profit a year after media</div></div>
+        <div class="stat"><div class="v" id="media">$39.8K</div><div class="l">media a month (June–July: $67.9K)</div></div>
+        <div class="stat"><div class="v" id="paidEq">$118K</div><div class="l">a year to buy the organic and AI visits in Ads</div></div>
+      </div>
+
+      <table aria-label="Close-rate sensitivity">
+        <thead><tr><th>If enquiry-to-booking is</th><th>Bookings / yr</th><th>Revenue added / yr</th></tr></thead>
+        <tbody id="sens"></tbody>
+      </table>
+    </section>
+  </div>
+
+  <div class="inaction">
+    <h2>What doing nothing costs</h2>
+    <p>Against June–July, about <b>11,600 high-intent visits a month</b> are gone: 7,875 on-intent paid visits, 1,536 commercial organic clicks and about 2,166 AI-assistant referrals. At the rates above that is <b id="coiM">$608K</b> of trip revenue a month, or <b id="coiW">one booking every 9 days</b>. Buying those visits back in Google Ads at TCS's own $4.24 would cost about <b>$49K a month</b>. Organic traffic is down 53% since March (Ahrefs), about 12% a month, and AI Overviews now sit above 95 of the 101 tracked TCS rankings. Every month the plan waits pushes back <b id="perMonth">$721K</b> of trip revenue at run-rate. And seats on the 28 Nov departure can't be sold once the jet leaves.</p>
+  </div>
+
+  <div class="foot">
+    <div>Traffic: Similarweb, US, Jun–Aug 2026 (261,338 visits; channel mix, engagement, search performance, August ad sample of 161 ads) and weekly to 25 Sep 2026. Paid search: $74,299 (Jun), $61,508 (Jul), $3,388 (Aug); $4.24 a visit Jun–Jul. August paid clicks: 27.7% brand, 30.8% relevant, 41.5% off-intent (other travel brands, trade press, guidebooks). Rankings, keywords and backlinks: Ahrefs, 28 Sep 2026 (organic 8,259 visits in Mar 2026 → 3,862 in Sep; referring domains 1,507 → 2,796 Aug→Sep). Click-through curve with AI Overviews present: #1 15%, #2 11%, #3 8%, #4 5.5%, #5 4%, #6 3%, #8 2%, #10 1.3%. Prices: tcsworldtravel.com (28 Nov 2026 departure $175K per person, 51 guests), Travel Weekly ($205K seven-continent), Luxury Travel Report ($90K–$175K range).</div>
+    <div>Formula: high-intent visits added = (paid budget ÷ $4.24 − 1,502 on-intent paid visits today) + organic and AI visits added. Extra enquiries a month = (today + added) × enquiry rate × (1 + lift) − today × enquiry rate; × close rate = extra bookings; × average booking value × 12 = trip revenue a year. Gross profit after media = revenue × margin − paid budget × 12, before agency fees. The Ads cost of the organic and AI visits is what they would cost to buy, not what they earn, and is never added to revenue. Every revenue figure uses placeholder rates until TCS shares its own.</div>
+    <div>Part of the ROAST × TCS World Travel integrated SEO, GEO and traffic analysis, September 2026. Companion to the <a href="../tcl-recovery-calculator/">TCL Recovery Calculator</a> and the <a href="../bergmeyer-project-value-calculator/">Bergmeyer Project-Value Calculator</a>.</div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const $=id=>document.getElementById(id);
+  const CPV=4.239124, PAID_NOW_HI=1502, JJ_HI=43415, LOST_HI=11576;
+  const bud=$('bud'),org=$('org'),lift=$('lift'),base=$('base'),enq=$('enq'),close=$('close'),bv=$('bv'),mar=$('mar');
+  const els=[bud,org,lift,base,enq,close,bv,mar];
+  const presetEls=[bud,org,lift];
+  const fmtI=n=>Math.round(n).toLocaleString('en-US');
+  const fmt1=n=>(Math.round(n*10)/10).toLocaleString('en-US',{minimumFractionDigits:1,maximumFractionDigits:1});
+  const fmtM=n=>{const s=n<0?'−':'';n=Math.abs(n);return s+(n>=1e6?'$'+(n/1e6).toFixed(2)+'M':n>=1e4?'$'+Math.round(n/1e3)+'K':n>=1e3?'$'+(n/1e3).toFixed(1)+'K':'$'+Math.round(n));};
+  const fmtD=n=>'$'+Math.round(n).toLocaleString('en-US');
+  const presets=[...document.querySelectorAll('.preset')];
+
+  const dep=new Date(2026,10,28), now=new Date();
+  $('days').textContent=Math.max(0,Math.round((dep-new Date(now.getFullYear(),now.getMonth(),now.getDate()))/86400000));
+
+  function tier(b,o,l){
+    if(o>=4000||l>=20) return ['','Tier 4','Tier 4 (ceiling): full organic recovery, AI referrals back to August, half the Smithsonian content gap'];
+    if(o>=1500) return ['','Tiers 1–3','Tiers 1–3: disciplined paid search, fixes, conversion, then AI visibility and content'];
+    if(l>0||o>=700) return ['','Tiers 1–2','Tiers 1–2: restart and repair, then jet pages, the mobile enquiry path and near-page-one pages'];
+    if(b>0||o>0) return ['low','Tier 1','Tier 1: disciplined paid search, working tracking, clean display, repaired redirects'];
+    return ['low','Nothing','No plan: today\'s run-rate'];
+  }
+  function model(b,o,l,bs,e,c,v){
+    const added=Math.max(0,b/CPV-PAID_NOW_HI)+o;
+    const enqNow=bs*e/100, enqNew=(bs+added)*e/100*(1+l/100);
+    const dEnq=enqNew-enqNow, dBk=dEnq*c/100;
+    return {added, dEnqY:dEnq*12, dBkY:dBk*12, revY:dBk*v*12, revM:dBk*v};
+  }
+  function render(){
+    const b=+bud.value,o=+org.value,l=+lift.value,bs=+base.value,e=+enq.value,c=+close.value,v=+bv.value,mg=+mar.value;
+    $('budOut').firstChild.textContent=fmtD(b);
+    const [cls,lbl,msg]=tier(b,o,l); $('tierLbl').textContent=lbl; $('band').className='band '+cls; $('band').textContent=msg;
+    $('orgOut').value=fmtI(o); $('liftOut').value=l+'%'; $('baseOut').value=fmtI(bs);
+    $('enqOut').value=e.toFixed(1)+'%'; $('closeOut').value=(c%1?c.toFixed(1):c)+'%'; $('bvOut').value=fmtD(v); $('marOut').value=mg+'%';
+    const m=model(b,o,l,bs,e,c,v);
+    $('rev').textContent=fmtM(m.revY);
+    $('revSub').textContent=`${fmtI(m.added)} more high-intent visits a month${l?` and a ${l}% better enquiry rate`:''} → ${fmtI(m.dEnqY)} extra enquiries a year × ${c%1?c.toFixed(1):c}% = ${fmt1(m.dBkY)} extra bookings × ${fmtM(v)}. Full run-rate; year one is about 80% of it as the tiers ramp.`;
+    $('enqY').textContent=fmtI(m.dEnqY); $('bkY').textContent=fmt1(m.dBkY); $('perEnq').textContent=fmtM(c/100*v);
+    const withV=bs+m.added, max=Math.max(withV,JJ_HI)*1.05;
+    $('baseN').textContent=fmtI(bs); $('withN').textContent=fmtI(withV);
+    const bb=bs/max*100, g=withV/max*100;
+    $('jjBar').style.width=(JJ_HI/max*100)+'%'; $('baseBar').style.width=bb+'%'; $('baseBar2').style.width=bb+'%';
+    const gain=$('gainBar'); gain.style.left=bb+'%'; gain.style.width=Math.max(0,g-bb)+'%';
+    $('gp').textContent=fmtM(m.revY*mg/100-b*12);
+    $('media').textContent=fmtM(b);
+    $('paidEq').textContent=fmtM(o*CPV*12);
+    $('sens').innerHTML=[3,5,8].map(x=>{const mm=model(b,o,l,bs,e,x,v);return `<tr><td>${x}%</td><td>${fmt1(mm.dBkY)}</td><td>${fmtM(mm.revY)}</td></tr>`;}).join('');
+    const coiBk=LOST_HI*e/100*c/100;
+    $('coiM').textContent=fmtM(coiBk*v);
+    $('coiW').textContent=coiBk>0?`one booking every ${Math.max(1,Math.round(30.4/coiBk))} days`:'no bookings';
+    $('perMonth').textContent=fmtM(m.revM);
+    presets.forEach(pr=>{const q=pr.dataset.p.split(',').map(Number);pr.setAttribute('aria-pressed',String(q.every((x,i)=>x===+presetEls[i].value)));});
+    try{localStorage.setItem('tcs-calc-v1',JSON.stringify(els.map(el=>el.value)));}catch(err){}
+  }
+  els.forEach(el=>el.addEventListener('input',render));
+  presets.forEach(pr=>pr.addEventListener('click',()=>{const q=pr.dataset.p.split(',');presetEls.forEach((el,i)=>el.value=q[i]);render();}));
+  try{const s=JSON.parse(localStorage.getItem('tcs-calc-v1'));if(Array.isArray(s)&&s.length===els.length){els.forEach((el,i)=>el.value=s[i]);}}catch(err){}
+  render();
+})();
+</script>
+</body>
+</html>

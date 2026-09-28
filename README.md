@@ -9,3 +9,4 @@ Interactive pages that accompany ROAST pitch decks. Static HTML, served with Git
 | MarketBeat Defend & Expand Calculator — traffic value kept and won across non-Google search, quote pages, tickers and new tool pages, plus paid savings | `marketbeat-defend-expand-calculator/` |
 | GayRealEstate Lead-Value Calculator — what LGBTQ+ home-buyer traffic is worth in referral fees, what paid re-aiming saves, and what the August organic loss costs | `gayrealestate-lead-value-calculator/` |
 | Bergmeyer Project-Value Calculator — what being found for its sectors (retail, restaurant, workplace, higher ed) is worth in won projects and new-project fees, and what waiting costs | `bergmeyer-project-value-calculator/` |
+| TCS Booking-Value Calculator — what restarting the high-intent half of paid search, plus organic and AI visibility, is worth in private-jet and custom-travel bookings, and what each month of waiting costs | `tcs-booking-value-calculator/` |
