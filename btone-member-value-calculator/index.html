@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>btone Member-Value Calculator</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;900&family=Public+Sans:wght@400;500;600&display=swap">
+<style>
+:root{
+  --bg:#ffffff; --ink:#111214; --muted:#5b5e66; --line:#e6e4dc; --panel:#f6f5f0;
+  --yellow:#FFD100; --yellow-deep:#e6bc00; --on-yellow:#111214; --on-yellow-muted:#4a4630;
+  --track:#e3e1d8; --ok:#1f7a3a;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){ --bg:#111214; --ink:#f4f3ee; --muted:#a6a79f; --line:#2a2b2f; --panel:#1b1c20; --track:#33343a; color-scheme:dark; }
+}
+:root[data-theme="dark"]{ --bg:#111214; --ink:#f4f3ee; --muted:#a6a79f; --line:#2a2b2f; --panel:#1b1c20; --track:#33343a; color-scheme:dark; }
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Public Sans",system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;font-size:15px;line-height:1.45}
+.wrap{max-width:1440px;margin:0 auto;padding-block:22px 44px;padding-inline:clamp(16px,3vw,40px);display:grid;gap:22px}
+.brand{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-bottom:6px;flex-wrap:wrap}
+.wordmark{display:flex;align-items:center;gap:12px}.wordmark .roast-logo{height:22px;width:auto;display:block;color:var(--ink)}
+.wordmark span{font-family:"Public Sans",sans-serif;font-weight:500;font-size:15px;color:var(--muted);letter-spacing:0}
+.deadline{font-size:13px;color:var(--muted);text-align:right}
+.deadline b{color:var(--ink);font-variant-numeric:tabular-nums}
+h1{font-family:"Archivo",system-ui,sans-serif;font-weight:900;font-size:clamp(28px,3.4vw,46px);line-height:1.05;letter-spacing:-.015em;margin:0;text-wrap:balance;max-width:26ch}
+.lede{color:var(--muted);max-width:78ch;margin:8px 0 0;font-size:clamp(14px,1.1vw,16px)}
+.grid{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,2fr);gap:22px;align-items:start}
+@media (max-width:900px){.grid{grid-template-columns:1fr}}
+.panel{background:var(--panel);border-radius:22px;padding:clamp(18px,2vw,28px) clamp(18px,2vw,28px) 10px;min-width:0;overflow:hidden}
+.ctl{display:grid;gap:8px;padding-block:14px;border-top:1px solid var(--line)}
+.ctl:first-child{border-top:0;padding-top:2px}
+.ctl .row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.ctl label{font-weight:600}
+.ctl output{font-family:"Archivo",sans-serif;font-weight:700;font-size:22px;font-variant-numeric:tabular-nums}
+.ctl output small{font-family:"Public Sans",sans-serif;font-weight:500;font-size:13px;color:var(--muted);margin-left:8px}
+.ctl .why{font-size:13px;color:var(--muted);max-width:72ch}
+.sect{font-family:"Archivo",sans-serif;font-weight:700;font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);padding-top:16px;border-top:1px solid var(--line)}
+.band{font-size:13px;font-weight:600;padding:5px 12px;border-radius:14px;background:var(--yellow);color:var(--on-yellow);width:fit-content;max-width:100%;line-height:1.3}
+.band.low{background:var(--track);color:var(--ink)}
+input[type=range]{width:100%;accent-color:var(--ink);height:30px;margin:0}
+input[type=range]:focus-visible{outline:2px solid var(--ink);outline-offset:4px;border-radius:6px}
+.presets{display:flex;flex-wrap:wrap;gap:8px;padding-block:16px;border-top:1px solid var(--line)}
+.preset{border:1.5px solid var(--line);border-radius:12px;padding:8px 12px;font-size:13px;background:transparent;color:var(--ink);cursor:pointer;font-family:inherit;text-align:left;line-height:1.25}
+.preset b{display:block;font-weight:700}
+.preset:hover,.preset:focus-visible{border-color:var(--ink);outline:none}
+.preset[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.result{background:var(--yellow);color:var(--on-yellow);border-radius:22px;padding:clamp(20px,2.2vw,32px);display:grid;gap:18px;min-width:0}
+.result .label{font-weight:600;font-size:14px;color:var(--on-yellow-muted)}
+.result .big{font-family:"Archivo",sans-serif;font-weight:900;font-size:clamp(48px,6vw,88px);line-height:.95;letter-spacing:-.02em;font-variant-numeric:tabular-nums;margin:6px 0}
+.result .sub{font-size:14px;color:var(--on-yellow-muted);max-width:52ch}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+@media (max-width:520px){.stats{grid-template-columns:1fr 1fr}}
+.stat{background:rgba(255,255,255,.5);border-radius:14px;padding:14px 14px 12px;min-width:0}
+.stat .v{font-family:"Archivo",sans-serif;font-weight:700;font-size:clamp(20px,1.8vw,26px);font-variant-numeric:tabular-nums;line-height:1.1}
+.stat .l{font-size:12.5px;color:var(--on-yellow-muted);margin-top:5px;line-height:1.3;text-wrap:balance}
+.bars{display:grid;gap:8px;margin-top:4px}
+.bars .t{font-weight:600;font-size:13px;color:var(--on-yellow-muted)}
+.bar{display:grid;grid-template-columns:minmax(120px,170px) 1fr 64px;gap:10px;align-items:center;font-size:13px}
+@media (max-width:520px){.bar{grid-template-columns:110px 1fr 56px}}
+.bar .fill{height:14px;border-radius:7px;background:rgba(17,18,20,.25);position:relative;overflow:hidden}
+.bar .fill i{position:absolute;inset:0;width:0;background:var(--on-yellow);border-radius:7px;transition:width .25s ease}
+.bar .fill i.gain{background:#ffffff;left:auto}
+.bar .n{text-align:right;font-variant-numeric:tabular-nums;font-weight:600}
+@media (prefers-reduced-motion: reduce){.bar .fill i{transition:none}}
+.corp{display:grid;gap:8px}
+.corp .t{font-weight:600;font-size:13px;color:var(--on-yellow-muted)}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th,td{text-align:left;padding:7px 4px;border-bottom:1px solid rgba(17,18,20,.18);font-variant-numeric:tabular-nums}
+th{font-size:12px;color:var(--on-yellow-muted);font-weight:600}
+td:last-child,th:last-child{text-align:right;font-weight:700}
+.inaction{background:var(--panel);border-radius:22px;padding:clamp(18px,2vw,28px);display:grid;gap:8px}
+.inaction h2{font-family:"Archivo",sans-serif;font-weight:700;font-size:18px;margin:0}
+.inaction p{margin:0;color:var(--muted);max-width:100ch;font-size:15px;line-height:1.55}
+.inaction b{color:var(--ink)}
+.foot{font-size:13px;color:var(--muted);max-width:110ch;display:grid;gap:6px}
+.foot a{color:var(--ink)}
+@media (min-width:901px){.result{position:sticky;top:16px}}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="brand">
+    <div class="wordmark"><svg class="roast-logo" fill="currentColor" aria-label="ROAST" role="img" viewBox="0 0 931.89 203.5" xmlns="http://www.w3.org/2000/svg" overflow="hidden"><path d="M30.4 4.59 0 4.59 0 0 93.33 0C128.29 0 166.29 7.45 166.29 50.73 166.29 85.7 123.42 94.87 101.23 97.45L101.23 98.02C136.19 100.89 154.74 108.05 159.3 145.89L163.56 180.86C165.69 197.77 174.2 198.92 179.37 198.92 184.84 198.92 188.79 197.2 191.84 196.05L193.66 199.78C187.58 201.79 179.98 203.51 168.73 203.51 131.64 203.51 129.51 184.88 125.25 151.92L123.12 134.72C120.99 116.66 115.52 100.32 81.17 100.32L61.41 100.32 61.41 198.92 92.42 198.92 92.42 203.51 0 203.51 0 198.92 30.4 198.92 30.4 4.59ZM61.41 95.73 76.61 95.73C112.48 95.73 133.46 83.98 133.46 50.73 133.46 27.8 125.25 4.58 82.08 4.58L61.41 4.58 61.41 95.73Z" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4"  fill-opacity="1"/><path d="M293.24 0.32C342.65 0.32 385.63 45.32 385.63 101.91 385.63 158.5 342.65 203.5 293.24 203.5 243.83 203.5 200.85 158.5 200.85 101.91 200.85 45.32 243.83 0.32 293.24 0.32ZM293.24 199.09C345.28 199.09 352.3 138.08 352.3 101.91 352.3 65.74 345.28 4.74 293.24 4.74 241.2 4.74 234.18 65.75 234.18 101.91 234.18 138.07 241.2 199.09 293.24 199.09Z" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4"  fill-opacity="1"/><path d="M501.23 135.93 438.66 135.93 424.96 175.38C422.91 180.89 420.57 187.51 420.57 192.19 420.57 196.05 424.08 199.08 433.43 199.08L448.63 199.08 448.63 203.49 388.4 203.49 388.4 199.08 397.76 199.08C406.82 199.08 410.62 198.25 416.18 182.82L480.77 0.32 483.99 0.32 556.81 199.09 581.08 199.09 581.08 203.5 495.42 203.5 495.42 199.09 524.07 199.09 501.24 135.93ZM469.66 48 469.08 48 440.43 131.52 499.78 131.52 469.67 48Z" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4"  fill-opacity="1"/><path d="M598 130.7 602.68 130.7C602.68 177.01 631.63 198.78 666.71 198.78 694.78 198.78 714.95 181.97 714.95 157.16 714.95 128.49 699.16 119.95 665.54 114.99 619.64 108.1 598 100.93 598 54.62 598 23.2 619.93 0.32 652.68 0.32 682.79 0.32 694.2 17.14 704.14 17.13 712.17 17.13 711.74 3.58 712.62-2.84217e-14L717.3-2.84217e-14 717.3 64.54 712.62 64.54C709.99 33.12 691.86 4.73 652.69 4.73 627.84 4.73 610.29 20.17 610.29 45.52 610.29 70.87 620.23 75.84 668.76 84.11 711.45 91.28 728.99 104.23 728.99 140.07 728.99 175.91 707.94 203.19 665.55 203.19 636.31 203.19 620.82 188.78 610 188.86 601.37 188.92 602.69 198.82 602.69 203.51L598.01 203.51 598.01 130.7Z" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4"  fill-opacity="1"/><path d="M752.96 0 752.96 64.54 757.64 64.54C757.64 24.77 766.71 6.75 804.33 4.79L804.33 147.44 829.12 147.44 829.12 4.41 855.73 4.41 855.73 147.44 880.52 147.44 880.52 4.78C918.11 6.71 927.21 24.7 927.21 64.54L931.89 64.54 931.89 0 752.96 0Z" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4"  fill-opacity="1"/></svg><span>× btone FITNESS · Q4 2026</span></div>
+    <div class="deadline"><b id="days">—</b> days until January, the biggest month of the year for new fitness memberships</div>
+  </div>
+
+  <div>
+    <h1>What non-branded search is worth in new btone members, from 43 studios to 100</h1>
+    <p class="lede">About three-quarters of the search clicks that reach btonefitness.com come from people who already know the name. Studio pages earn about 61 non-branded visits a month each, and close to none in Chicago, Salt Lake City and Raleigh, where the next studios are opening. The unit of value is a member, not a visit. Pick a tier, then replace our placeholder rates with btone's own.</p>
+  </div>
+
+  <div class="grid">
+    <section class="panel" aria-label="Assumptions">
+
+      <div class="ctl">
+        <div class="row"><label for="per">Non-branded search visits per studio a month</label><output id="perOut" for="per">135<small id="tierLbl">Tiers 1–3</small></output></div>
+        <input type="range" id="per" min="61" max="250" step="1" value="135">
+        <div class="band" id="band">Tiers 1–3: studio pages rebuilt, plus method content and AI answers</div>
+        <div class="why">Today: 61. Similarweb puts organic search at ~9,250 visits a month (Jun–Aug 2026); 28% of attributed clicks are non-branded; ÷ 43 studios. Ahrefs models less (~16), Similarweb's topline split more (~123). btone's best studio page today, Worcester, drew ~380 non-branded visits in August.</div>
+      </div>
+
+      <div class="ctl">
+        <div class="row"><label for="studios">Studios open</label><output id="studiosOut" for="studios">43</output></div>
+        <input type="range" id="studios" min="43" max="100" step="1" value="43">
+        <div class="why">43 open and 51 signed today; the goal is 100 (btone, Sep 2026). The uplift applies to every open studio.</div>
+      </div>
+
+      <div class="ctl">
+        <div class="row"><label for="intro">Non-branded visit to intro-offer purchase</label><output id="introOut" for="intro">3.0%</output></div>
+        <input type="range" id="intro" min="1" max="8" step="0.5" value="3">
+        <div class="why">Placeholder until btone shares its Mariana Tek data. Someone searching "pilates [town]" who lands on a studio page with a $49 two-week offer.</div>
+      </div>
+
+      <div class="ctl">
+        <div class="row"><label for="conv">Intro offer to member</label><output id="convOut" for="conv">30%</output></div>
+        <input type="range" id="conv" min="10" max="60" step="1" value="30">
+        <div class="why">Placeholder until btone shares its own. Boutique studios commonly convert 20–40% of intro offers.</div>
+      </div>
+
+      <div class="ctl">
+        <div class="row"><label for="monthly">Average monthly membership</label><output id="monthlyOut" for="monthly">$199</output></div>
+        <input type="range" id="monthly" min="129" max="299" step="5" value="199">
+        <div class="why">Placeholder: btone's prices sit behind the scheduler. An 8-class pack is $189 (Wellesley, Sep 2026).</div>
+      </div>
+
+      <div class="ctl">
+        <div class="row"><label for="tenure">Average months a member stays</label><output id="tenureOut" for="tenure">10</output></div>
+        <input type="range" id="tenure" min="4" max="24" step="1" value="10">
+        <div class="why">Placeholder until btone shares its retention data.</div>
+      </div>
+
+      <div class="sect">Corporate: franchise development</div>
+
+      <div class="ctl">
+        <div class="row"><label for="signed">Extra studios signed a year from a franchise hub</label><output id="signedOut" for="signed">0</output></div>
+        <input type="range" id="signed" min="0" max="5" step="1" value="0">
+        <div class="why">Kept at 0 in the headline. Today /franchise ranks only for "bungeeone franchise" at position 35, so btone has no franchise-intent search or AI presence while it recruits owners for studios 52–100.</div>
+      </div>
+
+      <div class="ctl">
+        <div class="row"><label for="auv">Average studio revenue a year (AUV)</label><output id="auvOut" for="auv">$600,000</output></div>
+        <input type="range" id="auv" min="300000" max="1200000" step="25000" value="600000">
+        <div class="why">Placeholder until btone shares its FDD Item 19. Sets the 6% royalty corporate earns per studio (2021 FDD: $50,000 fee, 6% royalty).</div>
+      </div>
+
+      <div class="presets" role="group" aria-label="Scenarios tied to the plan">
+        <button class="preset" type="button" data-p="65,43,3,30,199,10,0,600000"><b>Tier 1: fix what Google indexes</b>Scheduler URLs, stale pre-opening copy, 10 near-miss terms</button>
+        <button class="preset" type="button" data-p="110,43,3,30,199,10,0,600000"><b>Tiers 1–2: studio pages</b>Every studio page rebuilt; new-market launch kit</button>
+        <button class="preset" type="button" data-p="135,43,3,30,199,10,0,600000" aria-pressed="true"><b>Tiers 1–3: the plan</b>The headline: method content and AI answers on top</button>
+        <button class="preset" type="button" data-p="135,100,3,30,199,10,2,600000"><b>Tier 4 (ceiling)</b>The plan at 100 studios, plus a franchise hub</button>
+      </div>
+    </section>
+
+    <section class="result" aria-live="polite" aria-label="Outcome">
+      <div>
+        <div class="label">Membership revenue a year the plan adds, across the network</div>
+        <div class="big" id="rev">$684K</div>
+        <div class="sub" id="revSub"></div>
+      </div>
+
+      <div class="stats">
+        <div class="stat"><div class="v" id="members">344</div><div class="l">new members a year</div></div>
+        <div class="stat"><div class="v" id="intros">1,146</div><div class="l">intro offers a year</div></div>
+        <div class="stat"><div class="v" id="perVisit">$18</div><div class="l">value of one non-branded visit</div></div>
+      </div>
+
+      <div class="bars">
+        <div class="t">Non-branded search visits per studio a month</div>
+        <div class="bar"><span>New-market studios today</span><div class="fill"><i id="nmBar"></i></div><span class="n">~0</span></div>
+        <div class="bar"><span>Network average today</span><div class="fill"><i id="baseBar"></i></div><span class="n">61</span></div>
+        <div class="bar"><span>With the plan</span><div class="fill"><i id="baseBar2"></i><i class="gain" id="gainBar"></i></div><span class="n" id="withN">135</span></div>
+        <div class="bar"><span>Worcester, Aug 2026</span><div class="fill"><i id="worBar"></i></div><span class="n">380</span></div>
+      </div>
+
+      <div class="corp">
+        <div class="t">What reaches corporate</div>
+        <div class="stats">
+          <div class="stat"><div class="v" id="royalty">$41K</div><div class="l">6% royalty on the added revenue</div></div>
+          <div class="stat"><div class="v" id="franchise">$0</div><div class="l">franchise value of extra signings</div></div>
+          <div class="stat"><div class="v" id="paidEq">$134K</div><div class="l">paid-equivalent a year at $3.50 a click</div></div>
+        </div>
+      </div>
+
+      <table aria-label="Intro-offer rate sensitivity">
+        <thead><tr><th>If intro-offer rate is</th><th>Members / yr</th><th>Revenue added / yr</th></tr></thead>
+        <tbody id="sens"></tbody>
+      </table>
+    </section>
+  </div>
+
+  <div class="inaction">
+    <h2>What doing nothing costs</h2>
+    <p>Every month the plan waits defers about <b id="perMonth">$57K</b> of membership revenue. Each studio that opens in a new market without the launch kit starts near zero non-branded visits; against the plan's standard that's about <b id="nmMembers">15</b> members and <b id="nmRev">$29K</b> in its first year, and btone has <b id="toOpen">57</b> openings between here and 100. Meanwhile about <b>77% of paid search clicks</b> buy the name btone already ranks #1 for, organic traffic is about <b>35% below its May 2025 peak</b> (Ahrefs), and Google AI Overviews sit on <b>56%</b> of btone's results while ChatGPT and Google's AI name btone zero times.</p>
+  </div>
+
+  <div class="foot">
+    <div>Traffic: Similarweb, US, Jun–Aug 2026 (~31,300 visits a month; organic search ~9,250 a month; 72% of 10,855 keyword-attributed organic clicks are branded; Aug landing pages and rank distribution; Search Ads export, Aug 2026). Rankings, near-miss terms, AI citations and peak-to-now: Ahrefs, 30 Sep 2026 (organic 2,869 a month, ~75% branded; about a third of Similarweb's figure, and the two aren't blended). Studio counts: btone, Sep 2026; live /locations page, 30 Sep 2026. Franchise terms: 2021 FDD via Vetted and Franzy. Paid-equivalent: $3.50, the median non-branded CPC in the Similarweb export ($2.43–$5.92).</div>
+    <div>Formula: (visits per studio with the plan − 61 today) × studios × 12 = added non-branded visits a year; × intro-offer rate = intro offers; × intro-to-member rate = members; × monthly membership × months stayed = membership revenue added. Corporate: 6% royalty on that revenue (all of it at corporate-owned studios); each extra signed studio = $50,000 fee + 6% × AUV × 5 years. Paid-equivalent is what the visits would cost in Google Ads, not what they earn, and the two are never added. Every revenue figure uses placeholder rates until btone shares its own.</div>
+    <div>Part of the ROAST × btone FITNESS search, AI visibility and traffic analysis, September 2026. Companion to the <a href="../tcl-recovery-calculator/">TCL Recovery Calculator</a> and the <a href="../fitnessplus-growth-calculator/">FitnessPlus Growth Calculator</a>.</div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const $=id=>document.getElementById(id);
+  const TODAY=61, WOR=380, CPC=3.50, ROY=0.06, FEE=50000, YRS=5, OPEN_NOW=43, GOAL=100;
+  const per=$('per'),studios=$('studios'),intro=$('intro'),conv=$('conv'),monthly=$('monthly'),tenure=$('tenure'),signed=$('signed'),auv=$('auv');
+  const els=[per,studios,intro,conv,monthly,tenure,signed,auv];
+  const fmtI=n=>Math.round(n).toLocaleString('en-US');
+  const fmtM=n=>{const s=n<0?'−':'';n=Math.abs(n);return s+(n>=1e6?'$'+(n/1e6).toFixed(2)+'M':n>=1e3?'$'+Math.round(n/1e3)+'K':'$'+Math.round(n));};
+  const fmtD=n=>'$'+Math.round(n).toLocaleString('en-US');
+  const presets=[...document.querySelectorAll('.preset')];
+
+  const jan=new Date(2027,0,1), now=new Date();
+  $('days').textContent=Math.max(0,Math.ceil((jan-new Date(now.getFullYear(),now.getMonth(),now.getDate()))/86400000));
+
+  function tier(v,s){
+    if(s>51) return ['','Tier 4','Tier 4 (ceiling): the plan rolled out as btone grows toward 100 studios'];
+    if(v<=65) return ['low','Tier 1','Tier 1: scheduler URLs canonicalised, stale pre-opening copy removed, 10 near-miss terms pushed into the top 3'];
+    if(v<=110) return ['','Tiers 1–2','Tiers 1–2: every studio page rebuilt, plus a launch kit for new markets'];
+    if(v<=135) return ['','Tiers 1–3','Tiers 1–3: studio pages rebuilt, plus method content and AI answers'];
+    return ['','Beyond the plan','Beyond the plan: closer to what Worcester earns today, across every studio'];
+  }
+  function model(p,s,i,c,m,t){
+    const visYr=Math.max(0,p-TODAY)*s*12, intros=visYr*i/100, mem=intros*c/100;
+    return {visMo:visYr/12, intros, mem, rev:mem*m*t};
+  }
+  function render(){
+    const p=+per.value,s=+studios.value,i=+intro.value,c=+conv.value,m=+monthly.value,t=+tenure.value,g=+signed.value,a=+auv.value;
+    $('perOut').firstChild.textContent=fmtI(p);
+    const [cls,lbl,msg]=tier(p,s); $('tierLbl').textContent=lbl; $('band').className='band '+cls; $('band').textContent=msg;
+    $('studiosOut').value=fmtI(s); $('introOut').value=i.toFixed(1)+'%'; $('convOut').value=c+'%';
+    $('monthlyOut').value=fmtD(m); $('tenureOut').value=t; $('signedOut').value=g; $('auvOut').value=fmtD(a);
+    const r=model(p,s,i,c,m,t);
+    $('rev').textContent=fmtM(r.rev);
+    $('revSub').textContent=`${fmtI(r.visMo)} more non-branded visits a month across ${fmtI(s)} studios → ${fmtI(r.intros)} intro offers a year × ${c}% = ${fmtI(r.mem)} members × ${fmtD(m)} a month × ${t} months.`;
+    $('members').textContent=fmtI(r.mem); $('intros').textContent=fmtI(r.intros);
+    $('perVisit').textContent='$'+Math.round(i/100*c/100*m*t);
+    const max=Math.max(p,WOR)*1.05, bb=TODAY/max*100, gg=p/max*100;
+    $('withN').textContent=fmtI(p);
+    $('nmBar').style.width='0.8%';
+    $('baseBar').style.width=bb+'%'; $('baseBar2').style.width=bb+'%';
+    const gain=$('gainBar'); gain.style.left=bb+'%'; gain.style.width=Math.max(0,gg-bb)+'%';
+    $('worBar').style.width=(WOR/max*100)+'%';
+    $('royalty').textContent=fmtM(r.rev*ROY);
+    $('franchise').textContent=fmtM(g*(FEE+a*ROY*YRS));
+    $('paidEq').textContent=fmtM(r.visMo*CPC*12);
+    $('sens').innerHTML=[Math.max(1,i-1),i,Math.min(8,i+1)].map(x=>{const mm=model(p,s,x,c,m,t);return `<tr><td>${x.toFixed(1)}%</td><td>${fmtI(mm.mem)}</td><td>${fmtM(mm.rev)}</td></tr>`;}).join('');
+    $('perMonth').textContent=fmtM(r.rev/12);
+    const nm=model(p+TODAY,1,i,c,m,t);
+    $('nmMembers').textContent=fmtI(nm.mem); $('nmRev').textContent=fmtM(nm.rev);
+    $('toOpen').textContent=fmtI(GOAL-OPEN_NOW);
+    presets.forEach(pr=>{const q=pr.dataset.p.split(',').map(Number);pr.setAttribute('aria-pressed',String(q.every((x,k)=>x===+els[k].value)));});
+    try{localStorage.setItem('btone-calc-v1',JSON.stringify(els.map(e=>e.value)));}catch(e){}
+  }
+  els.forEach(el=>el.addEventListener('input',render));
+  presets.forEach(pr=>pr.addEventListener('click',()=>{const q=pr.dataset.p.split(',');els.forEach((el,k)=>el.value=q[k]);render();}));
+  try{const s=JSON.parse(localStorage.getItem('btone-calc-v1'));if(Array.isArray(s)&&s.length===els.length){els.forEach((el,k)=>el.value=s[k]);}}catch(e){}
+  render();
+})();
+</script>
+</body>
+</html>
