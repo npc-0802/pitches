@@ -1,0 +1,413 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>FitnessPlus Growth Calculator</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;900&family=Public+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: TCL Recovery Calculator system: controls left, yellow outcome right, lender view and cost of inaction full width below. */
+:root{
+  --bg:#ffffff; --ink:#111214; --muted:#5b5e66; --line:#e6e4dc; --panel:#f6f5f0;
+  --yellow:#FFD100; --yellow-deep:#e6bc00; --on-yellow:#111214; --on-yellow-muted:#4a4630;
+  --track:#e3e1d8; --ok:#1f7a3a; --neg:#b3261e;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){ --bg:#111214; --ink:#f4f3ee; --muted:#a6a79f; --line:#2a2b2f; --panel:#1b1c20; --track:#33343a; --ok:#6fcf8f; --neg:#ff8a80; color-scheme:dark; }
+}
+:root[data-theme="dark"]{ --bg:#111214; --ink:#f4f3ee; --muted:#a6a79f; --line:#2a2b2f; --panel:#1b1c20; --track:#33343a; --ok:#6fcf8f; --neg:#ff8a80; color-scheme:dark; }
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Public Sans",system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;font-size:15px;line-height:1.45}
+.wrap{max-width:1080px;margin:0 auto;padding-block:22px 44px;padding-inline:20px;display:grid;gap:18px}
+.brand{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-bottom:6px;flex-wrap:wrap}
+.wordmark{font-family:Georgia,"Times New Roman",serif;font-weight:700;font-size:26px;letter-spacing:.02em}
+.wordmark span{font-family:"Public Sans",sans-serif;font-weight:500;font-size:15px;color:var(--muted);margin-left:10px;letter-spacing:0}
+.deadline{font-size:13px;color:var(--muted);text-align:right}
+.deadline b{color:var(--ink);font-variant-numeric:tabular-nums}
+h1{font-family:"Archivo",system-ui,sans-serif;font-weight:900;font-size:clamp(28px,4vw,42px);line-height:1.05;letter-spacing:-.015em;margin:0;text-wrap:balance;max-width:22ch}
+h2{font-family:"Archivo",system-ui,sans-serif;font-weight:700;font-size:20px;line-height:1.15;margin:0;text-wrap:balance}
+.lede{color:var(--muted);max-width:70ch;margin:6px 0 0}
+.grid{display:grid;grid-template-columns:1.05fr .95fr;gap:18px;align-items:start}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start}
+@media (max-width:780px){.grid,.grid2{grid-template-columns:1fr}}
+.grid>*,.grid2>*{min-width:0}
+.panel{background:var(--panel);border-radius:22px;padding:22px 22px 8px}
+.panel.pad{padding:22px}
+.group{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding-top:18px;border-top:1px solid var(--line)}
+.group:first-child{border-top:0;padding-top:0}
+.ctl{display:grid;gap:8px;padding-block:14px;border-top:1px solid var(--line)}
+.group+.ctl{border-top:0}
+.ctl .row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.ctl label{font-weight:600}
+.ctl output{font-family:"Archivo",sans-serif;font-weight:700;font-size:22px;font-variant-numeric:tabular-nums}
+.ctl output small{font-family:"Public Sans",sans-serif;font-weight:500;font-size:13px;color:var(--muted);margin-left:8px}
+.ctl .why{font-size:13px;color:var(--muted);max-width:60ch}
+.band{font-size:13px;font-weight:600;padding:5px 10px;border-radius:999px;background:var(--yellow);color:var(--on-yellow);width:max-content;max-width:100%}
+.band.low{background:var(--track);color:var(--ink)}
+input[type=range]{width:100%;accent-color:var(--ink);height:30px;margin:0}
+input[type=range]:focus-visible{outline:2px solid var(--ink);outline-offset:4px;border-radius:6px}
+.seg{display:flex;gap:6px;flex-wrap:wrap}
+.seg button{border:1.5px solid var(--line);border-radius:10px;padding:7px 12px;font:inherit;font-size:13px;font-weight:600;background:transparent;color:var(--ink);cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.seg button:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.presets{display:flex;flex-wrap:wrap;gap:8px;padding-block:16px;border-top:1px solid var(--line)}
+.preset{border:1.5px solid var(--line);border-radius:12px;padding:8px 12px;font-size:13px;background:transparent;color:var(--ink);cursor:pointer;font-family:inherit;text-align:left;line-height:1.25}
+.preset b{display:block;font-weight:700}
+.preset:hover,.preset:focus-visible{border-color:var(--ink);outline:none}
+.preset[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.result{background:var(--yellow);color:var(--on-yellow);border-radius:22px;padding:24px 24px 20px;display:grid;gap:16px}
+.result .label{font-weight:600;font-size:14px;color:var(--on-yellow-muted)}
+.result .big{font-family:"Archivo",sans-serif;font-weight:900;font-size:clamp(46px,7.5vw,80px);line-height:.95;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.result .sub{font-size:14px;color:var(--on-yellow-muted);max-width:46ch}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+@media (max-width:520px){.stats{grid-template-columns:1fr 1fr}}
+.stat{background:rgba(255,255,255,.5);border-radius:14px;padding:12px 12px 10px}
+.stat .v{font-family:"Archivo",sans-serif;font-weight:700;font-size:21px;font-variant-numeric:tabular-nums;line-height:1.1}
+.stat .l{font-size:12px;color:var(--on-yellow-muted);margin-top:4px;line-height:1.3}
+.bars{display:grid;gap:8px;margin-top:4px}
+.bars .t{font-weight:600;font-size:13px;color:var(--on-yellow-muted)}
+.bar{display:grid;grid-template-columns:150px 1fr 64px;gap:10px;align-items:center;font-size:13px}
+@media (max-width:520px){.bar{grid-template-columns:110px 1fr 56px}}
+.bar .fill{height:14px;border-radius:7px;background:rgba(17,18,20,.25);position:relative;overflow:hidden}
+.bar .fill i{position:absolute;inset:0;width:0;background:var(--on-yellow);border-radius:7px;transition:width .25s ease}
+.bar .fill i.gain{background:#ffffff;left:auto}
+.bar .n{text-align:right;font-variant-numeric:tabular-nums;font-weight:600}
+@media (prefers-reduced-motion: reduce){.bar .fill i{transition:none}}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th,td{text-align:left;padding:7px 4px;border-bottom:1px solid rgba(17,18,20,.18);font-variant-numeric:tabular-nums}
+th{font-size:12px;color:var(--on-yellow-muted);font-weight:600}
+td:last-child,th:last-child{text-align:right;font-weight:700}
+.panel table th,.panel table td{border-bottom:1px solid var(--line)}
+.panel table th{color:var(--muted)}
+.panel table td.r,.panel table th.r{text-align:right}
+.tblwrap{overflow-x:auto}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
+@media (max-width:520px){.kpis{grid-template-columns:1fr}}
+.kpi{border:1px solid var(--line);border-radius:14px;padding:12px}
+.kpi .v{font-family:"Archivo",sans-serif;font-weight:700;font-size:22px;font-variant-numeric:tabular-nums;line-height:1.1}
+.kpi .l{font-size:12px;color:var(--muted);margin-top:4px;line-height:1.3}
+.pos{color:var(--ok)} .negv{color:var(--neg)}
+.chart{width:100%;height:auto;display:block;margin-top:6px}
+.note{font-size:13px;color:var(--muted);margin:8px 0 0;max-width:70ch}
+.coi{display:grid;gap:12px;margin-top:12px}
+.coi .item{display:grid;grid-template-columns:120px 1fr;gap:12px;align-items:baseline}
+@media (max-width:520px){.coi .item{grid-template-columns:1fr}}
+.coi .v{font-family:"Archivo",sans-serif;font-weight:700;font-size:22px;font-variant-numeric:tabular-nums}
+.coi .d{font-size:13.5px;color:var(--muted)}
+.foot{font-size:13px;color:var(--muted);max-width:84ch;display:grid;gap:6px}
+.foot a{color:var(--ink)}
+.formula{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px;background:var(--panel);border-radius:10px;padding:10px 12px;color:var(--ink);overflow-x:auto;white-space:nowrap}
+</style>
+</head><body>
+
+
+<div class="wrap">
+  <div class="brand">
+    <div class="wordmark">ROAST<span>× fitnessplus.com · Q1 2027 plan</span></div>
+    <div class="deadline"><b id="days">—</b> days to the planned start (Jan 1, 2027)</div>
+  </div>
+
+  <div>
+    <h1>What fixing the site and funding the plan is worth</h1>
+    <p class="lede">About 4,500 people in the US visit fitnessplus.com each month. Its category pages don't rank, so a handful of product pages carry organic search, and dealers with the same authority get 2.4 to 3.7 times the organic traffic. There is no structured paid search program. The plan closes that gap. Every rate below starts as a placeholder until FitnessPlus confirms its own number.</p>
+  </div>
+
+  <div class="grid">
+    <section class="panel" aria-label="Assumptions">
+      <div class="group">FitnessPlus numbers · placeholders until confirmed</div>
+      <div class="ctl">
+        <div class="row"><label for="inq">Visits that call, request a quote or add to cart</label><output id="inqOut" for="inq">1.25%</output></div>
+        <input type="range" id="inq" min="0.5" max="3" step="0.05" value="1.25">
+        <div class="why">Benchmarks: 2.4% of visits for retail and ecommerce forms plus calls (Ruler Analytics); 1.4% for online checkout (Littledata). Call tracking and GA4 replace this in month 1.</div>
+      </div>
+      <div class="ctl">
+        <div class="row"><label for="close">Inquiries that become orders</label><output id="closeOut" for="close">25%</output></div>
+        <input type="range" id="close" min="10" max="50" step="1" value="25">
+        <div class="why">Heavy-equipment sellers win about 20% of qualified opportunities (First Page Sage). Inbound requests for in-stock units usually close better.</div>
+      </div>
+      <div class="ctl">
+        <div class="row"><label for="aov">Average order value</label><output id="aovOut" for="aov">$4,000</output></div>
+        <input type="range" id="aov" min="1500" max="15000" step="250" value="4000">
+        <div class="why">Remanufactured single pieces sell for about $1,350–$4,400; packages for $18K–$115K. $4,000 assumes most orders are one or two pieces.</div>
+      </div>
+      <div class="ctl">
+        <div class="row"><label for="margin">Gross margin on equipment sold</label><output id="marginOut" for="margin">35%</output></div>
+        <input type="range" id="margin" min="20" max="60" step="1" value="35">
+        <div class="why">Decides whether the program pays for itself. Placeholder until the owner shares it.</div>
+      </div>
+
+      <div class="group">The plan</div>
+      <div class="ctl">
+        <div class="row"><label for="media">Monthly paid media</label><output id="mediaOut" for="media">$18,000<small id="clicksOut">6,545 clicks</small></output></div>
+        <input type="range" id="media" min="0" max="45000" step="1000" value="18000">
+        <div class="why">Google Search and Shopping on non-brand category and model terms, US only, with call extensions.</div>
+      </div>
+      <div class="ctl">
+        <div class="row"><label for="fee">ROAST monthly fee</label><output id="feeOut" for="fee">$12,000</output></div>
+        <input type="range" id="fee" min="0" max="25000" step="500" value="12000">
+        <div class="why">Placeholder commercial terms. With $18K of media this is the $30K a month discussed.</div>
+      </div>
+      <div class="ctl">
+        <div class="row"><label for="share">Revenue share to ROAST</label><output id="shareOut" for="share">0%</output></div>
+        <input type="range" id="share" min="0" max="10" step="0.5" value="0">
+        <div class="why">Optional share of the added revenue, traded for a lower base fee. Try $8,000 plus 5%.</div>
+      </div>
+      <div class="ctl">
+        <div class="row"><label id="pathLbl">Order of work</label><output id="pathOut">Phased</output></div>
+        <div class="seg" role="group" aria-labelledby="pathLbl">
+          <button type="button" id="pathPhased" aria-pressed="true">Fix in place, paid from month 2</button>
+          <button type="button" id="pathRebuild" aria-pressed="false">Rebuild first, paid from month 5</button>
+        </div>
+        <div id="rebuildCtl" hidden>
+          <div class="row"><label for="rebuild">One-time rebuild cost</label><output id="rebuildOut" for="rebuild">$75,000</output></div>
+          <input type="range" id="rebuild" min="0" max="150000" step="5000" value="75000">
+        </div>
+        <div class="why" id="pathWhy">Phased: fixes and paid go live in months 1–2 on the current site; a rebuild becomes a year-2 decision.</div>
+      </div>
+
+      <div class="group">The levers · set by the scenarios below</div>
+      <div class="ctl">
+        <div class="row"><label for="org">Added US organic visits a month</label><output id="orgOut" for="org">2,050<small id="orgX">2.4× today</small></output></div>
+        <input type="range" id="org" min="0" max="5000" step="50" value="2050">
+        <div class="band" id="band">Peer parity</div>
+        <div class="why">Today: 1,445 US organic visits a month (Similarweb). Both tools put gymstore, the nearest peer with lower authority, at 2.4–2.5× fitnessplus.com; the default uses the lower multiple.</div>
+      </div>
+      <div class="ctl">
+        <div class="row"><label for="lift">Conversion lift on the site</label><output id="liftOut" for="lift">20%</output></div>
+        <input type="range" id="lift" min="0" max="50" step="1" value="20">
+        <div class="why">Price, financing and a mobile call/quote button on every product page give the first 10% in months 1–3; testing on the quote flow adds the rest over months 4–12. A rebuild adds 15 points once it is live.</div>
+      </div>
+      <div class="ctl">
+        <div class="row"><label for="cpc">Cost per click</label><output id="cpcOut" for="cpc">$2.75</output></div>
+        <input type="range" id="cpc" min="1" max="5" step="0.05" value="2.75">
+        <div class="why">Sports and recreation averages: $2.64 (WordStream 2025), $2.77 (LocaliQ 2026). To be checked in Keyword Planner.</div>
+      </div>
+
+      <div class="presets" role="group" aria-label="Scenarios tied to the plan's tiers">
+        <button class="preset" type="button" data-p="0,10,0,phased,2.75"><b>Tier 1</b>Fix and protect</button>
+        <button class="preset" type="button" data-p="1100,10,12000,phased,2.75"><b>Tiers 1–2</b>Hubs, striking distance, paid launch</button>
+        <button class="preset" type="button" data-p="2050,20,18000,phased,2.75" aria-pressed="true"><b>Tiers 1–3</b>The $30K/month plan</button>
+        <button class="preset" type="button" data-p="3900,20,33000,rebuild,3.25"><b>Tiers 1–4 (ceiling)</b>Rebuild and scale</button>
+      </div>
+    </section>
+
+    <section class="result" aria-live="polite" aria-label="Outcome">
+      <div>
+        <div class="label">Added web-originated revenue a year, at run-rate</div>
+        <div class="big" id="rev">$1.24M</div>
+        <div class="sub" id="revSub"></div>
+      </div>
+      <div class="stats">
+        <div class="stat"><div class="v" id="y1rev">—</div><div class="l">added revenue in year 1</div></div>
+        <div class="stat"><div class="v" id="y2net">—</div><div class="l">year 2 gross profit minus cost</div></div>
+        <div class="stat"><div class="v" id="payback">—</div><div class="l">pays for itself</div></div>
+        <div class="stat"><div class="v" id="peak">—</div><div class="l">peak cash need</div></div>
+        <div class="stat"><div class="v" id="roas">—</div><div class="l">return on ad spend</div></div>
+        <div class="stat"><div class="v" id="rpv">—</div><div class="l">revenue per US visit today</div></div>
+      </div>
+      <div class="bars">
+        <div class="t">Web-originated revenue per month</div>
+        <div class="bar"><span>Today</span><div class="fill"><i id="baseBar"></i></div><span class="n" id="baseN">$56K</span></div>
+        <div class="bar"><span>With the plan</span><div class="fill"><i id="baseBar2"></i><i class="gain" id="gainBar"></i></div><span class="n" id="withN">$160K</span></div>
+      </div>
+      <table aria-label="Sensitivity to the inquiry rate">
+        <thead><tr><th>If the inquiry rate is</th><th>Added revenue a year</th><th>Year 2 net</th></tr></thead>
+        <tbody id="sens"></tbody>
+      </table>
+    </section>
+  </div>
+
+  <section class="panel pad" aria-label="For the lender">
+    <h2>For the lender: what it costs, what it returns, when it pays back</h2>
+    <div class="grid2" style="margin-top:12px">
+      <div class="tblwrap">
+        <table aria-label="Year 1 and year 2">
+          <thead><tr><th></th><th class="r">Year 1</th><th class="r">Year 2</th></tr></thead>
+          <tbody>
+            <tr><td>Added revenue</td><td class="r" id="t1rev"></td><td class="r" id="t2rev"></td></tr>
+            <tr><td>Added gross profit</td><td class="r" id="t1gp"></td><td class="r" id="t2gp"></td></tr>
+            <tr><td>Program cost: fee, media, build, share</td><td class="r" id="t1inv"></td><td class="r" id="t2inv"></td></tr>
+            <tr><td><b>Gross profit minus cost</b></td><td class="r" id="t1net"></td><td class="r" id="t2net"></td></tr>
+          </tbody>
+        </table>
+        <p class="note" id="lenderNote"></p>
+      </div>
+      <div>
+        <svg class="chart" id="cash" viewBox="0 0 520 250" role="img" aria-label="Cumulative gross profit minus program cost over 24 months"></svg>
+        <p class="note">Cumulative added gross profit minus program cost, month by month from January 2027, with orders booked a month after the inquiry. The low point is the most cash the program needs.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="grid2">
+    <section class="panel pad" aria-label="Cost of inaction">
+      <h2>What doing nothing costs</h2>
+      <div class="coi">
+        <div class="item"><div class="v" id="coiConc">—</div><div class="d">a month of revenue rides on one or two product pages (15% of organic search on Similarweb, 34% on Ahrefs). When those units sell and the pages come down, it goes with them.</div></div>
+        <div class="item"><div class="v" id="coiTrend">—</div><div class="d">of revenue lost in the first year if the 2024–26 slide resumes (organic fell 68% from February 2024 to September 2026 on Ahrefs, about 36% a year).</div></div>
+        <div class="item"><div class="v" id="coiGap">—</div><div class="d">a month of revenue that peers with the same authority already take, at the added organic visits set above.</div></div>
+      </div>
+    </section>
+    <section class="panel pad" aria-label="Paid-search equivalent">
+      <h2>The same visits bought as ads</h2>
+      <div class="coi">
+        <div class="item"><div class="v" id="peOrg">—</div><div class="d">a month to buy today's 1,445 US organic visits in Google Ads.</div></div>
+        <div class="item"><div class="v" id="peGap">—</div><div class="d">a month, every month, to buy the added organic visits instead of earning them.</div></div>
+      </div>
+      <p class="note">What the traffic would cost, kept separate from what it earns. Ahrefs values today's organic traffic at only $371 a month because product-name searches carry little or no cost per click.</p>
+    </section>
+  </div>
+
+  <div class="foot">
+    <div class="formula">added revenue/month = US visits × r × lift + added organic × r × (1 + lift) + (media ÷ CPC) × r × 0.75, where r = inquiry rate × close rate × order value</div>
+    <div>Traffic: Similarweb, US, June–August 2026 (4,502 visits a month; 1,445 organic in August) and Ahrefs, 30 September 2026 (901 US organic visits a month; peers from its organic competitor report). International visits (75% of the total, mostly under 25 seconds) are left out.</div>
+    <div>Timing: Tier 1's 10-point conversion lift lands over months 1–3 and the rest over months 4–12 (at launch, then months 6–14, when rebuilding). Organic gains ramp from month 3 to full in month 12 (month 6 to 15 when rebuilding). Paid media starts at half budget in month 2 (month 5). Orders book one month after the inquiry. A paid click converts at 75% of the site average. Levers are not double-counted across scenarios.</div>
+    <div>"Gross profit minus cost" is added gross profit less the program's fee, media, build and revenue share. It is before freight, sales time on the extra inquiries and the cost of credit.</div>
+    <div>Every rate is a placeholder until FitnessPlus confirms its own inquiry rate, close rate, order value and margin. Projections, not guarantees. Prepared by ROAST, 30 September 2026.</div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const $=id=>document.getElementById(id);
+  const US=4500, ORG=1445, PQ=0.75, REBUILD_LIFT=0.15, T1L=0.10, LAG=1, TREND=0.6432290162412347;
+  const els={inq:$('inq'),close:$('close'),aov:$('aov'),margin:$('margin'),media:$('media'),fee:$('fee'),share:$('share'),rebuild:$('rebuild'),org:$('org'),lift:$('lift'),cpc:$('cpc')};
+  let path='phased';
+  const presets=[...document.querySelectorAll('.preset')];
+  const fmtI=n=>Math.round(n).toLocaleString('en-US');
+  const money=n=>{const s=n<0?'−':'';const a=Math.abs(n);return s+(a>=995000?'$'+(a/1e6).toFixed(2)+'M':a>=1000?'$'+Math.round(a/1e3)+'K':'$'+Math.round(a));};
+  const signed=n=>(n>0?'+':'')+money(n);
+
+  const start=new Date(2027,0,1), now=new Date();
+  $('days').textContent=Math.max(0,Math.ceil((start-new Date(now.getFullYear(),now.getMonth(),now.getDate()))/86400000));
+
+  const clip=x=>Math.max(0,Math.min(1,x));
+  function ramps(p,m,lift){
+    const base=Math.min(lift,T1L), extra=Math.max(0,lift-T1L);
+    if(p==='phased') return [base*clip(m/3)+extra*clip((m-3)/9), clip((m-2)/10), m===1?0:(m===2?0.5:1), 0];
+    const live=m>=5;
+    return [(base+REBUILD_LIFT)*(live?1:0)+extra*clip((m-5)/9), clip((m-5)/10), m<=4?0:(m===5?0.5:1), m<=4?0.25:0];
+  }
+  function run(q){
+    const rpv=q.inq*q.close*q.aov;
+    const lift=q.lift+(q.path==='rebuild'?REBUILD_LIFT:0);
+    const clicks=q.cpc?q.media/q.cpc:0, rpc=rpv*PQ;
+    const act=[];
+    for(let m=1;m<=24+LAG;m++){const [c,o,pd,rb]=ramps(q.path,m,q.lift);act.push({r:US*rpv*c + q.org*o*rpv*(1+c) + clicks*pd*rpc,pd,rb});}
+    let cum=0,worst=0,payback=null; const months=[];
+    for(let m=1;m<=24;m++){
+      const a=act[m-1], rev=(m-1-LAG>=0)?act[m-1-LAG].r:0;
+      const gp=rev*q.margin;
+      const inv=q.fee + q.media*a.pd + (q.path==='rebuild'?q.rebuild*a.rb:0) + q.share*rev;
+      cum+=gp-inv; worst=Math.min(worst,cum);
+      if(payback===null && cum>=0 && m>1) payback=m;
+      months.push({m,rev,gp,inv,cum});
+    }
+    const sum=(a,k)=>a.reduce((s,x)=>s+x[k],0);
+    const y1=months.slice(0,12), y2=months.slice(12);
+    const full=US*rpv*lift + q.org*rpv*(1+lift) + clicks*rpc;
+    return {rpv,lift,clicks,full,months,payback,peak:-worst,
+      roas:q.media?clicks*rpc/q.media:null,
+      y1rev:sum(y1,'rev'),y1gp:sum(y1,'gp'),y1inv:sum(y1,'inv'),
+      y2rev:sum(y2,'rev'),y2gp:sum(y2,'gp'),y2inv:sum(y2,'inv')};
+  }
+  function read(){
+    return {inq:+els.inq.value/100, close:+els.close.value/100, aov:+els.aov.value, margin:+els.margin.value/100,
+      media:+els.media.value, fee:+els.fee.value, share:+els.share.value/100, rebuild:+els.rebuild.value,
+      org:+els.org.value, lift:+els.lift.value/100, cpc:+els.cpc.value, path};
+  }
+  function band(v){
+    if(v===0) return ['low','No organic growth'];
+    if(v<=1100) return ['low','Striking-distance terms only'];
+    if(v<=2050) return ['','Up to peer parity (2.4× today)'];
+    if(v<=3900) return ['','Toward the strongest same-authority peer (3.7×)'];
+    return ['','Beyond any same-authority peer'];
+  }
+  function drawCash(r){
+    const svg=$('cash'); const W=520,H=250,L=58,R=12,T=16,B=34;
+    const vals=r.months.map(x=>x.cum); const lo=Math.min(0,...vals), hi=Math.max(0,...vals);
+    const span=(hi-lo)||1; const y=v=>T+(hi-v)/span*(H-T-B); const x=m=>L+(m-1)/23*(W-L-R);
+    const ticks=[lo,0,hi].filter((v,i,a)=>a.indexOf(v)===i);
+    let s='';
+    ticks.forEach(v=>{s+=`<line x1="${L}" x2="${W-R}" y1="${y(v)}" y2="${y(v)}" stroke="var(--line)" stroke-width="1"/>`;
+      s+=`<text x="${L-6}" y="${y(v)+4}" text-anchor="end" font-size="11" fill="var(--muted)">${money(v)}</text>`;});
+    s+=`<line x1="${L}" x2="${W-R}" y1="${y(0)}" y2="${y(0)}" stroke="var(--muted)" stroke-width="1.2"/>`;
+    [1,6,12,18,24].forEach(m=>{s+=`<text x="${x(m)}" y="${H-12}" text-anchor="${m===1?'start':(m===24?'end':'middle')}" font-size="11" fill="var(--muted)">Month ${m}</text>`;});
+    s+=`<line x1="${x(12.5)}" x2="${x(12.5)}" y1="${T}" y2="${H-B}" stroke="var(--line)" stroke-dasharray="3 3"/>`;
+    s+=`<text x="${x(12.5)-6}" y="${T+10}" text-anchor="end" font-size="11" fill="var(--muted)">Year 1</text><text x="${x(12.5)+6}" y="${T+10}" font-size="11" fill="var(--muted)">Year 2</text>`;
+    const pts=r.months.map(p=>`${x(p.m).toFixed(1)},${y(p.cum).toFixed(1)}`).join(' ');
+    s+=`<polyline points="${pts}" fill="none" stroke="var(--ink)" stroke-width="2.4" stroke-linejoin="round"/>`;
+    const w=r.months.reduce((a,b)=>b.cum<a.cum?b:a);
+    const halo='stroke="var(--panel)" stroke-width="5" paint-order="stroke" stroke-linejoin="round"';
+    if(w.cum<0){const rx=x(w.m)>W*0.6;s+=`<circle cx="${x(w.m)}" cy="${y(w.cum)}" r="4.5" fill="var(--neg)"/><text x="${rx?x(w.m)-10:x(w.m)+10}" y="${Math.max(T+24,y(w.cum)-10)}" text-anchor="${rx?'end':'start'}" font-size="12" font-weight="600" fill="var(--neg)" ${halo}>Peak need ${money(-w.cum)}, month ${w.m}</text>`;}
+    if(r.payback){const p=r.months[r.payback-1];const rx=x(p.m)>W*0.6;s+=`<circle cx="${x(p.m)}" cy="${y(p.cum)}" r="4.5" fill="var(--ok)"/><text x="${rx?x(p.m)-10:x(p.m)+10}" y="${Math.min(H-B-6,y(p.cum)+18)}" text-anchor="${rx?'end':'start'}" font-size="12" font-weight="600" fill="var(--ok)" ${halo}>Paid back, month ${p.m}</text>`;}
+    const last=r.months[23];
+    const ly=last.cum>=0?Math.max(T+12,y(last.cum)-10):Math.max(T+24,y(last.cum)-10);
+    s+=`<text x="${W-R}" y="${ly}" text-anchor="end" font-size="12" font-weight="700" fill="var(--ink)" ${halo}>${signed(last.cum)} by month 24</text>`;
+    svg.innerHTML=s;
+  }
+  function render(){
+    const q=read(), r=run(q);
+    $('inqOut').value=(+els.inq.value).toFixed(2)+'%';
+    $('closeOut').value=els.close.value+'%';
+    $('aovOut').value='$'+fmtI(q.aov);
+    $('marginOut').value=els.margin.value+'%';
+    $('mediaOut').firstChild.textContent='$'+fmtI(q.media);
+    $('clicksOut').textContent=fmtI(r.clicks)+' clicks';
+    $('feeOut').value='$'+fmtI(q.fee);
+    $('shareOut').value=(+els.share.value)+'%';
+    $('rebuildOut').value='$'+fmtI(q.rebuild);
+    $('orgOut').firstChild.textContent=fmtI(q.org);
+    $('orgX').textContent=((ORG+q.org)/ORG).toFixed(1)+'× today';
+    const [cls,msg]=band(q.org); $('band').className='band '+cls; $('band').textContent=msg;
+    $('liftOut').value=els.lift.value+'%'+(path==='rebuild'?' + 15':'');
+    $('cpcOut').value='$'+q.cpc.toFixed(2);
+    $('pathOut').value=path==='phased'?'Phased':'Rebuild first';
+    $('pathPhased').setAttribute('aria-pressed',String(path==='phased'));
+    $('pathRebuild').setAttribute('aria-pressed',String(path==='rebuild'));
+    $('rebuildCtl').hidden=path!=='rebuild';
+    $('pathWhy').textContent=path==='phased'?'Phased: fixes and paid go live in months 1–2 on the current site; a rebuild becomes a year-2 decision.':'Rebuild first: nothing new goes live until month 5, then the new site converts 15 points better. Migration risk to the pages that rank today is not modelled.';
+
+    $('rev').textContent=money(r.full*12);
+    const base=US*r.rpv;
+    $('revSub').textContent=`About ${money(r.full)} a month once organic has fully ramped, on top of about ${money(base)} a month the site originates today.`;
+    $('y1rev').textContent=money(r.y1rev);
+    const n2=r.y2gp-r.y2inv; $('y2net').textContent=signed(n2);
+    $('payback').textContent=r.payback?'Month '+r.payback:'Not in 24 mo';
+    $('peak').textContent=money(r.peak);
+    $('roas').textContent=r.roas?r.roas.toFixed(1)+'×':'No media';
+    $('rpv').textContent='$'+r.rpv.toFixed(2);
+    $('baseN').textContent=money(base); $('withN').textContent=money(base+r.full);
+    const top=Math.max(base+r.full,1), b=base/top*100;
+    $('baseBar').style.width=b+'%'; $('baseBar2').style.width=b+'%';
+    const g=$('gainBar'); g.style.left=b+'%'; g.style.width=Math.max(0,100-b)+'%';
+
+    const cur=+els.inq.value;
+    const set=[...new Set([0.75,1,cur,1.5,2].map(v=>Math.round(v*100)/100))].sort((a,b)=>a-b);
+    $('sens').innerHTML=set.map(v=>{const rr=run({...q,inq:v/100});const n=rr.y2gp-rr.y2inv;const me=Math.abs(v-cur)<1e-9;return `<tr${me?' style="font-weight:700"':''}><td>${v.toFixed(2)}%${me?' (set)':''}</td><td>${money(rr.full*12)}</td><td>${signed(n)}</td></tr>`;}).join('');
+
+    const cell=(id,v,neg)=>{const e=$(id);e.textContent=neg?signed(v):money(v);e.className='r'+(neg?(v<0?' negv':' pos'):'');};
+    cell('t1rev',r.y1rev); cell('t2rev',r.y2rev); cell('t1gp',r.y1gp); cell('t2gp',r.y2gp);
+    cell('t1inv',r.y1inv); cell('t2inv',r.y2inv); cell('t1net',r.y1gp-r.y1inv,true); cell('t2net',n2,true);
+    const down=run({...q,inq:Math.max(0.005,q.inq-0.0025)}), dl=down.months[23];
+    const downTxt=down.payback?`it still pays for itself, in month ${down.payback}, with a peak cash need of ${money(down.peak)}`:`it does not pay for itself within 24 months: the gap is ${money(-dl.cum)} at month 24${dl.cum<down.months[22].cum?' and still widening':''}`;
+    $('lenderNote').textContent=`Size the line to the downside: year 1 program cost is ${money(r.y1inv)}. If ${(Math.max(0.5,+els.inq.value-0.25)).toFixed(2)}% of visits inquire instead of ${cur.toFixed(2)}%, ${downTxt}. The decision gates exist to cut spend before that happens.`;
+    drawCash(r);
+
+    const orgRev=ORG*r.rpv, f=Math.pow(TREND,1/12);
+    let trend=0; for(let m=1;m<=12;m++) trend+=orgRev*(1-Math.pow(f,m));
+    $('coiConc').textContent=money(orgRev*0.152)+'–'+money(orgRev*0.34).replace('$','');
+    $('coiTrend').textContent=money(trend);
+    $('coiGap').textContent=money(q.org*r.rpv*(1+r.lift));
+    $('peOrg').textContent=money(ORG*q.cpc);
+    $('peGap').textContent=money(q.org*q.cpc);
+
+    presets.forEach(p=>{const [po,pl,pm,pp,pc]=p.dataset.p.split(',');p.setAttribute('aria-pressed',String(+po===q.org&&+pl===+els.lift.value&&+pm===q.media&&pp===path&&Math.abs(+pc-q.cpc)<1e-9));});
+  }
+  Object.values(els).forEach(el=>el.addEventListener('input',render));
+  $('pathPhased').addEventListener('click',()=>{path='phased';render();});
+  $('pathRebuild').addEventListener('click',()=>{path='rebuild';render();});
+  presets.forEach(p=>p.addEventListener('click',()=>{const [po,pl,pm,pp,pc]=p.dataset.p.split(',');els.org.value=po;els.lift.value=pl;els.media.value=pm;path=pp;els.cpc.value=pc;render();}));
+  render();
+})();
+</script>
+
+</body></html>
