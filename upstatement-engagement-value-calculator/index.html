@@ -86,7 +86,7 @@ td:last-child,th:last-child{text-align:right;font-weight:700}
 
   <div>
     <h1>What being found by buyers who don't know Upstatement yet is worth in new-engagement fees</h1>
-    <p class="lede">None of the search clicks that reach upstatement.com come from someone looking for an agency, and AI engines name Upstatement in 4% of higher-ed answers against Carnegie's 36%. Upstatement's link authority (DR 70) matches Instrument and Work &amp; Co, so the gap is pages and listings, not reputation. The unit of value is a won engagement, not a visit. Pick a tier, then replace our placeholder rates with Upstatement's own.</p>
+    <p class="lede">Upstatement's inbound already works: about 900 form fills and 250 qualified leads in the last 12 months, almost all from people who know the name. None of its search clicks come from someone looking for an agency, and AI engines name it in 4% of higher-ed answers against Carnegie's 36%. This tool sizes the leads the plan adds on top, from buyers who don't know Upstatement yet. Pick a tier, then change any rate.</p>
   </div>
 
   <div class="grid">
@@ -112,33 +112,39 @@ td:last-child,th:last-child{text-align:right;font-weight:700}
       </div>
 
       <div class="ctl">
-        <div class="row"><label for="rA">Agency-seeking visit to project inquiry</label><output id="rAOut" for="rA">1.5%</output></div>
-        <input type="range" id="rA" min="0.5" max="4" step="0.1" value="1.5">
-        <div class="why">Placeholder until Upstatement shares its contact-form data. Professional-services sites typically turn 1–3% of high-intent visitors into an inquiry.</div>
+        <div class="row"><label for="rA">Agency-seeking visit to form fill</label><output id="rAOut" for="rA">1.0%</output></div>
+        <input type="range" id="rA" min="0.3" max="3" step="0.1" value="1">
+        <div class="why">Assumption: the site has no conversion tracking yet. Site-wide, about 900 fills on roughly 245,000 visits a year is about 0.4%, but most visitors are job-seekers, existing clients and developers. Pages built for buyers should convert at a multiple of that.</div>
       </div>
 
       <div class="ctl">
-        <div class="row"><label for="rR">Research visit to project inquiry</label><output id="rROut" for="rR">0.15%</output></div>
-        <input type="range" id="rR" min="0.05" max="0.5" step="0.05" value="0.15">
-        <div class="why">Placeholder: a tenth of the agency-seeking rate. Readers include students, designers and small nonprofits; a few are institutions planning a redesign.</div>
+        <div class="row"><label for="rR">Research visit to form fill</label><output id="rROut" for="rR">0.10%</output></div>
+        <input type="range" id="rR" min="0.03" max="0.3" step="0.01" value="0.1">
+        <div class="why">Assumption: a tenth of the agency-seeking rate. Readers include students, designers and small nonprofits; a few are institutions planning a redesign.</div>
       </div>
 
       <div class="ctl">
-        <div class="row"><label for="rAI">AI-referred visit to project inquiry</label><output id="rAIOut" for="rAI">2.0%</output></div>
-        <input type="range" id="rAI" min="0.5" max="5" step="0.1" value="2">
-        <div class="why">Placeholder: AI referrals arrive with a shortlist already made, so they convert at least as well as agency-seeking search.</div>
+        <div class="row"><label for="rAI">AI-referred visit to form fill</label><output id="rAIOut" for="rAI">1.5%</output></div>
+        <input type="range" id="rAI" min="0.3" max="4" step="0.1" value="1.5">
+        <div class="why">Assumption: AI referrals arrive with a shortlist already made, so they convert at least as well as agency-seeking search.</div>
       </div>
 
       <div class="ctl">
         <div class="row"><label for="halo">Arrivals by name or direct for each AI referral</label><output id="haloOut" for="halo">1.0×</output></div>
         <input type="range" id="halo" min="0" max="3" step="0.5" value="1">
-        <div class="why">Placeholder: buyers who see the name in an answer and then search it or type the URL. They show up as branded or direct visits, not as AI referrals.</div>
+        <div class="why">Assumption: buyers who see the name in an answer and then search it or type the URL. They show up as branded or direct visits, not as AI referrals.</div>
       </div>
 
       <div class="ctl">
-        <div class="row"><label for="win">Inquiry to won engagement</label><output id="winOut" for="win">6%</output></div>
-        <input type="range" id="win" min="2" max="15" step="1" value="6">
-        <div class="why">Placeholder until Upstatement shares its numbers: about 1 in 5 inquiries fits its scope and budget × about 30% won against other studios.</div>
+        <div class="row"><label for="qual">Form fill to qualified lead</label><output id="qualOut" for="qual">28%</output></div>
+        <input type="range" id="qual" min="10" max="50" step="1" value="28">
+        <div class="why">Upstatement's own figure: about 250 qualified leads from about 900 form fills in the last 12 months. The 900 include bots and spam, so the rate for real inquiries is higher; new buyers who don't know the name may qualify a little lower. The two roughly offset.</div>
+      </div>
+
+      <div class="ctl">
+        <div class="row"><label for="win">Qualified lead to won engagement</label><output id="winOut" for="win">25%</output></div>
+        <input type="range" id="win" min="10" max="50" step="1" value="25">
+        <div class="why">Placeholder: Upstatement's win rate isn't shared. One in four qualified leads won is a mid-range assumption for a studio competing on credentials and referrals.</div>
       </div>
 
       <div class="ctl">
@@ -154,24 +160,30 @@ td:last-child,th:last-child{text-align:right;font-weight:700}
       </div>
 
       <div class="presets" role="group" aria-label="Scenarios tied to the plan">
-        <button class="preset" type="button" data-p="0,0,11,1.5,0.15,2,1,6,250000,1"><b>Tier 1: fix the foundations</b>Redirects, diagnosis, homepage, /for-agents, Clutch</button>
-        <button class="preset" type="button" data-p="194,38,13,1.5,0.15,2,1,6,250000,1"><b>Tiers 1–2: answer pages</b>8 sector and service pages live by month 3</button>
-        <button class="preset" type="button" data-p="337,65,15.6,1.5,0.15,2,1,6,250000,1" aria-pressed="true"><b>Tiers 1–3: the plan</b>The headline: listicles, directories and content on top</button>
-        <button class="preset" type="button" data-p="909,152,20,1.5,0.15,2,1,6,250000,1"><b>Tier 4 (ceiling)</b>Carnegie-level higher-ed share, months 12–24</button>
+        <button class="preset" type="button" data-p="0,0,11,1,0.1,1.5,1,28,25,250000,1"><b>Tier 1: fix the foundations</b>Tracking, redirects, homepage, /for-agents, Clutch</button>
+        <button class="preset" type="button" data-p="194,38,13,1,0.1,1.5,1,28,25,250000,1"><b>Tiers 1–2: answer pages</b>8 sector and service pages live by month 3</button>
+        <button class="preset" type="button" data-p="337,65,15.6,1,0.1,1.5,1,28,25,250000,1" aria-pressed="true"><b>Tiers 1–3: the plan</b>The headline: listicles, directories and content on top</button>
+        <button class="preset" type="button" data-p="909,152,20,1,0.1,1.5,1,28,25,250000,1"><b>Tier 4 (ceiling)</b>Carnegie-level higher-ed share, months 12–24</button>
       </div>
     </section>
 
     <section class="result" aria-live="polite" aria-label="Outcome">
       <div>
         <div class="label">New-engagement fees a year the plan adds, at run-rate</div>
-        <div class="big" id="fees">$1.13M</div>
+        <div class="big" id="fees">$899K</div>
         <div class="sub" id="feesSub"></div>
       </div>
 
       <div class="stats">
-        <div class="stat"><div class="v" id="inq">75</div><div class="l">project inquiries a year</div></div>
-        <div class="stat"><div class="v" id="won">4.5</div><div class="l">won engagements a year</div></div>
-        <div class="stat"><div class="v" id="perInq">$15K</div><div class="l">value of one inquiry</div></div>
+        <div class="stat"><div class="v" id="qualN">14</div><div class="l">more qualified leads a year</div></div>
+        <div class="stat"><div class="v" id="won">3.6</div><div class="l">won engagements a year</div></div>
+        <div class="stat"><div class="v" id="perQual">$63K</div><div class="l">value of one qualified lead</div></div>
+      </div>
+
+      <div class="bars">
+        <div class="t">Qualified leads a year (Upstatement, last 12 months)</div>
+        <div class="bar"><span>Today</span><div class="fill"><i id="qBase"></i></div><span class="n">~250</span></div>
+        <div class="bar"><span>Today + plan</span><div class="fill"><i id="qBase2"></i><i class="gain" id="qGain"></i></div><span class="n" id="qWith">264</span></div>
       </div>
 
       <div class="bars">
@@ -191,12 +203,12 @@ td:last-child,th:last-child{text-align:right;font-weight:700}
 
       <div class="stats">
         <div class="stat"><div class="v" id="paidEq">$35K</div><div class="l">paid-equivalent a year at $7.32 a click</div></div>
-        <div class="stat"><div class="v" id="yrsAds">7</div><div class="l">years of those clicks one win buys</div></div>
-        <div class="stat"><div class="v" id="aiAdd">57</div><div class="l">AI-led visits a month added</div></div>
+        <div class="stat"><div class="v" id="perVisit">$175</div><div class="l">expected fees per agency-seeking visit</div></div>
+        <div class="stat"><div class="v" id="fills">51</div><div class="l">more form fills a year</div></div>
       </div>
 
       <table aria-label="Win-rate sensitivity">
-        <thead><tr><th>If inquiry-to-win is</th><th>Wins / yr</th><th>Fees added / yr</th></tr></thead>
+        <thead><tr><th>If qualified-to-won is</th><th>Wins / yr</th><th>Fees added / yr</th></tr></thead>
         <tbody id="sens"></tbody>
       </table>
     </section>
@@ -204,22 +216,22 @@ td:last-child,th:last-child{text-align:right;font-weight:700}
 
   <div class="inaction">
     <h2>What doing nothing costs</h2>
-    <p>Every month the plan waits pushes back about <b id="perMonth">$94K</b> of new-engagement fees at run-rate. Meanwhile <b>6,170 buyer searches a month</b> (about 74,000 a year) go to KEG, Carnegie, Boston agencies and listicles. Organic search traffic is down 79% in a year (Ahrefs: 971 visits in September 2025, 203 in September 2026), backlinks fell 28% in October 2025, and 81 domains rated DR 30+ still link to pages that return 404. AI assistants sent about 360 visits between June and late September, nearly as many as every other referring website, yet Upstatement appears in 4% of higher-ed answers against Carnegie's 36%, while public universities scope accessibility-driven redesigns ahead of the 26 April 2027 ADA Title II deadline. A flagship site that goes to a competitor isn't re-tendered for years.</p>
+    <p>Upstatement's inbound is healthy and growing: form fills are up by 150–200 over the last few years. But that growth comes from people who already know the name. Every month the plan waits pushes back about <b id="perMonth">$75K</b> of new-engagement fees at run-rate, from buyers who don't. Meanwhile <b>6,170 buyer searches a month</b> (about 74,000 a year) go to KEG, Carnegie, Boston agencies and listicles, and AI engines name Upstatement in 4% of higher-ed answers against Carnegie's 36%, while public universities scope accessibility-driven redesigns ahead of the 26 April 2027 ADA Title II deadline. Search discovery keeps shrinking too: organic traffic is down 79% in a year (Ahrefs), and 81 domains rated DR 30+ still link to pages that return 404. A flagship site that goes to a competitor isn't re-tendered for years.</p>
   </div>
 
   <div class="foot">
-    <div>Traffic: Similarweb, US, Jun–Aug 2026 (8,500–9,500 visits a month; 239 search keywords recorded, none of the 24 that send clicks a service or sector term; Gen AI referrals 361 from 1 Jun to 26 Sep) and backlinks 1 Sep 2025–30 Sep 2026. Rankings, keywords, peer traffic and AI citations: Ahrefs, 28 Sep 2026 (16 buyer terms, 6,170 US searches a month; peers Collins 1,212 and Work &amp; Co 1,956 organic visits a month). AI visibility: Peec, 24–28 Sep 2026, 85 unbranded prompts across ChatGPT, Gemini and Google AI Overviews; five days of data, so directional. Click-through curve for B2B commercial results: #1 25%, #3 9%, #4 6%, #6 3.5%, #10 1.5%. AI Overview haircut from Ahrefs' 2026 study (−58% at #1). Buyer behaviour: Forrester Buyers' Journey Survey 2025 (94% of business buyers use AI when they buy). Fees: Clutch minimums via Masterly; LOW/CODE university redesign cost guide (Sep 2026). Deadline: DOJ interim final rule, 20 Apr 2026, via EDUCAUSE.</div>
-    <div>Formula: (agency-seeking visits × agency inquiry rate + research visits × research inquiry rate + added AI visits × (1 + arrivals by name) × AI inquiry rate) × 12 = inquiries a year; × win rate = won engagements; × average fee × engagements per client = fees added a year. Added AI visits = 93 a month today × 50% from unbranded answers × (new share ÷ 9.7% − 1). Search visits are all incremental: Upstatement ranks for none of these terms today. Paid-equivalent uses the keyword set's weighted CPC of $7.32; it is what the traffic would cost in Google Ads, not what it earns, and the two are never added together. Every fee figure uses placeholder rates until Upstatement shares its own.</div>
-    <div>Part of the ROAST × Upstatement integrated search, AI visibility and traffic analysis, September 2026. Companion to the <a href="../tcl-recovery-calculator/">TCL Recovery Calculator</a> and the <a href="../quotient-client-value-calculator/">Quotient Client-Value Calculator</a>.</div>
+    <div>Leads: Upstatement, last 12 months to October 2026 (about 900 form fills including bots and spam; about 250 qualified leads). The site has no conversion tracking yet, so conversion rates are assumptions until GA4 events are live. Traffic: Similarweb, US, Jun–Aug 2026 (8,500–9,500 visits a month, 46% of worldwide; 239 search keywords recorded, none of the 24 that send clicks a service or sector term; Gen AI referrals 361 from 1 Jun to 26 Sep) and backlinks 1 Sep 2025–30 Sep 2026. Rankings, keywords, peer traffic and AI citations: Ahrefs, 28 Sep 2026 (16 buyer terms, 6,170 US searches a month; peers Collins 1,212 and Work &amp; Co 1,956 organic visits a month). AI visibility: Peec, 24–28 Sep 2026, 85 unbranded prompts across ChatGPT, Gemini and Google AI Overviews; five days of data, so directional. Click-through curve for B2B commercial results: #1 25%, #3 9%, #4 6%, #6 3.5%, #10 1.5%. AI Overview haircut from Ahrefs' 2026 study (−58% at #1). Fees: Clutch minimums via Masterly; LOW/CODE university redesign cost guide (Sep 2026). Deadline: DOJ interim final rule, 20 Apr 2026, via EDUCAUSE.</div>
+    <div>Formula: (agency-seeking visits × agency fill rate + research visits × research fill rate + added AI visits × (1 + arrivals by name) × AI fill rate) × 12 = form fills a year; × fill-to-qualified = qualified leads; × qualified-to-won = won engagements; × average fee × engagements per client = fees added a year. Added AI visits = 93 a month today × 50% from unbranded answers × (new share ÷ 9.7% − 1). Search visits are all incremental: Upstatement ranks for none of these terms today. Paid-equivalent uses the keyword set's weighted CPC of $7.32; it is what the traffic would cost in Google Ads, not what it earns, and the two are never added together. The win rate and average fee are placeholders until Upstatement shares its own.</div>
+    <div>Part of the ROAST × Upstatement integrated search, AI visibility and traffic analysis, September–October 2026. Companion to the <a href="../tcl-recovery-calculator/">TCL Recovery Calculator</a> and the <a href="../quotient-client-value-calculator/">Quotient Client-Value Calculator</a>.</div>
   </div>
 </div>
 
 <script>
 (function(){
   const $=id=>document.getElementById(id);
-  const TODAY_ORG=186, COL=1212, WC=1956, CPC=7.32, AI_TODAY=93, UNB=0.5, VIS0=9.7, PENT=17.0;
-  const agency=$('agency'),research=$('research'),vis=$('vis'),rA=$('rA'),rR=$('rR'),rAI=$('rAI'),halo=$('halo'),win=$('win'),fee=$('fee'),rep=$('rep');
-  const els=[agency,research,vis,rA,rR,rAI,halo,win,fee,rep];
+  const TODAY_ORG=186, COL=1212, WC=1956, CPC=7.32, AI_TODAY=93, UNB=0.5, VIS0=9.7, PENT=17.0, TODAY_QUAL=250;
+  const agency=$('agency'),research=$('research'),vis=$('vis'),rA=$('rA'),rR=$('rR'),rAI=$('rAI'),halo=$('halo'),qual=$('qual'),win=$('win'),fee=$('fee'),rep=$('rep');
+  const els=[agency,research,vis,rA,rR,rAI,halo,qual,win,fee,rep];
   const fmtI=n=>Math.round(n).toLocaleString('en-US');
   const fmt1=n=>(Math.round(n*10)/10).toLocaleString('en-US',{minimumFractionDigits:1,maximumFractionDigits:1});
   const fmtM=n=>{const s=n<0?'−':'';n=Math.abs(n);return s+(n>=1e6?'$'+(n/1e6).toFixed(2)+'M':n>=1e3?'$'+Math.round(n/1e3)+'K':'$'+Math.round(n));};
@@ -230,31 +242,35 @@ td:last-child,th:last-child{text-align:right;font-weight:700}
   $('days').textContent=Math.max(0,Math.ceil((deadline-new Date(now.getFullYear(),now.getMonth(),now.getDate()))/86400000));
 
   function tier(v){
-    if(v<=20) return ['low','Tier 1','Tier 1: redirects, diagnosis, homepage, /for-agents and Clutch. Mostly protection, few new visits'];
+    if(v<=20) return ['low','Tier 1','Tier 1: tracking, redirects, homepage, /for-agents and Clutch. Mostly protection and measurement, few new visits'];
     if(v<=300) return ['','Tiers 1–2','Tiers 1–2: 8 sector and service answer pages live by month 3'];
     if(v<=600) return ['','Tiers 1–3','Tiers 1–3: answer pages plus listicles, directories and buyer-question content'];
     return ['','Tier 4','Tier 4 (ceiling): Carnegie-level share of higher-ed answers, months 12–24'];
   }
-  function model(a,r,v,ra,rr,rai,h,w,fe,rp){
+  function model(a,r,v,ra,rr,rai,h,q,w,fe,rp){
     const aiAdded=AI_TODAY*UNB*Math.max(0,v/VIS0-1), aiEff=aiAdded*(1+h);
-    const inq=(a*ra/100+r*rr/100+aiEff*rai/100)*12;
-    const won=inq*w/100;
-    return {aiAdded, aiEff, inq, won, fees:won*fe*rp};
+    const fills=(a*ra/100+r*rr/100+aiEff*rai/100)*12;
+    const ql=fills*q/100, won=ql*w/100;
+    return {aiEff, fills, ql, won, fees:won*fe*rp};
   }
   function render(){
-    const a=+agency.value,r=+research.value,v=+vis.value,ra=+rA.value,rr=+rR.value,rai=+rAI.value,h=+halo.value,w=+win.value,fe=+fee.value,rp=+rep.value;
+    const a=+agency.value,r=+research.value,v=+vis.value,ra=+rA.value,rr=+rR.value,rai=+rAI.value,h=+halo.value,q=+qual.value,w=+win.value,fe=+fee.value,rp=+rep.value;
     $('agencyOut').firstChild.textContent=fmtI(a);
     const [cls,lbl,msg]=tier(a+r); $('tierLbl').textContent=lbl; $('band').className='band '+cls; $('band').textContent=msg;
     $('researchOut').value=fmtI(r); $('visOut').value=v.toFixed(1)+'%';
     $('rAOut').value=ra.toFixed(1)+'%'; $('rROut').value=rr.toFixed(2)+'%'; $('rAIOut').value=rai.toFixed(1)+'%';
-    $('haloOut').value=h.toFixed(1)+'×'; $('winOut').value=w+'%'; $('feeOut').value=fmtD(fe); $('repOut').value=rp.toFixed(1)+'×';
-    const m=model(a,r,v,ra,rr,rai,h,w,fe,rp);
+    $('haloOut').value=h.toFixed(1)+'×'; $('qualOut').value=q+'%'; $('winOut').value=w+'%'; $('feeOut').value=fmtD(fe); $('repOut').value=rp.toFixed(1)+'×';
+    const m=model(a,r,v,ra,rr,rai,h,q,w,fe,rp);
     $('fees').textContent=fmtM(m.fees);
-    $('feesSub').textContent=`${fmtI(a+r)} buyer-search visits and ${fmtI(m.aiEff)} AI-led visits a month → ${fmtI(m.inq)} project inquiries a year × ${w}% = ${fmt1(m.won)} won engagements × ${fmtM(fe)}${rp>1?' × '+rp.toFixed(1)+' per client':''}. All of it is new: today none of these searches reach Upstatement.`;
-    $('inq').textContent=fmtI(m.inq); $('won').textContent=fmt1(m.won); $('perInq').textContent=fmtM(w/100*fe*rp);
+    $('feesSub').textContent=`${fmtI(a+r)} buyer-search and ${fmtI(m.aiEff)} AI-led visits a month → ${fmtI(m.fills)} more form fills a year × ${q}% qualified = ${fmt1(m.ql)} qualified leads × ${w}% won = ${fmt1(m.won)} engagements × ${fmtM(fe)}${rp>1?' × '+rp.toFixed(1)+' per client':''}. On top of about 250 qualified leads a year today.`;
+    $('qualN').textContent=fmtI(m.ql); $('won').textContent=fmt1(m.won); $('perQual').textContent=fmtM(w/100*fe*rp);
+    $('fills').textContent=fmtI(m.fills); $('perVisit').textContent=fmtM(ra/100*q/100*w/100*fe*rp);
     const paidYr=(a+r)*CPC*12; $('paidEq').textContent=fmtM(paidYr);
-    $('yrsAds').textContent=paidYr>0?fmtI(fe/paidYr):'—';
-    $('aiAdd').textContent=fmtI(m.aiEff);
+    const qWith=TODAY_QUAL+m.ql, qmax=Math.max(qWith,TODAY_QUAL)*1.15;
+    $('qWith').textContent=fmtI(qWith);
+    const qb=TODAY_QUAL/qmax*100, qg=qWith/qmax*100;
+    $('qBase').style.width=qb+'%'; $('qBase2').style.width=qb+'%';
+    const qgain=$('qGain'); qgain.style.left=qb+'%'; qgain.style.width=Math.max(0,qg-qb)+'%';
     const withV=TODAY_ORG+a+r, max=Math.max(withV,WC)*1.05;
     $('withN').textContent=fmtI(withV);
     const bb=TODAY_ORG/max*100, g=withV/max*100;
@@ -266,14 +282,14 @@ td:last-child,th:last-child{text-align:right;font-weight:700}
     $('aiBase').style.width=ab+'%'; $('aiBase2').style.width=ab+'%';
     const aig=$('aiGain'); aig.style.left=ab+'%'; aig.style.width=Math.max(0,ag-ab)+'%';
     $('pentBar').style.width=(PENT/amax*100)+'%';
-    $('sens').innerHTML=[Math.max(2,w-2),w,Math.min(15,w+2)].map(x=>{const mm=model(a,r,v,ra,rr,rai,h,x,fe,rp);return `<tr><td>${x}%</td><td>${fmt1(mm.won)}</td><td>${fmtM(mm.fees)}</td></tr>`;}).join('');
+    $('sens').innerHTML=[Math.max(10,w-5),w,Math.min(50,w+5)].map(x=>{const mm=model(a,r,v,ra,rr,rai,h,q,x,fe,rp);return `<tr><td>${x}%</td><td>${fmt1(mm.won)}</td><td>${fmtM(mm.fees)}</td></tr>`;}).join('');
     $('perMonth').textContent=fmtM(m.fees/12);
-    presets.forEach(pr=>{const q=pr.dataset.p.split(',').map(Number);pr.setAttribute('aria-pressed',String(q.every((x,i)=>x===+els[i].value)));});
-    try{localStorage.setItem('upstatement-calc-v1',JSON.stringify(els.map(e=>e.value)));}catch(e){}
+    presets.forEach(pr=>{const pv=pr.dataset.p.split(',').map(Number);pr.setAttribute('aria-pressed',String(pv.every((x,i)=>x===+els[i].value)));});
+    try{localStorage.setItem('upstatement-calc-v2',JSON.stringify(els.map(e=>e.value)));}catch(e){}
   }
   els.forEach(el=>el.addEventListener('input',render));
-  presets.forEach(pr=>pr.addEventListener('click',()=>{const q=pr.dataset.p.split(',');els.forEach((el,i)=>el.value=q[i]);render();}));
-  try{const s=JSON.parse(localStorage.getItem('upstatement-calc-v1'));if(Array.isArray(s)&&s.length===els.length){els.forEach((el,i)=>el.value=s[i]);}}catch(e){}
+  presets.forEach(pr=>pr.addEventListener('click',()=>{const pv=pr.dataset.p.split(',');els.forEach((el,i)=>el.value=pv[i]);render();}));
+  try{const s=JSON.parse(localStorage.getItem('upstatement-calc-v2'));if(Array.isArray(s)&&s.length===els.length){els.forEach((el,i)=>el.value=s[i]);}}catch(e){}
   render();
 })();
 </script>
