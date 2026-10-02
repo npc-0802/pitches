@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hawkeye Inspection-Value Calculator</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;900&family=Public+Sans:wght@400;500;600&display=swap">
+<style>
+:root{
+  --bg:#ffffff; --ink:#111214; --muted:#5b5e66; --line:#e6e4dc; --panel:#f6f5f0;
+  --yellow:#FFD100; --yellow-deep:#e6bc00; --on-yellow:#111214; --on-yellow-muted:#4a4630;
+  --track:#e3e1d8; --ok:#1f7a3a;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){ --bg:#111214; --ink:#f4f3ee; --muted:#a6a79f; --line:#2a2b2f; --panel:#1b1c20; --track:#33343a; color-scheme:dark; }
+}
+:root[data-theme="dark"]{ --bg:#111214; --ink:#f4f3ee; --muted:#a6a79f; --line:#2a2b2f; --panel:#1b1c20; --track:#33343a; color-scheme:dark; }
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Public Sans",system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;font-size:15px;line-height:1.45}
+.wrap{max-width:1440px;margin:0 auto;padding-block:22px 44px;padding-inline:clamp(16px,3vw,40px);display:grid;gap:22px}
+.brand{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-bottom:6px;flex-wrap:wrap}
+.wordmark{display:flex;align-items:center;gap:12px}.wordmark .roast-logo{height:22px;width:auto;display:block;color:var(--ink)}
+.wordmark span{font-family:"Public Sans",sans-serif;font-weight:500;font-size:15px;color:var(--muted);letter-spacing:0}
+.deadline{font-size:13px;color:var(--muted);text-align:right}
+.deadline b{color:var(--ink);font-variant-numeric:tabular-nums}
+h1{font-family:"Archivo",system-ui,sans-serif;font-weight:900;font-size:clamp(28px,3.4vw,46px);line-height:1.05;letter-spacing:-.015em;margin:0;text-wrap:balance;max-width:26ch}
+.lede{color:var(--muted);max-width:78ch;margin:8px 0 0;font-size:clamp(14px,1.1vw,16px)}
+.grid{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,2fr);gap:22px;align-items:start}
+@media (max-width:900px){.grid{grid-template-columns:1fr}}
+.panel{background:var(--panel);border-radius:22px;padding:clamp(18px,2vw,28px) clamp(18px,2vw,28px) 10px;min-width:0;overflow:hidden}
+.ctl{display:grid;gap:8px;padding-block:14px;border-top:1px solid var(--line)}
+.ctl:first-child{border-top:0;padding-top:2px}
+.ctl .row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.ctl label{font-weight:600}
+.ctl output{font-family:"Archivo",sans-serif;font-weight:700;font-size:22px;font-variant-numeric:tabular-nums}
+.ctl output small{font-family:"Public Sans",sans-serif;font-weight:500;font-size:13px;color:var(--muted);margin-left:8px}
+.ctl .why{font-size:13px;color:var(--muted);max-width:72ch}
+.sect{font-family:"Archivo",sans-serif;font-weight:700;font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);padding-top:16px;border-top:1px solid var(--line)}
+.band{font-size:13px;font-weight:600;padding:5px 12px;border-radius:14px;background:var(--yellow);color:var(--on-yellow);width:fit-content;max-width:100%;line-height:1.3}
+.band.low{background:var(--track);color:var(--ink)}
+input[type=range]{width:100%;accent-color:var(--ink);height:30px;margin:0}
+input[type=range]:focus-visible{outline:2px solid var(--ink);outline-offset:4px;border-radius:6px}
+.presets{display:flex;flex-wrap:wrap;gap:8px;padding-block:16px;border-top:1px solid var(--line)}
+.preset{border:1.5px solid var(--line);border-radius:12px;padding:8px 12px;font-size:13px;background:transparent;color:var(--ink);cursor:pointer;font-family:inherit;text-align:left;line-height:1.25}
+.preset b{display:block;font-weight:700}
+.preset:hover,.preset:focus-visible{border-color:var(--ink);outline:none}
+.preset[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.result{background:var(--yellow);color:var(--on-yellow);border-radius:22px;padding:clamp(20px,2.2vw,32px);display:grid;gap:18px;min-width:0}
+.result .label{font-weight:600;font-size:14px;color:var(--on-yellow-muted)}
+.result .big{font-family:"Archivo",sans-serif;font-weight:900;font-size:clamp(48px,6vw,88px);line-height:.95;letter-spacing:-.02em;font-variant-numeric:tabular-nums;margin:6px 0}
+.result .sub{font-size:14px;color:var(--on-yellow-muted);max-width:52ch}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+@media (max-width:520px){.stats{grid-template-columns:1fr 1fr}}
+.stat{background:rgba(255,255,255,.5);border-radius:14px;padding:14px 14px 12px;min-width:0}
+.stat .v{font-family:"Archivo",sans-serif;font-weight:700;font-size:clamp(20px,1.8vw,26px);font-variant-numeric:tabular-nums;line-height:1.1}
+.stat .l{font-size:12.5px;color:var(--on-yellow-muted);margin-top:5px;line-height:1.3;text-wrap:balance}
+.bars{display:grid;gap:8px;margin-top:4px}
+.bars .t{font-weight:600;font-size:13px;color:var(--on-yellow-muted)}
+.bar{display:grid;grid-template-columns:minmax(120px,170px) 1fr 64px;gap:10px;align-items:center;font-size:13px}
+@media (max-width:520px){.bar{grid-template-columns:110px 1fr 56px}}
+.bar .fill{height:14px;border-radius:7px;background:rgba(17,18,20,.25);position:relative;overflow:hidden}
+.bar .fill i{position:absolute;inset:0;width:0;background:var(--on-yellow);border-radius:7px;transition:width .25s ease}
+.bar .fill i.gain{background:#ffffff;left:auto}
+.bar .n{text-align:right;font-variant-numeric:tabular-nums;font-weight:600}
+@media (prefers-reduced-motion: reduce){.bar .fill i{transition:none}}
+.corp{display:grid;gap:8px}
+.corp .t{font-weight:600;font-size:13px;color:var(--on-yellow-muted)}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th,td{text-align:left;padding:7px 4px;border-bottom:1px solid rgba(17,18,20,.18);font-variant-numeric:tabular-nums}
+th{font-size:12px;color:var(--on-yellow-muted);font-weight:600}
+td:last-child,th:last-child{text-align:right;font-weight:700}
+.inaction{background:var(--panel);border-radius:22px;padding:clamp(18px,2vw,28px);display:grid;gap:8px}
+.inaction h2{font-family:"Archivo",sans-serif;font-weight:700;font-size:18px;margin:0}
+.inaction p{margin:0;color:var(--muted);max-width:100ch;font-size:15px;line-height:1.55}
+.inaction b{color:var(--ink)}
+.foot{font-size:13px;color:var(--muted);max-width:110ch;display:grid;gap:6px}
+.foot a{color:var(--ink)}
+@media (min-width:901px){.result{position:sticky;top:16px}}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="brand">
+    <div class="wordmark"><svg class="roast-logo" fill="currentColor" aria-label="ROAST" role="img" viewBox="0 0 931.89 203.5" xmlns="http://www.w3.org/2000/svg" overflow="hidden"><path d="M30.4 4.59 0 4.59 0 0 93.33 0C128.29 0 166.29 7.45 166.29 50.73 166.29 85.7 123.42 94.87 101.23 97.45L101.23 98.02C136.19 100.89 154.74 108.05 159.3 145.89L163.56 180.86C165.69 197.77 174.2 198.92 179.37 198.92 184.84 198.92 188.79 197.2 191.84 196.05L193.66 199.78C187.58 201.79 179.98 203.51 168.73 203.51 131.64 203.51 129.51 184.88 125.25 151.92L123.12 134.72C120.99 116.66 115.52 100.32 81.17 100.32L61.41 100.32 61.41 198.92 92.42 198.92 92.42 203.51 0 203.51 0 198.92 30.4 198.92 30.4 4.59ZM61.41 95.73 76.61 95.73C112.48 95.73 133.46 83.98 133.46 50.73 133.46 27.8 125.25 4.58 82.08 4.58L61.41 4.58 61.41 95.73Z" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4"  fill-opacity="1"/><path d="M293.24 0.32C342.65 0.32 385.63 45.32 385.63 101.91 385.63 158.5 342.65 203.5 293.24 203.5 243.83 203.5 200.85 158.5 200.85 101.91 200.85 45.32 243.83 0.32 293.24 0.32ZM293.24 199.09C345.28 199.09 352.3 138.08 352.3 101.91 352.3 65.74 345.28 4.74 293.24 4.74 241.2 4.74 234.18 65.75 234.18 101.91 234.18 138.07 241.2 199.09 293.24 199.09Z" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4"  fill-opacity="1"/><path d="M501.23 135.93 438.66 135.93 424.96 175.38C422.91 180.89 420.57 187.51 420.57 192.19 420.57 196.05 424.08 199.08 433.43 199.08L448.63 199.08 448.63 203.49 388.4 203.49 388.4 199.08 397.76 199.08C406.82 199.08 410.62 198.25 416.18 182.82L480.77 0.32 483.99 0.32 556.81 199.09 581.08 199.09 581.08 203.5 495.42 203.5 495.42 199.09 524.07 199.09 501.24 135.93ZM469.66 48 469.08 48 440.43 131.52 499.78 131.52 469.67 48Z" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4"  fill-opacity="1"/><path d="M598 130.7 602.68 130.7C602.68 177.01 631.63 198.78 666.71 198.78 694.78 198.78 714.95 181.97 714.95 157.16 714.95 128.49 699.16 119.95 665.54 114.99 619.64 108.1 598 100.93 598 54.62 598 23.2 619.93 0.32 652.68 0.32 682.79 0.32 694.2 17.14 704.14 17.13 712.17 17.13 711.74 3.58 712.62-2.84217e-14L717.3-2.84217e-14 717.3 64.54 712.62 64.54C709.99 33.12 691.86 4.73 652.69 4.73 627.84 4.73 610.29 20.17 610.29 45.52 610.29 70.87 620.23 75.84 668.76 84.11 711.45 91.28 728.99 104.23 728.99 140.07 728.99 175.91 707.94 203.19 665.55 203.19 636.31 203.19 620.82 188.78 610 188.86 601.37 188.92 602.69 198.82 602.69 203.51L598.01 203.51 598.01 130.7Z" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4"  fill-opacity="1"/><path d="M752.96 0 752.96 64.54 757.64 64.54C757.64 24.77 766.71 6.75 804.33 4.79L804.33 147.44 829.12 147.44 829.12 4.41 855.73 4.41 855.73 147.44 880.52 147.44 880.52 4.78C918.11 6.71 927.21 24.7 927.21 64.54L931.89 64.54 931.89 0 752.96 0Z" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4"  fill-opacity="1"/></svg><span>× Hawkeye Inspectors · Q4 2026</span></div>
+    <div class="deadline"><b id="days">—</b> days to get town pages live in time to rank for the spring 2027 buying season</div>
+  </div>
+
+  <div>
+    <h1>What being found in the 207 towns it serves is worth in booked inspections for Hawkeye</h1>
+    <p class="lede">About 98% of the search clicks that reach hawkeyeinspectors.com come from people who already typed the name, and none come from "home inspector [town]" searches in the 196 Massachusetts and 11 New Hampshire towns Hawkeye covers. Peers win those searches with a page per town. The unit of value is a booked inspection. Pick a tier, then replace our placeholder rates with Hawkeye's own.</p>
+  </div>
+
+  <div class="grid">
+    <section class="panel" aria-label="Assumptions">
+
+      <div class="ctl">
+        <div class="row"><label for="visits">New non-branded search visits a month</label><output id="visitsOut" for="visits">250<small id="tierLbl">Tier 2</small></output></div>
+        <input type="range" id="visits" min="0" max="1000" step="10" value="250">
+        <div class="band" id="band">Tier 2: the first 25 town pages, a page per service and a full Google Business Profile</div>
+        <div class="why">Today: close to 0. Organic search brings ~265 visits a month, nearly all on the name (Similarweb, Aug 2026). 250 more takes Hawkeye to ~515, level with WAVE Inspection's 532. Clayton Home Inspection runs 200+ town pages.</div>
+      </div>
+
+      <div class="ctl">
+        <div class="row"><label for="book">Visit to booked inspection</label><output id="bookOut" for="book">5.0%</output></div>
+        <input type="range" id="book" min="1" max="12" step="0.5" value="5">
+        <div class="why">Placeholder until Hawkeye shares its Spectora data. 10% of visits enquire × 50% of enquiries book (BuiltRight Digital, 2026). Someone searching "home inspector Salem MA" is usually under contract and booking that week.</div>
+      </div>
+
+      <div class="ctl">
+        <div class="row"><label for="job">Average job, inspection plus add-ons</label><output id="jobOut" for="job">$650</output></div>
+        <input type="range" id="job" min="350" max="1200" step="25" value="650">
+        <div class="why">Placeholder until Hawkeye shares its own. Top Massachusetts inspectors charge $500–600 for a single-family home; radon, water, mold and WDI add-ons run $25–200 each.</div>
+      </div>
+
+      <div class="ctl">
+        <div class="row"><label for="maps">Extra bookings a month from Google Maps calls</label><output id="mapsOut" for="maps">3</output></div>
+        <input type="range" id="maps" min="0" max="20" step="1" value="3">
+        <div class="why">Placeholder until Hawkeye shares Business Profile Insights. Map-pack calls never touch the site. Today Hawkeye's 226 Google reviews sit on a profile at its old Lexington address, split from a second Marblehead listing.</div>
+      </div>
+
+      <div class="sect">Agent channel</div>
+
+      <div class="ctl">
+        <div class="row"><label for="partners">New agent partners</label><output id="partnersOut" for="partners">0</output></div>
+        <input type="range" id="partners" min="0" max="30" step="1" value="0">
+        <div class="why">Kept at 0 in the headline. 78% of inspection jobs come through an agent referral (Spectora, 2026); a "recommended inspector" link from a brokerage like Barrett Sotheby's earns both the referral and the ranking signal.</div>
+      </div>
+
+      <div class="ctl">
+        <div class="row"><label for="per">Referrals a year from each new partner</label><output id="perOut" for="per">4</output></div>
+        <input type="range" id="per" min="1" max="12" step="1" value="4">
+        <div class="why">Placeholder until Hawkeye shares how many jobs its regular agents send.</div>
+      </div>
+
+      <div class="presets" role="group" aria-label="Scenarios tied to the plan">
+        <button class="preset" type="button" data-p="50,5,650,2,0,4"><b>Tier 1: fix the foundations</b>One name and address everywhere, Search Console audit, booking tracking</button>
+        <button class="preset" type="button" data-p="250,5,650,3,0,4" aria-pressed="true"><b>Tier 2: town and service pages</b>The headline: 25 town pages, a page per service, a full Google profile</button>
+        <button class="preset" type="button" data-p="400,5,650,5,10,4"><b>Tier 3: + agents and AI answers</b>Agent partner program, a tips hub AI can cite, all 207 towns</button>
+        <button class="preset" type="button" data-p="800,5,650,8,20,4"><b>Tier 4 (ceiling)</b>The default answer for "home inspector [town]" across MA and southern NH</button>
+      </div>
+    </section>
+
+    <section class="result" aria-live="polite" aria-label="Outcome">
+      <div>
+        <div class="label">New inspection revenue a year, once the pages rank</div>
+        <div class="big" id="rev">$120,900</div>
+        <div class="sub" id="revSub"></div>
+      </div>
+
+      <div class="stats">
+        <div class="stat"><div class="v" id="jobs">186</div><div class="l">booked inspections a year</div></div>
+        <div class="stat"><div class="v" id="yr1">$96K</div><div class="l">in year one, on a 6-month ramp</div></div>
+        <div class="stat"><div class="v" id="perVisit">$32.50</div><div class="l">value of one non-branded visit</div></div>
+      </div>
+
+      <div class="bars">
+        <div class="t">Organic search visits a month</div>
+        <div class="bar"><span>Hawkeye today, all on its name</span><div class="fill"><i id="baseBar"></i></div><span class="n">265</span></div>
+        <div class="bar"><span>Hawkeye with the plan</span><div class="fill"><i id="baseBar2"></i><i class="gain" id="gainBar"></i></div><span class="n" id="withN">515</span></div>
+        <div class="bar"><span>WAVE Inspection, Aug 2026</span><div class="fill"><i id="waveBar"></i></div><span class="n">532</span></div>
+      </div>
+
+      <div class="corp">
+        <div class="t">Cost to buy, share of market, capacity</div>
+        <div class="stats">
+          <div class="stat"><div class="v" id="paidEq">$3,000</div><div class="l">a month to buy these visits in Google Ads</div></div>
+          <div class="stat"><div class="v" id="share">2.9%</div><div class="l">of self-directed inspections in Hawkeye's towns</div></div>
+          <div class="stat"><div class="v" id="perInsp">23</div><div class="l">extra jobs a year per inspector (of 8)</div></div>
+        </div>
+      </div>
+
+      <table aria-label="Booking-rate sensitivity">
+        <thead><tr><th>If the booking rate is</th><th>Inspections / yr</th><th>Revenue / yr</th></tr></thead>
+        <tbody id="sens"></tbody>
+      </table>
+    </section>
+  </div>
+
+  <div class="inaction">
+    <h2>What waiting costs</h2>
+    <p>Every month the plan waits defers about <b id="perMonth">$10,075</b> of inspections to peers with town pages. Pages need three to six months to rank, so pages live by January reach the March–June buying season; pages started in spring arrive for 2028. Meanwhile Hawkeye's genuine referring domains fell <b>24% between February and August 2026</b> (Similarweb), <b>four other Hawkeye and Hawk inspection sites</b> compete for the name, and Hawkeye's <b>226 Google reviews</b> sit on a profile at its old address.</p>
+  </div>
+
+  <div class="foot">
+    <div>Traffic: Similarweb, US, Jun–Aug 2026 (~990 visits a month; organic search ~265 in Aug, 98.5% of tracked clicks on "hawkeye home inspections"; five-site compare with WAVE, Omega, Clayton and Greenhouse, pulled 2 Oct 2026). Rankings, backlinks and AI citations: Ahrefs, 30 Sep 2026 (50 organic visits a month, ~95% branded; Ahrefs and Similarweb aren't blended). Listings: Birdeye, HomeAdvisor, Yahoo Local, 2 Oct 2026. Rates: BuiltRight Digital, "Home Inspection Google Ads Cost" (2026); Spectora, "How Homebuyers Choose a Home Inspector in 2026"; MassRealEstateNews inspection cost guide. Market: Warren Group, 61,551 Massachusetts home sales in 2025.</div>
+    <div>Formula: (new non-branded visits a month × booking rate + Maps bookings a month) × 12 × average job = search revenue; plus new agent partners × referrals each × average job. Year one assumes a linear six-month ramp. Market share: 61,551 sales × 60% in Hawkeye's towns × 80% inspected × 22% chosen without an agent referral ≈ 6,500 self-directed inspections a year. Paid-equivalent is what the visits would cost in Google Ads at $12 a click (sector range $8–25), not what they earn, and the two are never added. Every revenue figure uses placeholder rates until Hawkeye shares its own.</div>
+    <div>Part of the ROAST × Hawkeye Inspectors search, AI visibility and traffic analysis, October 2026. Companion to the <a href="../tcl-recovery-calculator/">TCL Recovery Calculator</a> and the <a href="../btone-member-value-calculator/">btone Member-Value Calculator</a>.</div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const $=id=>document.getElementById(id);
+  const TODAY=265, WAVE=532, CPC=12, RAMP=6, INSPECTORS=8, MARKET=61551*0.60*0.80*0.22;
+  const visits=$('visits'),book=$('book'),job=$('job'),maps=$('maps'),partners=$('partners'),per=$('per');
+  const els=[visits,book,job,maps,partners,per];
+  const fmtI=n=>Math.round(n).toLocaleString('en-US');
+  const fmtK=n=>{n=Math.round(n);return n>=1e6?'$'+(n/1e6).toFixed(2)+'M':n>=1e4?'$'+Math.round(n/1e3)+'K':'$'+n.toLocaleString('en-US');};
+  const fmtD=n=>'$'+Math.round(n).toLocaleString('en-US');
+  const presets=[...document.querySelectorAll('.preset')];
+
+  const due=new Date(2027,0,1), now=new Date();
+  $('days').textContent=Math.max(0,Math.ceil((due-new Date(now.getFullYear(),now.getMonth(),now.getDate()))/86400000));
+
+  function tier(v,p){
+    if(v>=800||p>=20) return ['','Tier 4','Tier 4 (ceiling): the default answer for "home inspector [town]" in Google Maps and AI across MA and southern NH'];
+    if(v>=400||p>0) return ['','Tier 3','Tier 3: an agent partner program, a tips hub AI can cite, and town pages rolled out to all 207 towns'];
+    if(v>=250) return ['','Tier 2','Tier 2: the first 25 town pages, a page per service and a full Google Business Profile'];
+    if(v>=50) return ['low','Tier 1','Tier 1: one name and address everywhere, a Search Console audit and booking tracking'];
+    return ['low','Today','Today: no non-branded search visits to speak of'];
+  }
+  function model(v,b,j,m,p,r){
+    const jobsMo=v*b/100+m, jobsYr=jobsMo*12+p*r, rev=jobsYr*j;
+    let f=0; for(let k=1;k<=12;k++) f+=Math.min(k/RAMP,1);
+    return {jobsMo, jobsYr, rev, yr1:rev*f/12};
+  }
+  function render(){
+    const v=+visits.value,b=+book.value,j=+job.value,m=+maps.value,p=+partners.value,r=+per.value;
+    $('visitsOut').firstChild.textContent=fmtI(v);
+    const [cls,lbl,msg]=tier(v,p); $('tierLbl').textContent=lbl; $('band').className='band '+cls; $('band').textContent=msg;
+    $('bookOut').value=b.toFixed(1)+'%'; $('jobOut').value=fmtD(j); $('mapsOut').value=m; $('partnersOut').value=p; $('perOut').value=r;
+    const o=model(v,b,j,m,p,r);
+    $('rev').textContent=fmtD(o.rev);
+    const site=v*b/100;
+    let s=`${fmtI(v)} non-branded visits a month × ${b.toFixed(1)}% = ${(Math.round(site*10)/10).toLocaleString('en-US')} bookings, + ${m} from Google Maps = ${(Math.round(o.jobsMo*10)/10).toLocaleString('en-US')} a month × 12 × ${fmtD(j)}.`;
+    if(p>0) s+=` Plus ${p} agent partners × ${r} referrals = ${fmtI(p*r)} jobs a year.`;
+    $('revSub').textContent=s;
+    $('jobs').textContent=fmtI(o.jobsYr); $('yr1').textContent=fmtK(o.yr1);
+    $('perVisit').textContent='$'+(b/100*j).toFixed(2);
+    const withN=TODAY+v, max=Math.max(withN,WAVE)*1.05, bb=TODAY/max*100, gg=withN/max*100;
+    $('withN').textContent=fmtI(withN);
+    $('baseBar').style.width=bb+'%'; $('baseBar2').style.width=bb+'%';
+    const gain=$('gainBar'); gain.style.left=bb+'%'; gain.style.width=Math.max(0,gg-bb)+'%';
+    $('waveBar').style.width=(WAVE/max*100)+'%';
+    $('paidEq').textContent=fmtD(v*CPC);
+    $('share').textContent=(o.jobsYr/MARKET*100).toFixed(1)+'%';
+    $('perInsp').textContent=fmtI(o.jobsYr/INSPECTORS);
+    $('sens').innerHTML=[Math.max(1,b-2),b,Math.min(12,b+2)].map(x=>{const mm=model(v,x,j,m,p,r);return `<tr><td>${x.toFixed(1)}%</td><td>${fmtI(mm.jobsYr)}</td><td>${fmtD(mm.rev)}</td></tr>`;}).join('');
+    $('perMonth').textContent=fmtD(o.rev/12);
+    presets.forEach(pr=>{const q=pr.dataset.p.split(',').map(Number);pr.setAttribute('aria-pressed',String(q.every((x,k)=>x===+els[k].value)));});
+    try{localStorage.setItem('hawkeye-calc-v1',JSON.stringify(els.map(e=>e.value)));}catch(e){}
+  }
+  els.forEach(el=>el.addEventListener('input',render));
+  presets.forEach(pr=>pr.addEventListener('click',()=>{const q=pr.dataset.p.split(',');els.forEach((el,k)=>el.value=q[k]);render();}));
+  try{const s=JSON.parse(localStorage.getItem('hawkeye-calc-v1'));if(Array.isArray(s)&&s.length===els.length){els.forEach((el,k)=>el.value=s[k]);}}catch(e){}
+  render();
+})();
+</script>
+</body>
+</html>
