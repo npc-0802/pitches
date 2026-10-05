@@ -16,3 +16,7 @@ Interactive pages that accompany ROAST pitch decks. Static HTML, served with Git
 | Hawkeye Inspection-Value Calculator — what Google Ads, Local Services Ads and town pages across the 207 towns Hawkeye serves are worth in booked inspections, revenue per $1 of ad spend, and what each month of waiting defers | `hawkeye-inspection-value-calculator/` |
 | CarGurus Search-Value Calculator — what winning the searches CarGurus nearly owns (near-miss model pages, "used cars", car value, enthusiast models and AI answers) is worth in marketplace revenue, what re-aiming brand and overlap bids frees in paid spend, and what each month of waiting defers | `cargurus-search-value-calculator/` |
 | Citizens Search-Value Calculator — what putting Citizens' rate and product pages on page one for non-branded product searches (mortgage, HELOC, CDs, checking) is worth in new funded accounts, what the learning hub and AI answers add, and what each month of waiting defers | `citizens-search-value-calculator/` |
+
+## Favicon and link previews
+
+Every page links the shared ROAST favicon in `assets/` (`favicon.svg`, `favicon-32.png`, `apple-touch-icon.png`) and carries an `og.png` share card plus Open Graph / Twitter tags between `<!-- share:start -->` and `<!-- share:end -->`, so links unfurl with an image in Slack, iMessage, email and LinkedIn. Generate both with `roast-deck-kit/og_card.py` when a new calculator is added (see the kit README).
