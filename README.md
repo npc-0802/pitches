@@ -16,6 +16,7 @@ Interactive pages that accompany ROAST pitch decks. Static HTML, served with Git
 | Hawkeye Inspection-Value Calculator — what Google Ads, Local Services Ads and town pages across the 207 towns Hawkeye serves are worth in booked inspections, revenue per $1 of ad spend, and what each month of waiting defers | `hawkeye-inspection-value-calculator/` |
 | CarGurus Search-Value Calculator — what winning the searches CarGurus nearly owns (near-miss model pages, "used cars", car value, enthusiast models and AI answers) is worth in marketplace revenue, what re-aiming brand and overlap bids frees in paid spend, and what each month of waiting defers | `cargurus-search-value-calculator/` |
 | Citizens Search-Value Calculator — what putting Citizens' rate and product pages on page one for non-branded product searches (mortgage, HELOC, CDs, checking) is worth in new funded accounts, what the learning hub and AI answers add, and what each month of waiting defers | `citizens-search-value-calculator/` |
+| Industrious Membership-Value Calculator — what winning back the non-branded searches Industrious lost since November 2025, plus re-aiming part of its Google Ads budget to city searches, is worth in new memberships and first-year membership revenue, and what each month of waiting defers | `industrious-membership-value-calculator/` |
 
 ## Favicon and link previews
 
