@@ -67,6 +67,7 @@ input[type=range]:focus-visible{outline:2px solid var(--ink);outline-offset:4px;
 .preset:hover,.preset:focus-visible{border-color:var(--ink);outline:none}
 .preset[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
 .result{background:var(--yellow);color:var(--on-yellow);border-radius:22px;padding:clamp(20px,2.2vw,32px);display:grid;gap:18px;min-width:0}
+.result{grid-template-columns:minmax(0,1fr)}.result>*{min-width:0}.result .big{overflow-wrap:anywhere}
 .result .label{font-weight:600;font-size:14px;color:var(--on-yellow-muted)}
 .result .big{font-family:"Archivo",sans-serif;font-weight:900;font-size:clamp(48px,6vw,88px);line-height:.95;letter-spacing:-.02em;font-variant-numeric:tabular-nums;margin:6px 0}
 .result .sub{font-size:14px;color:var(--on-yellow-muted);max-width:52ch}
@@ -166,7 +167,7 @@ td:last-child,th:last-child{text-align:right;font-weight:700}
     <section class="result" aria-live="polite" aria-label="Outcome">
       <div>
         <div class="label">New first-year membership revenue a year</div>
-        <div class="big" id="rev">$6,178,235</div>
+        <div class="big" id="rev">$6.18M</div>
         <div class="sub" id="revSub"></div>
       </div>
 
@@ -220,6 +221,7 @@ td:last-child,th:last-child{text-align:right;font-weight:700}
   const fmtI=n=>Math.round(n).toLocaleString('en-US');
   const fmtK=n=>{n=Math.round(n);return n>=1e6?'$'+(n/1e6).toFixed(2)+'M':n>=1e4?'$'+Math.round(n/1e3)+'K':'$'+n.toLocaleString('en-US');};
   const fmtD=n=>'$'+Math.round(n).toLocaleString('en-US');
+  const fmtBig=n=>n>=1e6?'$'+(n/1e6).toFixed(2)+'M':fmtD(n);
   const presets=[...document.querySelectorAll('.preset')];
   const since=new Date(2025,10,1), now=new Date();
   $('days').textContent=Math.max(0,Math.floor((new Date(now.getFullYear(),now.getMonth(),now.getDate())-since)/86400000));
@@ -244,14 +246,14 @@ td:last-child,th:last-child{text-align:right;font-weight:700}
     ob.textContent=v.org===0?'No organic recovery':`${Math.round(v.org/GAP*100)}% of the ~17,000 non-branded visits a month lost since September 2025`+(v.org>GAP?' (past the Similarweb estimate; Ahrefs puts the loss at ~27,000)':'');
     const rb=$('reaimBand'); rb.className='band'+(v.reaim>SPEND*0.2?' warn':'');
     rb.textContent=v.reaim===0?'No budget re-aimed':`${(v.reaim/SPEND*100).toFixed(0)}% of ~$632K a month in estimated search spend; buys ~${fmtI(o.clicks)} city and generic clicks`;
-    $('rev').textContent=fmtD(o.total);
-    $('revSub').textContent=`${fmtI(o.mP)} from re-aimed ads + ${fmtI(o.mO)} from recovered rankings`+(v.ai>0?` + ${fmtI(o.mA)} from AI answers`:'')+` = ${fmtI(o.mMo)} new memberships a month × 12 × ${fmtD(v.mrr*12)} first-year value.`;
+    $('rev').textContent=fmtBig(o.total);
+    $('revSub').textContent=`${fmtI(o.mP)} from re-aimed ads + ${fmtI(o.mO)} from recovered rankings`+(v.ai>0?` + ${fmtI(o.mA)} from AI answers`:'')+` = ${fmtI(o.mMo)} new memberships a month × 12 × ${fmtD(v.mrr*12)} first-year value = ${fmtD(o.total)}.`;
     $('mem').textContent=fmtI(o.mMo*12); $('roas').textContent=v.reaim?o.roas.toFixed(1)+'×':'—'; $('yr1').textContent=fmtK(o.yr1);
     const mx=Math.max(o.mP,o.mO,o.mA,1)*1.08;
     [['bP','nP',o.mP],['bO','nO',o.mO],['bA','nA',o.mA]].forEach(([b,n,x])=>{$(b).style.width=(x/mx*100)+'%';$(n).textContent=fmtI(x);});
     $('cpm').textContent=o.cpm?fmtD(o.cpm):'—'; $('peq').textContent=fmtK(o.peq);
     $('share').textContent=Math.round(v.org/GAP*100)+'%';
-    $('sens').innerHTML=[Math.max(10,v.close-10),v.close,Math.min(50,v.close+10)].map(x=>{const m=model(Object.assign({},v,{close:x}));return `<tr><td>${x}%</td><td>${fmtI(m.mMo*12)}</td><td>${fmtD(m.total)}</td></tr>`;}).join('');
+    $('sens').innerHTML=[Math.max(10,v.close-10),v.close,Math.min(50,v.close+10)].map(x=>{const m=model(Object.assign({},v,{close:x}));return `<tr><td>${x}%</td><td>${fmtI(m.mMo*12)}</td><td>${fmtBig(m.total)}</td></tr>`;}).join('');
     $('perMonth').textContent=fmtD(o.total/12);
     presets.forEach(pr=>{const q=pr.dataset.p.split(',').map(Number);pr.setAttribute('aria-pressed',String(q.every((x,k)=>x===+els[k].value)));});
     try{localStorage.setItem('industrious-calc-v1',JSON.stringify(els.map(e=>e.value)));}catch(e){}
