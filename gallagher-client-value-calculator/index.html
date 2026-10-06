@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Gallagher Client-Value Calculator</title>
+<!-- share:start -->
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<meta name="description" content="What putting Gallagher in the top 3 for the commercial and benefits buyer searches it already ranks for is worth in new clients and first-year commission &amp; fees, and what each month of waiting defers.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ROAST">
+<meta property="og:title" content="Gallagher Client-Value Calculator">
+<meta property="og:description" content="What putting Gallagher in the top 3 for the commercial and benefits buyer searches it already ranks for is worth in new clients and first-year commission &amp; fees, and what each month of waiting defers.">
+<meta property="og:url" content="https://npc-0802.github.io/pitches/gallagher-client-value-calculator/">
+<meta property="og:image" content="https://npc-0802.github.io/pitches/gallagher-client-value-calculator/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="ROAST × Gallagher: Client-Value Calculator">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Gallagher Client-Value Calculator">
+<meta name="twitter:description" content="What putting Gallagher in the top 3 for the commercial and benefits buyer searches it already ranks for is worth in new clients and first-year commission &amp; fees, and what each month of waiting defers.">
+<meta name="twitter:image" content="https://npc-0802.github.io/pitches/gallagher-client-value-calculator/og.png">
+<!-- share:end -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;900&family=Public+Sans:wght@400;500;600&display=swap">
+<style>
+:root{
+  --bg:#ffffff; --ink:#111214; --muted:#5b5e66; --line:#e6e4dc; --panel:#f6f5f0;
+  --yellow:#FFD100; --yellow-deep:#e6bc00; --on-yellow:#111214; --on-yellow-muted:#4a4630;
+  --track:#e3e1d8; --ok:#1f7a3a;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){ --bg:#111214; --ink:#f4f3ee; --muted:#a6a79f; --line:#2a2b2f; --panel:#1b1c20; --track:#33343a; color-scheme:dark; }
+}
+:root[data-theme="dark"]{ --bg:#111214; --ink:#f4f3ee; --muted:#a6a79f; --line:#2a2b2f; --panel:#1b1c20; --track:#33343a; color-scheme:dark; }
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Public Sans",system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;font-size:15px;line-height:1.45}
+.wrap{max-width:1440px;margin:0 auto;padding-block:22px 44px;padding-inline:clamp(16px,3vw,40px);display:grid;gap:22px}
+.brand{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-bottom:6px;flex-wrap:wrap}
+.wordmark{display:flex;align-items:center;gap:12px}.wordmark .roast-logo{height:22px;width:auto;display:block;color:var(--ink)}
+.wordmark span{font-family:"Public Sans",sans-serif;font-weight:500;font-size:15px;color:var(--muted);letter-spacing:0}
+.deadline{font-size:13px;color:var(--muted);text-align:right}
+.deadline b{color:var(--ink);font-variant-numeric:tabular-nums}
+h1{font-family:"Archivo",system-ui,sans-serif;font-weight:900;font-size:clamp(28px,3.4vw,46px);line-height:1.05;letter-spacing:-.015em;margin:0;text-wrap:balance;max-width:26ch}
+.lede{color:var(--muted);max-width:78ch;margin:8px 0 0;font-size:clamp(14px,1.1vw,16px)}
+.grid{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,2fr);gap:22px;align-items:start}
+@media (max-width:900px){.grid{grid-template-columns:1fr}}
+.panel{background:var(--panel);border-radius:22px;padding:clamp(18px,2vw,28px) clamp(18px,2vw,28px) 10px;min-width:0;overflow:hidden}
+.ctl{display:grid;gap:8px;padding-block:14px;border-top:1px solid var(--line)}
+.ctl:first-child{border-top:0;padding-top:2px}
+.ctl .row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.ctl label{font-weight:600}
+.ctl output{font-family:"Archivo",sans-serif;font-weight:700;font-size:22px;font-variant-numeric:tabular-nums}
+.ctl output small{font-family:"Public Sans",sans-serif;font-weight:500;font-size:13px;color:var(--muted);margin-left:8px}
+.ctl .why{font-size:13px;color:var(--muted);max-width:72ch}
+.sect{font-family:"Archivo",sans-serif;font-weight:700;font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);padding-top:16px;border-top:1px solid var(--line)}
+.band{font-size:13px;font-weight:600;padding:5px 12px;border-radius:14px;background:var(--yellow);color:var(--on-yellow);width:fit-content;max-width:100%;line-height:1.3}
+.band.low{background:var(--track);color:var(--ink)}
+.band.warn{background:#f3c4bd;color:#5c120a}
+input[type=range]{width:100%;accent-color:var(--ink);height:30px;margin:0}
+input[type=range]:focus-visible{outline:2px solid var(--ink);outline-offset:4px;border-radius:6px}
+.presets{display:flex;flex-wrap:wrap;gap:8px;padding-block:16px;border-top:1px solid var(--line)}
+.preset{border:1.5px solid var(--line);border-radius:12px;padding:8px 12px;font-size:13px;background:transparent;color:var(--ink);cursor:pointer;font-family:inherit;text-align:left;line-height:1.25}
+.preset b{display:block;font-weight:700}
+.preset:hover,.preset:focus-visible{border-color:var(--ink);outline:none}
+.preset[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.result{background:var(--yellow);color:var(--on-yellow);border-radius:22px;padding:clamp(20px,2.2vw,32px);display:grid;gap:18px;min-width:0}
+.result{grid-template-columns:minmax(0,1fr)}.result>*{min-width:0}.result .big{overflow-wrap:anywhere}
+.result .label{font-weight:600;font-size:14px;color:var(--on-yellow-muted)}
+.result .big{font-family:"Archivo",sans-serif;font-weight:900;font-size:clamp(48px,6vw,88px);line-height:.95;letter-spacing:-.02em;font-variant-numeric:tabular-nums;margin:6px 0}
+.result .sub{font-size:14px;color:var(--on-yellow-muted);max-width:52ch}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+@media (max-width:520px){.stats{grid-template-columns:1fr 1fr}}
+.stat{background:rgba(255,255,255,.5);border-radius:14px;padding:14px 14px 12px;min-width:0}
+.stat .v{font-family:"Archivo",sans-serif;font-weight:700;font-size:clamp(20px,1.8vw,26px);font-variant-numeric:tabular-nums;line-height:1.1}
+.stat .l{font-size:12.5px;color:var(--on-yellow-muted);margin-top:5px;line-height:1.3;text-wrap:balance}
+.bars{display:grid;gap:8px;margin-top:4px}
+.bars .t{font-weight:600;font-size:13px;color:var(--on-yellow-muted)}
+.bar{display:grid;grid-template-columns:minmax(120px,170px) 1fr 64px;gap:10px;align-items:center;font-size:13px}
+@media (max-width:520px){.bar{grid-template-columns:110px 1fr 56px}}
+.bar .fill{height:14px;border-radius:7px;background:rgba(17,18,20,.25);position:relative;overflow:hidden}
+.bar .fill i{position:absolute;inset:0;width:0;background:var(--on-yellow);border-radius:7px;transition:width .25s ease}
+.bar .fill i.gain{background:#ffffff;left:auto}
+.bar .n{text-align:right;font-variant-numeric:tabular-nums;font-weight:600}
+@media (prefers-reduced-motion: reduce){.bar .fill i{transition:none}}
+.corp{display:grid;gap:8px}
+.corp .t{font-weight:600;font-size:13px;color:var(--on-yellow-muted)}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th,td{text-align:left;padding:7px 4px;border-bottom:1px solid rgba(17,18,20,.18);font-variant-numeric:tabular-nums}
+th{font-size:12px;color:var(--on-yellow-muted);font-weight:600}
+td:last-child,th:last-child{text-align:right;font-weight:700}
+.inaction{background:var(--panel);border-radius:22px;padding:clamp(18px,2vw,28px);display:grid;gap:8px}
+.inaction h2{font-family:"Archivo",sans-serif;font-weight:700;font-size:18px;margin:0}
+.inaction p{margin:0;color:var(--muted);max-width:100ch;font-size:15px;line-height:1.55}
+.inaction b{color:var(--ink)}
+.foot{font-size:13px;color:var(--muted);max-width:110ch;display:grid;gap:6px}
+.foot a{color:var(--ink)}
+@media (min-width:901px){.result{position:sticky;top:16px}}
+.wordmark{flex-wrap:wrap;row-gap:6px}.wordmark .client-logo{height:22px;width:auto;display:block;color:var(--ink)}
+.wordmark .client-name{font-family:"Archivo",system-ui,sans-serif;font-weight:900;font-size:21px;line-height:1;letter-spacing:-.01em;color:var(--ink)}
+.yes{color:var(--ok)}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="brand">
+    <div class="wordmark"><svg class="roast-logo" fill="currentColor" aria-label="ROAST" role="img" viewBox="0 0 931.89 203.5" xmlns="http://www.w3.org/2000/svg" overflow="hidden"><path d="M30.4 4.59 0 4.59 0 0 93.33 0C128.29 0 166.29 7.45 166.29 50.73 166.29 85.7 123.42 94.87 101.23 97.45L101.23 98.02C136.19 100.89 154.74 108.05 159.3 145.89L163.56 180.86C165.69 197.77 174.2 198.92 179.37 198.92 184.84 198.92 188.79 197.2 191.84 196.05L193.66 199.78C187.58 201.79 179.98 203.51 168.73 203.51 131.64 203.51 129.51 184.88 125.25 151.92L123.12 134.72C120.99 116.66 115.52 100.32 81.17 100.32L61.41 100.32 61.41 198.92 92.42 198.92 92.42 203.51 0 203.51 0 198.92 30.4 198.92 30.4 4.59ZM61.41 95.73 76.61 95.73C112.48 95.73 133.46 83.98 133.46 50.73 133.46 27.8 125.25 4.58 82.08 4.58L61.41 4.58 61.41 95.73Z" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4"  fill-opacity="1"/><path d="M293.24 0.32C342.65 0.32 385.63 45.32 385.63 101.91 385.63 158.5 342.65 203.5 293.24 203.5 243.83 203.5 200.85 158.5 200.85 101.91 200.85 45.32 243.83 0.32 293.24 0.32ZM293.24 199.09C345.28 199.09 352.3 138.08 352.3 101.91 352.3 65.74 345.28 4.74 293.24 4.74 241.2 4.74 234.18 65.75 234.18 101.91 234.18 138.07 241.2 199.09 293.24 199.09Z" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4"  fill-opacity="1"/><path d="M501.23 135.93 438.66 135.93 424.96 175.38C422.91 180.89 420.57 187.51 420.57 192.19 420.57 196.05 424.08 199.08 433.43 199.08L448.63 199.08 448.63 203.49 388.4 203.49 388.4 199.08 397.76 199.08C406.82 199.08 410.62 198.25 416.18 182.82L480.77 0.32 483.99 0.32 556.81 199.09 581.08 199.09 581.08 203.5 495.42 203.5 495.42 199.09 524.07 199.09 501.24 135.93ZM469.66 48 469.08 48 440.43 131.52 499.78 131.52 469.67 48Z" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4"  fill-opacity="1"/><path d="M598 130.7 602.68 130.7C602.68 177.01 631.63 198.78 666.71 198.78 694.78 198.78 714.95 181.97 714.95 157.16 714.95 128.49 699.16 119.95 665.54 114.99 619.64 108.1 598 100.93 598 54.62 598 23.2 619.93 0.32 652.68 0.32 682.79 0.32 694.2 17.14 704.14 17.13 712.17 17.13 711.74 3.58 712.62-2.84217e-14L717.3-2.84217e-14 717.3 64.54 712.62 64.54C709.99 33.12 691.86 4.73 652.69 4.73 627.84 4.73 610.29 20.17 610.29 45.52 610.29 70.87 620.23 75.84 668.76 84.11 711.45 91.28 728.99 104.23 728.99 140.07 728.99 175.91 707.94 203.19 665.55 203.19 636.31 203.19 620.82 188.78 610 188.86 601.37 188.92 602.69 198.82 602.69 203.51L598.01 203.51 598.01 130.7Z" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4"  fill-opacity="1"/><path d="M752.96 0 752.96 64.54 757.64 64.54C757.64 24.77 766.71 6.75 804.33 4.79L804.33 147.44 829.12 147.44 829.12 4.41 855.73 4.41 855.73 147.44 880.52 147.44 880.52 4.78C918.11 6.71 927.21 24.7 927.21 64.54L931.89 64.54 931.89 0 752.96 0Z" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4"  fill-opacity="1"/></svg><span>×</span><span class="client-name" role="img" aria-label="Gallagher">Gallagher</span><span>· Q4 2026</span></div>
+    <div class="deadline"><b id="days">—</b> days to the 1 January renewal season</div>
+  </div>
+
+  <div>
+    <h1>What ranking for buyer searches is worth in new Gallagher clients</h1>
+    <p class="lede">Gallagher ranks for 32 commercial and benefits buyer searches in the US (29,270 searches a month), but none in the top 3, so they send it ~700 visits a month (Similarweb, Aug 2026). 91% of its search clicks come from people already searching for Gallagher. Pick a tier, then replace our placeholder rates with Gallagher's own.</p>
+  </div>
+
+  <div class="grid">
+    <section class="panel" aria-label="Assumptions">
+      <div class="sect" style="border-top:0;padding-top:0">Organic search and AI answers</div>
+      <div class="ctl">
+        <div class="row"><label for="org">New non-branded buyer-search visits a month</label><output id="orgOut" for="org">2,800</output></div>
+        <input type="range" id="org" min="0" max="6000" step="100" value="2800">
+        <div class="band" id="orgBand"></div>
+        <div class="why">From moving the 32 buyer searches Gallagher already ranks for (#4–#34) into the top 3, at a 12% click share because 28 of the 32 results show an AI Overview. Top 3 on all 32 adds ~2,800; #1 on all 32 adds ~5,200. Pages take 3–6 months to move.</div>
+      </div>
+      <div class="ctl">
+        <div class="row"><label for="newv">Visits from new head-search pages and AI answers a month</label><output id="newvOut" for="newv">0</output></div>
+        <input type="range" id="newv" min="0" max="10000" step="250" value="0">
+        <div class="why">Kept at 0 in the headline; a placeholder until Keyword Planner volumes for searches like "business insurance" and "employee benefits consulting" are pulled. Gallagher doesn't rank for them today. AI assistants send ~2,000–2,800 visits a month (Similarweb, Jun–Aug 2026).</div>
+      </div>
+      <div class="sect">From visit to client</div>
+      <div class="ctl">
+        <div class="row"><label for="lead">Enquiry rate</label><output id="leadOut" for="lead">1%</output></div>
+        <input type="range" id="lead" min="0.25" max="3" step="0.05" value="1">
+        <div class="why">Placeholder until Gallagher shares its own: buyer-search visits that request a quote, call or fill in the contact form.</div>
+      </div>
+      <div class="ctl">
+        <div class="row"><label for="close">Enquiry-to-client</label><output id="closeOut" for="close">20%</output></div>
+        <input type="range" id="close" min="5" max="40" step="1" value="20">
+        <div class="why">Placeholder: the share of web enquiries that become clients.</div>
+      </div>
+      <div class="ctl">
+        <div class="row"><label for="fyv">First-year commission &amp; fees per client</label><output id="fyvOut" for="fyv">$15,000</output></div>
+        <input type="range" id="fyv" min="2500" max="60000" step="500" value="15000">
+        <div class="band" id="fyvBand"></div>
+        <div class="why">Placeholder: a blend of small-business accounts worth a few thousand dollars and middle-market or benefits clients worth tens of thousands. Renewals after year one aren't counted.</div>
+      </div>
+      <div class="sect">What the same clicks would cost</div>
+      <div class="ctl">
+        <div class="row"><label for="cpc">Cost per click on these searches</label><output id="cpcOut" for="cpc">$20.24</output></div>
+        <input type="range" id="cpc" min="3" max="60" step="0.01" value="20.24">
+        <div class="why">Volume-weighted Similarweb CPC across 21 of the buyer searches ($3.42–$57.47), e.g. "commercial insurance broker" $25.03, "cyber insurance" $45.56. Keyword Planner to confirm.</div>
+      </div>
+      <div class="presets" role="group" aria-label="Scenarios tied to the plan">
+        <button class="preset" type="button" data-p="1000,0,1,20,15000,20.24"><b>Tier 1: page-one searches</b>The 11 buyer searches at #4–#10 move into the top 3; the RFP guide becomes a buyer page</button>
+        <button class="preset" type="button" data-p="2800,0,1,20,15000,20.24" aria-pressed="true"><b>Tier 2: all 32 in the top 3</b>The headline: rebuilt US product and benefits pages</button>
+        <button class="preset" type="button" data-p="2800,2500,1,20,15000,20.24"><b>Tier 3: head searches and AI</b>Plus new US pages for head searches and AI answers (placeholder)</button>
+        <button class="preset" type="button" data-p="5200,5000,1,20,15000,20.24"><b>Tier 4 (ceiling)</b>#1 for all 32, the head searches and AI: the default broker answer</button>
+      </div>
+    </section>
+
+    <section class="result" aria-live="polite" aria-label="Outcome">
+      <div>
+        <div class="label">New first-year commission &amp; fees a year</div>
+        <div class="big" id="rev">$1.0M</div>
+        <div class="sub" id="revSub"></div>
+      </div>
+
+      <div class="stats">
+        <div class="stat"><div class="v" id="cli">67</div><div class="l">new clients a year</div></div>
+        <div class="stat"><div class="v" id="vpv">$30</div><div class="l">value of one buyer-search visit</div></div>
+        <div class="stat"><div class="v" id="yr1">$798K</div><div class="l">in year one, pages ramping</div></div>
+      </div>
+
+      <div class="bars">
+        <div class="t">Buyer-search visits a month</div>
+        <div class="bar"><span>Today</span><div class="fill"><i id="bT"></i></div><span class="n" id="nT">700</span></div>
+        <div class="bar"><span>With the plan</span><div class="fill"><i id="bW"></i></div><span class="n" id="nW">3,500</span></div>
+      </div>
+
+      <div class="corp">
+        <div class="t">What the same clicks would cost in Google Ads</div>
+        <div class="stats">
+          <div class="stat"><div class="v" id="cpcV">$20.24</div><div class="l">a click</div></div>
+          <div class="stat"><div class="v" id="peq">$56,672</div><div class="l">a month to buy the new clicks</div></div>
+          <div class="stat"><div class="v" id="px">1.5×</div><div class="l" id="pxL">click value ÷ CPC (ads pay at 2×)</div></div>
+        </div>
+      </div>
+
+      <table aria-label="First-year value sensitivity">
+        <thead><tr><th>If a client is worth</th><th>Clients / yr</th><th>Ads pay?</th><th>Revenue / yr</th></tr></thead>
+        <tbody id="sens"></tbody>
+      </table>
+    </section>
+  </div>
+
+  <div class="inaction">
+    <h2>What waiting costs</h2>
+    <p>At these rates, every month without the work defers about <b id="perMonth">$84,000</b> of first-year commission &amp; fees. Ahrefs models Gallagher's organic visits <b>down ~40% in a year</b> (133.5K to 80.8K a month, all countries), or <b>~4,400 visits a month on average</b>. Six buyer pages slipped in August 2026 alone (Similarweb): <b>"hr consulting" from #8 to #34</b> and <b>"commercial insurance broker" from #10 to #20</b>. Meanwhile an estimated 73% of Gallagher's paid search clicks buy its own name, which it already ranks #1 for.</p>
+  </div>
+
+  <div class="foot">
+    <div>Traffic: Similarweb, US (rank distribution and website keywords, Jun–Aug 2026; marketing channels and search performance; pulled 5 Oct 2026); Ahrefs, 30 Sep 2026 (all countries). Visits are modelled from Similarweb's rank data: search volume × click-through at each position (#1 28%, #3 11%, #10 2%, page two 1%, pages three and four 0.3%), with a 12% top-3 click share where an AI Overview shows (28 of 32 results). Today's ~700 visits a month on these searches are worth ~$252K a year at the default rates. Buyer context: GWI Core (Q1 2025–Q2 2026) and GWI Work (Q3 2026), US business decision-makers, a proxy audience: 48% find new suppliers through search; 59% say AI answers influence supplier research.</div>
+    <div>Formula: (new buyer-search visits + new-page and AI visits) × enquiry rate × enquiry-to-client = new clients a month; × 12 × first-year commission &amp; fees per client = first-year revenue a year. Year one: pages ramp over six months. The paid-equivalent (visits × cost per click) is what buying the same clicks would cost; it isn't added to revenue. Every revenue figure uses placeholder rates until Gallagher shares its own; brand, careers, client-login and student-plan traffic are excluded.</div>
+    <div>Part of the ROAST × Gallagher search and AI visibility analysis, October 2026. Companion to the <a href="../industrious-membership-value-calculator/">Industrious Membership-Value Calculator</a> and the <a href="../citizens-search-value-calculator/">Citizens calculator</a>.</div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const $=id=>document.getElementById(id);
+  const TODAY=700, RAMP=6, PAID_MIN=2;
+  const ids=['org','newv','lead','close','fyv','cpc'];
+  const els=ids.map($);
+  const fmtI=n=>Math.round(n).toLocaleString('en-US');
+  const fmt1=n=>{const r=Math.round(n*10)/10;return Math.abs(r-Math.round(r))<0.05?fmtI(r):r.toFixed(1);};
+  const fmtK=n=>{n=Math.round(n);return n>=1e6?'$'+(n/1e6).toFixed(1)+'M':n>=1e4?'$'+Math.round(n/1e3)+'K':'$'+n.toLocaleString('en-US');};
+  const fmtD=n=>'$'+Math.round(n).toLocaleString('en-US');
+  const fmtBig=n=>n>=1e6?'$'+(n/1e6).toFixed(1)+'M':fmtD(n);
+  const pct=n=>(+n.toFixed(2)).toString()+'%';
+  const presets=[...document.querySelectorAll('.preset')];
+  const now=new Date(), today=new Date(now.getFullYear(),now.getMonth(),now.getDate());
+  const jan1=new Date(now.getFullYear()+1,0,1);
+  $('days').textContent=Math.max(0,Math.round((jan1-today)/86400000));
+  function model(v){
+    const visits=v.org+v.newv, conv=v.lead/100*v.close/100;
+    const cMo=visits*conv, rev=cMo*12*v.fyv;
+    let f=0; for(let k=1;k<=12;k++) f+=Math.min(k/RAMP,1); f/=12;
+    const vpv=conv*v.fyv;
+    return {visits,conv,cMo,cOrg:v.org*conv,cNew:v.newv*conv,rev,yr1:rev*f,vpv,px:v.cpc?vpv/v.cpc:0,peq:visits*v.cpc,
+            fyvPays:conv?PAID_MIN*v.cpc/conv:0};
+  }
+  function vals(){const v={};ids.forEach((k,i)=>v[k]=+els[i].value);return v;}
+  function render(){
+    const v=vals();
+    $('orgOut').value=fmtI(v.org); $('newvOut').value=fmtI(v.newv); $('leadOut').value=pct(v.lead); $('closeOut').value=v.close+'%';
+    $('fyvOut').value=fmtD(v.fyv); $('cpcOut').value='$'+v.cpc.toFixed(2);
+    const o=model(v);
+    const ob=$('orgBand'); ob.className='band'+(v.org>5200?' low':'');
+    ob.textContent=v.org===0?'No ranking gains':`${fmtI(TODAY+v.org)} visits a month on these searches, up from ~700 today`+(v.org>5200?' (past #1 on all 32: needs more searches)':'');
+    const fb=$('fyvBand'); fb.className='band'+(o.px>=PAID_MIN?'':' low');
+    fb.textContent=o.px>=PAID_MIN?`At this value a paid click clears ${PAID_MIN}× its cost: add a non-branded ads test`:`A paid click clears ${PAID_MIN}× its cost from ~${fmtD(o.fyvPays)} a client at these rates`;
+    $('rev').textContent=fmtBig(o.rev);
+    $('revSub').textContent=`${fmt1(o.cMo)} new clients a month`+(v.newv>0?` (${fmt1(o.cOrg)} from ranked buyer searches + ${fmt1(o.cNew)} from new pages and AI)`:'')+` × 12 × ${fmtD(v.fyv)} first-year commission & fees = ${fmtD(o.rev)}.`;
+    $('cli').textContent=fmtI(o.cMo*12); $('vpv').textContent=o.vpv>=10?fmtD(o.vpv):'$'+o.vpv.toFixed(2); $('yr1').textContent=fmtK(o.yr1);
+    const tot=TODAY+o.visits, mx=Math.max(tot,TODAY,1)*1.08;
+    $('bT').style.width=(TODAY/mx*100)+'%'; $('nT').textContent=fmtI(TODAY);
+    $('bW').style.width=(tot/mx*100)+'%'; $('nW').textContent=fmtI(tot);
+    $('cpcV').textContent='$'+v.cpc.toFixed(2); $('peq').textContent=fmtD(o.peq);
+    $('px').textContent=o.px.toFixed(1)+'×'; $('px').className='v'+(o.px>=PAID_MIN?' yes':'');
+    $('sens').innerHTML=[v.fyv/2,v.fyv,v.fyv*2].map(x=>{const m=model(Object.assign({},v,{fyv:x}));return `<tr><td>${fmtD(x)}</td><td>${fmtI(m.cMo*12)}</td><td>${m.px>=PAID_MIN?'Yes ('+m.px.toFixed(1)+'×)':'No ('+m.px.toFixed(1)+'×)'}</td><td>${fmtBig(m.rev)}</td></tr>`;}).join('');
+    $('perMonth').textContent=fmtD(o.rev/12);
+    presets.forEach(pr=>{const q=pr.dataset.p.split(',').map(Number);pr.setAttribute('aria-pressed',String(q.every((x,k)=>Math.abs(x-+els[k].value)<1e-9)));});
+    try{localStorage.setItem('gallagher-calc-v1',JSON.stringify(els.map(e=>e.value)));}catch(e){}
+  }
+  els.forEach(el=>el.addEventListener('input',render));
+  presets.forEach(pr=>pr.addEventListener('click',()=>{const q=pr.dataset.p.split(',');els.forEach((el,k)=>el.value=q[k]);render();}));
+  try{const s=JSON.parse(localStorage.getItem('gallagher-calc-v1'));if(Array.isArray(s)&&s.length===els.length){els.forEach((el,k)=>el.value=s[k]);}}catch(e){}
+  render();
+})();
+</script>
+</body>
+</html>
