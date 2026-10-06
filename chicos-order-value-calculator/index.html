@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Chico's Order-Value Calculator</title>
+<!-- share:start -->
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<meta name="description" content="What lifting Chico&#x27;s category pages (pants, jackets, dresses) onto Google&#x27;s page one and building its missing business-casual and occasion pages is worth in online orders, and what each month of waiting forgoes.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ROAST">
+<meta property="og:title" content="Chico&#x27;s Order-Value Calculator">
+<meta property="og:description" content="What lifting Chico&#x27;s category pages (pants, jackets, dresses) onto Google&#x27;s page one and building its missing business-casual and occasion pages is worth in online orders, and what each month of waiting forgoes.">
+<meta property="og:url" content="https://npc-0802.github.io/pitches/chicos-order-value-calculator/">
+<meta property="og:image" content="https://npc-0802.github.io/pitches/chicos-order-value-calculator/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="ROAST × Chico&#x27;s: Order-Value Calculator">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Chico&#x27;s Order-Value Calculator">
+<meta name="twitter:description" content="What lifting Chico&#x27;s category pages (pants, jackets, dresses) onto Google&#x27;s page one and building its missing business-casual and occasion pages is worth in online orders, and what each month of waiting forgoes.">
+<meta name="twitter:image" content="https://npc-0802.github.io/pitches/chicos-order-value-calculator/og.png">
+<!-- share:end -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;900&family=Public+Sans:wght@400;500;600&display=swap">
+<style>
+:root{
+  --bg:#ffffff; --ink:#111214; --muted:#5b5e66; --line:#e6e4dc; --panel:#f6f5f0;
+  --yellow:#FFD100; --yellow-deep:#e6bc00; --on-yellow:#111214; --on-yellow-muted:#4a4630;
+  --track:#e3e1d8; --ok:#1f7a3a;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){ --bg:#111214; --ink:#f4f3ee; --muted:#a6a79f; --line:#2a2b2f; --panel:#1b1c20; --track:#33343a; color-scheme:dark; }
+}
+:root[data-theme="dark"]{ --bg:#111214; --ink:#f4f3ee; --muted:#a6a79f; --line:#2a2b2f; --panel:#1b1c20; --track:#33343a; color-scheme:dark; }
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Public Sans",system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;font-size:15px;line-height:1.45}
+.wrap{max-width:1440px;margin:0 auto;padding-block:22px 44px;padding-inline:clamp(16px,3vw,40px);display:grid;gap:22px}
+.brand{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-bottom:6px;flex-wrap:wrap}
+.wordmark{display:flex;align-items:center;gap:12px}.wordmark .roast-logo{height:22px;width:auto;display:block;color:var(--ink)}
+.wordmark span{font-family:"Public Sans",sans-serif;font-weight:500;font-size:15px;color:var(--muted);letter-spacing:0}
+.deadline{font-size:13px;color:var(--muted);text-align:right}
+.deadline b{color:var(--ink);font-variant-numeric:tabular-nums}
+h1{font-family:"Archivo",system-ui,sans-serif;font-weight:900;font-size:clamp(28px,3.4vw,46px);line-height:1.05;letter-spacing:-.015em;margin:0;text-wrap:balance;max-width:26ch}
+.lede{color:var(--muted);max-width:78ch;margin:8px 0 0;font-size:clamp(14px,1.1vw,16px)}
+.grid{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,2fr);gap:22px;align-items:start}
+@media (max-width:900px){.grid{grid-template-columns:1fr}}
+.panel{background:var(--panel);border-radius:22px;padding:clamp(18px,2vw,28px) clamp(18px,2vw,28px) 10px;min-width:0;overflow:hidden}
+.ctl{display:grid;gap:8px;padding-block:14px;border-top:1px solid var(--line)}
+.ctl:first-child{border-top:0;padding-top:2px}
+.ctl .row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.ctl label{font-weight:600}
+.ctl output{font-family:"Archivo",sans-serif;font-weight:700;font-size:22px;font-variant-numeric:tabular-nums}
+.ctl output small{font-family:"Public Sans",sans-serif;font-weight:500;font-size:13px;color:var(--muted);margin-left:8px}
+.ctl .why{font-size:13px;color:var(--muted);max-width:72ch}
+.sect{font-family:"Archivo",sans-serif;font-weight:700;font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);padding-top:16px;border-top:1px solid var(--line)}
+.band{font-size:13px;font-weight:600;padding:5px 12px;border-radius:14px;background:var(--yellow);color:var(--on-yellow);width:fit-content;max-width:100%;line-height:1.3}
+.band.low{background:var(--track);color:var(--ink)}
+.band.warn{background:#f3c4bd;color:#5c120a}
+input[type=range]{width:100%;accent-color:var(--ink);height:30px;margin:0}
+input[type=range]:focus-visible{outline:2px solid var(--ink);outline-offset:4px;border-radius:6px}
+.presets{display:flex;flex-wrap:wrap;gap:8px;padding-block:16px;border-top:1px solid var(--line)}
+.preset{border:1.5px solid var(--line);border-radius:12px;padding:8px 12px;font-size:13px;background:transparent;color:var(--ink);cursor:pointer;font-family:inherit;text-align:left;line-height:1.25}
+.preset b{display:block;font-weight:700}
+.preset:hover,.preset:focus-visible{border-color:var(--ink);outline:none}
+.preset[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.result{background:var(--yellow);color:var(--on-yellow);border-radius:22px;padding:clamp(20px,2.2vw,32px);display:grid;gap:18px;min-width:0}
+.result{grid-template-columns:minmax(0,1fr)}.result>*{min-width:0}.result .big{overflow-wrap:anywhere}
+.result .label{font-weight:600;font-size:14px;color:var(--on-yellow-muted)}
+.result .big{font-family:"Archivo",sans-serif;font-weight:900;font-size:clamp(48px,6vw,88px);line-height:.95;letter-spacing:-.02em;font-variant-numeric:tabular-nums;margin:6px 0}
+.result .sub{font-size:14px;color:var(--on-yellow-muted);max-width:52ch}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+@media (max-width:520px){.stats{grid-template-columns:1fr 1fr}}
+.stat{background:rgba(255,255,255,.5);border-radius:14px;padding:14px 14px 12px;min-width:0}
+.stat .v{font-family:"Archivo",sans-serif;font-weight:700;font-size:clamp(20px,1.8vw,26px);font-variant-numeric:tabular-nums;line-height:1.1}
+.stat .l{font-size:12.5px;color:var(--on-yellow-muted);margin-top:5px;line-height:1.3;text-wrap:balance}
+.bars{display:grid;gap:8px;margin-top:4px}
+.bars .t{font-weight:600;font-size:13px;color:var(--on-yellow-muted)}
+.bar{display:grid;grid-template-columns:minmax(120px,170px) 1fr 64px;gap:10px;align-items:center;font-size:13px}
+@media (max-width:520px){.bar{grid-template-columns:110px 1fr 56px}}
+.bar .fill{height:14px;border-radius:7px;background:rgba(17,18,20,.25);position:relative;overflow:hidden}
+.bar .fill i{position:absolute;inset:0;width:0;background:var(--on-yellow);border-radius:7px;transition:width .25s ease}
+.bar .fill i.gain{background:#ffffff;left:auto}
+.bar .n{text-align:right;font-variant-numeric:tabular-nums;font-weight:600}
+@media (prefers-reduced-motion: reduce){.bar .fill i{transition:none}}
+.corp{display:grid;gap:8px}
+.corp .t{font-weight:600;font-size:13px;color:var(--on-yellow-muted)}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th,td{text-align:left;padding:7px 4px;border-bottom:1px solid rgba(17,18,20,.18);font-variant-numeric:tabular-nums}
+th{font-size:12px;color:var(--on-yellow-muted);font-weight:600}
+td:last-child,th:last-child{text-align:right;font-weight:700}
+.inaction{background:var(--panel);border-radius:22px;padding:clamp(18px,2vw,28px);display:grid;gap:8px}
+.inaction h2{font-family:"Archivo",sans-serif;font-weight:700;font-size:18px;margin:0}
+.inaction p{margin:0;color:var(--muted);max-width:100ch;font-size:15px;line-height:1.55}
+.inaction b{color:var(--ink)}
+.foot{font-size:13px;color:var(--muted);max-width:110ch;display:grid;gap:6px}
+.foot a{color:var(--ink)}
+@media (min-width:901px){.result{position:sticky;top:16px}}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="brand">
+    <div class="wordmark"><svg class="roast-logo" fill="currentColor" aria-label="ROAST" role="img" viewBox="0 0 931.89 203.5" xmlns="http://www.w3.org/2000/svg" overflow="hidden"><path d="M30.4 4.59 0 4.59 0 0 93.33 0C128.29 0 166.29 7.45 166.29 50.73 166.29 85.7 123.42 94.87 101.23 97.45L101.23 98.02C136.19 100.89 154.74 108.05 159.3 145.89L163.56 180.86C165.69 197.77 174.2 198.92 179.37 198.92 184.84 198.92 188.79 197.2 191.84 196.05L193.66 199.78C187.58 201.79 179.98 203.51 168.73 203.51 131.64 203.51 129.51 184.88 125.25 151.92L123.12 134.72C120.99 116.66 115.52 100.32 81.17 100.32L61.41 100.32 61.41 198.92 92.42 198.92 92.42 203.51 0 203.51 0 198.92 30.4 198.92 30.4 4.59ZM61.41 95.73 76.61 95.73C112.48 95.73 133.46 83.98 133.46 50.73 133.46 27.8 125.25 4.58 82.08 4.58L61.41 4.58 61.41 95.73Z" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4"  fill-opacity="1"/><path d="M293.24 0.32C342.65 0.32 385.63 45.32 385.63 101.91 385.63 158.5 342.65 203.5 293.24 203.5 243.83 203.5 200.85 158.5 200.85 101.91 200.85 45.32 243.83 0.32 293.24 0.32ZM293.24 199.09C345.28 199.09 352.3 138.08 352.3 101.91 352.3 65.74 345.28 4.74 293.24 4.74 241.2 4.74 234.18 65.75 234.18 101.91 234.18 138.07 241.2 199.09 293.24 199.09Z" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4"  fill-opacity="1"/><path d="M501.23 135.93 438.66 135.93 424.96 175.38C422.91 180.89 420.57 187.51 420.57 192.19 420.57 196.05 424.08 199.08 433.43 199.08L448.63 199.08 448.63 203.49 388.4 203.49 388.4 199.08 397.76 199.08C406.82 199.08 410.62 198.25 416.18 182.82L480.77 0.32 483.99 0.32 556.81 199.09 581.08 199.09 581.08 203.5 495.42 203.5 495.42 199.09 524.07 199.09 501.24 135.93ZM469.66 48 469.08 48 440.43 131.52 499.78 131.52 469.67 48Z" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4"  fill-opacity="1"/><path d="M598 130.7 602.68 130.7C602.68 177.01 631.63 198.78 666.71 198.78 694.78 198.78 714.95 181.97 714.95 157.16 714.95 128.49 699.16 119.95 665.54 114.99 619.64 108.1 598 100.93 598 54.62 598 23.2 619.93 0.32 652.68 0.32 682.79 0.32 694.2 17.14 704.14 17.13 712.17 17.13 711.74 3.58 712.62-2.84217e-14L717.3-2.84217e-14 717.3 64.54 712.62 64.54C709.99 33.12 691.86 4.73 652.69 4.73 627.84 4.73 610.29 20.17 610.29 45.52 610.29 70.87 620.23 75.84 668.76 84.11 711.45 91.28 728.99 104.23 728.99 140.07 728.99 175.91 707.94 203.19 665.55 203.19 636.31 203.19 620.82 188.78 610 188.86 601.37 188.92 602.69 198.82 602.69 203.51L598.01 203.51 598.01 130.7Z" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4"  fill-opacity="1"/><path d="M752.96 0 752.96 64.54 757.64 64.54C757.64 24.77 766.71 6.75 804.33 4.79L804.33 147.44 829.12 147.44 829.12 4.41 855.73 4.41 855.73 147.44 880.52 147.44 880.52 4.78C918.11 6.71 927.21 24.7 927.21 64.54L931.89 64.54 931.89 0 752.96 0Z" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4"  fill-opacity="1"/></svg><span>× Chico's · Q4 2026</span></div>
+    <div class="deadline"><b id="days">—</b> days to Black Friday (27 November 2026)</div>
+  </div>
+
+  <div>
+    <h1>What lifting Chico's category pages onto page one is worth in online orders</h1>
+    <p class="lede">86% of Chico's search visits come from people who already typed its name (Similarweb, Jul–Sep 2026), and Ahrefs estimates its rankings earn 55% less traffic than a year ago. It ranks in Google's top three for only 58 of the non-branded searches it appears for; 629 more sit at positions 4–20, about 1.7M searches a month, and it isn't in the top 100 for "business casual" or "mother of the bride" (193K a month). We model today's non-branded organic visits at ~50,000 a month. Pick a tier, then replace our placeholder rates with Chico's own.</p>
+  </div>
+
+  <div class="grid">
+    <section class="panel" aria-label="Assumptions">
+      <div class="sect" style="border-top:0;padding-top:0">Organic search and AI answers</div>
+      <div class="ctl">
+        <div class="row"><label for="org">Non-branded search visits added a month</label><output id="orgOut" for="org">25,000</output></div>
+        <input type="range" id="org" min="0" max="110000" step="1000" value="25000">
+        <div class="band" id="orgBand"></div>
+        <div class="why">From pants, jacket and dress hubs moved onto page one, plus new business-casual and mother-of-the-bride pages. Every search at #4–10 to #3 adds ~27,000 a month; every search at #11–20 to #5 adds ~57,000; the two occasion pages add ~10,000 at #5 (Similarweb ranks, Sep 2026; Ahrefs, Oct 2026).</div>
+      </div>
+      <div class="ctl">
+        <div class="row"><label for="ai">Visits from AI answers added a month</label><output id="aiOut" for="ai">0</output></div>
+        <input type="range" id="ai" min="0" max="5000" step="500" value="0">
+        <div class="why">Kept at 0 in the headline. AI assistants send ~2,700 visits a month today (Similarweb); only 4% of US women 45–64 hear about products through AI tools (GWI USA).</div>
+      </div>
+      <div class="sect">From visit to order</div>
+      <div class="ctl">
+        <div class="row"><label for="cvr">Visit-to-order rate</label><output id="cvrOut" for="cvr">1.5%</output></div>
+        <input type="range" id="cvr" min="0.5" max="3" step="0.1" value="1.5">
+        <div class="why">Placeholder until Chico's shares its own. Non-branded first visits convert below a site's average; ECDB's estimate of chicos.com's 2025 online revenue is ~$6.50 per visit across all channels.</div>
+      </div>
+      <div class="ctl">
+        <div class="row"><label for="aov">Average order value</label><output id="aovOut" for="aov">$120</output></div>
+        <input type="range" id="aov" min="60" max="250" step="5" value="120">
+        <div class="why">Placeholder. Chico's pants list at $79.50–$149.50, with 40% off everything running (chicos.com, 6 Oct 2026).</div>
+      </div>
+      <div class="ctl">
+        <div class="row"><label for="cpc">Cost per click on the same searches</label><output id="cpcOut" for="cpc">$1.11</output></div>
+        <input type="range" id="cpc" min="0.3" max="2.5" step="0.01" value="1.11">
+        <div class="band" id="cpcBand"></div>
+        <div class="why">Median Similarweb CPC for 1,866 non-branded keywords Chico's gets clicks on; Ahrefs puts the category heads at ~$0.40. Placeholder until Keyword Planner CPCs are pulled.</div>
+      </div>
+      <div class="presets" role="group" aria-label="Scenarios tied to the plan">
+        <button class="preset" type="button" data-p="8000,0,1.5,120,1.11"><b>Tier 1: page-one categories</b>The 191 searches at #4–10 pushed toward the top three</button>
+        <button class="preset" type="button" data-p="25000,0,1.5,120,1.11" aria-pressed="true"><b>Tier 2: hubs + missing pages</b>The headline: pants, jacket and dress hubs, business-casual and occasion pages</button>
+        <button class="preset" type="button" data-p="50000,1000,1.5,120,1.11"><b>Tier 3: links, guides, Bing and AI</b>Link base rebuilt, fit guides, Bing and Yahoo, AI Overviews cite Chico's</button>
+        <button class="preset" type="button" data-p="100000,2000,1.5,120,1.11"><b>Tier 4 (ceiling)</b>Every striking-distance search on page one</button>
+      </div>
+    </section>
+
+    <section class="result" aria-live="polite" aria-label="Outcome">
+      <div>
+        <div class="label">New online revenue a year</div>
+        <div class="big" id="rev">$540,000</div>
+        <div class="sub" id="revSub"></div>
+      </div>
+
+      <div class="stats">
+        <div class="stat"><div class="v" id="ord">375</div><div class="l">new orders a month</div></div>
+        <div class="stat"><div class="v" id="vpv">$1.80</div><div class="l">revenue per non-branded visit</div></div>
+        <div class="stat"><div class="v" id="peq">$27,750</div><div class="l">a month to buy the same clicks in Google Ads</div></div>
+      </div>
+
+      <div class="bars">
+        <div class="t">Non-branded organic visits a month</div>
+        <div class="bar"><span>Today (model)</span><div class="fill"><i id="bT"></i></div><span class="n" id="nT">50K</span></div>
+        <div class="bar"><span>With the plan</span><div class="fill"><i id="bW"></i></div><span class="n" id="nW">75K</span></div>
+        <div class="bar"><span>Ceiling (Tier 4)</span><div class="fill"><i id="bC"></i></div><span class="n" id="nC">152K</span></div>
+      </div>
+
+      <table aria-label="Conversion-rate sensitivity">
+        <thead><tr><th>If visits convert at</th><th>Orders / yr</th><th>Revenue / yr</th></tr></thead>
+        <tbody id="sens"></tbody>
+      </table>
+    </section>
+  </div>
+
+  <div class="inaction">
+    <h2>What waiting costs</h2>
+    <p>At these rates, every month without the plan forgoes about <b id="perMonth">$45,000</b> of online revenue (<b id="perMonthO">375</b> orders). Meanwhile the pages that need to climb are losing support: Chico's referring domains fell from <b>7,656 to 5,039 in twelve months (−34%), about 215 a month</b>, and backlinks fell 36% (Similarweb, Oct 2025 to Oct 2026), while Ahrefs estimates its rankings earn <b>55% less traffic than a year ago</b>. With <b>86% of search visits on its own name</b>, any dip in brand demand reaches search with nothing underneath it. Separately, ~77,000 paid clicks a month go to the search "chicos", where Chico's already ranks #1 (~$41.5K a month at Similarweb's estimated CPC); a holdout test would show how much of that is defensive. No saving is counted here.</p>
+  </div>
+
+  <div class="foot">
+    <div>Traffic: Similarweb, US, Jul–Sep 2026 unless noted (marketing channels, traffic sources, search performance, rank distribution and organic landing pages for Sep 2026, website keywords, search ads and backlinks Oct 2025–Oct 2026; pulled 6 Oct 2026). Ranking trend and category terms: Ahrefs, 5 Oct 2026. Non-branded organic visits today are modelled from Similarweb's Sep 2026 ranks: 12-month average search volume × a click-through curve (#1 28%, #2 15%, #3 11%, #4 8%, #5 6%, #6–10 5–2%, #11–20 1%), less 15% where an AI Overview shows (74% of these searches). Search ad spend (~$421K a month) is Similarweb's estimate. Buyer context: GWI USA, Q3 2025–Q2 2026 (US women 45–64, a demographic audience). Price check: chicos.com (6 Oct 2026). Revenue per visit: ECDB estimate of chicos.com 2025 online revenue (~$354M) ÷ Similarweb visits.</div>
+    <div>Formula: (non-branded visits added + AI visits) × visit-to-order rate = new orders a month; × average order value × 12 = new online revenue a year. First orders only; repeat purchases would add to it. Paid-equivalent = the same visits × cost per click, shown for comparison and never added to revenue. Every revenue figure uses placeholder rates until Chico's shares its own.</div>
+    <div>Part of the ROAST × Chico's search and AI visibility analysis, October 2026.</div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const $=id=>document.getElementById(id);
+  const TODAY=50000, CEIL=100000, CEIL_AI=2000;
+  const ids=['org','ai','cvr','aov','cpc'];
+  const els=ids.map($);
+  const fmtI=n=>Math.round(n).toLocaleString('en-US');
+  const fmtD=n=>'$'+Math.round(n).toLocaleString('en-US');
+  const fmtV=n=>n>=1e4?Math.round(n/1e3)+'K':fmtI(n);
+  const fmtBig=n=>n>=1e6?'$'+(n/1e6).toFixed(2)+'M':fmtD(n);
+  const presets=[...document.querySelectorAll('.preset')];
+  const bf=new Date(2026,10,27), now=new Date();
+  $('days').textContent=Math.max(0,Math.ceil((bf-new Date(now.getFullYear(),now.getMonth(),now.getDate()))/86400000));
+  function model(v){
+    const visits=v.org+v.ai, orders=visits*v.cvr/100, revMo=orders*v.aov;
+    let f=0; for(let k=1;k<=12;k++) f+=Math.min(k/6,1); f/=12;
+    return {visits,orders,revMo,total:revMo*12,yr1:revMo*12*f,vpv:v.cvr/100*v.aov,peq:visits*v.cpc};
+  }
+  function vals(){const v={};ids.forEach((k,i)=>v[k]=+els[i].value);return v;}
+  function render(){
+    const v=vals();
+    $('orgOut').value=fmtI(v.org); $('aiOut').value=fmtI(v.ai); $('cvrOut').value=v.cvr.toFixed(1)+'%';
+    $('aovOut').value=fmtD(v.aov); $('cpcOut').value='$'+v.cpc.toFixed(2);
+    const o=model(v);
+    const ob=$('orgBand'); ob.className='band'+(v.org>CEIL?' low':'');
+    ob.textContent=v.org===0?'No change from today':`+${Math.round(v.org/TODAY*100)}% on the ~50,000 non-branded organic visits a month Chico\'s gets today (model)`;
+    const x=o.vpv/v.cpc, cb=$('cpcBand'); cb.className='band'+(x>=2?'':' low');
+    cb.textContent=`A non-branded visit earns ${'$'+o.vpv.toFixed(2)} against a ${'$'+v.cpc.toFixed(2)} click: ${x.toFixed(1)}x`+(x>=2?', so ads pay at these rates':', under the 2x at which ads pay');
+    $('rev').textContent=fmtBig(o.total);
+    $('revSub').textContent=`${fmtI(o.visits)} visits × ${v.cvr.toFixed(1)}% = ${fmtI(o.orders)} orders a month × ${fmtD(v.aov)} × 12 = ${fmtD(o.total)}. Year one, pages ramping over six months: ${fmtBig(o.yr1)}.`;
+    $('ord').textContent=fmtI(o.orders); $('vpv').textContent='$'+o.vpv.toFixed(2); $('peq').textContent=o.peq>=1e5?'$'+Math.round(o.peq/1e3)+'K':fmtD(o.peq);
+    const mx=(TODAY+CEIL+CEIL_AI)*1.05;
+    [['bT','nT',TODAY],['bW','nW',TODAY+v.org+v.ai],['bC','nC',TODAY+CEIL+CEIL_AI]].forEach(([b,n,x])=>{$(b).style.width=(x/mx*100)+'%';$(n).textContent=fmtV(x);});
+    $('sens').innerHTML=[1.0,1.5,2.0,2.5].map(c=>{const m=model(Object.assign({},v,{cvr:c}));return `<tr><td>${c.toFixed(1)}%</td><td>${fmtI(m.orders*12)}</td><td>${fmtBig(m.total)}</td></tr>`;}).join('');
+    $('perMonth').textContent=fmtD(o.revMo); $('perMonthO').textContent=fmtI(o.orders);
+    presets.forEach(pr=>{const q=pr.dataset.p.split(',').map(Number);pr.setAttribute('aria-pressed',String(q.every((x,k)=>x===+els[k].value)));});
+    try{localStorage.setItem('chicos-calc-v1',JSON.stringify(els.map(e=>e.value)));}catch(e){}
+  }
+  els.forEach(el=>el.addEventListener('input',render));
+  presets.forEach(pr=>pr.addEventListener('click',()=>{const q=pr.dataset.p.split(',');els.forEach((el,k)=>el.value=q[k]);render();}));
+  try{const s=JSON.parse(localStorage.getItem('chicos-calc-v1'));if(Array.isArray(s)&&s.length===els.length){els.forEach((el,k)=>el.value=s[k]);}}catch(e){}
+  render();
+})();
+</script>
+</body>
+</html>

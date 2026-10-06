@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Optimum Subscriber-Value Calculator</title>
+<!-- share:start -->
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<meta name="description" content="What town and fiber pages plus non-brand search ads in Optimum&#x27;s footprint are worth in new subscribers and subscriber revenue, what a brand-ad holdout frees, and what each month of waiting defers">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ROAST">
+<meta property="og:title" content="Optimum Subscriber-Value Calculator">
+<meta property="og:description" content="What town and fiber pages plus non-brand search ads in Optimum&#x27;s footprint are worth in new subscribers and subscriber revenue, what a brand-ad holdout frees, and what each month of waiting defers">
+<meta property="og:url" content="https://npc-0802.github.io/pitches/optimum-subscriber-value-calculator/">
+<meta property="og:image" content="https://npc-0802.github.io/pitches/optimum-subscriber-value-calculator/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="ROAST × Optimum: Subscriber-Value Calculator">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Optimum Subscriber-Value Calculator">
+<meta name="twitter:description" content="What town and fiber pages plus non-brand search ads in Optimum&#x27;s footprint are worth in new subscribers and subscriber revenue, what a brand-ad holdout frees, and what each month of waiting defers">
+<meta name="twitter:image" content="https://npc-0802.github.io/pitches/optimum-subscriber-value-calculator/og.png">
+<!-- share:end -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;900&family=Public+Sans:wght@400;500;600&display=swap">
+<style>
+
+:root{
+  --bg:#ffffff; --ink:#111214; --muted:#5b5e66; --line:#e6e4dc; --panel:#f6f5f0;
+  --yellow:#FFD100; --yellow-deep:#e6bc00; --on-yellow:#111214; --on-yellow-muted:#4a4630;
+  --track:#e3e1d8; --ok:#1f7a3a;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){ --bg:#111214; --ink:#f4f3ee; --muted:#a6a79f; --line:#2a2b2f; --panel:#1b1c20; --track:#33343a; color-scheme:dark; }
+}
+:root[data-theme="dark"]{ --bg:#111214; --ink:#f4f3ee; --muted:#a6a79f; --line:#2a2b2f; --panel:#1b1c20; --track:#33343a; color-scheme:dark; }
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Public Sans",system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;font-size:15px;line-height:1.45}
+.wrap{max-width:1440px;margin:0 auto;padding-block:22px 44px;padding-inline:clamp(16px,3vw,40px);display:grid;gap:22px}
+.brand{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-bottom:6px;flex-wrap:wrap}
+.wordmark{display:flex;align-items:center;gap:12px}.wordmark .roast-logo{height:22px;width:auto;display:block;color:var(--ink)}
+.wordmark span{font-family:"Public Sans",sans-serif;font-weight:500;font-size:15px;color:var(--muted);letter-spacing:0}
+.deadline{font-size:13px;color:var(--muted);text-align:right}
+.deadline b{color:var(--ink);font-variant-numeric:tabular-nums}
+h1{font-family:"Archivo",system-ui,sans-serif;font-weight:900;font-size:clamp(28px,3.4vw,46px);line-height:1.05;letter-spacing:-.015em;margin:0;text-wrap:balance;max-width:26ch}
+.lede{color:var(--muted);max-width:78ch;margin:8px 0 0;font-size:clamp(14px,1.1vw,16px)}
+.grid{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,2fr);gap:22px;align-items:start}
+@media (max-width:900px){.grid{grid-template-columns:1fr}}
+.panel{background:var(--panel);border-radius:22px;padding:clamp(18px,2vw,28px) clamp(18px,2vw,28px) 10px;min-width:0;overflow:hidden}
+.ctl{display:grid;gap:8px;padding-block:14px;border-top:1px solid var(--line)}
+.ctl:first-child{border-top:0;padding-top:2px}
+.ctl .row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.ctl label{font-weight:600}
+.ctl output{font-family:"Archivo",sans-serif;font-weight:700;font-size:22px;font-variant-numeric:tabular-nums}
+.ctl output small{font-family:"Public Sans",sans-serif;font-weight:500;font-size:13px;color:var(--muted);margin-left:8px}
+.ctl .why{font-size:13px;color:var(--muted);max-width:72ch}
+.sect{font-family:"Archivo",sans-serif;font-weight:700;font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);padding-top:16px;border-top:1px solid var(--line)}
+.band{font-size:13px;font-weight:600;padding:5px 12px;border-radius:14px;background:var(--yellow);color:var(--on-yellow);width:fit-content;max-width:100%;line-height:1.3}
+.band.low{background:var(--track);color:var(--ink)}
+.band.warn{background:#f3c4bd;color:#5c120a}
+input[type=range]{width:100%;accent-color:var(--ink);height:30px;margin:0}
+input[type=range]:focus-visible{outline:2px solid var(--ink);outline-offset:4px;border-radius:6px}
+.presets{display:flex;flex-wrap:wrap;gap:8px;padding-block:16px;border-top:1px solid var(--line)}
+.preset{border:1.5px solid var(--line);border-radius:12px;padding:8px 12px;font-size:13px;background:transparent;color:var(--ink);cursor:pointer;font-family:inherit;text-align:left;line-height:1.25}
+.preset b{display:block;font-weight:700}
+.preset:hover,.preset:focus-visible{border-color:var(--ink);outline:none}
+.preset[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.result{background:var(--yellow);color:var(--on-yellow);border-radius:22px;padding:clamp(20px,2.2vw,32px);display:grid;gap:18px;min-width:0}
+.result{grid-template-columns:minmax(0,1fr)}.result>*{min-width:0}.result .big{overflow-wrap:anywhere}
+.result .label{font-weight:600;font-size:14px;color:var(--on-yellow-muted)}
+.result .big{font-family:"Archivo",sans-serif;font-weight:900;font-size:clamp(48px,6vw,88px);line-height:.95;letter-spacing:-.02em;font-variant-numeric:tabular-nums;margin:6px 0}
+.result .sub{font-size:14px;color:var(--on-yellow-muted);max-width:52ch}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+@media (max-width:520px){.stats{grid-template-columns:1fr 1fr}}
+.stat{background:rgba(255,255,255,.5);border-radius:14px;padding:14px 14px 12px;min-width:0}
+.stat .v{font-family:"Archivo",sans-serif;font-weight:700;font-size:clamp(20px,1.8vw,26px);font-variant-numeric:tabular-nums;line-height:1.1}
+.stat .l{font-size:12.5px;color:var(--on-yellow-muted);margin-top:5px;line-height:1.3;text-wrap:balance}
+.bars{display:grid;gap:8px;margin-top:4px}
+.bars .t{font-weight:600;font-size:13px;color:var(--on-yellow-muted)}
+.bar{display:grid;grid-template-columns:minmax(120px,170px) 1fr 64px;gap:10px;align-items:center;font-size:13px}
+@media (max-width:520px){.bar{grid-template-columns:110px 1fr 56px}}
+.bar .fill{height:14px;border-radius:7px;background:rgba(17,18,20,.25);position:relative;overflow:hidden}
+.bar .fill i{position:absolute;inset:0;width:0;background:var(--on-yellow);border-radius:7px;transition:width .25s ease}
+.bar .fill i.gain{background:#ffffff;left:auto}
+.bar .n{text-align:right;font-variant-numeric:tabular-nums;font-weight:600}
+@media (prefers-reduced-motion: reduce){.bar .fill i{transition:none}}
+.corp{display:grid;gap:8px}
+.corp .t{font-weight:600;font-size:13px;color:var(--on-yellow-muted)}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th,td{text-align:left;padding:7px 4px;border-bottom:1px solid rgba(17,18,20,.18);font-variant-numeric:tabular-nums}
+th{font-size:12px;color:var(--on-yellow-muted);font-weight:600}
+td:last-child,th:last-child{text-align:right;font-weight:700}
+.inaction{background:var(--panel);border-radius:22px;padding:clamp(18px,2vw,28px);display:grid;gap:8px}
+.inaction h2{font-family:"Archivo",sans-serif;font-weight:700;font-size:18px;margin:0}
+.inaction p{margin:0;color:var(--muted);max-width:100ch;font-size:15px;line-height:1.55}
+.inaction b{color:var(--ink)}
+.foot{font-size:13px;color:var(--muted);max-width:110ch;display:grid;gap:6px}
+.foot a{color:var(--ink)}
+@media (min-width:901px){.result{position:sticky;top:16px}}
+
+.eff{display:grid;gap:8px}.eff .t{font-weight:600;font-size:13px;color:var(--on-yellow-muted)}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="brand">
+    <div class="wordmark"><svg class="roast-logo" fill="currentColor" aria-label="ROAST" role="img" viewBox="0 0 931.89 203.5" xmlns="http://www.w3.org/2000/svg" overflow="hidden"><path d="M30.4 4.59 0 4.59 0 0 93.33 0C128.29 0 166.29 7.45 166.29 50.73 166.29 85.7 123.42 94.87 101.23 97.45L101.23 98.02C136.19 100.89 154.74 108.05 159.3 145.89L163.56 180.86C165.69 197.77 174.2 198.92 179.37 198.92 184.84 198.92 188.79 197.2 191.84 196.05L193.66 199.78C187.58 201.79 179.98 203.51 168.73 203.51 131.64 203.51 129.51 184.88 125.25 151.92L123.12 134.72C120.99 116.66 115.52 100.32 81.17 100.32L61.41 100.32 61.41 198.92 92.42 198.92 92.42 203.51 0 203.51 0 198.92 30.4 198.92 30.4 4.59ZM61.41 95.73 76.61 95.73C112.48 95.73 133.46 83.98 133.46 50.73 133.46 27.8 125.25 4.58 82.08 4.58L61.41 4.58 61.41 95.73Z" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4"  fill-opacity="1"/><path d="M293.24 0.32C342.65 0.32 385.63 45.32 385.63 101.91 385.63 158.5 342.65 203.5 293.24 203.5 243.83 203.5 200.85 158.5 200.85 101.91 200.85 45.32 243.83 0.32 293.24 0.32ZM293.24 199.09C345.28 199.09 352.3 138.08 352.3 101.91 352.3 65.74 345.28 4.74 293.24 4.74 241.2 4.74 234.18 65.75 234.18 101.91 234.18 138.07 241.2 199.09 293.24 199.09Z" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4"  fill-opacity="1"/><path d="M501.23 135.93 438.66 135.93 424.96 175.38C422.91 180.89 420.57 187.51 420.57 192.19 420.57 196.05 424.08 199.08 433.43 199.08L448.63 199.08 448.63 203.49 388.4 203.49 388.4 199.08 397.76 199.08C406.82 199.08 410.62 198.25 416.18 182.82L480.77 0.32 483.99 0.32 556.81 199.09 581.08 199.09 581.08 203.5 495.42 203.5 495.42 199.09 524.07 199.09 501.24 135.93ZM469.66 48 469.08 48 440.43 131.52 499.78 131.52 469.67 48Z" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4"  fill-opacity="1"/><path d="M598 130.7 602.68 130.7C602.68 177.01 631.63 198.78 666.71 198.78 694.78 198.78 714.95 181.97 714.95 157.16 714.95 128.49 699.16 119.95 665.54 114.99 619.64 108.1 598 100.93 598 54.62 598 23.2 619.93 0.32 652.68 0.32 682.79 0.32 694.2 17.14 704.14 17.13 712.17 17.13 711.74 3.58 712.62-2.84217e-14L717.3-2.84217e-14 717.3 64.54 712.62 64.54C709.99 33.12 691.86 4.73 652.69 4.73 627.84 4.73 610.29 20.17 610.29 45.52 610.29 70.87 620.23 75.84 668.76 84.11 711.45 91.28 728.99 104.23 728.99 140.07 728.99 175.91 707.94 203.19 665.55 203.19 636.31 203.19 620.82 188.78 610 188.86 601.37 188.92 602.69 198.82 602.69 203.51L598.01 203.51 598.01 130.7Z" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4"  fill-opacity="1"/><path d="M752.96 0 752.96 64.54 757.64 64.54C757.64 24.77 766.71 6.75 804.33 4.79L804.33 147.44 829.12 147.44 829.12 4.41 855.73 4.41 855.73 147.44 880.52 147.44 880.52 4.78C918.11 6.71 927.21 24.7 927.21 64.54L931.89 64.54 931.89 0 752.96 0Z" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4"  fill-opacity="1"/></svg><span>× Optimum · Q4 2026</span></div>
+    <div class="deadline"><b id="days">—</b> days to the summer 2027 moving season</div>
+  </div>
+
+  <div>
+    <h1>What households choosing a provider in Optimum's towns are worth in new subscribers</h1>
+    <p class="lede">84% of Optimum's organic clicks are its own name, and under 2% come from people choosing an internet provider (Similarweb, Jul–Sep 2026). Optimum is in the top 100 for 3 of 24 "find a provider" searches, ~643K US searches a month that comparison sites own (Ahrefs); HighSpeedInternet then sends Optimum ~403K visits a month. Optimum can only sell inside its footprint, so the calculator applies a footprint share before any value. Pick a tier, then replace our placeholder rates with Optimum's own.</p>
+  </div>
+
+  <div class="grid">
+    <section class="panel" aria-label="Assumptions">
+      <div class="sect" style="border-top:0;padding-top:0">Demand Optimum can sell to</div>
+      <div class="ctl">
+        <div class="row"><label for="dem">"Find a provider" searches a month, US national</label><output id="demOut" for="dem">643,160</output></div>
+        <input type="range" id="dem" min="300000" max="1500000" step="40" value="643160">
+        <div class="why">Ahrefs, US, Oct 2026: 24 head terms like "home internet" (265K), "internet providers near me" (163K) and "fiber internet" (65K). Town, ZIP and address searches aren't counted.</div>
+      </div>
+      <div class="ctl">
+        <div class="row"><label for="fp">Share of those searches from Optimum's footprint</label><output id="fpOut" for="fp">7.5%</output></div>
+        <input type="range" id="fp" min="2" max="20" step="0.5" value="7.5">
+        <div class="band" id="fpBand"></div>
+        <div class="why">Placeholder until ZIP/DMA Keyword Planner volumes: Optimum passes 10.1M homes in 21 states (Q2 2026), ~7.6% of ~132M US households.</div>
+      </div>
+      <div class="sect">Organic search: town and fiber pages</div>
+      <div class="ctl">
+        <div class="row"><label for="cap">Share of footprint searches the pages win</label><output id="capOut" for="cap">12%</output></div>
+        <input type="range" id="cap" min="0" max="40" step="1" value="12">
+        <div class="band" id="capBand"></div>
+        <div class="why">Town pages rebuilt as "internet providers in [town]" answers, plus fiber and moving hubs. Today ~1,900 organic clicks a month come from provider searches. Pages take 3–6 months to rank.</div>
+      </div>
+      <div class="sect">Paid search: non-brand ads</div>
+      <div class="ctl">
+        <div class="row"><label for="ads">Non-brand search ads a month</label><output id="adsOut" for="ads">$40,000</output></div>
+        <input type="range" id="ads" min="0" max="150000" step="5000" value="40000">
+        <div class="band" id="adsBand"></div>
+        <div class="why">Geo-fenced to serviceable ZIPs, landing on town pages with an address check. New budget: 92% of today's paid clicks (~$2.4M a month, Similarweb estimate) are on Optimum's own name.</div>
+      </div>
+      <div class="ctl">
+        <div class="row"><label for="cpc">Cost per click on non-brand provider searches</label><output id="cpcOut" for="cpc">$10.00</output></div>
+        <input type="range" id="cpc" min="3" max="30" step="0.25" value="10">
+        <div class="band" id="cpcBand"></div>
+        <div class="why">Placeholder until Keyword Planner for Optimum's DMAs. Median Similarweb CPC across 153 provider searches in Optimum's data: $10.02; Ahrefs head terms $3.50–$8.</div>
+      </div>
+      <div class="sect">From visit to subscriber</div>
+      <div class="ctl">
+        <div class="row"><label for="order">Visit to order (new connect)</label><output id="orderOut" for="order">2.0%</output></div>
+        <input type="range" id="order" min="0.5" max="5" step="0.1" value="2">
+        <div class="why">Placeholder until Optimum shares its own. The least certain rate here: see the sensitivity table.</div>
+      </div>
+      <div class="ctl">
+        <div class="row"><label for="arpu">Revenue per new subscriber a month</label><output id="arpuOut" for="arpu">$75</output></div>
+        <input type="range" id="arpu" min="25" max="150" step="1" value="75">
+        <div class="why">Optimum's Q2 2026 broadband revenue per broadband customer (~$75, our derivation from the filing). New subscribers on the $25 1 Gig offer pay less early on.</div>
+      </div>
+      <div class="ctl">
+        <div class="row"><label for="months">Months a subscriber stays</label><output id="monthsOut" for="months">36</output></div>
+        <input type="range" id="months" min="12" max="72" step="1" value="36">
+        <div class="why">Placeholder. 36 months matches the "$25 until 2029" price lock in Optimum's ads.</div>
+      </div>
+      <div class="presets" role="group" aria-label="Scenarios tied to the plan">
+        <button class="preset" type="button" data-p="643160,7.5,3,20000,10,2,75,36"><b>Tier 1: fix the shop window</b>$20K of non-brand ads in Optimum's ZIPs; brand-ad holdout; easy terms to an address check</button>
+        <button class="preset" type="button" data-p="643160,7.5,12,40000,10,2,75,36" aria-pressed="true"><b>Tier 2: town and fiber pages</b>The headline: pages win 12% of footprint searches; $40K of ads</button>
+        <button class="preset" type="button" data-p="643160,7.5,20,60000,10,2,75,36"><b>Tier 3: every town, plus AI Overviews</b>All 21 states; comparison sites show the real speeds and prices; $60K</button>
+        <button class="preset" type="button" data-p="643160,7.5,30,70000,10,2,75,36"><b>Tier 4 (ceiling)</b>The default answer to "what's the best internet at my address?"</button>
+      </div>
+    </section>
+
+    <section class="result" aria-live="polite" aria-label="Outcome">
+      <div>
+        <div class="label">Subscriber revenue from a year's new subscribers</div>
+        <div class="big" id="revBig">$6.34M</div>
+        <div class="sub" id="revSub"></div>
+      </div>
+
+      <div class="stats">
+        <div class="stat"><div class="v" id="subs">2,349</div><div class="l">new subscribers a year</div></div>
+        <div class="stat"><div class="v" id="roas">5.4×</div><div class="l">revenue per $1 of non-brand ads</div></div>
+        <div class="stat"><div class="v" id="yr1">$5.35M</div><div class="l">in year one, pages ramping</div></div>
+      </div>
+
+      <div class="bars">
+        <div class="t">New subscribers a month, by channel</div>
+        <div class="bar"><span>Non-brand ads</span><div class="fill"><i id="bP"></i></div><span class="n" id="nP">80</span></div>
+        <div class="bar"><span>Town and fiber pages</span><div class="fill"><i id="bO"></i></div><span class="n" id="nO">116</span></div>
+      </div>
+
+      <div class="corp">
+        <div class="t">Cost per subscriber and reach in the footprint</div>
+        <div class="stats">
+          <div class="stat"><div class="v" id="cps">$500</div><div class="l">of ad clicks per new subscriber</div></div>
+          <div class="stat"><div class="v" id="share">20%</div><div class="l">of footprint searches won</div></div>
+          <div class="stat"><div class="v" id="peq">$58K</div><div class="l">a month to buy the page visits as clicks</div></div>
+        </div>
+      </div>
+
+      <div class="eff">
+        <div class="t">Paid efficiency (not added to revenue)</div>
+        <div class="sub" id="effTxt"></div>
+      </div>
+
+      <table aria-label="Visit-to-order sensitivity">
+        <thead><tr><th>If visits order at</th><th>Subscribers / yr</th><th>Revenue</th></tr></thead>
+        <tbody id="sens"></tbody>
+      </table>
+    </section>
+  </div>
+
+  <div class="inaction">
+    <h2>What waiting costs</h2>
+    <p>At these rates, every month without the plan defers about <b id="perMonth">$528,576</b> of subscriber revenue, or <b id="perMonthSubs">~196 new subscribers</b>. Pages take 3–6 months to rank, so work that starts after December misses the summer 2027 moving season: <b id="visitsYr">~117,000 non-branded visits a year</b> that keep going to comparison sites. In the meantime comparison and moving sites send Optimum <b>~725K visits a month</b> (Similarweb), and Similarweb shows its backlink count <b>down 48% in a year (1.50M to 0.78M)</b>.</p>
+  </div>
+
+  <div class="foot">
+    <div>Traffic: Similarweb, US, Jul–Sep 2026 (marketing channels, traffic sources, search performance, website keywords, rank distribution, organic landing pages and search ads for optimum.com; pulled 6 Oct 2026); Ahrefs, 5 Oct 2026 (Keywords Explorer volumes, CPCs and Optimum's rankings for 24 "find a provider" terms, US). Paid spend is Similarweb's estimate; Ahrefs sees ~$257K a month, so ROAST will confirm it in the account. Company: Optimum Communications Q2 2026 results (passings, broadband customers, broadband revenue); US households, Census 2024.</div>
+    <div>Formula: national searches × footprint share × share the pages win = new non-branded visits a month; (those visits + ad budget ÷ cost per click) × visit-to-order = new subscribers a month; × 12 × monthly revenue × months retained = subscriber revenue from one year's new subscribers. Year one: ads from month 2; pages ramp over six months. Ads above ~15% of footprint searches are flagged: ads rarely win more of a market's clicks. Brand-ad holdout: Similarweb's ~$2.1M a month of estimated spend on Optimum's own name × 10% (placeholder until a holdout test); never added to revenue. Revenue is subscriber revenue, not profit. Every revenue figure uses placeholder rates until Optimum shares its own.</div>
+    <div>Part of the ROAST × Optimum search, paid media and AI visibility analysis, October 2026. Companion to the <a href="../cmg-loan-value-calculator/">CMG Home Loans Loan-Value Calculator</a> and the <a href="../hawkeye-inspection-value-calculator/">Hawkeye Inspection-Value Calculator</a>.</div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const $=id=>document.getElementById(id);
+  const AGG_ORGANIC=949300, BRAND_SPEND=2098788, REAIM=0.10, FEE=15000, RAMP=6, CEIL=0.15;
+  const ids=['dem','fp','cap','ads','cpc','order','arpu','months'];
+  const els=ids.map($);
+  const fmtI=n=>Math.round(n).toLocaleString('en-US');
+  const fmtK=n=>{n=Math.round(n);return n>=1e6?'$'+(n/1e6).toFixed(2)+'M':n>=1e4?'$'+Math.round(n/1e3)+'K':'$'+n.toLocaleString('en-US');};
+  const fmtD=n=>'$'+Math.round(n).toLocaleString('en-US');
+  const fmtBig=n=>n>=1e6?'$'+(n/1e6).toFixed(2)+'M':fmtD(n);
+  const presets=[...document.querySelectorAll('.preset')];
+  const target=new Date(2027,5,1), now=new Date();
+  $('days').textContent=Math.max(0,Math.ceil((target-new Date(now.getFullYear(),now.getMonth(),now.getDate()))/86400000));
+  function model(v){
+    const fpS=v.dem*v.fp/100, org=fpS*v.cap/100, clicks=v.cpc?v.ads/v.cpc:0, o=v.order/100;
+    const sP=clicks*o, sO=org*o, sMo=sP+sO, subVal=v.arpu*v.months;
+    const rev={p:sP*12*subVal,o:sO*12*subVal}, total=rev.p+rev.o;
+    let f=0; for(let k=1;k<=12;k++) f+=Math.min(k/RAMP,1); f/=12;
+    const vpv=o*subVal;
+    return {fpS,org,clicks,sP,sO,sMo,total,yr1:rev.p*11/12+rev.o*f,vpv,roas:v.cpc?vpv/v.cpc:0,
+            cps:o?v.cpc/o:0,cpsO:sO?FEE/sO:0,peq:org*v.cpc,share:fpS?(org+clicks)/fpS:0,adShare:fpS?clicks/fpS:0};
+  }
+  function vals(){const v={};ids.forEach((k,i)=>v[k]=+els[i].value);return v;}
+  function render(){
+    const v=vals();
+    $('demOut').value=fmtI(v.dem); $('fpOut').value=v.fp.toFixed(1)+'%'; $('capOut').value=v.cap+'%'; $('adsOut').value=fmtD(v.ads);
+    $('cpcOut').value='$'+v.cpc.toFixed(2); $('orderOut').value=v.order.toFixed(1)+'%'; $('arpuOut').value=fmtD(v.arpu); $('monthsOut').value=v.months;
+    const o=model(v);
+    $('fpBand').textContent=`~${fmtI(o.fpS)} "find a provider" searches a month Optimum could sell to`;
+    const aggFp=AGG_ORGANIC*v.fp/100, cb0=$('capBand'); cb0.className='band'+(v.cap>30?' low':'');
+    cb0.textContent=v.cap===0?'No new organic visits':`~${fmtI(o.org)} visits a month, ${Math.round(o.org/aggFp*100)}% of what HighSpeedInternet, BroadbandNow and Allconnect get at this footprint share`+(v.cap>30?', past our ceiling':'');
+    const ab=$('adsBand'); const over=o.adShare>CEIL+1e-9; ab.className='band'+(v.ads===0?' low':(over?' warn':''));
+    ab.textContent=v.ads===0?'No non-brand ads':`Buys ~${fmtI(o.clicks)} clicks a month, ${Math.round(o.adShare*100)}% of footprint searches`+(over?': past the ~15% ads usually win':'');
+    const cb=$('cpcBand'); const pays=o.roas>=2; cb.className='band'+(pays?'':' warn');
+    cb.textContent=`A click is worth ${'$'+o.vpv.toFixed(2)} at these rates, ${o.roas.toFixed(1)}× its cost`+(pays?`; ads pay up to ${'$'+(o.vpv/2).toFixed(2)} a click`:`: below the 2× ads need`);
+    $('revBig').textContent=fmtBig(o.total);
+    $('revSub').textContent=`${fmtI(o.sP)} from non-brand ads + ${fmtI(o.sO)} from new pages = ${fmtI(o.sMo)} new subscribers a month × 12 × ${fmtD(v.arpu)} × ${v.months} months = ${fmtD(o.total)}.`;
+    $('subs').textContent=fmtI(o.sMo*12); $('roas').textContent=v.ads?o.roas.toFixed(1)+'×':'—'; $('yr1').textContent=fmtK(o.yr1);
+    const mx=Math.max(o.sP,o.sO,0.1)*1.08;
+    [['bP','nP',o.sP],['bO','nO',o.sO]].forEach(([b,n,x])=>{$(b).style.width=(x/mx*100)+'%';$(n).textContent=fmtI(x);});
+    $('cps').textContent=o.cps?fmtD(o.cps):'—'; $('share').textContent=Math.round(o.share*100)+'%'; $('peq').textContent=fmtK(o.peq);
+    const freed=BRAND_SPEND*REAIM;
+    $('effTxt').textContent=`A brand-ad holdout on searches Optimum already ranks #1 for: if 10% of ~${fmtK(BRAND_SPEND)} a month of estimated brand spend is re-aimable, that frees ~${fmtK(freed)} a month`+(v.ads?`, ${(freed/v.ads).toFixed(1)}× this non-brand budget.`:'.');
+    $('sens').innerHTML=[Math.max(0.5,v.order-1),v.order,Math.min(5,v.order+1)].map(x=>{const m=model(Object.assign({},v,{order:x}));return `<tr><td>${x.toFixed(1)}%</td><td>${fmtI(m.sMo*12)}</td><td>${fmtBig(m.total)}</td></tr>`;}).join('');
+    $('perMonth').textContent=fmtD(o.total/12); $('perMonthSubs').textContent=`~${fmtI(o.sMo)} new subscribers`;
+    $('visitsYr').textContent=`~${fmtI(Math.round((o.org+o.clicks)*12/1000)*1000)} non-branded visits a year`;
+    presets.forEach(pr=>{const q=pr.dataset.p.split(',').map(Number);pr.setAttribute('aria-pressed',String(q.every((x,k)=>x===+els[k].value)));});
+    try{localStorage.setItem('optimum-sub-calc-v1',JSON.stringify(els.map(e=>e.value)));}catch(e){}
+  }
+  els.forEach(el=>el.addEventListener('input',render));
+  presets.forEach(pr=>pr.addEventListener('click',()=>{const q=pr.dataset.p.split(',');els.forEach((el,k)=>el.value=q[k]);render();}));
+  try{const s=JSON.parse(localStorage.getItem('optimum-sub-calc-v1'));if(Array.isArray(s)&&s.length===els.length){els.forEach((el,k)=>el.value=s[k]);}}catch(e){}
+  render();
+})();
+</script>
+</body>
+</html>
