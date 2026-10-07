@@ -8,11 +8,11 @@
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="../assets/favicon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
-<meta name="description" content="What moving Talbots&#x27; category pages from Google&#x27;s page two to page one is worth in online orders, and what each month of waiting forgoes.">
+<meta name="description" content="What winning back Talbots&#x27; category rankings adds in online orders">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ROAST">
 <meta property="og:title" content="Talbots Order-Value Calculator">
-<meta property="og:description" content="What moving Talbots&#x27; category pages from Google&#x27;s page two to page one is worth in online orders, and what each month of waiting forgoes.">
+<meta property="og:description" content="What winning back Talbots&#x27; category rankings adds in online orders">
 <meta property="og:url" content="https://npc-0802.github.io/pitches/talbots-order-value-calculator/">
 <meta property="og:image" content="https://npc-0802.github.io/pitches/talbots-order-value-calculator/og.png">
 <meta property="og:image:width" content="1200">
@@ -20,7 +20,7 @@
 <meta property="og:image:alt" content="ROAST × Talbots: Order-Value Calculator">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Talbots Order-Value Calculator">
-<meta name="twitter:description" content="What moving Talbots&#x27; category pages from Google&#x27;s page two to page one is worth in online orders, and what each month of waiting forgoes.">
+<meta name="twitter:description" content="What winning back Talbots&#x27; category rankings adds in online orders">
 <meta name="twitter:image" content="https://npc-0802.github.io/pitches/talbots-order-value-calculator/og.png">
 <!-- share:end -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;900&family=Public+Sans:wght@400;500;600&display=swap">
@@ -100,6 +100,10 @@ td:last-child,th:last-child{text-align:right;font-weight:700}
 @media (min-width:901px){.result{position:sticky;top:16px}}
 .wordmark{flex-wrap:wrap;row-gap:6px}.wordmark .client-logo{height:22px;width:auto;display:block;color:var(--ink)}
 .wordmark .logo-dark{display:none}@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .wordmark .logo-light{display:none}:root:not([data-theme="light"]) .wordmark .logo-dark{display:block}}:root[data-theme="dark"] .wordmark .logo-light{display:none}:root[data-theme="dark"] .wordmark .logo-dark{display:block}
+.validate{border:2px solid var(--yellow);border-radius:22px;padding:clamp(18px,2vw,28px);display:grid;gap:8px}
+.validate h2{font-family:"Archivo",sans-serif;font-weight:700;font-size:18px;margin:0}
+.validate ul{margin:0;padding-left:20px;color:var(--muted);display:grid;gap:4px;max-width:110ch}
+.validate b{color:var(--ink)}
 </style>
 </head>
 <body>
@@ -111,67 +115,67 @@ td:last-child,th:last-child{text-align:right;font-weight:700}
   </div>
 
   <div>
-    <h1>What moving Talbots' category pages onto page one is worth in online orders</h1>
-    <p class="lede">85–92% of Talbots' search visits come from people who already typed its name (Similarweb, Jun–Aug 2026). It ranks in Google's top three for only 112 of the 4,648 non-branded searches it appears for, while 2,127 more sit at positions 4–20, about 3.0M searches a month, including "petite" at #16. We model today's non-branded organic visits at ~65,000 a month. Pick a tier, then replace our placeholder rates with Talbots' own.</p>
+    <h1>What winning back Talbots' category rankings adds in online orders</h1>
+    <p class="lede">~90% of Talbots' search visits come from people who already typed its name (Similarweb, Jun–Aug 2026), and Ahrefs estimates its Google rankings earn 49% less traffic than a year ago (428K to 220K visits a month). It ranks in the top three for only 109 of the non-branded searches it appears for; 1,988 more sit at positions 4–20, about 2.9M searches a month, and neither Ahrefs nor Similarweb ranks it for "business casual" or "mother of the bride" (193K a month). Sort, filter and paging URLs rank in place of category pages for ~260+ searches. We model today's non-branded organic visits at ~65,000 a month. Pick a tier, then replace our placeholder rates with Talbots' own.</p>
   </div>
 
   <div class="grid">
     <section class="panel" aria-label="Assumptions">
       <div class="sect" style="border-top:0;padding-top:0">Organic search and AI answers</div>
       <div class="ctl">
-        <div class="row"><label for="org">Non-branded search visits added a month</label><output id="orgOut" for="org">40,000</output></div>
-        <input type="range" id="org" min="0" max="160000" step="5000" value="40000">
+        <div class="row"><label for="org">Non-branded search visits added a month</label><output id="orgOut" for="org">35,000</output></div>
+        <input type="range" id="org" min="0" max="180000" step="1000" value="35000">
         <div class="band" id="orgBand"></div>
-        <div class="why">From category pages moved from page two to page one: petite, sweaters, pants, dresses, plus. Moving every search at #4–10 to #3 adds ~51,000 a month; every search at #11–20 to #5 adds ~104,000 more (Similarweb ranks, Aug 2026).</div>
+        <div class="why">From pants, jacket, skort and sweater hubs back in the top three, plus "business casual" on the Workwear page and a new mother-of-the-bride page. Every search at #4–10 to #3 adds ~50,000 a month; every search at #11–20 to #5 adds ~95,000 (leaving out "petite" and "skirts", already #1 in Ahrefs); the two gap pages add ~10,000 at #5 (Similarweb ranks, Aug 2026; Ahrefs, Oct 2026).</div>
       </div>
       <div class="ctl">
         <div class="row"><label for="ai">Visits from AI answers added a month</label><output id="aiOut" for="ai">0</output></div>
         <input type="range" id="ai" min="0" max="10000" step="500" value="0">
-        <div class="why">Kept at 0 in the headline. AI assistants send ~8,400 visits a month today (Similarweb). ~1 in 4 US women 45–64 used ChatGPT last month (GWI USA).</div>
+        <div class="why">Kept at 0 in the headline. AI assistants send ~8,400 visits a month today (Similarweb); 9.7% of Talbots shoppers hear about products through AI tools (GWI USA, index 163, n=70: directional).</div>
       </div>
       <div class="sect">From visit to order</div>
       <div class="ctl">
         <div class="row"><label for="cvr">Visit-to-order rate</label><output id="cvrOut" for="cvr">1.5%</output></div>
         <input type="range" id="cvr" min="0.5" max="3" step="0.1" value="1.5">
-        <div class="why">Placeholder until Talbots shares its own. Fashion sites converted 1.86% in Aug 2026 (IRP Commerce, UK); non-branded visits usually convert lower.</div>
+        <div class="why">Placeholder until Talbots shares its own. Non-branded first visits convert below a site's average; ECDB's estimate of talbots.com's 2025 online revenue (~$127M) is ~$2.40 per visit across all channels.</div>
       </div>
       <div class="ctl">
         <div class="row"><label for="aov">Average order value</label><output id="aovOut" for="aov">$120</output></div>
         <input type="range" id="aov" min="60" max="250" step="5" value="120">
-        <div class="why">Placeholder. Talbots' petite items list at $99–$149, with 40%-off promotions running (talbots.com, 6 Oct 2026).</div>
+        <div class="why">Placeholder until Talbots shares its own. Talbots' petite styles list at $89.50–$359, with 25% off regular-price tops, pants and jeans running (talbots.com, 6 Oct 2026).</div>
       </div>
       <div class="ctl">
         <div class="row"><label for="cpc">Cost per click on the same searches</label><output id="cpcOut" for="cpc">$1.09</output></div>
-        <input type="range" id="cpc" min="0.5" max="2.5" step="0.01" value="1.09">
+        <input type="range" id="cpc" min="0.3" max="2.5" step="0.01" value="1.09">
         <div class="band" id="cpcBand"></div>
-        <div class="why">Median Similarweb CPC for 2,443 non-branded keywords Talbots ranks for; placeholder until Keyword Planner CPCs are pulled.</div>
+        <div class="why">Median Similarweb CPC for 2,948 non-branded keywords Talbots gets clicks on ($0.97 weighted by paid clicks, $0.73 by search volume); Ahrefs puts the category heads at $0.30–0.50. Placeholder until Keyword Planner CPCs are pulled.</div>
       </div>
       <div class="presets" role="group" aria-label="Scenarios tied to the plan">
-        <button class="preset" type="button" data-p="15000,0,1.5,120,1.09"><b>Tier 1: page-one categories</b>The 698 searches at #4–10 pushed toward the top three</button>
-        <button class="preset" type="button" data-p="40000,0,1.5,120,1.09" aria-pressed="true"><b>Tier 2: page two onto page one</b>The headline: petite, sweater, pants, dress and plus hubs rebuilt</button>
-        <button class="preset" type="button" data-p="80000,3000,1.5,120,1.09"><b>Tier 3: links, guides and AI</b>Link base rebuilt, fit and occasion guides, AI answers cite Talbots</button>
-        <button class="preset" type="button" data-p="155000,6000,1.5,120,1.09"><b>Tier 4 (ceiling)</b>Every striking-distance search on page one</button>
+        <button class="preset" type="button" data-p="15000,0,1.5,120,1.09"><b>Tier 1: URLs + page-one categories</b>Parameter URLs fixed; the 668 searches at #4–10 pushed toward the top three</button>
+        <button class="preset" type="button" data-p="35000,0,1.5,120,1.09" aria-pressed="true"><b>Tier 2: hubs back + two gap pages</b>The headline: pants, jacket, skort and sweater hubs; business casual and mother of the bride</button>
+        <button class="preset" type="button" data-p="90000,3000,1.5,120,1.09"><b>Tier 3: page two, links, guides and AI</b>Page-two categories, link reclamation, catalog pages, AI Overviews cite Talbots</button>
+        <button class="preset" type="button" data-p="160000,6000,1.5,120,1.09"><b>Tier 4 (ceiling)</b>Every striking-distance search on page one, both gaps at #3</button>
       </div>
     </section>
 
     <section class="result" aria-live="polite" aria-label="Outcome">
       <div>
         <div class="label">New online revenue a year</div>
-        <div class="big" id="rev">$864,000</div>
+        <div class="big" id="rev">$756,000</div>
         <div class="sub" id="revSub"></div>
       </div>
 
       <div class="stats">
-        <div class="stat"><div class="v" id="ord">600</div><div class="l">new orders a month</div></div>
+        <div class="stat"><div class="v" id="ord">525</div><div class="l">new orders a month</div></div>
         <div class="stat"><div class="v" id="vpv">$1.80</div><div class="l">revenue per non-branded visit</div></div>
-        <div class="stat"><div class="v" id="peq">$43,600</div><div class="l">a month to buy the same clicks in Google Ads</div></div>
+        <div class="stat"><div class="v" id="peq">$38,150</div><div class="l">a month to buy the same clicks in Google Ads</div></div>
       </div>
 
       <div class="bars">
         <div class="t">Non-branded organic visits a month</div>
         <div class="bar"><span>Today (model)</span><div class="fill"><i id="bT"></i></div><span class="n" id="nT">65K</span></div>
-        <div class="bar"><span>With the plan</span><div class="fill"><i id="bW"></i></div><span class="n" id="nW">105K</span></div>
-        <div class="bar"><span>Ceiling (Tier 4)</span><div class="fill"><i id="bC"></i></div><span class="n" id="nC">220K</span></div>
+        <div class="bar"><span>With the plan</span><div class="fill"><i id="bW"></i></div><span class="n" id="nW">100K</span></div>
+        <div class="bar"><span>Ceiling (Tier 4)</span><div class="fill"><i id="bC"></i></div><span class="n" id="nC">231K</span></div>
       </div>
 
       <table aria-label="Conversion-rate sensitivity">
@@ -183,20 +187,31 @@ td:last-child,th:last-child{text-align:right;font-weight:700}
 
   <div class="inaction">
     <h2>What waiting costs</h2>
-    <p>At these rates, every month without the plan forgoes about <b id="perMonth">$72,000</b> of online revenue (<b id="perMonthO">600</b> orders). Meanwhile the pages that need to climb are losing support: Talbots' referring domains fell from <b>7,852 to 5,378 in twelve months (−32%), about 200 a month</b>, and backlinks fell 65% (Similarweb, Oct 2025 to Oct 2026). With <b>85–92% of search visits on its own name</b>, any dip in brand demand reaches search with nothing underneath it. Separately, ~96,000 paid clicks a month go to the search "talbots", where Talbots already ranks #1 (~$56K a month at Similarweb's estimated CPC); a holdout test would show how much of that is defensive. No saving is counted here.</p>
+    <p>At these rates, every month without the plan forgoes about <b id="perMonth">$63,000</b> of online revenue (<b id="perMonthO">525</b> orders). Meanwhile Ahrefs estimates Talbots' rankings earn <b>49% less traffic than a year ago (428K to 220K visits a month, Sep 2025 to Sep 2026)</b>, and sort, filter and paging URLs rank in place of category pages for ~260+ searches. With <b>~90% of search visits on its own name</b>, any dip in brand demand reaches search with nothing underneath it. Separately, ~96,000 paid clicks a month go to the search "talbots", where Talbots already ranks #1 (~$56K a month at Similarweb's estimated CPC); a holdout test would show how much of that is defensive. No saving is counted here.</p>
+  </div>
+
+  <div class="validate">
+    <h2>For Talbots to validate</h2>
+    <ul>
+      <li><b>Visit-to-order rate</b> on non-branded search visits (placeholder 1.5%) and <b>average order value</b> (placeholder $120).</li>
+      <li><b>Non-branded organic visits today</b>: our rank model says ~65,000 a month; Similarweb's brand split implies ~89,000. Search Console settles it.</li>
+      <li><b>Search ad spend</b>: Similarweb estimates ~$356K a month ($450K in June, $335K in July, $283K in August 2026), with 84% of visible paid clicks on Talbots' own name. Ahrefs sees ~$129 a month: it only logs an ad if Google showed it when Ahrefs crawled that search, so its paid estimate swings and undercounts; Similarweb sees paid search every week from 1 Jun to 3 Oct. The account or the Ads Transparency Center settles it.</li>
+      <li><b>Non-branded Shopping ROAS</b>: at a 1.82% visit-to-order rate, or CPCs of $0.90 or less, a non-branded click earns 2x its cost and category ads join the plan.</li>
+    </ul>
   </div>
 
   <div class="foot">
-    <div>Traffic: Similarweb, US, Sep 2025–Aug 2026 (marketing channels, search performance, rank distribution, website keywords, search ads and backlinks; pulled 6 Oct 2026). Non-branded organic visits today are modelled from Similarweb's Aug 2026 ranks: 12-month average search volume × a click-through curve (#1 28%, #2 15%, #3 11%, #4 8%, #5 6%, #6–10 5–2%, #11–20 1%), less 15% where an AI Overview shows. Search ad spend (~$356K a month) is Similarweb's estimate. Buyer context: GWI USA, Q3 2025–Q2 2026 (US women 45–64, a demographic audience). Rates: IRP Commerce fashion market data (Aug 2026); talbots.com prices (6 Oct 2026).</div>
+    <div>Where the tools disagree: Similarweb counts ~927K organic search visits a month (every engine, ~90% brand); Ahrefs models ~253K US from Google rankings (51% of it the word "talbots"). Ahrefs' history shows rankings slipping since Nov 2025, while Similarweb's visits held because brand demand held. We use Similarweb for traffic, channels, paid search and CPCs, and Ahrefs for the ranking trend and the category terms, each labelled. Ahrefs has "petite" and "skirts" at #1 on 5 Oct; Similarweb had them at #16 and #22 in August. On six category heads (womens tops, sweaters, pants, blouses, jackets and linen pants) Similarweb has Talbots at #10–32 in August where Ahrefs has it outside the top 100; neither ranks it for "business casual" or "mother of the bride".</div>
+    <div>Traffic: Similarweb, US, Jun–Aug 2026 unless noted (marketing channels and traffic sources, search performance, website keywords and search ads; rank distribution and organic landing pages for Aug 2026; weekly channels to 3 Oct 2026; engagement Sep 2025–Aug 2026; backlinks Oct 2025–Oct 2026; pulled 6 Oct 2026). Ranking trend, category terms and peers: Ahrefs, 5 Oct 2026. Non-branded organic visits today are modelled from Similarweb's Aug 2026 ranks: 12-month average search volume × a click-through curve (#1 28%, #2 15%, #3 11%, #4 8%, #5 6%, #6–10 5–2%, #11–20 1%), less 15% where an AI Overview shows (55% of these searches). Search ad spend (~$356K a month) is Similarweb's estimate. Buyer context: GWI USA, Q3 2025–Q2 2026 (Recent Talbots Shoppers; US women 45–64 as category context). Price check: talbots.com (6 Oct 2026). Revenue per visit: ECDB estimate of talbots.com 2025 online revenue (~$127M) ÷ Similarweb visits.</div>
     <div>Formula: (non-branded visits added + AI visits) × visit-to-order rate = new orders a month; × average order value × 12 = new online revenue a year. First orders only; repeat purchases would add to it. Paid-equivalent = the same visits × cost per click, shown for comparison and never added to revenue. Every revenue figure uses placeholder rates until Talbots shares its own.</div>
-    <div>Part of the ROAST × Talbots search and AI visibility analysis, October 2026. Companion to the <a href="../citizens-search-value-calculator/">Citizens Search-Value Calculator</a> and the <a href="../cargurus-search-value-calculator/">CarGurus Search-Value Calculator</a>.</div>
+    <div>Part of the ROAST × Talbots search and AI visibility analysis, October 2026 (v2).</div>
   </div>
 </div>
 
 <script>
 (function(){
   const $=id=>document.getElementById(id);
-  const TODAY=65000, CEIL=155000;
+  const TODAY=65000, CEIL=160000, CEIL_AI=6000;
   const ids=['org','ai','cvr','aov','cpc'];
   const els=ids.map($);
   const fmtI=n=>Math.round(n).toLocaleString('en-US');
@@ -205,7 +220,7 @@ td:last-child,th:last-child{text-align:right;font-weight:700}
   const fmtBig=n=>n>=1e6?'$'+(n/1e6).toFixed(2)+'M':fmtD(n);
   const presets=[...document.querySelectorAll('.preset')];
   const bf=new Date(2026,10,27), now=new Date();
-  $('days').textContent=Math.max(0,Math.ceil((bf-new Date(now.getFullYear(),now.getMonth(),now.getDate()))/86400000));
+  $('days').textContent=Math.max(0,Math.round((bf-new Date(now.getFullYear(),now.getMonth(),now.getDate()))/86400000));
   function model(v){
     const visits=v.org+v.ai, orders=visits*v.cvr/100, revMo=orders*v.aov;
     let f=0; for(let k=1;k<=12;k++) f+=Math.min(k/6,1); f/=12;
@@ -224,16 +239,16 @@ td:last-child,th:last-child{text-align:right;font-weight:700}
     $('rev').textContent=fmtBig(o.total);
     $('revSub').textContent=`${fmtI(o.visits)} visits × ${v.cvr.toFixed(1)}% = ${fmtI(o.orders)} orders a month × ${fmtD(v.aov)} × 12 = ${fmtD(o.total)}. Year one, pages ramping over six months: ${fmtBig(o.yr1)}.`;
     $('ord').textContent=fmtI(o.orders); $('vpv').textContent='$'+o.vpv.toFixed(2); $('peq').textContent=o.peq>=1e5?'$'+Math.round(o.peq/1e3)+'K':fmtD(o.peq);
-    const mx=(TODAY+CEIL+6000)*1.05;
-    [['bT','nT',TODAY],['bW','nW',TODAY+v.org+v.ai],['bC','nC',TODAY+CEIL+6000]].forEach(([b,n,x])=>{$(b).style.width=(x/mx*100)+'%';$(n).textContent=fmtV(x);});
+    const mx=(TODAY+CEIL+CEIL_AI)*1.05;
+    [['bT','nT',TODAY],['bW','nW',TODAY+v.org+v.ai],['bC','nC',TODAY+CEIL+CEIL_AI]].forEach(([b,n,x])=>{$(b).style.width=(x/mx*100)+'%';$(n).textContent=fmtV(x);});
     $('sens').innerHTML=[1.0,1.5,2.0,2.5].map(c=>{const m=model(Object.assign({},v,{cvr:c}));return `<tr><td>${c.toFixed(1)}%</td><td>${fmtI(m.orders*12)}</td><td>${fmtBig(m.total)}</td></tr>`;}).join('');
     $('perMonth').textContent=fmtD(o.revMo); $('perMonthO').textContent=fmtI(o.orders);
     presets.forEach(pr=>{const q=pr.dataset.p.split(',').map(Number);pr.setAttribute('aria-pressed',String(q.every((x,k)=>x===+els[k].value)));});
-    try{localStorage.setItem('talbots-calc-v1',JSON.stringify(els.map(e=>e.value)));}catch(e){}
+    try{localStorage.setItem('talbots-calc-v2',JSON.stringify(els.map(e=>e.value)));}catch(e){}
   }
   els.forEach(el=>el.addEventListener('input',render));
   presets.forEach(pr=>pr.addEventListener('click',()=>{const q=pr.dataset.p.split(',');els.forEach((el,k)=>el.value=q[k]);render();}));
-  try{const s=JSON.parse(localStorage.getItem('talbots-calc-v1'));if(Array.isArray(s)&&s.length===els.length){els.forEach((el,k)=>el.value=s[k]);}}catch(e){}
+  try{const s=JSON.parse(localStorage.getItem('talbots-calc-v2'));if(Array.isArray(s)&&s.length===els.length){els.forEach((el,k)=>el.value=s[k]);}}catch(e){}
   render();
 })();
 </script>
