@@ -26,6 +26,7 @@ Interactive pages that accompany ROAST pitch decks. Static HTML, served with Git
 | Optimum Subscriber-Value Calculator — what town and fiber pages plus non-brand search ads in Optimum's footprint are worth in new subscribers and subscriber revenue, what a brand-ad holdout frees, and what each month of waiting defers | `optimum-subscriber-value-calculator/` |
 | IKS Health Client-Value Calculator — what high-intent search ads plus RCM, coding and scribe service pages are worth in new provider clients and first-year contract value, revenue per $1 of ads and what organic adds on the same budget, and what each month of waiting defers | `ikshealth-client-value-calculator/` |
 | Northeastern Enrollment-Value Calculator — what a program-search ad test plus program pages moved onto page 1 (master's, certificate, nursing and online-degree searches) are worth in new graduate and online students and net tuition, what ranking pages do to the ad cost per new student, and what each month of waiting defers | `northeastern-enrollment-value-calculator/` |
+| CMC Trailer-Value Calculator — what reaching named Midwest retailers, charities, hotels and colleges is worth to Chicago Mattress Company (CMC & NAMU) in filled trailers and new sales, sales per $1 of ads, and what the idle shipping capacity is worth each week | `cmc-trailer-value-calculator/` |
 
 ## Favicon and link previews
 
