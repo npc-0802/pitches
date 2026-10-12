@@ -28,6 +28,7 @@ Interactive pages that accompany ROAST pitch decks. Static HTML, served with Git
 | Northeastern Enrollment-Value Calculator — what a program-search ad test plus program pages moved onto page 1 (master's, certificate, nursing and online-degree searches) are worth in new graduate and online students and net tuition, what ranking pages do to the ad cost per new student, and what each month of waiting defers | `northeastern-enrollment-value-calculator/` |
 | CMC Trailer-Value Calculator — what reaching named Midwest retailers, charities, hotels and colleges is worth to Chicago Mattress Company (CMC & NAMU) in filled trailers and new sales, sales per $1 of ads, and what the idle shipping capacity is worth each week | `cmc-trailer-value-calculator/` |
 | Fuqua Enrollment-Value Calculator — what pages that answer prospects' generic MBA questions in Google and AI, plus program-search ads behind Round 2, are worth to Duke's Fuqua School of Business in new students and net tuition per class, net tuition per $1 of ads, and what each month of waiting defers | `fuqua-enrollment-value-calculator/` |
+| Outside Gear-Guide Value Calculator — what moving Outside's page-one and page-two gear searches into Google's top three (merged, rebuilt buyer's guides), plus AI answers, is worth in affiliate, Outside+ and ad revenue, what buying the same clicks would cost in Google Ads, and what each month of waiting defers | `outside-gear-guide-value-calculator/` |
 
 ## Favicon and link previews
 
