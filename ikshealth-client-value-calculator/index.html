@@ -146,19 +146,19 @@ td:last-child,th:last-child{text-align:right;font-weight:700}
       </div>
       <div class="sect">From visit to new client</div>
       <div class="ctl">
-        <div class="row"><label for="lead">Visit to enquiry (demo, RFP or contact request)</label><output id="leadOut" for="lead">0.50%</output></div>
+        <div class="row"><label for="lead">Visit to inquiry (demo, RFP or contact request)</label><output id="leadOut" for="lead">0.50%</output></div>
         <input type="range" id="lead" min="0.1" max="2" step="0.05" value="0.5">
         <div class="why">Placeholder until IKS shares its own. Blended across head-term visitors (many are researching, not buying) and high-intent ones.</div>
       </div>
       <div class="ctl">
-        <div class="row"><label for="close">Enquiry to new client</label><output id="closeOut" for="close">3%</output></div>
+        <div class="row"><label for="close">Inquiry to new client</label><output id="closeOut" for="close">3%</output></div>
         <input type="range" id="close" min="1" max="15" step="0.5" value="3">
         <div class="why">Placeholder. Enterprise sales cycles run months and often go to RFP; the least certain rate here: see the sensitivity table.</div>
       </div>
       <div class="ctl">
         <div class="row"><label for="fyv">First-year contract value per new client</label><output id="fyvOut" for="fyv">$250,000</output></div>
         <input type="range" id="fyv" min="50000" max="1000000" step="10000" value="250000">
-        <div class="why">Placeholder: a mid-size physician group's RCM or scribing contract. IKS serves 600+ organisations; its own figure by service line replaces this.</div>
+        <div class="why">Placeholder: a mid-size physician group's RCM or scribing contract. IKS serves 600+ organizations; its own figure by service line replaces this.</div>
       </div>
       <div class="ctl">
         <div class="row"><label for="years">Contract length (years)</label><output id="yearsOut" for="years">4</output></div>
@@ -187,7 +187,7 @@ td:last-child,th:last-child{text-align:right;font-weight:700}
       </div>
 
       <div class="bars">
-        <div class="t">Enquiries a month, by channel</div>
+        <div class="t">Inquiries a month, by channel</div>
         <div class="bar"><span>Search ads</span><div class="fill"><i id="bP"></i></div><span class="n" id="nP">—</span></div>
         <div class="bar"><span>Service pages</span><div class="fill"><i id="bO"></i></div><span class="n" id="nO">—</span></div>
         <div class="bar"><span>AI answers</span><div class="fill"><i id="bA"></i></div><span class="n" id="nA">—</span></div>
@@ -202,8 +202,8 @@ td:last-child,th:last-child{text-align:right;font-weight:700}
         </div>
       </div>
 
-      <table aria-label="Enquiry-to-client sensitivity">
-        <thead><tr><th>If enquiries close at</th><th>Clients / yr</th><th>Value / yr</th></tr></thead>
+      <table aria-label="Inquiry-to-client sensitivity">
+        <thead><tr><th>If inquiries close at</th><th>Clients / yr</th><th>Value / yr</th></tr></thead>
         <tbody id="sens"></tbody>
       </table>
     </section>
@@ -216,7 +216,7 @@ td:last-child,th:last-child{text-align:right;font-weight:700}
 
   <div class="foot">
     <div>Traffic: Similarweb, US, Jul–Sep 2026 (marketing channels, search performance, website keywords, rank distribution and organic landing pages for ikshealth.com; pulled 6 Oct 2026; no paid search to export); Ahrefs, 5 Oct 2026 (organic traffic and history, Domain Rating, US keyword volumes, difficulty, CPCs and SERP features for 18 core service searches; peers r1rcm.com, commure.com, abridge.com, ensemblehp.com). Buyer context: GWI Work, Q3 2026, US decision-makers in Healthcare, Medical &amp; Pharma (a proxy audience, n=65–116; directional).</div>
-    <div>Formula: (new organic buyer-search visits + AI visits + ad budget ÷ cost per click) × visit-to-enquiry × enquiry-to-client = new clients a month; × 12 × first-year contract value = new first-year contract value a year; × contract length = lifetime value of a year's new clients. Year one: ads from month 2; pages and AI ramp over six months. Paid clicks use the same rates as organic visits. Every value figure uses placeholder rates until IKS Health shares its own; brand, careers, patient-portal and coding-guide traffic are excluded.</div>
+    <div>Formula: (new organic buyer-search visits + AI visits + ad budget ÷ cost per click) × visit-to-inquiry × inquiry-to-client = new clients a month; × 12 × first-year contract value = new first-year contract value a year; × contract length = lifetime value of a year's new clients. Year one: ads from month 2; pages and AI ramp over six months. Paid clicks use the same rates as organic visits. Every value figure uses placeholder rates until IKS Health shares its own; brand, careers, patient-portal and coding-guide traffic are excluded.</div>
     <div>Part of the ROAST × IKS Health search, paid media and AI visibility analysis, October 2026. Companion to the <a href="../gallagher-client-value-calculator/">Gallagher Client-Value Calculator</a> and the <a href="../cmg-loan-value-calculator/">CMG Home Loans Loan-Value Calculator</a>.</div>
   </div>
 </div>
@@ -260,7 +260,7 @@ td:last-child,th:last-child{text-align:right;font-weight:700}
     const cb=$('cpcBand'); const pays=o.roas>=2; cb.className='band'+(pays?'':' warn');
     cb.textContent=`A click is worth ${'$'+o.vpv.toFixed(2)} at these rates, ${o.roas.toFixed(1)}× its cost`+(pays?`; ads pay up to ${'$'+(o.vpv/2).toFixed(2)} a click`:`: below the 2× ads need`);
     $('revBig').textContent=fmtBig(o.total);
-    $('revSub').textContent=`${fmt1(o.eP)} enquiries from ads + ${fmt1(o.eO)} from service pages`+(v.ai>0?` + ${fmt1(o.eA)} from AI answers`:'')+` = ${fmt1(o.eP+o.eO+o.eA)} enquiries a month × ${(+v.close.toFixed(1))}% = ${o.cMo.toFixed(2)} new clients a month × 12 × ${fmtD(v.fyv)} = ${fmtD(o.total)}.`;
+    $('revSub').textContent=`${fmt1(o.eP)} inquiries from ads + ${fmt1(o.eO)} from service pages`+(v.ai>0?` + ${fmt1(o.eA)} from AI answers`:'')+` = ${fmt1(o.eP+o.eO+o.eA)} inquiries a month × ${(+v.close.toFixed(1))}% = ${o.cMo.toFixed(2)} new clients a month × 12 × ${fmtD(v.fyv)} = ${fmtD(o.total)}.`;
     $('clients').textContent=fmt1(o.cMo*12); $('roas').textContent=v.ads?'$'+o.roas.toFixed(2):'—'; $('vpv').textContent='$'+o.vpv.toFixed(2);
     const mx=Math.max(o.eP,o.eO,o.eA,0.1)*1.08;
     [['bP','nP',o.eP],['bO','nO',o.eO],['bA','nA',o.eA]].forEach(([b,n,x])=>{$(b).style.width=(x/mx*100)+'%';$(n).textContent=fmt1(x);});
