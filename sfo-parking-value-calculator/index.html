@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SFO Parking-Value Calculator</title>
+<!-- share:start -->
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<meta name="description" content="What winning back SFO&#x27;s parking searches from AI Overviews and off-airport lots, a compare-and-save parking page and re-aimed parking ads are worth in new parking stays and revenue, and what each month of waiting costs.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ROAST">
+<meta property="og:title" content="SFO Parking-Value Calculator">
+<meta property="og:description" content="What winning back SFO&#x27;s parking searches from AI Overviews and off-airport lots, a compare-and-save parking page and re-aimed parking ads are worth in new parking stays and revenue, and what each month of waiting costs.">
+<meta property="og:url" content="https://npc-0802.github.io/pitches/sfo-parking-value-calculator/">
+<meta property="og:image" content="https://npc-0802.github.io/pitches/sfo-parking-value-calculator/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="ROAST × SFO: Parking-Value Calculator">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="SFO Parking-Value Calculator">
+<meta name="twitter:description" content="What winning back SFO&#x27;s parking searches from AI Overviews and off-airport lots, a compare-and-save parking page and re-aimed parking ads are worth in new parking stays and revenue, and what each month of waiting costs.">
+<meta name="twitter:image" content="https://npc-0802.github.io/pitches/sfo-parking-value-calculator/og.png">
+<!-- share:end -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;900&family=Public+Sans:wght@400;500;600&display=swap">
+<style>
+:root{
+  --bg:#ffffff; --ink:#111214; --muted:#5b5e66; --line:#e6e4dc; --panel:#f6f5f0;
+  --yellow:#FFD100; --yellow-deep:#e6bc00; --on-yellow:#111214; --on-yellow-muted:#4a4630;
+  --track:#e3e1d8; --ok:#1f7a3a;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){ --bg:#111214; --ink:#f4f3ee; --muted:#a6a79f; --line:#2a2b2f; --panel:#1b1c20; --track:#33343a; color-scheme:dark; }
+}
+:root[data-theme="dark"]{ --bg:#111214; --ink:#f4f3ee; --muted:#a6a79f; --line:#2a2b2f; --panel:#1b1c20; --track:#33343a; color-scheme:dark; }
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Public Sans",system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;font-size:15px;line-height:1.45}
+.wrap{max-width:1440px;margin:0 auto;padding-block:22px 44px;padding-inline:clamp(16px,3vw,40px);display:grid;gap:22px}
+.brand{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-bottom:6px;flex-wrap:wrap}
+.wordmark{display:flex;align-items:center;gap:12px}.wordmark .roast-logo{height:22px;width:auto;display:block;color:var(--ink)}
+.wordmark span{font-family:"Public Sans",sans-serif;font-weight:500;font-size:15px;color:var(--muted);letter-spacing:0}
+.deadline{font-size:13px;color:var(--muted);text-align:right}
+.deadline b{color:var(--ink);font-variant-numeric:tabular-nums}
+h1{font-family:"Archivo",system-ui,sans-serif;font-weight:900;font-size:clamp(28px,3.4vw,46px);line-height:1.05;letter-spacing:-.015em;margin:0;text-wrap:balance;max-width:26ch}
+.lede{color:var(--muted);max-width:78ch;margin:8px 0 0;font-size:clamp(14px,1.1vw,16px)}
+.grid{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,2fr);gap:22px;align-items:start}
+@media (max-width:900px){.grid{grid-template-columns:1fr}}
+.panel{background:var(--panel);border-radius:22px;padding:clamp(18px,2vw,28px) clamp(18px,2vw,28px) 10px;min-width:0;overflow:hidden}
+.ctl{display:grid;gap:8px;padding-block:14px;border-top:1px solid var(--line)}
+.ctl:first-child{border-top:0;padding-top:2px}
+.ctl .row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.ctl label{font-weight:600}
+.ctl output{font-family:"Archivo",sans-serif;font-weight:700;font-size:22px;font-variant-numeric:tabular-nums}
+.ctl output small{font-family:"Public Sans",sans-serif;font-weight:500;font-size:13px;color:var(--muted);margin-left:8px}
+.ctl .why{font-size:13px;color:var(--muted);max-width:72ch}
+.sect{font-family:"Archivo",sans-serif;font-weight:700;font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);padding-top:16px;border-top:1px solid var(--line)}
+.band{font-size:13px;font-weight:600;padding:5px 12px;border-radius:14px;background:var(--yellow);color:var(--on-yellow);width:fit-content;max-width:100%;line-height:1.3}
+.band.low{background:var(--track);color:var(--ink)}
+.band.warn{background:#f3c4bd;color:#5c120a}
+input[type=range]{width:100%;accent-color:var(--ink);height:30px;margin:0}
+input[type=range]:focus-visible{outline:2px solid var(--ink);outline-offset:4px;border-radius:6px}
+.presets{display:flex;flex-wrap:wrap;gap:8px;padding-block:16px;border-top:1px solid var(--line)}
+.preset{border:1.5px solid var(--line);border-radius:12px;padding:8px 12px;font-size:13px;background:transparent;color:var(--ink);cursor:pointer;font-family:inherit;text-align:left;line-height:1.25}
+.preset b{display:block;font-weight:700}
+.preset:hover,.preset:focus-visible{border-color:var(--ink);outline:none}
+.preset[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.result{background:var(--yellow);color:var(--on-yellow);border-radius:22px;padding:clamp(20px,2.2vw,32px);display:grid;gap:18px;min-width:0}
+.result .label{font-weight:600;font-size:14px;color:var(--on-yellow-muted)}
+.result .big{font-family:"Archivo",sans-serif;font-weight:900;font-size:clamp(48px,6vw,88px);line-height:.95;letter-spacing:-.02em;font-variant-numeric:tabular-nums;margin:6px 0}
+.result .sub{font-size:14px;color:var(--on-yellow-muted);max-width:52ch}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+@media (max-width:520px){.stats{grid-template-columns:1fr 1fr}}
+.stat{background:rgba(255,255,255,.5);border-radius:14px;padding:14px 14px 12px;min-width:0}
+.stat .v{font-family:"Archivo",sans-serif;font-weight:700;font-size:clamp(20px,1.8vw,26px);font-variant-numeric:tabular-nums;line-height:1.1}
+.stat .l{font-size:12.5px;color:var(--on-yellow-muted);margin-top:5px;line-height:1.3;text-wrap:balance}
+.bars{display:grid;gap:8px;margin-top:4px}
+.bars .t{font-weight:600;font-size:13px;color:var(--on-yellow-muted)}
+.bar{display:grid;grid-template-columns:minmax(120px,170px) 1fr 64px;gap:10px;align-items:center;font-size:13px}
+@media (max-width:520px){.bar{grid-template-columns:110px 1fr 56px}}
+.bar .fill{height:14px;border-radius:7px;background:rgba(17,18,20,.25);position:relative;overflow:hidden}
+.bar .fill i{position:absolute;inset:0;width:0;background:var(--on-yellow);border-radius:7px;transition:width .25s ease}
+.bar .fill i.gain{background:#ffffff;left:auto}
+.bar .n{text-align:right;font-variant-numeric:tabular-nums;font-weight:600}
+@media (prefers-reduced-motion: reduce){.bar .fill i{transition:none}}
+.corp{display:grid;gap:8px}
+.corp .t{font-weight:600;font-size:13px;color:var(--on-yellow-muted)}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th,td{text-align:left;padding:7px 4px;border-bottom:1px solid rgba(17,18,20,.18);font-variant-numeric:tabular-nums}
+th{font-size:12px;color:var(--on-yellow-muted);font-weight:600}
+td:last-child,th:last-child{text-align:right;font-weight:700}
+.inaction{background:var(--panel);border-radius:22px;padding:clamp(18px,2vw,28px);display:grid;gap:8px}
+.inaction h2{font-family:"Archivo",sans-serif;font-weight:700;font-size:18px;margin:0}
+.inaction p{margin:0;color:var(--muted);max-width:100ch;font-size:15px;line-height:1.55}
+.inaction b{color:var(--ink)}
+.foot{font-size:13px;color:var(--muted);max-width:110ch;display:grid;gap:6px}
+.foot a{color:var(--ink)}
+@media (min-width:901px){.result{position:sticky;top:16px}}
+.wordmark{flex-wrap:wrap;row-gap:6px}.wordmark .client-logo{height:22px;width:auto;display:block;color:var(--ink)}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="brand">
+    <div class="wordmark"><svg class="roast-logo" fill="currentColor" aria-label="ROAST" role="img" viewBox="0 0 931.89 203.5" xmlns="http://www.w3.org/2000/svg" overflow="hidden"><path d="M30.4 4.59 0 4.59 0 0 93.33 0C128.29 0 166.29 7.45 166.29 50.73 166.29 85.7 123.42 94.87 101.23 97.45L101.23 98.02C136.19 100.89 154.74 108.05 159.3 145.89L163.56 180.86C165.69 197.77 174.2 198.92 179.37 198.92 184.84 198.92 188.79 197.2 191.84 196.05L193.66 199.78C187.58 201.79 179.98 203.51 168.73 203.51 131.64 203.51 129.51 184.88 125.25 151.92L123.12 134.72C120.99 116.66 115.52 100.32 81.17 100.32L61.41 100.32 61.41 198.92 92.42 198.92 92.42 203.51 0 203.51 0 198.92 30.4 198.92 30.4 4.59ZM61.41 95.73 76.61 95.73C112.48 95.73 133.46 83.98 133.46 50.73 133.46 27.8 125.25 4.58 82.08 4.58L61.41 4.58 61.41 95.73Z" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4"  fill-opacity="1"/><path d="M293.24 0.32C342.65 0.32 385.63 45.32 385.63 101.91 385.63 158.5 342.65 203.5 293.24 203.5 243.83 203.5 200.85 158.5 200.85 101.91 200.85 45.32 243.83 0.32 293.24 0.32ZM293.24 199.09C345.28 199.09 352.3 138.08 352.3 101.91 352.3 65.74 345.28 4.74 293.24 4.74 241.2 4.74 234.18 65.75 234.18 101.91 234.18 138.07 241.2 199.09 293.24 199.09Z" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4"  fill-opacity="1"/><path d="M501.23 135.93 438.66 135.93 424.96 175.38C422.91 180.89 420.57 187.51 420.57 192.19 420.57 196.05 424.08 199.08 433.43 199.08L448.63 199.08 448.63 203.49 388.4 203.49 388.4 199.08 397.76 199.08C406.82 199.08 410.62 198.25 416.18 182.82L480.77 0.32 483.99 0.32 556.81 199.09 581.08 199.09 581.08 203.5 495.42 203.5 495.42 199.09 524.07 199.09 501.24 135.93ZM469.66 48 469.08 48 440.43 131.52 499.78 131.52 469.67 48Z" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4"  fill-opacity="1"/><path d="M598 130.7 602.68 130.7C602.68 177.01 631.63 198.78 666.71 198.78 694.78 198.78 714.95 181.97 714.95 157.16 714.95 128.49 699.16 119.95 665.54 114.99 619.64 108.1 598 100.93 598 54.62 598 23.2 619.93 0.32 652.68 0.32 682.79 0.32 694.2 17.14 704.14 17.13 712.17 17.13 711.74 3.58 712.62-2.84217e-14L717.3-2.84217e-14 717.3 64.54 712.62 64.54C709.99 33.12 691.86 4.73 652.69 4.73 627.84 4.73 610.29 20.17 610.29 45.52 610.29 70.87 620.23 75.84 668.76 84.11 711.45 91.28 728.99 104.23 728.99 140.07 728.99 175.91 707.94 203.19 665.55 203.19 636.31 203.19 620.82 188.78 610 188.86 601.37 188.92 602.69 198.82 602.69 203.51L598.01 203.51 598.01 130.7Z" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4"  fill-opacity="1"/><path d="M752.96 0 752.96 64.54 757.64 64.54C757.64 24.77 766.71 6.75 804.33 4.79L804.33 147.44 829.12 147.44 829.12 4.41 855.73 4.41 855.73 147.44 880.52 147.44 880.52 4.78C918.11 6.71 927.21 24.7 927.21 64.54L931.89 64.54 931.89 0 752.96 0Z" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4"  fill-opacity="1"/></svg><span>×</span><img class="client-logo" src="data:image/png;base64,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" alt="SFO" height="24" style="height:24px"><span>· Q4 2026</span></div>
+    <div class="deadline"><b id="days">—</b> <span id="dayslabel">days to the Thanksgiving travel rush</span></div>
+  </div>
+
+  <div>
+    <h1>What winning back SFO's parking searches is worth in new parking stays</h1>
+    <p class="lede">SFO still ranks #1 for nearly every "sfo parking" search, yet its parking pages draw 40,662 search clicks a month, down from 65,568 a year ago. Google's AI Overviews, the local pack and off-airport lots now answer first, and the "cheap," "near" and "promo code" searches go to off-airport lots and Reddit. Every airport we checked lost a third or more of its search traffic, so this models share of the lost clicks, not the peak back. Pick a tier, then replace our placeholder rates with SFO's own.</p>
+  </div>
+
+  <div class="grid">
+    <section class="panel" aria-label="Assumptions">
+      <div class="sect" style="border-top:0;padding-top:0">Organic &amp; AI: SFO's parking pages</div>
+      <div class="ctl">
+        <div class="row"><label for="back">Parking search clicks won back a month</label><output id="backOut" for="back">4,980</output></div>
+        <input type="range" id="back" min="0" max="12500" step="10" value="4980">
+        <div class="band" id="backBand"></div>
+        <div class="why">Of the 24,906 a month lost while SFO kept its #1 rankings (Ahrefs, US, Oct 2025 to Oct 2026). Fixing the duplicate and mis-ranked parking pages and earning the AI Overview click wins some back.</div>
+      </div>
+      <div class="ctl">
+        <div class="row"><label for="price">New visits on "cheap," "near" &amp; "promo" searches</label><output id="priceOut" for="price">270</output></div>
+        <input type="range" id="price" min="0" max="1500" step="10" value="270">
+        <div class="why">~5,900 searches a month where SFO sits sixth or lower. 270 = half of them reaching Google's top three with a compare-and-save parking page.</div>
+      </div>
+      <div class="ctl">
+        <div class="row"><label for="cr">Parking visit to an SFO parking stay</label><output id="crOut" for="cr">5.0%</output></div>
+        <input type="range" id="cr" min="1" max="12" step="0.5" value="5.0">
+        <div class="why">Placeholder until SFO shares its own: a stay booked on parking.flysfo.com or a drive-up.</div>
+      </div>
+      <div class="ctl">
+        <div class="row"><label for="new">Won-back stays that are new to SFO</label><output id="newOut" for="new">50%</output></div>
+        <input type="range" id="new" min="0" max="100" step="5" value="50">
+        <div class="why">Placeholder: drivers who'd otherwise park off-airport. Drivers who'd have parked at SFO anyway aren't counted.</div>
+      </div>
+      <div class="sect">Paid search: SFO's parking ads</div>
+      <div class="ctl">
+        <div class="row"><label for="reaim">Ad budget moved to price &amp; off-airport searches</label><output id="reaimOut" for="reaim">$1,250</output></div>
+        <input type="range" id="reaim" min="0" max="4000" step="250" value="1250">
+        <div class="band" id="reaimBand"></div>
+        <div class="why">Moved out of the ~$46K SFO spent on parking ads in October (Ahrefs est.), almost all on "sfo parking" searches it already ranks #1 for. No new budget.</div>
+      </div>
+      <div class="ctl">
+        <div class="row"><label for="cpc">Cost per click on those searches</label><output id="cpcOut" for="cpc">$1.40</output></div>
+        <input type="range" id="cpc" min="0.8" max="3" step="0.05" value="1.4">
+        <div class="why">Ahrefs shows $1.20–1.70 on "cheap" and "near" parking searches; Keyword Planner will confirm.</div>
+      </div>
+      <div class="ctl">
+        <div class="row"><label for="pcr">Ad click to a booked stay</label><output id="pcrOut" for="pcr">5.0%</output></div>
+        <input type="range" id="pcr" min="1" max="15" step="0.5" value="5.0">
+        <div class="why">Placeholder. The ads land on SFO's booking page, parking.flysfo.com.</div>
+      </div>
+      <div class="ctl">
+        <div class="row"><label for="hold">Brand-ad clicks that would arrive anyway</label><output id="holdOut" for="hold">20%</output></div>
+        <input type="range" id="hold" min="0" max="60" step="5" value="20">
+        <div class="why">Placeholder until a holdout test on "sfo parking" shows how many of SFO's ad clicks would come through its #1 result. The budget this frees isn't counted as revenue.</div>
+      </div>
+      <div class="sect">Every stay</div>
+      <div class="ctl">
+        <div class="row"><label for="val">Average parking stay</label><output id="valOut" for="val">$110</output></div>
+        <input type="range" id="val" min="50" max="250" step="5" value="110">
+        <div class="why">Placeholder: ~4 days at long-term rates ($27 a day drive-up); the garages run $37–41 a day (SFO rates, Sep 2026).</div>
+      </div>
+      <div class="sect">Passenger answers (not counted as revenue)</div>
+      <div class="ctl">
+        <div class="row"><label for="info">Passenger-info clicks won back a month</label><output id="infoOut" for="info">3,970</output></div>
+        <input type="range" id="info" min="0" max="10000" step="10" value="3970">
+        <div class="why">Security wait, maps, lounges, dining, rental-car and terminal searches lost 19,846 clicks a month (Ahrefs). Valued only at what the clicks would cost to buy ($0.85 each).</div>
+      </div>
+      <div class="presets" role="group" aria-label="Scenarios tied to the plan">
+        <button class="preset" type="button" data-p="2490,0,5.0,50,750,1.4,5.0,20,110,1980"><b>Tier 1: fix the parking pages</b>One page per lot, no duplicates, rates in Google, broken links redirected, holdout test</button>
+        <button class="preset" type="button" data-p="4980,270,5.0,50,1250,1.4,5.0,20,110,3970" aria-pressed="true"><b>Tier 2: answer pages + re-aimed ads</b>The headline: a parking hub built for AI answers, a compare-and-save page, $1,250 a month re-aimed</button>
+        <button class="preset" type="button" data-p="7470,540,5.0,50,1250,1.4,5.0,20,110,5950"><b>Tier 3: earn the AI answers</b>Tracked prompts, logistics guides, the sources AI quotes</button>
+        <button class="preset" type="button" data-p="9960,950,5.0,50,2000,1.4,5.0,20,110,7940"><b>Tier 4 (ceiling)</b>SFO as the default answer for parking and getting to the gate</button>
+      </div>
+    </section>
+
+    <section class="result" aria-live="polite" aria-label="Outcome">
+      <div>
+        <div class="label">New parking revenue a year from won-back clicks, price searches and re-aimed ads</div>
+        <div class="big" id="rev">$0</div>
+        <div class="sub" id="revSub"></div>
+      </div>
+
+      <div class="stats">
+        <div class="stat"><div class="v" id="stays">0</div><div class="l">new parking stays a year</div></div>
+        <div class="stat"><div class="v" id="roas">—</div><div class="l">revenue per $1 of re-aimed ads</div></div>
+        <div class="stat"><div class="v" id="freed">$0</div><div class="l">ad budget a month the holdout frees</div></div>
+      </div>
+
+      <div class="bars">
+        <div class="t">New parking stays a month, by source</div>
+        <div class="bar"><span>Won-back parking clicks</span><div class="fill"><i id="bB"></i></div><span class="n" id="nB">0</span></div>
+        <div class="bar"><span>Price &amp; off-airport searches</span><div class="fill"><i id="bP"></i></div><span class="n" id="nP">0</span></div>
+        <div class="bar"><span>Re-aimed ads</span><div class="fill"><i id="bA"></i></div><span class="n" id="nA">0</span></div>
+      </div>
+
+      <div class="corp">
+        <div class="t">Passenger answers and ad efficiency (not in the revenue)</div>
+        <div class="stats">
+          <div class="stat"><div class="v" id="infoV">0</div><div class="l">passenger-info clicks a month won back</div></div>
+          <div class="stat"><div class="v" id="infoUSD">$0</div><div class="l">a month to buy those clicks instead</div></div>
+          <div class="stat"><div class="v" id="cps">$0</div><div class="l">ad cost per booked stay</div></div>
+        </div>
+      </div>
+
+      <table aria-label="Conversion sensitivity">
+        <thead><tr><th>If a parking visit converts at</th><th>Stays / yr</th><th>Revenue / yr</th></tr></thead>
+        <tbody id="sens"></tbody>
+      </table>
+    </section>
+  </div>
+
+  <div class="inaction">
+    <h2>What waiting costs</h2>
+    <p>Over the past year SFO's parking pages lost about <b>2,076 search clicks a month, every month</b>, while still ranking #1. At these rates each month the trend runs takes away about <b id="trendStays">0</b> parking stays and <b id="trendRev">$0</b> of parking revenue a month, and the losses add up. Each month without the plan also defers about <b id="perMonth">$0</b> of new parking revenue. In the meantime, at least <b>500 sites link to SFO pages that now return a 404</b>, including CNN, Wired and the LA Times on its old homepage. Thanksgiving week will be the biggest test of the parking pages this year.</p>
+  </div>
+
+  <div class="foot">
+    <div>Demand and traffic: Ahrefs, US, subdomains, 13 Oct 2026, modeled estimates. Parking: the 68 parking searches in SFO's top 400 keywords brought 65,568 clicks a month in Oct 2025 and 40,662 in Oct 2026 (−38%), with SFO #1 on nearly all of them; 79,620 parking searches a month in total (top 137). Price and off-airport searches: ~8,000 a month (cheap, near, promo code, shuttle, park-and-fly, off-airport brands), ~5,900 excluding off-airport brand names; Ahrefs CPC $1.20–1.70. Searches with an AI Overview lost 27% of their clicks to flysfo.com, searches without one 5%. Peers, Oct 2025 to Oct 2026: LAX −41%, Denver −53%, Oakland −34%, San Jose −34%, SFO −46%. Paid: ~46,101 paid visits and ~$45,993 a month in Oct 2026, almost all to parking.flysfo.com (Ahrefs estimate; SFO's paid search has run in bursts). Rates: SFO parking drive-up daily maximums, as listed 29 Sep 2026. CTR curve (ROAST working curve): #1 28%, #2 15%, #3 11%, #6 5%, with a 30% AI Overview haircut. Ads are capped at ~15% of the price searches' clicks (~$1,250 a month) until Keyword Planner volumes arrive. GWI Travel (Q1 &amp; Q3 2026): 51% of US vacation flyers plan trips with search engines and 18% with AI tools like ChatGPT; airport location (50%) and quick check-in (40%) matter more than parking cost (27%) when they choose an airport.</div>
+    <div>Formula: won-back clicks × visit-to-stay × share new to SFO + price-search visits × visit-to-stay = organic stays; re-aimed budget ÷ CPC × click-to-stay = ad stays; (organic + ad stays) × 12 × average stay = new parking revenue a year. Revenue per $1 counts only the re-aimed ads. The holdout share × SFO's current parking ad spend = budget freed; passenger-info clicks × $0.85 (Ahrefs traffic value per visit) = what those clicks would cost to buy. Neither is added to the revenue. Revenue is parking revenue SFO collects, before operating costs. Every revenue figure uses placeholder rates until SFO shares its own.</div>
+    <div>Part of the ROAST × SFO search, paid media and AI visibility analysis, October 2026. Companion to the <a href="../hawkeye-inspection-value-calculator/">Hawkeye Inspection-Value Calculator</a> and the <a href="../tcl-recovery-calculator/">TCL Recovery Calculator</a>.</div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const $=id=>document.getElementById(id);
+  const C={"PARK_LOST": 24906, "PARK_NOW": 40662, "PARK_LY": 65568, "ROOM": 1250, "PRICE_NONBRAND": 5900, "AD_SPEND": 45993, "AD_CPC": 0.9977, "VPV": 0.85, "LOSS_MO": 2076};
+  const ids=["back", "price", "cr", "new", "reaim", "cpc", "pcr", "hold", "val", "info"];
+  const els=ids.map($);
+  const fmtI=n=>Math.round(n).toLocaleString('en-US');
+  const fmt1=n=>(Math.round(n*10)/10).toLocaleString('en-US');
+  const fmtD=n=>'$'+Math.round(n).toLocaleString('en-US');
+  const presets=[...document.querySelectorAll('.preset')];
+  const now=new Date(), today=new Date(now.getFullYear(),now.getMonth(),now.getDate());
+  let due=new Date(2026,10,25), lab='days to the Thanksgiving travel rush';
+  if(today>due){due=new Date(2026,11,18);lab='days to the December holiday travel peak';}
+  $('days').textContent=Math.max(0,Math.ceil((due-today)/86400000)); $('dayslabel').textContent=lab;
+  function model(v){
+    const cr=v.cr/100, nw=v.new/100, pcr=v.pcr/100;
+    const sB=v.back*cr*nw, sP=v.price*cr, clicks=v.cpc?v.reaim/v.cpc:0, sA=clicks*pcr;
+    const stays=sB+sP+sA, rev=stays*12*v.val, revA=sA*12*v.val, spend=v.reaim*12;
+    return {sB,sP,sA,stays,rev,revA,spend,clicks,roas:spend?revA/spend:0,freed:C.AD_SPEND*v.hold/100,
+            infoUSD:v.info*C.VPV,cps:sA?v.reaim/sA:0};
+  }
+  function vals(){const v={};ids.forEach((k,i)=>v[k]=+els[i].value);return v;}
+  function render(){
+    const v=vals();
+    $('backOut').value=fmtI(v.back); $('priceOut').value=fmtI(v.price); $('crOut').value=v.cr.toFixed(1)+'%'; $('newOut').value=v.new+'%';
+    $('reaimOut').value=fmtD(v.reaim); $('cpcOut').value='$'+v.cpc.toFixed(2); $('pcrOut').value=v.pcr.toFixed(1)+'%'; $('holdOut').value=v.hold+'%';
+    $('valOut').value=fmtD(v.val); $('infoOut').value=fmtI(v.info);
+    const o=model(v);
+    const sh=v.back/C.PARK_LOST;
+    $('backBand').className='band'+(sh>0.5?' warn':'');
+    $('backBand').textContent=v.back===0?'Nothing won back: parking clicks stay at '+fmtI(C.PARK_NOW)+' a month':
+      `${Math.round(sh*100)}% of the lost clicks: ${fmtI(C.PARK_NOW+v.back)} a month, vs ${fmtI(C.PARK_LY)} a year ago`+(sh>0.5?'; past half, this assumes SFO beats a market-wide decline':'');
+    const rb=$('reaimBand'), over=v.reaim>C.ROOM;
+    rb.className='band'+(over?' warn':'');
+    rb.textContent=v.reaim===0?'No re-aimed ads: SFO stays out of the paid results on price searches':
+      `Buys ~${fmtI(o.clicks)} clicks a month, ${Math.round(v.reaim/C.AD_SPEND*100)}% of October's parking ad spend`+(over?'; past ~$'+fmtI(C.ROOM)+' needs Keyword Planner volumes':'');
+    $('rev').textContent=fmtD(o.rev);
+    $('revSub').textContent=`${fmt1(o.sB)} won-back + ${fmt1(o.sP)} price-search + ${fmt1(o.sA)} ad stays = ${fmt1(o.stays)} a month × 12 × ${fmtD(v.val)}.`;
+    $('stays').textContent=fmtI(o.stays*12); $('roas').textContent=o.spend?'$'+o.roas.toFixed(2):'—'; $('freed').textContent=fmtD(o.freed);
+    const mx=Math.max(o.sB,o.sP,o.sA,1)*1.08;
+    [['bB','nB',o.sB],['bP','nP',o.sP],['bA','nA',o.sA]].forEach(([b,n,x])=>{$(b).style.width=(x/mx*100)+'%';$(n).textContent=fmt1(x);});
+    $('infoV').textContent=fmtI(v.info); $('infoUSD').textContent=fmtD(o.infoUSD); $('cps').textContent=o.sA?fmtD(o.cps):'—';
+    $('sens').innerHTML=[Math.max(1,v.cr-2),v.cr,Math.min(12,v.cr+2)].map(x=>{const m=model(Object.assign({},v,{cr:x}));return `<tr><td>${x.toFixed(1)}%</td><td>${fmtI(m.stays*12)}</td><td>${fmtD(m.rev)}</td></tr>`;}).join('');
+    const tS=C.LOSS_MO*v.cr/100*v.new/100;
+    $('trendStays').textContent=fmt1(tS); $('trendRev').textContent=fmtD(tS*v.val); $('perMonth').textContent=fmtD(o.rev/12);
+    presets.forEach(pr=>{const q=pr.dataset.p.split(',').map(Number);pr.setAttribute('aria-pressed',String(q.every((x,k)=>x===+els[k].value)));});
+    try{localStorage.setItem('sfo-calc-v1',JSON.stringify(els.map(e=>e.value)));}catch(e){}
+  }
+  els.forEach(el=>el.addEventListener('input',render));
+  presets.forEach(pr=>pr.addEventListener('click',()=>{const q=pr.dataset.p.split(',');els.forEach((el,k)=>el.value=q[k]);render();}));
+  try{const s=JSON.parse(localStorage.getItem('sfo-calc-v1'));if(Array.isArray(s)&&s.length===els.length){els.forEach((el,k)=>el.value=s[k]);}}catch(e){}
+  render();
+})();
+</script>
+</body>
+</html>
