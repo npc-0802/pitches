@@ -29,6 +29,7 @@ Interactive pages that accompany ROAST pitch decks. Static HTML, served with Git
 | CMC Trailer-Value Calculator — what reaching named Midwest retailers, charities, hotels and colleges is worth to Chicago Mattress Company (CMC & NAMU) in filled trailers and new sales, sales per $1 of ads, and what the idle shipping capacity is worth each week | `cmc-trailer-value-calculator/` |
 | Fuqua Enrollment-Value Calculator — what pages that answer prospects' generic MBA questions in Google and AI, plus program-search ads behind Round 2, are worth to Duke's Fuqua School of Business in new students and net tuition per class, net tuition per $1 of ads, and what each month of waiting defers | `fuqua-enrollment-value-calculator/` |
 | Outside Gear-Guide Value Calculator — what moving Outside's page-one and page-two gear searches into Google's top three (merged, rebuilt buyer's guides), plus AI answers, is worth in affiliate, Outside+ and ad revenue, what buying the same clicks would cost in Google Ads, and what each month of waiting defers | `outside-gear-guide-value-calculator/` |
+| II Membership-Value Calculator — what fixing Institutional Investor's search plumbing, putting its events into Google and AI answers, and retargeting its own visitors (plus a LinkedIn test) is worth in new manager memberships, per £1 of ads, and what each month of waiting defers (UK English, £) | `institutional-investor-membership-value-calculator/` |
 
 ## Favicon and link previews
 
