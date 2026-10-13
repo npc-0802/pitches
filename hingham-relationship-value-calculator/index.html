@@ -312,7 +312,7 @@ td:last-child,th:last-child{text-align:right;font-weight:700}
   </div>
 
   <div class="foot">
-    <div><b>Assumptions &amp; sources.</b> Hingham's own: wholesale (borrowed) funds rate 3.93%, wholesale funds $1.915B, net interest margin 2.14% (Q2 2026 earnings release); Specialized Deposit Group non-interest-bearing balances +37.7% in 2025 (2025 letter to shareholders). Every conversion rate, balance, loan size and spread is a placeholder until Hingham shares its own (relationships and loans by source, average new balances, loan pricing). Search: Ahrefs, pulled 13 Oct 2026, US, modelled estimates: 30 category searches worth 18,680 a month (specialty deposits 1,660; multifamily and commercial real estate lending 13,350; Massachusetts deposits 3,020 and mortgages 650, not valued here because Hingham's CD rates trail its Boston peers'); Hingham isn't in the top 100 for any of them. Visits use a standard top-three click curve with a 50% AI Overview haircut. Lending visits count only the ~6% of US searches from Hingham's three markets (a population placeholder). AI visits are an assumption. Ad costs are placeholders. ROAST fees are not in the number.</div>
+    <div><b>Assumptions &amp; sources.</b> Hingham's own: wholesale (borrowed) funds rate 3.93%, wholesale funds $1.915B, net interest margin 2.14% (Q2 2026 earnings release); Specialized Deposit Group non-interest-bearing balances +37.7% in 2025 (2025 letter to shareholders). Every conversion rate, balance, loan size and spread is a placeholder until Hingham shares its own (relationships and loans by source, average new balances, loan pricing). Search: Ahrefs, pulled 13 Oct 2026, US, modeled estimates: 30 category searches worth 18,680 a month (specialty deposits 1,660; multifamily and commercial real estate lending 13,350; Massachusetts deposits 3,020 and mortgages 650, not valued here because Hingham's CD rates trail its Boston peers'); Hingham isn't in the top 100 for any of them. Visits use a standard top-three click curve with a 50% AI Overview haircut. Lending visits count only the ~6% of US searches from Hingham's three markets (a population placeholder). AI visits are an assumption. Ad costs are placeholders. ROAST fees are not in the number.</div>
     <div><b>Formula.</b> Deposit relationships = (deposit visits a month × 12 + ad clicks a year × 70%) × visit-to-relationship rate. Loans = (borrower visits a month × 12 + ad clicks a year × 30%) × visit-to-loan rate. Ad clicks a year = ad budget a month ÷ cost per click × 12. Added net interest income = relationships × average new deposits × funding saving + loans × average loan × net spread. Interest income per $1 of ads = the ads' share of that ÷ the ad budget a year. Each month of waiting = the total ÷ 12. The tiers change only the visits and the ad budget; the rates stay as set.</div>
     <div>Part of the ROAST × Hingham Institution for Savings search, AI and paid media analysis, October 2026.</div>
   </div>
@@ -333,6 +333,7 @@ td:last-child,th:last-child{text-align:right;font-weight:700}
   const fmtD=n=>'$'+Math.round(n).toLocaleString(loc);
   const fmtM=n=>n>=1e6?'$'+(n/1e6).toFixed(1)+'M':n>=1e3?'$'+Math.round(n/1e3)+'K':fmtD(n);
   const fmtP=x=>(+(x*100).toFixed(2))+'%';
+  const fp=x=>{const v=Math.round(x*10000)/100; return (Math.abs(v*10-Math.round(v*10))<1e-6?v.toFixed(1):v.toFixed(2))+'%';};
   const presets=[...document.querySelectorAll('.preset')];
 
   const live=new Date(2026,8,21), now=new Date();
@@ -364,8 +365,8 @@ td:last-child,th:last-child{text-align:right;font-weight:700}
     $('depOut').value=fmtI(v.dep); $('loanvOut').value=fmtI(v.loanv);
     $('budgetOut').innerHTML=fmtD(v.budget)+'<small>'+fmtD(o.ad_yr)+' a year</small>';
     $('cpcOut').value='$'+v.cpc.toFixed(2);
-    $('openOut').value=fmtP(v.open); $('balOut').value=fmtD(v.bal); $('saveOut').value=fmtP(v.save);
-    $('loanOut').value=fmtP(v.loan); $('sizeOut').value=fmtD(v.size); $('spreadOut').value=fmtP(v.spread);
+    $('openOut').value=fp(v.open); $('balOut').value=fmtD(v.bal); $('saveOut').value=fp(v.save);
+    $('loanOut').value=(v.loan*100).toFixed(2)+'%'; $('sizeOut').value=fmtD(v.size); $('spreadOut').value=(v.spread*100).toFixed(2)+'%';
 
     const db=$('depBand');
     if(!v.dep){db.className='band low';db.textContent='No new deposit-search visits';}
