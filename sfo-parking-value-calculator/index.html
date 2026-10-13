@@ -125,7 +125,7 @@ td:last-child,th:last-child{text-align:right;font-weight:700}
       <div class="ctl">
         <div class="row"><label for="price">New visits on "cheap," "near" &amp; "promo" searches</label><output id="priceOut" for="price">270</output></div>
         <input type="range" id="price" min="0" max="1500" step="10" value="270">
-        <div class="why">~5,900 searches a month where SFO sits sixth or lower. 270 = half of them reaching Google's top three with a compare-and-save parking page.</div>
+        <div class="why">~5,900 searches a month where SFO ranks 3rd to 7th, or not at all. 270 = half of them reaching Google's top three with a compare-and-save parking page.</div>
       </div>
       <div class="ctl">
         <div class="row"><label for="cr">Parking visit to an SFO parking stay</label><output id="crOut" for="cr">5.0%</output></div>
@@ -163,7 +163,7 @@ td:last-child,th:last-child{text-align:right;font-weight:700}
       <div class="ctl">
         <div class="row"><label for="val">Average parking stay</label><output id="valOut" for="val">$90</output></div>
         <input type="range" id="val" min="50" max="250" step="5" value="90">
-        <div class="why">Placeholder: ~4 days of long-term parking at $18 a day booked online to $27 drive-up; the garages run $37–41 a day.</div>
+        <div class="why">Placeholder: ~4 days at $18 a day booked online to $27 a day drive-up (long-term); the garages run $37–41 a day.</div>
       </div>
       <div class="sect">Passenger answers (not counted as revenue)</div>
       <div class="ctl">
@@ -221,7 +221,7 @@ td:last-child,th:last-child{text-align:right;font-weight:700}
   </div>
 
   <div class="foot">
-    <div>Demand and traffic: Ahrefs, US, subdomains, 13 Oct 2026, modeled estimates. Parking: the 68 parking searches in SFO's top 400 keywords brought 65,568 clicks a month in Oct 2025 and 40,662 in Oct 2026 (−38%), with SFO #1 on nearly all of them; 79,620 parking searches a month in total (top 137). Price and off-airport searches: ~8,000 a month (cheap, near, promo code, shuttle, park-and-fly, off-airport brands), ~5,900 excluding off-airport brand names; Ahrefs CPC $1.20–1.70. Searches with an AI Overview lost 27% of their clicks to flysfo.com, searches without one 5%. Peers, Oct 2025 to Oct 2026: LAX −41%, Denver −53%, Oakland −34%, San Jose −34%, SFO −46%. Paid: ~46,101 paid visits and ~$45,993 a month in Oct 2026, almost all to parking.flysfo.com (Ahrefs estimate; SFO's paid search has run in bursts). Rates: SFO's drive-up daily maximums ($27 long-term, $37 international, $41 domestic) as its pages show them in Google, and the $18 a day online long-term rate in its travel tips (13 Oct 2026); Google's AI answers quote off-site lots at $5.50–15 a day. CTR curve (ROAST working curve): #1 28%, #2 15%, #3 11%, #6 5%, with a 30% AI Overview haircut. Ads are capped at ~15% of the price searches' clicks (~$1,250 a month) until Keyword Planner volumes arrive. GWI Travel (Q1 &amp; Q3 2026): 51% of US vacation flyers plan trips with search engines and 18% with AI tools like ChatGPT; airport location (50%) and quick check-in (40%) matter more than parking cost (27%) when they choose an airport.</div>
+    <div>Demand and traffic: Ahrefs, US, subdomains, 13 Oct 2026, modeled estimates. Parking: the 68 parking searches in SFO's top 400 keywords brought 65,568 clicks a month in Oct 2025 and 40,662 in Oct 2026 (−38%), with SFO #1 on nearly all of them; 79,620 parking searches a month in total (top 137). Price and off-airport searches: ~8,000 a month (cheap, near, promo code, shuttle, park-and-fly, off-airport brands), ~5,900 excluding off-airport brand names; Ahrefs CPC $1.20–1.70. Searches with an AI Overview lost 27% of their clicks to flysfo.com, searches without one 5%. Peers, Oct 2025 to Oct 2026: LAX −41%, Denver −53%, Oakland −34%, San Jose −34%, SFO −46%. Paid: ~46,101 paid visits and ~$45,993 a month in Oct 2026, almost all to parking.flysfo.com (Ahrefs estimate; SFO's paid search has run in bursts). Rates: SFO's drive-up daily maximums ($27 long-term, $37 international, $41 domestic) as its pages show them in Google, and the $18 a day online rate in its travel tips (13 Oct 2026); Google's AI answers quote off-site lots at $5.50–15 a day. CTR curve (ROAST working curve): #1 28%, #2 15%, #3 11%, #6 5%, with a 30% AI Overview haircut. Ads are capped at ~15% of the price searches' clicks (~$1,250 a month) until Keyword Planner volumes arrive. GWI Travel (Q1 &amp; Q3 2026): 51% of US vacation flyers plan trips with search engines and 18% with AI tools like ChatGPT; airport location (50%) and quick check-in (40%) matter more than parking cost (27%) when they choose an airport.</div>
     <div>Formula: won-back clicks × visit-to-stay × share new to SFO + price-search visits × visit-to-stay = organic stays; re-aimed budget ÷ CPC × click-to-stay = ad stays; (organic + ad stays) × 12 × average stay = new parking revenue a year. Revenue per $1 counts only the re-aimed ads. The holdout share × SFO's current parking ad spend = budget freed; passenger-info clicks × $0.85 (Ahrefs traffic value per visit) = what those clicks would cost to buy. Neither is added to the revenue. Revenue is parking revenue SFO collects, before operating costs. Every revenue figure uses placeholder rates until SFO shares its own.</div>
     <div>Part of the ROAST × SFO search, paid media and AI visibility analysis, October 2026. Companion to the <a href="../hawkeye-inspection-value-calculator/">Hawkeye Inspection-Value Calculator</a> and the <a href="../tcl-recovery-calculator/">TCL Recovery Calculator</a>.</div>
   </div>
@@ -230,7 +230,7 @@ td:last-child,th:last-child{text-align:right;font-weight:700}
 <script>
 (function(){
   const $=id=>document.getElementById(id);
-  const C={"PARK_LOST": 24906, "PARK_NOW": 40662, "PARK_LY": 65568, "ROOM": 1250, "PRICE_NONBRAND": 5900, "AD_SPEND": 45993, "AD_CPC": 0.9977, "VPV": 0.85, "LOSS_MO": 2076};
+  const C={"PARK_LOST": 24906, "PARK_NOW": 40662, "PARK_LY": 65568, "ROOM": 1250, "PRICE_NONBRAND": 5900, "AD_SPEND": 45993, "AD_CPC": 0.9977, "VPV": 0.85, "LOSS_MO": 2075.5};
   const ids=["back", "price", "cr", "new", "reaim", "cpc", "pcr", "hold", "val", "info"];
   const els=ids.map($);
   const fmtI=n=>Math.round(n).toLocaleString('en-US');
