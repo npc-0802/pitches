@@ -201,17 +201,17 @@ td:last-child,th:last-child{text-align:right;font-weight:700}
 
       <div class="sect">Funnel</div>
       <div class="ctl">
-        <div class="row"><label for="v2i">Manager visit to membership inquiry</label><output id="v2iOut" for="v2i">0.2%</output></div>
+        <div class="row"><label for="v2i">Manager visit to membership enquiry</label><output id="v2iOut" for="v2i">0.2%</output></div>
         <input type="range" id="v2i" min="0.05" max="1" step="0.05" value="0.2">
-        <div class="why">Placeholder until II shares its own: "Apply as a Manager" and partnership inquiries from site visits.</div>
+        <div class="why">Placeholder until II shares its own: "Apply as a Manager" and partnership enquiries from site visits.</div>
       </div>
       <div class="ctl">
-        <div class="row"><label for="c2i">Ad click to membership inquiry</label><output id="c2iOut" for="c2i">0.5%</output></div>
+        <div class="row"><label for="c2i">Ad click to membership enquiry</label><output id="c2iOut" for="c2i">0.5%</output></div>
         <input type="range" id="c2i" min="0.1" max="3" step="0.1" value="0.5">
         <div class="why">Placeholder. Clicks land on membership and partnership pages; retargeted visitors usually convert above cold LinkedIn traffic.</div>
       </div>
       <div class="ctl">
-        <div class="row"><label for="close">Inquiry to new member</label><output id="closeOut" for="close">12%</output></div>
+        <div class="row"><label for="close">Enquiry to new member</label><output id="closeOut" for="close">12%</output></div>
         <input type="range" id="close" min="3" max="40" step="1" value="12">
         <div class="why">Placeholder; one of the two rates that move the number most (see the sensitivity table). II's CRM has the real figure.</div>
       </div>
@@ -243,7 +243,7 @@ td:last-child,th:last-child{text-align:right;font-weight:700}
 
       <div class="stats four">
         <div class="stat"><div class="v" id="mem">20.8</div><div class="l">New manager members a year</div><div class="s" id="memS">4.8 from search &amp; AI · 16.0 from ads</div></div>
-        <div class="stat"><div class="v" id="inq">174</div><div class="l">Membership inquiries a year</div><div class="s" id="inqS">40 from search &amp; AI · 133 from ads</div></div>
+        <div class="stat"><div class="v" id="inq">174</div><div class="l">Membership enquiries a year</div><div class="s" id="inqS">40 from search &amp; AI · 133 from ads</div></div>
         <div class="stat"><div class="v" id="roas">£3.33</div><div class="l">Revenue per £1 of ads</div><div class="s" id="roasS">ads alone: ~16.0 members</div></div>
         <div class="stat"><div class="v" id="alloc">379</div><div class="l">Allocator sign-ups a year</div><div class="s" id="allocS">from search &amp; AI, not priced</div></div>
       </div>
@@ -268,16 +268,16 @@ td:last-child,th:last-child{text-align:right;font-weight:700}
       <div class="funnel">
         <div class="step"><div class="v" id="fVis">122,667</div><div class="l">Visits &amp; ad clicks</div><div class="s" id="fVisS">96,000 visits · 26,667 clicks</div></div>
         <div class="step"><div class="v" id="fMgr">46,827</div><div class="l">From managers</div><div class="s" id="fMgrS">21% of visits · every ad click</div></div>
-        <div class="step"><div class="v" id="fInq">174</div><div class="l">Inquiries</div><div class="s" id="fInqS">40 search &amp; AI · 133 ads</div></div>
-        <div class="step last"><div class="v" id="fMem">20.8</div><div class="l">New members</div><div class="s" id="fMemS">12% of inquiries</div></div>
+        <div class="step"><div class="v" id="fInq">174</div><div class="l">Enquiries</div><div class="s" id="fInqS">40 search &amp; AI · 133 ads</div></div>
+        <div class="step last"><div class="v" id="fMem">20.8</div><div class="l">New members</div><div class="s" id="fMemS">12% of enquiries</div></div>
       </div>
       <p class="hint">A year of visits and ad clicks at the rates set above. Ads are aimed at managers, so every ad click counts as a manager click. Only the 21% manager share is II's own figure.</p>
     </div>
 
     <div class="inaction">
       <h2>If the least certain rates come in different</h2>
-      <div class="scroll"><table class="sens" aria-label="First-year membership revenue by inquiry-to-member rate and membership value">
-        <thead><tr><th>Inquiry to member</th><th>£15,000<span>membership</span></th><th>£25,000<span>placeholder</span></th><th>£40,000<span>membership</span></th></tr></thead>
+      <div class="scroll"><table class="sens" aria-label="First-year membership revenue by enquiry-to-member rate and membership value">
+        <thead><tr><th>Enquiry to member</th><th>£15,000<span>membership</span></th><th>£25,000<span>placeholder</span></th><th>£40,000<span>membership</span></th></tr></thead>
         <tbody id="sens"></tbody>
       </table></div>
       <p class="hint">First-year membership revenue a year. Every other rate as set above; the yellow cell matches the current setting.</p>
@@ -305,8 +305,8 @@ td:last-child,th:last-child{text-align:right;font-weight:700}
   </div>
 
   <div class="foot">
-    <div><b>Assumptions &amp; sources.</b> Only the manager share of readers is II's own: 21% asset managers, 79% allocators, intermediaries or bankers (II readership survey, May 2026, in II's August 2026 digital sales deck). Every other rate, and the membership value, is a placeholder until II shares its own (membership prices by package, inquiries by source, inquiry-to-member rate). Search: Ahrefs, pulled 13 Oct 2026, subdomains, worldwide, modelled estimates: organic traffic of 25,476 visits a month at the September 2025 peak and 13,480 in October 2026; pages ranking in the top 100 fell from 11,662 (August 2025) to 1,894; Ahrefs traffic value of $26,172 a month on 16,949 visits, $1.54 (£1.17) a visit. Near-miss searches: 19 searches at positions 4–20 with 300+ US searches a month; event searches: 24 head terms (1,630 US, ~2,580 worldwide searches a month), visits at a standard click-through curve with a 50% AI Overview haircut. AI visits are an assumption. II publishes 140,000+ monthly visitors (about page) and 240,000 monthly users (sales deck); GA4 would replace the Ahrefs estimates. Ad costs are placeholders. Exchange rate: $1.3212 per £1 (13 Oct 2026). ROAST fees are not in the number.</div>
-    <div><b>Formula.</b> Search &amp; AI members = new visits a month × 12 × manager share × visit to inquiry × inquiry to member. Ad members = ad budget a month ÷ cost per click × 12 × click to inquiry × inquiry to member. Revenue = (search &amp; AI members + ad members) × first-year membership value. Allocator sign-ups = new visits × 12 × (1 − manager share) × sign-up rate (counted, never priced). Revenue per £1 of ads = ad members × membership value ÷ ad budget a year. Each month of waiting = revenue ÷ 12. The tiers change only the visits and the ad budget; the rates stay as set.</div>
+    <div><b>Assumptions &amp; sources.</b> Only the manager share of readers is II's own: 21% asset managers, 79% allocators, intermediaries or bankers (II readership survey, May 2026, in II's August 2026 digital sales deck). Every other rate, and the membership value, is a placeholder until II shares its own (membership prices by package, enquiries by source, enquiry-to-member rate). Search: Ahrefs, pulled 13 Oct 2026, subdomains, worldwide, modelled estimates: organic traffic of 25,476 visits a month at the September 2025 peak and 13,480 in October 2026; pages ranking in the top 100 fell from 11,662 (August 2025) to 1,894; Ahrefs traffic value of $26,172 a month on 16,949 visits, $1.54 (£1.17) a visit. Near-miss searches: 19 searches at positions 4–20 with 300+ US searches a month; event searches: 24 head terms (1,630 US, ~2,580 worldwide searches a month), visits at a standard click-through curve with a 50% AI Overview haircut. AI visits are an assumption. II publishes 140,000+ monthly visitors (about page) and 240,000 monthly users (sales deck); GA4 would replace the Ahrefs estimates. Ad costs are placeholders. Exchange rate: $1.3212 per £1 (13 Oct 2026). ROAST fees are not in the number.</div>
+    <div><b>Formula.</b> Search &amp; AI members = new visits a month × 12 × manager share × visit to enquiry × enquiry to member. Ad members = ad budget a month ÷ cost per click × 12 × click to enquiry × enquiry to member. Revenue = (search &amp; AI members + ad members) × first-year membership value. Allocator sign-ups = new visits × 12 × (1 − manager share) × sign-up rate (counted, never priced). Revenue per £1 of ads = ad members × membership value ÷ ad budget a year. Each month of waiting = revenue ÷ 12. The tiers change only the visits and the ad budget; the rates stay as set.</div>
     <div>Part of the ROAST × Institutional Investor search, AI and paid media analysis, October 2026.</div>
   </div>
 </div>
@@ -389,7 +389,7 @@ td:last-child,th:last-child{text-align:right;font-weight:700}
     $('fVis').textContent=fmtI(o.visits_yr+o.clicks_yr); $('fVisS').textContent=`${fmtI(o.visits_yr)} visits · ${fmtI(o.clicks_yr)} clicks`;
     $('fMgr').textContent=fmtI(o.mgr_visits+o.clicks_yr); $('fMgrS').textContent=`${Math.round(v.mgr*100)}% of visits · every ad click`;
     $('fInq').textContent=fmtI(o.inq); $('fInqS').textContent=`${fmtI(o.inq_org)} search & AI · ${fmtI(o.inq_ads)} ads`;
-    $('fMem').textContent=fmt1(o.members); $('fMemS').textContent=`${fmtP(v.close)} of inquiries`;
+    $('fMem').textContent=fmt1(o.members); $('fMemS').textContent=`${fmtP(v.close)} of enquiries`;
 
     $('sens').innerHTML=[0.08,0.12,0.20].map(r=>{
       const cells=[15000,25000,40000].map(n=>{const m=model(Object.assign({},v,{close:r,value:n}));
