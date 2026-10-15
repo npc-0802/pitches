@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Vedder New-Client Value Calculator</title>
+<!-- share:start -->
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<meta name="description" content="What repairing Vedder&#x27;s move to vedder.com, practice pages rebuilt as answers, a place in AI answers and a small ads test are worth in new institutional clients and first-year fees, per $1 of ads, and what each month of waiting defers.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ROAST">
+<meta property="og:title" content="Vedder New-Client Value Calculator">
+<meta property="og:description" content="What repairing Vedder&#x27;s move to vedder.com, practice pages rebuilt as answers, a place in AI answers and a small ads test are worth in new institutional clients and first-year fees, per $1 of ads, and what each month of waiting defers.">
+<meta property="og:url" content="https://npc-0802.github.io/pitches/vedder-new-client-value-calculator/">
+<meta property="og:image" content="https://npc-0802.github.io/pitches/vedder-new-client-value-calculator/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="ROAST × Vedder: New-Client Value Calculator">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Vedder New-Client Value Calculator">
+<meta name="twitter:description" content="What repairing Vedder&#x27;s move to vedder.com, practice pages rebuilt as answers, a place in AI answers and a small ads test are worth in new institutional clients and first-year fees, per $1 of ads, and what each month of waiting defers.">
+<meta name="twitter:image" content="https://npc-0802.github.io/pitches/vedder-new-client-value-calculator/og.png">
+<!-- share:end -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;900&family=Public+Sans:wght@400;500;600&display=swap">
+<style>
+:root{
+  --bg:#ffffff; --ink:#111214; --muted:#5b5e66; --line:#e6e4dc; --panel:#f6f5f0;
+  --yellow:#FFD100; --yellow-deep:#e6bc00; --on-yellow:#111214; --on-yellow-muted:#4a4630;
+  --track:#e3e1d8; --ok:#1f7a3a;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){ --bg:#111214; --ink:#f4f3ee; --muted:#a6a79f; --line:#2a2b2f; --panel:#1b1c20; --track:#33343a; color-scheme:dark; }
+}
+:root[data-theme="dark"]{ --bg:#111214; --ink:#f4f3ee; --muted:#a6a79f; --line:#2a2b2f; --panel:#1b1c20; --track:#33343a; color-scheme:dark; }
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Public Sans",system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;font-size:15px;line-height:1.45}
+.wrap{max-width:1440px;margin:0 auto;padding-block:22px 44px;padding-inline:clamp(16px,3vw,40px);display:grid;gap:22px}
+.brand{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-bottom:6px;flex-wrap:wrap}
+.wordmark{display:flex;align-items:center;gap:12px}.wordmark .roast-logo{height:22px;width:auto;display:block;color:var(--ink)}
+.wordmark span{font-family:"Public Sans",sans-serif;font-weight:500;font-size:15px;color:var(--muted);letter-spacing:0}
+.deadline{font-size:13px;color:var(--muted);text-align:right}
+.deadline b{color:var(--ink);font-variant-numeric:tabular-nums}
+h1{font-family:"Archivo",system-ui,sans-serif;font-weight:900;font-size:clamp(28px,3.4vw,46px);line-height:1.05;letter-spacing:-.015em;margin:0;text-wrap:balance;max-width:26ch}
+.lede{color:var(--muted);max-width:78ch;margin:8px 0 0;font-size:clamp(14px,1.1vw,16px)}
+.grid{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,2fr);gap:22px;align-items:start}
+@media (max-width:900px){.grid{grid-template-columns:1fr}}
+.panel{background:var(--panel);border-radius:22px;padding:clamp(18px,2vw,28px) clamp(18px,2vw,28px) 10px;min-width:0;overflow:hidden}
+.ctl{display:grid;gap:8px;padding-block:14px;border-top:1px solid var(--line)}
+.ctl:first-child{border-top:0;padding-top:2px}
+.ctl .row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.ctl label{font-weight:600}
+.ctl output{font-family:"Archivo",sans-serif;font-weight:700;font-size:22px;font-variant-numeric:tabular-nums}
+.ctl output small{font-family:"Public Sans",sans-serif;font-weight:500;font-size:13px;color:var(--muted);margin-left:8px}
+.ctl .why{font-size:13px;color:var(--muted);max-width:72ch}
+.sect{font-family:"Archivo",sans-serif;font-weight:700;font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);padding-top:16px;border-top:1px solid var(--line)}
+.band{font-size:13px;font-weight:600;padding:5px 12px;border-radius:14px;background:var(--yellow);color:var(--on-yellow);width:fit-content;max-width:100%;line-height:1.3}
+.band.low{background:var(--track);color:var(--ink)}
+.band.warn{background:#f3c4bd;color:#5c120a}
+input[type=range]{width:100%;accent-color:var(--ink);height:30px;margin:0}
+input[type=range]:focus-visible{outline:2px solid var(--ink);outline-offset:4px;border-radius:6px}
+.presets{display:flex;flex-wrap:wrap;gap:8px;padding-block:16px;border-top:1px solid var(--line)}
+.preset{border:1.5px solid var(--line);border-radius:12px;padding:8px 12px;font-size:13px;background:transparent;color:var(--ink);cursor:pointer;font-family:inherit;text-align:left;line-height:1.25}
+.preset b{display:block;font-weight:700}
+.preset:hover,.preset:focus-visible{border-color:var(--ink);outline:none}
+.preset[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.result{background:var(--yellow);color:var(--on-yellow);border-radius:22px;padding:clamp(20px,2.2vw,32px);display:grid;gap:18px;min-width:0}
+.result .label{font-weight:600;font-size:14px;color:var(--on-yellow-muted)}
+.result .big{font-family:"Archivo",sans-serif;font-weight:900;font-size:clamp(48px,6vw,88px);line-height:.95;letter-spacing:-.02em;font-variant-numeric:tabular-nums;margin:6px 0}
+.result .sub{font-size:14px;color:var(--on-yellow-muted);max-width:52ch}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+@media (max-width:520px){.stats{grid-template-columns:1fr 1fr}}
+.stat{background:rgba(255,255,255,.5);border-radius:14px;padding:14px 14px 12px;min-width:0}
+.stat .v{font-family:"Archivo",sans-serif;font-weight:700;font-size:clamp(20px,1.8vw,26px);font-variant-numeric:tabular-nums;line-height:1.1}
+.stat .l{font-size:12.5px;color:var(--on-yellow-muted);margin-top:5px;line-height:1.3;text-wrap:balance}
+.bars{display:grid;gap:8px;margin-top:4px}
+.bars .t{font-weight:600;font-size:13px;color:var(--on-yellow-muted)}
+.bar{display:grid;grid-template-columns:minmax(120px,170px) 1fr 64px;gap:10px;align-items:center;font-size:13px}
+@media (max-width:520px){.bar{grid-template-columns:110px 1fr 56px}}
+.bar .fill{height:14px;border-radius:7px;background:rgba(17,18,20,.25);position:relative;overflow:hidden}
+.bar .fill i{position:absolute;inset:0;width:0;background:var(--on-yellow);border-radius:7px;transition:width .25s ease}
+.bar .fill i.gain{background:#ffffff;left:auto}
+.bar .n{text-align:right;font-variant-numeric:tabular-nums;font-weight:600}
+@media (prefers-reduced-motion: reduce){.bar .fill i{transition:none}}
+.corp{display:grid;gap:8px}
+.corp .t{font-weight:600;font-size:13px;color:var(--on-yellow-muted)}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th,td{text-align:left;padding:7px 4px;border-bottom:1px solid rgba(17,18,20,.18);font-variant-numeric:tabular-nums}
+th{font-size:12px;color:var(--on-yellow-muted);font-weight:600}
+td:last-child,th:last-child{text-align:right;font-weight:700}
+.inaction{background:var(--panel);border-radius:22px;padding:clamp(18px,2vw,28px);display:grid;gap:8px}
+.inaction h2{font-family:"Archivo",sans-serif;font-weight:700;font-size:18px;margin:0}
+.inaction p{margin:0;color:var(--muted);max-width:100ch;font-size:15px;line-height:1.55}
+.inaction b{color:var(--ink)}
+.foot{font-size:13px;color:var(--muted);max-width:110ch;display:grid;gap:6px}
+.foot a{color:var(--ink)}
+@media (min-width:901px){.result{position:sticky;top:16px}}
+.wordmark{flex-wrap:wrap;row-gap:6px}.wordmark .client-logo{height:22px;width:auto;display:block;color:var(--ink)}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="brand">
+    <div class="wordmark"><svg class="roast-logo" fill="currentColor" aria-label="ROAST" role="img" viewBox="0 0 931.89 203.5" xmlns="http://www.w3.org/2000/svg" overflow="hidden" xmlns:c2pa="http://c2pa.org/manifest"><metadata><c2pa:manifest>AAAWgmp1bWIAAAAeanVtZGMycGEAEQAQgAAAqgA4m3EDYzJwYQAAABZcanVtYgAAAEdqdW1kYzJtYQARABCAAACqADibcQN1cm46YzJwYTozZDQ3MGE0ZS0yMmVkLTQyMmItYTUyMS03MDBhY2VmMjQ1YzkAAAADl2p1bWIAAAApanVtZGMyYXMAEQAQgAAAqgA4m3EDYzJwYS5hc3NlcnRpb25zAAAAALxqdW1iAAAARGp1bWRjYm9yABEAEIAAAKoAOJtxE2MycGEuaW5ncmVkaWVudC52MwAAAAAYYzJzaA2CgfxpiyX5e10r0s1hRZEAAABwY2JvcqNpZGM6Zm9ybWF0bWltYWdlL3N2Zyt4bWxqaW5zdGFuY2VJRHgseG1wOmlpZDplM2ZmMmVlNi01ZGQ1LTQ1MjItOWQ5Yy0zZGJjNGU4YmI5NWJscmVsYXRpb25zaGlwaHBhcmVudE9mAAAB4mp1bWIAAABBanVtZGNib3IAEQAQgAAAqgA4m3ETYzJwYS5hY3Rpb25zLnYyAAAAABhjMnNokbiFip/0bVcWbCsmWV7bOwAAAZljYm9yomdhY3Rpb25zgqJmYWN0aW9ua2MycGEub3BlbmVkanBhcmFtZXRlcnOha2luZ3JlZGllbnRzgaJjdXJseC1zZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmluZ3JlZGllbnQudjNkaGFzaFggdHVjQhQbTIDc8numuX28WgpAZrXhsoTiscHOU7tUJ9ikZmFjdGlvbngdY29tLmFudGhyb3BpYy5jbGF1ZGUucHJvdmlkZWRqcGFyYW1ldGVyc6F4H2NvbS5hbnRocm9waWMub3JpZ2luLWNvbmZpZGVuY2VndW5rbm93bmtkZXNjcmlwdGlvbnhmQ2xhdWRlIHByb3ZpZGVkIHRoaXMgZmlsZSBhdCB0aGUgcmVxdWVzdCBvZiBhIHVzZXIgYW5kIG1heSBoYXZlIGNyZWF0ZWQgb3IgbW9kaWZpZWQgdGhlIGZpbGUgY29udGVudHMubXNvZnR3YXJlQWdlbnShZG5hbWVmQ2xhdWRlcmFsbEFjdGlvbnNJbmNsdWRlZPUAAADIanVtYgAAAEBqdW1kY2JvcgARABCAAACqADibcRNjMnBhLmhhc2guZGF0YQAAAAAYYzJzaJTTpaWSGw/skOxEaOFCsm0AAACAY2JvcqVjYWxnZnNoYTI1NmNwYWRNAAAAAAAAAAAAAAAAAGRoYXNoWCBFqzodb2N2pJR9ua6fnBJPH/pxrehRy7zC3r72E1+nfmRuYW1lbmp1bWJmIG1hbmlmZXN0amV4Y2x1c2lvbnOBomVzdGFydBjZZmxlbmd0aBkeBAAAAj5qdW1iAAAAJ2p1bWRjMmNsABEAEIAAAKoAOJtxA2MycGEuY2xhaW0udjIAAAACD2Nib3KlY2FsZ2ZzaGEyNTZpc2lnbmF0dXJleE1zZWxmI2p1bWJmPS9jMnBhL3VybjpjMnBhOjNkNDcwYTRlLTIyZWQtNDIyYi1hNTIxLTcwMGFjZWYyNDVjOS9jMnBhLnNpZ25hdHVyZWppbnN0YW5jZUlEeCx4bXA6aWlkOjgyNWJkYzkyLWFhMzAtNGMyYy1iZWFhLWQ2YzVjOWU5YTlmMHJjcmVhdGVkX2Fzc2VydGlvbnODomN1cmx4LXNlbGYjanVtYmY9YzJwYS5hc3NlcnRpb25zL2MycGEuaW5ncmVkaWVudC52M2RoYXNoWCB0dWNCFBtMgNzye6a5fbxaCkBmteGyhOKxwc5Tu1Qn2KJjdXJseCpzZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmFjdGlvbnMudjJkaGFzaFggZb4jeey+/rFWzYf06bWr+PDqqliKesNjNSIAZleW87WiY3VybHgpc2VsZiNqdW1iZj1jMnBhLmFzc2VydGlvbnMvYzJwYS5oYXNoLmRhdGFkaGFzaFggJXgyBv4iaW2DX7SIIoYZDAgDYOBXpYCAOdcJs3U09wJ0Y2xhaW1fZ2VuZXJhdG9yX2luZm+jZG5hbWVvQW50aHJvcGljIEZpbGVzZ3ZlcnNpb25lMS4wLjBrc3BlY1ZlcnNpb25lMi40LjAAABA4anVtYgAAAChqdW1kYzJjcwARABCAAACqADibcQNjMnBhLnNpZ25hdHVyZQAAABAIY2JvctKEWQISogEmGCFZAgowggIGMIIBjaADAgECAhRA5aAK7sI50L64g/oGQgU9Z1UTADAKBggqhkjOPQQDAzBJMRcwFQYDVQQKEw5BbnRocm9waWMsIFBCQzEuMCwGA1UEAxMlQW50aHJvcGljIENvbnRlbnQgQ3JlZGVudGlhbHMgUm9vdCBDQTAeFw0yNjA4MDcxODQzNTZaFw0yODA4MDYxOTQzNTZaMEQxFzAVBgNVBAoTDkFudGhyb3BpYywgUEJDMSkwJwYDVQQDEyBBbnRocm9waWMgQ2xhdWRlIENvbnRlbnQgU2lnbmluZzBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABJh6CmvLUBgFFNU0vUKlOVtE6djd17L5SuwX0LemFisBM3dkd/3cyjxFA3Qo5S46fX0/ihY0VZ7mfb9KF703t5OjWDBWMA4GA1UdDwEB/wQEAwIHgDAVBgNVHSUEDjAMBgorBgEEAYPoXgIBMAwGA1UdEwEB/wQCMAAwHwYDVR0jBBgwFoAUzlHiBIFOZFsj+OPEz5o+nMHXXMIwCgYIKoZIzj0EAwMDZwAwZAIwMXMdFJ4BetLLVY7ORuE9noqbbAZOZn/aArXyTwFAZfKrPzxF2vPoJNf1+UCdg1XGAjBwX1zd9WGqYkqmL5SFqw1QySjr1zJfpJM9+1rdDwSPLMOPOjKuiXjoU/pUUeG9RwmhY3BhZFkNngAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPZYQKQHFmaWWw8/Pc9rbvILoQMoF65ZjbiA82R+olrBgcQbYPjdqnnCCZ2/cDk4w5k3mqsSm4BnOOf3/ZWf0b44t4k=</c2pa:manifest></metadata><path d="M30.4 4.59 0 4.59 0 0 93.33 0C128.29 0 166.29 7.45 166.29 50.73 166.29 85.7 123.42 94.87 101.23 97.45L101.23 98.02C136.19 100.89 154.74 108.05 159.3 145.89L163.56 180.86C165.69 197.77 174.2 198.92 179.37 198.92 184.84 198.92 188.79 197.2 191.84 196.05L193.66 199.78C187.58 201.79 179.98 203.51 168.73 203.51 131.64 203.51 129.51 184.88 125.25 151.92L123.12 134.72C120.99 116.66 115.52 100.32 81.17 100.32L61.41 100.32 61.41 198.92 92.42 198.92 92.42 203.51 0 203.51 0 198.92 30.4 198.92 30.4 4.59ZM61.41 95.73 76.61 95.73C112.48 95.73 133.46 83.98 133.46 50.73 133.46 27.8 125.25 4.58 82.08 4.58L61.41 4.58 61.41 95.73Z" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4"  fill-opacity="1"/><path d="M293.24 0.32C342.65 0.32 385.63 45.32 385.63 101.91 385.63 158.5 342.65 203.5 293.24 203.5 243.83 203.5 200.85 158.5 200.85 101.91 200.85 45.32 243.83 0.32 293.24 0.32ZM293.24 199.09C345.28 199.09 352.3 138.08 352.3 101.91 352.3 65.74 345.28 4.74 293.24 4.74 241.2 4.74 234.18 65.75 234.18 101.91 234.18 138.07 241.2 199.09 293.24 199.09Z" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4"  fill-opacity="1"/><path d="M501.23 135.93 438.66 135.93 424.96 175.38C422.91 180.89 420.57 187.51 420.57 192.19 420.57 196.05 424.08 199.08 433.43 199.08L448.63 199.08 448.63 203.49 388.4 203.49 388.4 199.08 397.76 199.08C406.82 199.08 410.62 198.25 416.18 182.82L480.77 0.32 483.99 0.32 556.81 199.09 581.08 199.09 581.08 203.5 495.42 203.5 495.42 199.09 524.07 199.09 501.24 135.93ZM469.66 48 469.08 48 440.43 131.52 499.78 131.52 469.67 48Z" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4"  fill-opacity="1"/><path d="M598 130.7 602.68 130.7C602.68 177.01 631.63 198.78 666.71 198.78 694.78 198.78 714.95 181.97 714.95 157.16 714.95 128.49 699.16 119.95 665.54 114.99 619.64 108.1 598 100.93 598 54.62 598 23.2 619.93 0.32 652.68 0.32 682.79 0.32 694.2 17.14 704.14 17.13 712.17 17.13 711.74 3.58 712.62-2.84217e-14L717.3-2.84217e-14 717.3 64.54 712.62 64.54C709.99 33.12 691.86 4.73 652.69 4.73 627.84 4.73 610.29 20.17 610.29 45.52 610.29 70.87 620.23 75.84 668.76 84.11 711.45 91.28 728.99 104.23 728.99 140.07 728.99 175.91 707.94 203.19 665.55 203.19 636.31 203.19 620.82 188.78 610 188.86 601.37 188.92 602.69 198.82 602.69 203.51L598.01 203.51 598.01 130.7Z" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4"  fill-opacity="1"/><path d="M752.96 0 752.96 64.54 757.64 64.54C757.64 24.77 766.71 6.75 804.33 4.79L804.33 147.44 829.12 147.44 829.12 4.41 855.73 4.41 855.73 147.44 880.52 147.44 880.52 4.78C918.11 6.71 927.21 24.7 927.21 64.54L931.89 64.54 931.89 0 752.96 0Z" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4"  fill-opacity="1"/></svg><span>×</span><svg class="client-logo" role="img" aria-label="Vedder" style="height:24px" viewBox="0 0 219 45" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="VP-logo_FPO">
+<path id="Path 1" d="M38.631 0L22.662 37.844L6.562 0H0L18.987 43.356H26.118L45.281 0H38.631Z" fill="currentColor"/>
+<g id="Group 1">
+<path id="Path 2" d="M46.1562 28.7004C46.1562 34.7814 50.8373 39.0694 57.7063 39.0694C62.8683 39.0694 66.5873 36.9254 67.9003 33.3824H74.7253C72.4502 40.2514 66.1943 44.5384 57.7063 44.5384C46.8563 44.5384 40.0312 37.6694 40.0312 27.3444C40.0312 16.9754 46.9003 10.1504 57.7063 10.1504C68.7313 10.1504 75.2932 16.6254 75.2932 27.3444V28.4384H46.1562V28.7004ZM68.9502 24.2814C68.0752 18.9004 63.7882 15.4874 57.6192 15.4874C51.5382 15.4874 47.2502 18.8124 46.2002 24.2814H68.9502Z" fill="currentColor"/>
+<path id="Path 3" d="M113.75 43.356H107.888V38.719C106.398 40.5578 104.498 42.0221 102.34 42.9946C100.182 43.9671 97.827 44.4206 95.4626 44.319C85.3126 44.319 78.2686 37.45 78.2686 27.475C78.2686 17.413 85.3126 10.631 95.5056 10.631C97.8638 10.5438 100.211 10.9994 102.365 11.9627C104.519 12.926 106.423 14.3713 107.931 16.187V0H113.794V43.4H113.75V43.356ZM96.1186 15.881C88.8566 15.881 84.3936 20.256 84.3936 27.431C84.3936 34.65 88.8126 38.981 96.1186 38.981C103.425 38.981 107.931 34.606 107.931 27.431C107.931 20.256 103.381 15.881 96.1186 15.881Z" fill="currentColor"/>
+<path id="Path 4" d="M152.862 43.356H146.999V38.719C145.509 40.5578 143.609 42.0221 141.451 42.9946C139.294 43.9671 136.938 44.4206 134.574 44.319C124.424 44.319 117.38 37.45 117.38 27.475C117.38 17.413 124.424 10.631 134.617 10.631C136.975 10.5438 139.322 10.9994 141.476 11.9627C143.63 12.926 145.535 14.3713 147.042 16.187V0H152.905V43.4H152.861L152.862 43.356ZM135.231 15.881C127.969 15.881 123.506 20.256 123.506 27.431C123.506 34.65 127.925 38.981 135.231 38.981C142.537 38.981 147.043 34.606 147.043 27.431C147.043 20.256 142.493 15.881 135.231 15.881Z" fill="currentColor"/>
+<path id="Path 5" d="M164.193 28.7004C164.193 34.7814 168.874 39.0694 175.743 39.0694C180.905 39.0694 184.624 36.9254 185.937 33.3824H192.762C190.487 40.3384 184.275 44.5384 175.743 44.5384C164.893 44.5384 158.068 37.6694 158.068 27.3444C158.068 16.9754 164.937 10.1504 175.743 10.1504C186.768 10.1504 193.33 16.6254 193.33 27.3444V28.4384H164.193V28.7004ZM187.074 24.2814C186.199 18.9004 181.912 15.4874 175.743 15.4874C169.662 15.4874 165.374 18.8124 164.324 24.2814H187.074Z" fill="currentColor"/>
+<path id="Path 6" d="M198.493 11.2443H204.268V16.6253C205.539 14.6347 207.292 12.9974 209.365 11.8654C211.437 10.7334 213.763 10.1435 216.124 10.1503C217.033 10.1213 217.934 10.3168 218.749 10.7193V16.8003C217.416 16.3948 216.031 16.1882 214.637 16.1873C209.081 16.1873 204.443 20.8683 204.443 27.6493V43.4003H198.581V11.2443H198.493Z" fill="currentColor"/>
+</g>
+</g>
+</svg><span>· Q4 2026</span></div>
+    <div class="deadline"><b id="months">—</b> <span id="monthslabel">months since the move to vedder.com</span></div>
+  </div>
+
+  <div>
+    <h1>What putting Vedder back in front of buyers in Google and AI is worth</h1>
+    <p class="lede">Moving to vedder.com in January cut the search terms Vedder ranks for by 78%, from 895 to 200. On buyers' own questions, ChatGPT, Gemini and Google's AI Overviews name Vedder in 5.7% of answers, 12th of 17 firms, though Chambers ranks it Band 1 in aviation finance and level with Holland &amp; Knight in asset finance. In equipment finance, AI names Holland &amp; Knight and Chapman and Cutler about 5x as often as Vedder. Pick a tier, then replace our placeholder rates with Vedder's own.</p>
+  </div>
+
+  <div class="grid">
+    <section class="panel" aria-label="Assumptions">
+      <div class="sect" style="border-top:0;padding-top:0">Reach: search, AI answers and ads</div>
+      <div class="ctl">
+        <div class="row"><label for="search">Buyer searches reaching a Vedder page</label><output id="searchOut" for="search">8.0%</output></div>
+        <input type="range" id="search" min="0.5" max="15" step="0.5" value="8">
+        <div class="band" id="searchBand"></div>
+        <div class="why">Of ~11,820 searches a month across 42 practice terms (Ahrefs, US). About 0.7% today (~80 clicks). Repaired redirects and pages rebuilt as answers.</div>
+      </div>
+      <div class="ctl">
+        <div class="row"><label for="ai">Buyers' AI answers naming Vedder</label><output id="aiOut" for="ai">20%</output></div>
+        <input type="range" id="ai" min="5" max="40" step="1" value="20">
+        <div class="why">Peec today: 5.7% (Holland &amp; Knight 22.8%). Of ~8,274 buyer questions a month, 10% of answers naming Vedder send a visit (placeholders).</div>
+      </div>
+      <div class="ctl">
+        <div class="row"><label for="ads">Search ads a month</label><output id="adsOut" for="ads">$3,000</output></div>
+        <input type="range" id="ads" min="0" max="10000" step="500" value="3000">
+        <div class="band" id="adsBand"></div>
+        <div class="why">Fund regulation, aircraft leasing, PE and OFCCP terms at ~$7.99 a click. No peer buys search ads today.</div>
+      </div>
+      <div class="sect">New clients</div>
+      <div class="ctl">
+        <div class="row"><label for="inq">Buyer visits that send a new-matter inquiry</label><output id="inqOut" for="inq">0.3%</output></div>
+        <input type="range" id="inq" min="0.1" max="1" step="0.05" value="0.3">
+        <div class="why">Placeholder until Vedder shares its own. Ad clicks convert at 75% of this rate.</div>
+      </div>
+      <div class="ctl">
+        <div class="row"><label for="win">Inquiries that become clients</label><output id="winOut" for="win">15%</output></div>
+        <input type="range" id="win" min="5" max="40" step="1" value="15">
+        <div class="why">Placeholder until Vedder shares its own.</div>
+      </div>
+      <div class="ctl">
+        <div class="row"><label for="fees">First-year fees per new client</label><output id="feesOut" for="fees">$150,000</output></div>
+        <input type="range" id="fees" min="25000" max="500000" step="5000" value="150000">
+        <div class="why">Placeholder: 5–15% of a $1B company's ~$1.9M a year in law-firm spend (ACC/MLA 2026).</div>
+      </div>
+      <div class="presets" role="group" aria-label="Scenarios tied to the plan">
+        <button class="preset" type="button" data-p="2.5,8,3000,0.3,15,150000"><b>Tier 1: fix the move</b>301s, restored pages, duplicate hosts and directory profiles, plus a $3K/mo ads test</button>
+        <button class="preset" type="button" data-p="5,14,3000,0.3,15,150000"><b>Tiers 1–2: + practice pages</b>Equipment, aviation, rail and funds pages rebuilt as answers</button>
+        <button class="preset" type="button" data-p="8,20,3000,0.3,15,150000" aria-pressed="true"><b>Tiers 1–3: + AI shortlist</b>The headline: explainers, directories and earned lists, tracked in Peec</button>
+        <button class="preset" type="button" data-p="12,28,6000,0.3,15,150000"><b>Tier 4 (ceiling)</b>The default answer, with more reach and budget</button>
+      </div>
+    </section>
+
+    <section class="result" aria-live="polite" aria-label="Outcome">
+      <div>
+        <div class="label">New client fees a year (first year)</div>
+        <div class="big" id="rev">$0</div>
+        <div class="sub" id="revSub"></div>
+      </div>
+
+      <div class="stats">
+        <div class="stat"><div class="v" id="clients">0</div><div class="l">new clients a year</div></div>
+        <div class="stat"><div class="v" id="visits">0</div><div class="l">more buyer visits a month</div></div>
+        <div class="stat"><div class="v" id="roas">—</div><div class="l">first-year fees per $1 of ads</div></div>
+      </div>
+
+      <div class="bars">
+        <div class="t">First-year fees a year, by where the buyer came from</div>
+        <div class="bar"><span>Search (practice pages)</span><div class="fill"><i id="bS"></i></div><span class="n" id="nS">$0</span></div>
+        <div class="bar"><span>AI answers</span><div class="fill"><i id="bA"></i></div><span class="n" id="nA">$0</span></div>
+        <div class="bar"><span>Search ads</span><div class="fill"><i id="bP"></i></div><span class="n" id="nP">$0</span></div>
+      </div>
+
+      <div class="corp">
+        <div class="t">What one buyer is worth vs what a click costs</div>
+        <div class="stats">
+          <div class="stat"><div class="v" id="vO">$0</div><div class="l">organic buyer visit</div></div>
+          <div class="stat"><div class="v" id="vP">$0</div><div class="l">ad click (costs ~$7.99)</div></div>
+          <div class="stat"><div class="v" id="life">$0</div><div class="l">3-year value</div></div>
+        </div>
+      </div>
+
+      <table aria-label="Inquiry rate sensitivity">
+        <thead><tr><th>If buyer visits inquire at</th><th>Clients / yr</th><th>Fees / yr</th></tr></thead>
+        <tbody id="sens"></tbody>
+      </table>
+    </section>
+  </div>
+
+  <div class="inaction">
+    <h2>What waiting costs</h2>
+    <p>Old vedderprice.com addresses still answer with <b>temporary (302) redirects</b>, and <b>125 sites</b>, including Wikipedia, Forbes and Cornell Law, link to Vedder pages that now return 404. Chambers' profile still reads "Vedder Price" and links to vedderprice.com, while Google's AI names ten equipment finance firms without Vedder. GC teams' use of gen AI doubled in a year, from 44% to 87% (FTI 2026). Each month without the plan defers about <b id="perMonth">$0</b> of first-year fees at these rates.</p>
+  </div>
+
+  <div class="foot">
+    <div>Search demand: Ahrefs Keywords Explorer, US, 42 head terms buyers of outside counsel use for Vedder's practices (11,820 searches a month; Ahrefs undercounts the B2B legal long tail, so this is a floor). Search today: ~80 category and topic clicks a month to vedder.com (Ahrefs, 15 Oct 2026). Before the move vedderprice.com ranked for 895 terms; vedder.com ranks for 200. AI: Peec, ChatGPT, Gemini and Google AI Overviews, 110 prompts, 888 answers, 15 Oct 2026 (day one): Vedder named in 5.7% of answers to the 92 prompts that don't name it. AI buyer questions are a proxy: one per search × 70% of GC teams using gen AI for general queries (FTI/Relativity General Counsel Report 2026, n=224). Ads: 27 terms, 8,640 searches a month, volume-weighted CPC $7.99 (Ahrefs), capped at 15% of those clicks. Directories: Chambers USA 2026, Chambers Global 2026, Legal 500 US 2026.</div>
+    <div>Formula: buyer visits = searches × reach + AI questions × share naming Vedder × 10%, counted only above today's ~127 a month. Ad clicks = ads ÷ $7.99. New clients a year = (new buyer visits × inquiry rate + ad clicks × inquiry rate × 75%) × inquiry-to-client × 12. Fees = new clients × first-year fees. The 3-year view assumes 75% of clients stay each year. Fees per $1 counts only ad-driven fees. Every rate and the fee per client are placeholders until Vedder shares its own; ROAST's fees aren't included.</div>
+    <div>Part of the ROAST × Vedder search, AI and new-client analysis, October 2026.</div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const $=id=>document.getElementById(id);
+  const C={"DEMAND": 11820, "AIQ": 8274.0, "AIV": 10.0, "CPC": 7.9918, "POOL": 8640, "SHARE": 0.15, "PAIDX": 0.75, "S0": 0.676819, "AI0": 5.7};
+  const ids=["search", "ai", "ads", "inq", "win", "fees"];
+  const els=ids.map($);
+  const fmtI=n=>Math.round(n).toLocaleString('en-US');
+  const fmt1=n=>(Math.round(n*10)/10).toLocaleString('en-US');
+  const fmtD=n=>'$'+Math.round(n).toLocaleString('en-US');
+  const fmtK=n=>n>=1e6?'$'+(n/1e6).toFixed(2)+'M':'$'+Math.round(n/1000).toLocaleString('en-US')+'K';
+  const presets=[...document.querySelectorAll('.preset')];
+  const now=new Date(); const m=(now.getFullYear()-2026)*12+now.getMonth();
+  $('months').textContent=Math.max(0,m);
+  function model(v){
+    const s0=C.DEMAND*C.S0/100, a0=C.AIQ*C.AI0/100*C.AIV/100;
+    const vs=C.DEMAND*v.search/100, va=C.AIQ*v.ai/100*C.AIV/100;
+    const dS=Math.max(0,vs-s0), dA=Math.max(0,va-a0), newOrg=Math.max(0,vs+va-s0-a0);
+    const clicks=Math.min(v.ads/C.CPC,C.POOL*C.SHARE), spend=clicks*C.CPC;
+    const w=v.win/100, q=v.inq/100;
+    const cS=dS*q*w*12, cA=dA*q*w*12, cP=clicks*q*C.PAIDX*w*12;
+    const fS=cS*v.fees, fA=cA*v.fees, fP=cP*v.fees, rev=fS+fA+fP;
+    return {fS,fA,fP,rev,clients:cS+cA+cP,cP,newOrg,clicks,spend,spendYr:spend*12,roas:spend?fP/(spend*12):0,
+            vO:q*w*v.fees, vP:q*C.PAIDX*w*v.fees, life:rev*(1+0.75+0.5625)};
+  }
+  function vals(){const v={};ids.forEach((k,i)=>v[k]=+els[i].value);return v;}
+  function render(){
+    const v=vals();
+    $('searchOut').value=v.search.toFixed(1)+'%'; $('aiOut').value=v.ai.toFixed(0)+'%'; $('adsOut').value=fmtD(v.ads);
+    $('inqOut').value=v.inq.toFixed(2).replace(/0$/,'')+'%'; $('winOut').value=v.win+'%'; $('feesOut').value=fmtD(v.fees);
+    const o=model(v);
+    const sb=$('searchBand'); const sv=C.DEMAND*v.search/100;
+    sb.textContent=`~${fmtI(sv)} buyer visits a month from search, vs ~${fmtI(C.DEMAND*C.S0/100)} today`;
+    const ab=$('adsBand'), capped=o.spend<v.ads-1;
+    ab.className='band'+(capped?' warn':'');
+    ab.textContent=v.ads===0?'No ads':`Buys ~${fmtI(o.clicks)} clicks a month`+(capped?`; only ~${fmtD(o.spend)} can be spent at ~15% of these searches`:'');
+    $('rev').textContent=fmtD(o.rev);
+    $('revSub').textContent=`${fmtK(o.fS+o.fA)} from search & AI + ${fmtK(o.fP)} from ads. ${fmt1(o.clients)} new clients a year, ${fmt1(o.cP)} of them from ads.`;
+    $('clients').textContent=fmt1(o.clients); $('visits').textContent=fmtI(o.newOrg); $('roas').textContent=o.spend?'$'+o.roas.toFixed(2):'—';
+    const mx=Math.max(o.fS,o.fA,o.fP,1)*1.08;
+    [['bS','nS',o.fS],['bA','nA',o.fA],['bP','nP',o.fP]].forEach(([b,n,x])=>{$(b).style.width=(x/mx*100)+'%';$(n).textContent=fmtK(x);});
+    $('vO').textContent='$'+o.vO.toFixed(2); $('vP').textContent='$'+o.vP.toFixed(2); $('life').textContent=fmtK(o.life);
+    $('sens').innerHTML=[0.1,0.2,0.3,0.5].map(x=>{const r=model(Object.assign({},v,{inq:x}));return `<tr><td>${x}%</td><td>${fmt1(r.clients)}</td><td>${fmtD(r.rev)}</td></tr>`;}).join('');
+    $('perMonth').textContent=fmtD(o.rev/12);
+    presets.forEach(pr=>{const q=pr.dataset.p.split(',').map(Number);pr.setAttribute('aria-pressed',String(q.every((x,k)=>Math.abs(x-+els[k].value)<1e-9)));});
+    try{localStorage.setItem('vedder-calc-v1',JSON.stringify(els.map(e=>e.value)));}catch(e){}
+  }
+  els.forEach(el=>el.addEventListener('input',render));
+  presets.forEach(pr=>pr.addEventListener('click',()=>{const q=pr.dataset.p.split(',');els.forEach((el,k)=>el.value=q[k]);render();}));
+  try{const s=JSON.parse(localStorage.getItem('vedder-calc-v1'));if(Array.isArray(s)&&s.length===els.length){els.forEach((el,k)=>el.value=s[k]);}}catch(e){}
+  render();
+})();
+</script>
+</body>
+</html>
