@@ -78,8 +78,8 @@ input[type=range]:focus-visible{outline:2px solid var(--ink);outline-offset:4px;
 .stat .l{font-size:12.5px;color:var(--on-yellow-muted);margin-top:5px;line-height:1.3;text-wrap:balance}
 .bars{display:grid;gap:8px;margin-top:4px}
 .bars .t{font-weight:600;font-size:13px;color:var(--on-yellow-muted)}
-.bar{display:grid;grid-template-columns:minmax(120px,170px) 1fr 64px;gap:10px;align-items:center;font-size:13px}
-@media (max-width:520px){.bar{grid-template-columns:110px 1fr 56px}}
+.bar{display:grid;grid-template-columns:minmax(120px,170px) 1fr minmax(64px,auto);gap:10px;align-items:center;font-size:13px}
+@media (max-width:520px){.bar{grid-template-columns:110px 1fr minmax(56px,auto)}}
 .bar .fill{height:14px;border-radius:7px;background:rgba(17,18,20,.25);position:relative;overflow:hidden}
 .bar .fill i{position:absolute;inset:0;width:0;background:var(--on-yellow);border-radius:7px;transition:width .25s ease}
 .bar .fill i.gain{background:#ffffff;left:auto}
@@ -121,8 +121,8 @@ td:last-child,th:last-child{text-align:right;font-weight:700}
 .inaction .bar .fill i.gain{background:var(--yellow);border-radius:0 7px 7px 0}
 .bar .fill i.cap{opacity:.4}
 .result .bar .fill i.gain{border-radius:0 7px 7px 0}
-.inaction .bar{grid-template-columns:minmax(120px,170px) 1fr 92px}
-@media (max-width:520px){.inaction .bar{grid-template-columns:104px 1fr 82px}}
+.inaction .bar{grid-template-columns:minmax(120px,170px) 1fr minmax(92px,auto)}
+@media (max-width:520px){.inaction .bar{grid-template-columns:104px 1fr minmax(82px,auto)}}
 .inaction table{font-size:14px}
 .inaction th,.inaction td{border-bottom:1px solid var(--line)}
 .inaction th{color:var(--muted)}
@@ -137,6 +137,18 @@ td:last-child,th:last-child{text-align:right;font-weight:700}
 .inaction .hint{font-size:13px;color:var(--muted);margin:0}
 .foot b{color:var(--ink)}
 .wordmark{flex-wrap:wrap;row-gap:6px}.wordmark .client-logo{height:22px;width:auto;display:block;color:var(--ink)}
+/* layout-guard:start: roast-deck-kit/layout_guard.py; re-run it instead of editing */
+.grid>*,.result>*,.stats>*,.bar>*,.funnel>*,.keys>*{min-width:0}
+.result{grid-template-columns:minmax(0,1fr);container:lgresult/inline-size}
+.stat .l,.funnel .l,.funnel .s,.key .l,.key .s{overflow-wrap:break-word}
+.tscroll{overflow-x:auto;max-width:100%}
+@container lgresult (max-width:400px){
+  .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .stats>.stat:last-child:nth-child(odd){grid-column:1/-1}
+  .funnel{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .funnel .step::after{display:none}
+}
+/* layout-guard:end */
 </style>
 </head>
 <body>
@@ -431,5 +443,40 @@ td:last-child,th:last-child{text-align:right;font-weight:700}
   render();
 })();
 </script>
+<!-- layout-guard:start: roast-deck-kit/layout_guard.py -->
+<script>
+(function(){
+  var els=[].slice.call(document.querySelectorAll('.result .big,.stat .v,.funnel .v,.key .v'));
+  if(!els.length) return;
+  function fit(el){
+    el.style.fontSize='';
+    var w=el.clientWidth; if(!w) return;
+    var min=el.classList.contains('big')?28:13;
+    for(var i=0;i<4&&el.scrollWidth>w+0.5;i++){
+      var fs=parseFloat(getComputedStyle(el).fontSize);
+      var next=Math.max(min,fs*w/el.scrollWidth-0.5);
+      if(next>=fs) break;
+      el.style.fontSize=next.toFixed(1)+'px';
+    }
+  }
+  function all(){els.forEach(fit);}
+  var mo=new MutationObserver(all);
+  els.forEach(function(el){mo.observe(el,{childList:true,characterData:true,subtree:true});});
+  var raf=0; function soon(){if(!raf) raf=requestAnimationFrame(function(){raf=0;all();});}
+  window.addEventListener('resize',soon);
+  if(window.ResizeObserver){
+    var last=new WeakMap();
+    var ro=new ResizeObserver(function(entries){
+      var changed=false;
+      entries.forEach(function(e){var w=Math.round(e.contentRect.width);if(last.get(e.target)!==w){last.set(e.target,w);changed=true;}});
+      if(changed) soon();
+    });
+    [].slice.call(document.querySelectorAll('.result,.stat,.funnel .step,.key')).forEach(function(b){ro.observe(b);});
+  }
+  if(document.fonts&&document.fonts.ready) document.fonts.ready.then(all);
+  all();
+})();
+</script>
+<!-- layout-guard:end -->
 </body>
 </html>
