@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Long's Watch-Value Calculator</title>
+<!-- share:start -->
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<meta name="description" content="What watch search, Google Maps and ads are worth to Long&#x27;s Jewelers in watch sales and service, and what each month of waiting defers.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ROAST">
+<meta property="og:title" content="Long&#x27;s Watch-Value Calculator">
+<meta property="og:description" content="What watch search, Google Maps and ads are worth to Long&#x27;s Jewelers in watch sales and service, and what each month of waiting defers.">
+<meta property="og:url" content="https://npc-0802.github.io/pitches/longs-watch-value-calculator/">
+<meta property="og:image" content="https://npc-0802.github.io/pitches/longs-watch-value-calculator/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="ROAST × Long&#x27;s Jewelers: Watch-Value Calculator">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Long&#x27;s Watch-Value Calculator">
+<meta name="twitter:description" content="What watch search, Google Maps and ads are worth to Long&#x27;s Jewelers in watch sales and service, and what each month of waiting defers.">
+<meta name="twitter:image" content="https://npc-0802.github.io/pitches/longs-watch-value-calculator/og.png">
+<!-- share:end -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;900&family=Public+Sans:wght@400;500;600&display=swap">
+<style>
+:root{
+  --bg:#ffffff; --ink:#111214; --muted:#5b5e66; --line:#e6e4dc; --panel:#f6f5f0;
+  --yellow:#FFD100; --yellow-deep:#e6bc00; --on-yellow:#111214; --on-yellow-muted:#4a4630;
+  --track:#e3e1d8; --ok:#1f7a3a;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){ --bg:#111214; --ink:#f4f3ee; --muted:#a6a79f; --line:#2a2b2f; --panel:#1b1c20; --track:#33343a; color-scheme:dark; }
+}
+:root[data-theme="dark"]{ --bg:#111214; --ink:#f4f3ee; --muted:#a6a79f; --line:#2a2b2f; --panel:#1b1c20; --track:#33343a; color-scheme:dark; }
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Public Sans",system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;font-size:15px;line-height:1.45}
+.wrap{max-width:1440px;margin:0 auto;padding-block:22px 44px;padding-inline:clamp(16px,3vw,40px);display:grid;gap:22px}
+.brand{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-bottom:6px;flex-wrap:wrap}
+.wordmark{display:flex;align-items:center;gap:12px}.wordmark .roast-logo{height:22px;width:auto;display:block;color:var(--ink)}
+.wordmark span{font-family:"Public Sans",sans-serif;font-weight:500;font-size:15px;color:var(--muted);letter-spacing:0}
+.deadline{font-size:13px;color:var(--muted);text-align:right}
+.deadline b{color:var(--ink);font-variant-numeric:tabular-nums}
+h1{font-family:"Archivo",system-ui,sans-serif;font-weight:900;font-size:clamp(28px,3.4vw,46px);line-height:1.05;letter-spacing:-.015em;margin:0;text-wrap:balance;max-width:26ch}
+.lede{color:var(--muted);max-width:78ch;margin:8px 0 0;font-size:clamp(14px,1.1vw,16px)}
+.grid{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,2fr);gap:22px;align-items:start}
+@media (max-width:900px){.grid{grid-template-columns:1fr}}
+.panel{background:var(--panel);border-radius:22px;padding:clamp(18px,2vw,28px) clamp(18px,2vw,28px) 10px;min-width:0;overflow:hidden}
+.ctl{display:grid;gap:8px;padding-block:14px;border-top:1px solid var(--line)}
+.ctl:first-child{border-top:0;padding-top:2px}
+.ctl .row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.ctl label{font-weight:600}
+.ctl output{font-family:"Archivo",sans-serif;font-weight:700;font-size:22px;font-variant-numeric:tabular-nums}
+.ctl output small{font-family:"Public Sans",sans-serif;font-weight:500;font-size:13px;color:var(--muted);margin-left:8px}
+.ctl .why{font-size:13px;color:var(--muted);max-width:72ch}
+.sect{font-family:"Archivo",sans-serif;font-weight:700;font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);padding-top:16px;border-top:1px solid var(--line)}
+.band{font-size:13px;font-weight:600;padding:5px 12px;border-radius:14px;background:var(--yellow);color:var(--on-yellow);width:fit-content;max-width:100%;line-height:1.3}
+.band.low{background:var(--track);color:var(--ink)}
+.band.warn{background:#f3c4bd;color:#5c120a}
+input[type=range]{width:100%;accent-color:var(--ink);height:30px;margin:0}
+input[type=range]:focus-visible{outline:2px solid var(--ink);outline-offset:4px;border-radius:6px}
+.presets{display:flex;flex-wrap:wrap;gap:8px;padding-block:16px;border-top:1px solid var(--line)}
+.preset{border:1.5px solid var(--line);border-radius:12px;padding:8px 12px;font-size:13px;background:transparent;color:var(--ink);cursor:pointer;font-family:inherit;text-align:left;line-height:1.25}
+.preset b{display:block;font-weight:700}
+.preset:hover,.preset:focus-visible{border-color:var(--ink);outline:none}
+.preset[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.result{background:var(--yellow);color:var(--on-yellow);border-radius:22px;padding:clamp(20px,2.2vw,32px);display:grid;gap:18px;min-width:0}
+.result .label{font-weight:600;font-size:14px;color:var(--on-yellow-muted)}
+.result .big{font-family:"Archivo",sans-serif;font-weight:900;font-size:clamp(48px,6vw,88px);line-height:.95;letter-spacing:-.02em;font-variant-numeric:tabular-nums;margin:6px 0}
+.result .sub{font-size:14px;color:var(--on-yellow-muted);max-width:52ch}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+@media (max-width:520px){.stats{grid-template-columns:1fr 1fr}}
+.stat{background:rgba(255,255,255,.5);border-radius:14px;padding:14px 14px 12px;min-width:0}
+.stat .v{font-family:"Archivo",sans-serif;font-weight:700;font-size:clamp(20px,1.8vw,26px);font-variant-numeric:tabular-nums;line-height:1.1}
+.stat .l{font-size:12.5px;color:var(--on-yellow-muted);margin-top:5px;line-height:1.3;text-wrap:balance}
+.bars{display:grid;gap:8px;margin-top:4px}
+.bars .t{font-weight:600;font-size:13px;color:var(--on-yellow-muted)}
+.bar{display:grid;grid-template-columns:minmax(120px,170px) 1fr minmax(64px,auto);gap:10px;align-items:center;font-size:13px}
+@media (max-width:520px){.bar{grid-template-columns:110px 1fr minmax(56px,auto)}}
+.bar .fill{height:14px;border-radius:7px;background:rgba(17,18,20,.25);position:relative;overflow:hidden}
+.bar .fill i{position:absolute;inset:0;width:0;background:var(--on-yellow);border-radius:7px;transition:width .25s ease}
+.bar .fill i.gain{background:#ffffff;left:auto}
+.bar .n{text-align:right;font-variant-numeric:tabular-nums;font-weight:600}
+@media (prefers-reduced-motion: reduce){.bar .fill i{transition:none}}
+.corp{display:grid;gap:8px}
+.corp .t{font-weight:600;font-size:13px;color:var(--on-yellow-muted)}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th,td{text-align:left;padding:7px 4px;border-bottom:1px solid rgba(17,18,20,.18);font-variant-numeric:tabular-nums}
+th{font-size:12px;color:var(--on-yellow-muted);font-weight:600}
+td:last-child,th:last-child{text-align:right;font-weight:700}
+.inaction{background:var(--panel);border-radius:22px;padding:clamp(18px,2vw,28px);display:grid;gap:8px}
+.inaction h2{font-family:"Archivo",sans-serif;font-weight:700;font-size:18px;margin:0}
+.inaction p{margin:0;color:var(--muted);max-width:100ch;font-size:15px;line-height:1.55}
+.inaction b{color:var(--ink)}
+.foot{font-size:13px;color:var(--muted);max-width:110ch;display:grid;gap:6px}
+.foot a{color:var(--ink)}
+@media (min-width:901px){.result{position:sticky;top:16px}}
+.wordmark{flex-wrap:wrap;row-gap:6px}.wordmark .client-logo{height:22px;width:auto;display:block;color:var(--ink)}
+/* layout-guard:start: roast-deck-kit/layout_guard.py; re-run it instead of editing */
+.grid>*,.result>*,.stats>*,.bar>*,.funnel>*,.keys>*{min-width:0}
+.result{grid-template-columns:minmax(0,1fr);container:lgresult/inline-size}
+.stat .l,.funnel .l,.funnel .s,.key .l,.key .s{overflow-wrap:break-word}
+.tscroll{overflow-x:auto;max-width:100%}
+@container lgresult (max-width:400px){
+  .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .stats>.stat:last-child:nth-child(odd){grid-column:1/-1}
+  .funnel{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .funnel .step::after{display:none}
+}
+/* layout-guard:end */
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="brand">
+    <div class="wordmark"><svg class="roast-logo" fill="currentColor" aria-label="ROAST" role="img" viewBox="0 0 931.89 203.5" xmlns="http://www.w3.org/2000/svg" overflow="hidden"><path d="M30.4 4.59 0 4.59 0 0 93.33 0C128.29 0 166.29 7.45 166.29 50.73 166.29 85.7 123.42 94.87 101.23 97.45L101.23 98.02C136.19 100.89 154.74 108.05 159.3 145.89L163.56 180.86C165.69 197.77 174.2 198.92 179.37 198.92 184.84 198.92 188.79 197.2 191.84 196.05L193.66 199.78C187.58 201.79 179.98 203.51 168.73 203.51 131.64 203.51 129.51 184.88 125.25 151.92L123.12 134.72C120.99 116.66 115.52 100.32 81.17 100.32L61.41 100.32 61.41 198.92 92.42 198.92 92.42 203.51 0 203.51 0 198.92 30.4 198.92 30.4 4.59ZM61.41 95.73 76.61 95.73C112.48 95.73 133.46 83.98 133.46 50.73 133.46 27.8 125.25 4.58 82.08 4.58L61.41 4.58 61.41 95.73Z" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4"  fill-opacity="1"/><path d="M293.24 0.32C342.65 0.32 385.63 45.32 385.63 101.91 385.63 158.5 342.65 203.5 293.24 203.5 243.83 203.5 200.85 158.5 200.85 101.91 200.85 45.32 243.83 0.32 293.24 0.32ZM293.24 199.09C345.28 199.09 352.3 138.08 352.3 101.91 352.3 65.74 345.28 4.74 293.24 4.74 241.2 4.74 234.18 65.75 234.18 101.91 234.18 138.07 241.2 199.09 293.24 199.09Z" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4"  fill-opacity="1"/><path d="M501.23 135.93 438.66 135.93 424.96 175.38C422.91 180.89 420.57 187.51 420.57 192.19 420.57 196.05 424.08 199.08 433.43 199.08L448.63 199.08 448.63 203.49 388.4 203.49 388.4 199.08 397.76 199.08C406.82 199.08 410.62 198.25 416.18 182.82L480.77 0.32 483.99 0.32 556.81 199.09 581.08 199.09 581.08 203.5 495.42 203.5 495.42 199.09 524.07 199.09 501.24 135.93ZM469.66 48 469.08 48 440.43 131.52 499.78 131.52 469.67 48Z" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4"  fill-opacity="1"/><path d="M598 130.7 602.68 130.7C602.68 177.01 631.63 198.78 666.71 198.78 694.78 198.78 714.95 181.97 714.95 157.16 714.95 128.49 699.16 119.95 665.54 114.99 619.64 108.1 598 100.93 598 54.62 598 23.2 619.93 0.32 652.68 0.32 682.79 0.32 694.2 17.14 704.14 17.13 712.17 17.13 711.74 3.58 712.62-2.84217e-14L717.3-2.84217e-14 717.3 64.54 712.62 64.54C709.99 33.12 691.86 4.73 652.69 4.73 627.84 4.73 610.29 20.17 610.29 45.52 610.29 70.87 620.23 75.84 668.76 84.11 711.45 91.28 728.99 104.23 728.99 140.07 728.99 175.91 707.94 203.19 665.55 203.19 636.31 203.19 620.82 188.78 610 188.86 601.37 188.92 602.69 198.82 602.69 203.51L598.01 203.51 598.01 130.7Z" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4"  fill-opacity="1"/><path d="M752.96 0 752.96 64.54 757.64 64.54C757.64 24.77 766.71 6.75 804.33 4.79L804.33 147.44 829.12 147.44 829.12 4.41 855.73 4.41 855.73 147.44 880.52 147.44 880.52 4.78C918.11 6.71 927.21 24.7 927.21 64.54L931.89 64.54 931.89 0 752.96 0Z" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4"  fill-opacity="1"/></svg><span>×</span><svg class="client-logo" role="img" aria-label="Long's Jewelers" style="height:40px" xmlns="http://www.w3.org/2000/svg" viewBox="4 4 1607 993"><path fill-rule="evenodd" fill="currentColor" d="M195.5,993.0C194.9,992.5 192.6,990.4 190.2,988.4C187.9,986.4 186.0,984.2 186.0,983.4C186.0,982.6 187.8,980.8 190.0,979.4L194.1,976.7L197.3,979.7C211.3,993.0 237.3,989.8 245.7,973.8L248.5,968.5L248.8,938.5C248.9,922.0 249.3,907.5 249.5,906.2C250.0,904.3 250.7,904.0 255.0,904.0L260.0,904.0L260.0,935.5C260.0,964.9 259.9,967.5 257.9,973.3C255.5,980.6 250.1,988.0 244.8,991.5C241.1,994.0 240.9,994.0 218.8,994.0C206.5,993.9 196.1,993.5 195.5,993.0Z M342.6,992.4C342.3,991.5 342.0,971.8 342.0,948.5C342.0,914.0 342.3,906.0 343.4,905.1C344.3,904.3 356.7,904.1 387.1,904.2L429.5,904.5L429.5,909.0L429.5,913.5L392.0,914.0L354.5,914.5L354.5,929.0L354.5,943.5L386.2,943.8L418.0,944.0L418.0,949.0L418.0,954.0L386.2,954.2L354.5,954.5L354.5,969.5L354.5,984.5L391.9,984.8C417.5,984.9 429.7,985.4 430.7,986.1C431.4,986.7 432.0,988.8 432.0,990.6L432.0,994.0L387.6,994.0C348.0,994.0 343.1,993.8 342.6,992.4Z M522.7,984.2C520.7,978.9 518.1,971.6 516.7,968.0C515.4,964.4 510.6,951.4 506.1,939.0C501.6,926.6 497.0,914.3 495.9,911.6C493.0,904.3 493.2,904.0 499.5,904.0C503.8,904.0 505.1,904.4 505.9,905.9C506.5,906.9 511.3,920.1 516.6,935.1C521.8,950.2 527.3,965.7 528.6,969.5C531.9,978.7 532.7,980.0 534.0,978.0C534.5,977.2 537.5,969.8 540.6,961.5C543.7,953.2 547.0,944.5 548.0,942.0C549.0,939.5 552.2,930.9 555.3,922.9C562.8,902.8 562.0,904.0 568.4,904.0L573.8,904.0L576.8,911.8C578.5,916.0 583.6,929.2 588.0,941.0C592.4,952.8 596.5,963.4 597.0,964.5C597.4,965.6 598.9,969.3 600.2,972.8C601.4,976.2 602.9,978.9 603.5,978.7C604.5,978.3 605.6,975.5 615.0,949.0C618.2,939.9 623.1,926.2 625.8,918.5L630.8,904.5L636.4,904.2C641.1,903.9 642.0,904.2 642.0,905.6C642.0,907.0 637.4,920.3 633.5,930.0C632.3,933.1 627.2,946.8 617.5,973.5C615.7,978.5 613.2,985.1 612.0,988.3L609.8,994.1L603.2,993.8L596.6,993.5L588.2,971.0C573.7,932.0 569.2,920.6 568.2,920.2C567.4,920.0 563.1,931.0 545.2,978.7L539.5,994.0L532.9,994.0L526.2,994.0L522.7,984.2Z M710.2,949.2L710.5,904.5L754.0,904.5L797.5,904.5L797.5,909.0L797.5,913.5L759.5,914.0C738.6,914.3 721.4,914.7 721.2,914.8C721.1,914.9 721.0,921.3 721.0,928.9C721.0,940.6 721.2,942.9 722.6,943.4C723.5,943.7 738.1,944.0 755.1,944.0L786.0,944.0L786.0,949.0L786.0,954.0L753.8,954.2L721.5,954.5L721.5,969.5L721.5,984.5L759.7,984.8L798.0,985.0L798.6,987.4C798.9,988.8 798.9,990.8 798.5,991.9C797.9,994.0 797.5,994.0 753.9,994.0L710.0,994.0L710.2,949.2Z M876.2,949.2L876.5,904.5L881.5,904.5L886.5,904.5L887.0,944.5L887.5,984.5L922.0,985.0L956.5,985.5L956.8,989.8L957.1,994.0L916.5,994.0L876.0,994.0L876.2,949.2Z M1029.2,949.2L1029.5,904.5L1073.0,904.5L1116.5,904.5L1116.5,909.0L1116.5,913.5L1079.0,914.0L1041.5,914.5L1041.5,929.0L1041.5,943.5L1073.3,943.8L1105.1,944.0L1104.8,948.8L1104.5,953.5L1073.0,954.0L1041.5,954.5L1041.2,969.7L1040.9,985.0L1079.2,985.2L1117.5,985.5L1117.8,989.8L1118.1,994.0L1073.5,994.0L1029.0,994.0L1029.2,949.2Z M1190.2,949.2L1190.5,904.5L1227.0,904.5C1267.8,904.5 1267.7,904.5 1277.2,911.7C1283.0,916.2 1286.0,921.9 1286.7,929.8C1287.9,943.3 1280.0,954.6 1266.5,958.6C1263.5,959.4 1260.8,960.5 1260.6,960.9C1260.3,961.3 1266.4,968.7 1274.1,977.3C1281.7,986.0 1288.0,993.3 1288.0,993.5C1288.0,993.8 1284.7,994.0 1280.8,994.0L1273.5,994.0L1267.5,986.7C1264.2,982.8 1257.8,975.4 1253.2,970.3L1244.8,961.0L1223.4,961.0L1202.0,961.0L1202.0,977.5L1202.0,994.0L1196.0,994.0L1190.0,994.0L1190.2,949.2Z M1372.5,989.7C1362.1,984.3 1358.0,981.3 1358.0,979.1C1358.0,977.2 1363.0,972.0 1364.8,972.0C1365.5,972.0 1368.4,973.7 1371.3,975.8C1378.7,981.2 1387.2,984.6 1397.5,986.4C1408.6,988.4 1415.4,988.4 1424.5,986.6C1433.7,984.9 1437.8,983.0 1441.7,979.0C1446.3,974.2 1447.2,967.5 1443.7,963.2C1440.3,959.0 1427.7,955.7 1408.5,954.0C1385.5,952.0 1373.4,948.3 1366.0,941.1C1358.2,933.6 1357.8,923.9 1365.1,915.7C1373.7,905.9 1386.5,901.5 1406.5,901.6C1417.7,901.6 1420.7,902.0 1428.0,904.3C1437.3,907.2 1449.7,913.6 1451.4,916.2C1452.2,917.6 1451.9,918.5 1449.5,921.0C1447.9,922.6 1445.9,924.0 1444.9,924.0C1444.0,924.0 1440.5,922.2 1437.2,920.0C1428.1,913.9 1418.0,911.6 1402.6,912.3C1388.5,912.8 1381.9,914.7 1376.0,919.7C1372.5,922.7 1372.0,923.7 1372.0,927.3C1372.1,937.3 1379.6,940.3 1412.0,943.5C1438.7,946.1 1450.6,950.6 1455.6,960.2C1457.4,963.7 1457.4,974.1 1455.6,978.4C1453.8,982.7 1447.4,989.2 1443.2,990.9C1441.5,991.6 1440.0,992.6 1440.0,993.1C1440.0,993.6 1426.7,994.0 1410.2,993.9L1380.5,993.9L1372.5,989.7Z M1261.0,948.9C1266.3,947.7 1271.4,944.0 1273.5,940.0C1274.3,938.4 1275.0,934.7 1275.0,931.8C1275.0,924.6 1271.9,920.1 1264.8,916.9C1259.6,914.5 1258.9,914.5 1231.0,914.5L1202.5,914.5L1202.2,932.2L1202.0,950.0L1229.2,950.0C1244.3,950.0 1258.5,949.5 1261.0,948.9Z M952.3,844.5C936.9,840.2 929.7,832.5 926.9,817.6C922.2,791.8 951.3,752.6 997.5,722.5C1018.4,708.9 1036.6,700.0 1073.3,685.4C1094.7,676.9 1115.4,668.3 1127.5,663.0C1129.7,662.0 1135.8,659.4 1141.0,657.1C1146.2,654.8 1156.6,649.9 1164.0,646.2L1177.5,639.5L1184.0,630.8C1197.2,613.1 1216.4,581.1 1214.8,579.5C1214.4,579.1 1210.5,582.1 1206.2,586.2C1189.6,601.7 1169.8,613.0 1149.0,618.7C1141.4,620.8 1120.3,620.8 1112.7,618.8C1096.1,614.2 1089.2,604.5 1088.3,584.0C1087.9,576.8 1088.3,570.7 1089.4,564.5C1091.3,553.9 1091.3,554.0 1090.1,554.0C1088.9,554.0 1085.1,560.3 1072.9,582.2C1060.2,605.2 1056.3,610.9 1047.6,619.5C1038.1,628.8 1033.0,631.3 1021.7,631.8C1002.6,632.7 981.8,622.2 974.2,607.6C971.8,602.9 971.6,601.6 971.6,590.5C971.6,580.6 972.0,577.2 974.0,571.0C978.6,556.6 993.9,529.0 1008.2,509.5C1011.4,505.1 1014.6,500.6 1015.4,499.5C1016.2,498.4 1025.1,486.5 1035.2,473.0C1068.0,429.1 1078.0,412.2 1078.0,400.5C1078.0,393.8 1071.7,388.0 1064.2,388.0C1054.5,388.0 1027.9,400.2 1006.7,414.4C990.1,425.4 975.3,437.5 972.9,441.9C970.9,445.8 969.8,447.6 960.1,463.2C953.2,474.3 944.5,488.5 941.9,492.8C941.0,494.3 935.4,503.4 929.5,513.0C923.6,522.6 915.7,535.4 912.1,541.4C908.5,547.3 904.7,553.4 903.8,554.9C902.8,556.3 901.4,558.7 900.5,560.3C899.6,561.8 895.2,569.0 890.6,576.3C886.1,583.5 882.1,590.2 881.7,591.0C881.4,591.8 877.1,598.8 872.3,606.5L863.5,620.5L841.2,620.8C825.2,621.0 819.0,620.7 819.0,619.9C819.0,618.8 824.3,610.0 842.0,581.5C846.8,573.8 854.0,562.1 858.0,555.5C869.8,536.0 879.2,520.7 881.5,517.0C887.6,507.3 900.0,486.9 900.0,486.5C900.0,485.3 897.3,486.3 888.7,490.4C877.2,496.0 863.8,501.4 857.1,503.1C852.2,504.3 851.7,504.7 848.0,511.2C842.2,521.3 831.8,534.2 820.0,546.0C787.8,578.3 748.9,603.1 711.0,615.7C686.5,623.9 663.2,626.1 645.8,622.1C633.9,619.3 626.6,614.9 618.6,605.8C598.8,583.1 603.3,542.5 631.2,493.3C658.6,444.8 705.6,396.6 742.0,379.7C762.8,370.1 777.4,365.2 798.0,361.0C806.6,359.2 828.6,358.6 837.0,359.9C860.8,363.5 880.4,384.8 886.5,413.9C892.0,440.0 887.1,467.8 874.8,480.7C866.1,489.8 878.2,483.8 897.5,469.4C915.0,456.4 924.9,446.5 931.7,435.3C934.9,430.0 938.9,423.5 940.5,420.9C944.9,413.8 955.3,396.8 967.0,377.5C972.7,368.1 978.0,359.7 978.8,358.8C980.2,357.2 982.6,357.0 1002.2,357.0C1016.7,357.0 1024.0,357.4 1024.0,358.0C1024.0,358.6 1019.3,366.6 1013.6,375.8C1007.9,385.0 1002.0,394.8 1000.5,397.5C998.9,400.2 996.3,404.4 994.7,406.8C993.2,409.1 992.0,411.5 992.2,412.0C992.4,412.5 997.0,409.8 1002.5,405.9C1028.0,387.8 1057.4,373.2 1080.0,367.5C1088.5,365.3 1103.2,365.2 1108.2,367.4C1115.8,370.7 1123.0,381.2 1124.5,391.2C1125.4,397.2 1123.2,404.8 1118.3,412.2C1116.2,415.3 1103.5,433.5 1090.1,452.6C1056.3,500.8 1032.7,536.4 1019.5,559.5C1014.4,568.4 1006.2,585.4 1004.9,590.0C1004.2,592.5 1003.2,595.1 1002.7,595.7C1002.2,596.4 1001.5,600.8 1001.3,605.4C1000.6,616.0 1002.4,619.6 1009.9,622.9C1025.2,629.4 1039.2,622.0 1053.5,599.5C1059.6,590.0 1061.5,586.6 1074.3,562.0C1090.8,530.3 1102.8,508.2 1108.6,499.2C1111.8,494.1 1116.6,486.5 1119.2,482.2C1133.6,458.5 1142.3,446.8 1158.1,429.8C1193.0,392.3 1241.0,362.5 1277.9,355.5C1301.8,350.9 1319.4,357.6 1328.0,374.4C1329.8,378.0 1331.6,381.0 1331.9,381.0C1332.3,381.0 1334.1,378.2 1335.9,374.8C1337.8,371.3 1340.8,365.9 1342.7,362.7L1346.1,357.0L1369.7,357.0C1391.6,357.0 1393.2,357.1 1392.8,358.8C1392.5,359.7 1383.6,374.4 1373.0,391.5C1362.4,408.6 1353.0,423.9 1352.0,425.5C1351.1,427.1 1348.5,431.3 1346.4,434.7C1344.3,438.2 1338.5,447.4 1333.6,455.2C1328.7,463.1 1322.2,473.6 1319.0,478.5C1315.9,483.4 1310.0,492.9 1306.0,499.5C1302.0,506.1 1296.7,514.6 1294.3,518.5C1284.5,534.0 1256.7,578.8 1254.3,582.8C1252.9,585.1 1252.2,587.0 1252.8,587.0C1254.5,587.0 1316.5,536.1 1321.0,531.0C1321.3,530.7 1326.5,525.9 1332.5,520.5C1378.6,478.8 1426.3,428.4 1449.2,397.3C1453.6,391.4 1453.8,390.8 1454.5,381.9C1455.4,370.4 1458.2,359.3 1462.3,351.5C1466.6,343.3 1476.8,333.3 1485.2,329.1C1491.1,326.2 1492.6,325.8 1497.7,326.2C1505.2,326.8 1510.5,329.4 1514.1,334.3C1518.1,339.9 1519.3,344.7 1518.0,350.7C1516.6,357.1 1512.0,361.9 1494.6,375.0C1479.3,386.5 1472.4,393.5 1471.4,398.6C1470.9,401.4 1471.7,404.1 1475.9,413.3C1489.6,443.7 1497.2,476.8 1498.7,513.2L1499.3,529.0L1502.0,529.0C1505.6,529.0 1526.9,522.0 1536.0,517.8C1545.6,513.4 1559.0,505.0 1565.9,499.2C1575.1,491.4 1588.0,474.4 1595.9,459.9C1599.9,452.3 1602.9,449.0 1605.6,449.0C1607.8,449.0 1608.0,449.4 1608.0,453.4C1608.0,455.8 1607.7,458.0 1607.2,458.2C1606.8,458.4 1604.1,463.3 1601.2,469.2C1581.7,508.6 1556.8,529.9 1514.0,543.8C1507.1,546.0 1500.4,548.1 1499.0,548.4C1496.8,548.8 1496.1,550.1 1494.1,556.2C1491.8,563.4 1486.3,575.6 1481.8,583.6C1468.7,606.4 1445.8,624.7 1421.8,631.2C1414.7,633.2 1411.2,633.5 1398.0,633.4C1383.8,633.3 1381.9,633.1 1375.1,630.7C1361.4,625.8 1353.7,619.1 1348.6,607.9C1344.3,598.6 1342.6,590.4 1342.7,579.0C1342.8,564.4 1344.9,553.6 1350.5,538.2C1352.2,533.7 1352.5,532.0 1351.6,532.0C1350.9,532.0 1345.6,535.9 1339.9,540.7C1304.1,570.6 1292.9,579.8 1280.0,590.1C1263.8,603.0 1240.7,620.5 1238.0,622.0C1237.0,622.6 1232.7,628.1 1228.4,634.2C1224.1,640.4 1218.6,648.4 1216.1,652.0C1213.7,655.6 1207.3,664.4 1202.0,671.5C1196.7,678.6 1187.9,691.0 1182.5,699.0C1162.0,729.3 1144.4,750.7 1122.4,772.0C1082.8,810.4 1042.1,833.7 998.5,843.1C985.4,845.9 960.0,846.7 952.3,844.5Z M999.8,832.5C1029.8,824.9 1052.7,810.6 1078.9,783.4C1098.8,762.7 1116.2,738.7 1148.8,686.8C1159.9,669.3 1161.4,666.3 1159.5,666.7C1158.3,666.9 1126.2,678.1 1109.0,684.4C1051.7,705.1 1012.6,728.5 975.2,764.5C948.5,790.1 938.7,814.0 949.6,827.0C957.3,836.1 977.1,838.2 999.8,832.5Z M683.0,714.9C632.4,710.0 589.2,699.6 530.7,678.1C523.1,675.3 515.3,672.4 513.4,671.5C508.4,669.3 504.9,667.8 491.0,662.0C484.1,659.1 474.7,655.0 470.0,652.8C465.3,650.6 457.9,647.2 453.5,645.2C449.1,643.2 430.0,633.8 411.2,624.3C392.3,614.8 376.0,607.0 374.9,607.0C373.8,607.0 369.4,608.8 365.1,610.9C344.6,621.3 295.1,638.9 265.5,646.5C231.5,655.2 197.1,659.9 161.0,660.7C125.4,661.5 105.2,659.8 81.0,653.9C56.7,648.0 35.8,637.1 23.6,624.0C17.9,617.8 10.0,603.4 10.0,599.2C10.0,598.1 9.6,596.8 9.0,596.5C7.8,595.8 7.6,575.8 8.8,574.5C9.3,573.9 10.2,571.5 10.9,569.1C14.1,557.9 26.8,542.6 40.3,533.6C43.5,531.5 50.9,527.4 56.8,524.5C91.4,507.2 123.5,500.0 165.5,500.0C222.1,500.1 270.3,512.2 374.5,552.5C393.8,559.9 392.0,559.8 399.2,554.9C427.8,535.6 456.7,509.4 490.5,471.9C500.7,460.7 528.3,428.1 547.9,404.1C558.7,390.8 583.6,361.4 586.0,359.0C586.3,358.7 590.9,353.7 596.3,347.8C604.3,339.1 605.8,337.0 604.0,337.0C602.8,337.0 593.7,338.1 583.7,339.4C534.0,346.1 494.5,345.5 451.5,337.5C443.2,335.9 442.7,335.8 427.0,331.5C405.9,325.6 384.3,316.0 366.5,304.6C337.4,285.8 320.6,262.0 316.0,232.7C314.2,221.9 315.2,201.7 318.0,192.0C324.2,170.1 343.7,141.2 366.9,119.5C377.7,109.4 381.0,106.7 392.5,98.9C424.8,76.9 462.4,62.8 508.2,55.6C527.9,52.5 542.0,51.6 573.5,51.7C610.3,51.8 629.6,53.5 665.2,60.0C668.4,60.5 673.4,61.4 676.2,61.9C681.1,62.8 711.1,70.2 722.5,73.4C725.2,74.2 729.1,75.5 731.0,76.3C734.0,77.6 734.1,77.8 732.2,77.9C730.9,78.0 725.5,77.1 720.2,76.1C678.0,67.8 641.3,63.4 601.7,62.0C563.0,60.6 532.9,62.2 504.5,67.2C486.7,70.3 485.4,70.6 474.8,73.4C416.7,89.1 374.1,120.8 352.0,164.9C324.9,219.2 332.1,260.2 374.0,290.6C397.1,307.3 433.1,320.3 473.5,326.4C484.8,328.2 511.3,330.0 525.1,330.0C556.7,330.0 585.3,326.6 617.9,318.8C626.5,316.7 627.6,316.2 630.6,312.5C674.3,258.8 701.5,228.3 742.4,187.4C790.4,139.5 829.4,105.8 872.0,75.5C878.9,70.7 886.1,65.5 888.0,64.0C906.2,50.3 940.9,30.8 960.5,23.5C966.0,21.4 971.4,19.4 972.5,18.9C975.8,17.5 995.0,12.0 1002.5,10.3C1006.4,9.4 1014.5,8.5 1020.7,8.3C1031.1,7.9 1032.2,8.1 1037.4,10.5C1047.1,15.1 1052.1,22.7 1054.5,36.5C1056.9,50.7 1053.9,68.3 1045.8,86.0C1036.8,105.6 1023.9,121.8 991.3,154.7C938.8,207.6 884.0,249.6 827.4,280.3C807.5,291.1 779.1,304.2 766.0,308.6C763.0,309.6 760.0,310.7 759.5,311.1C758.6,311.7 744.8,316.1 730.0,320.5C727.5,321.2 722.0,322.6 717.7,323.5C709.1,325.4 708.9,325.5 699.9,336.0C690.6,346.9 670.5,369.5 663.5,377.0C637.3,404.9 621.0,421.7 607.3,435.0C583.4,458.3 567.6,473.1 551.5,487.4C546.0,492.3 539.9,497.7 538.0,499.4C523.4,512.4 488.7,540.1 476.5,548.6C474.9,549.7 469.4,553.6 464.5,557.1C459.6,560.7 450.9,566.5 445.2,570.0C439.6,573.5 435.0,576.7 435.0,577.1C435.0,577.8 440.3,582.0 441.2,582.0C441.4,582.0 447.2,585.0 454.1,588.8C486.4,606.3 534.4,628.0 589.5,649.9C662.6,678.9 685.2,686.6 718.9,693.9C746.4,699.9 773.9,702.6 799.8,701.7C809.2,701.4 817.0,701.3 817.0,701.6C817.0,704.2 775.9,712.4 749.5,714.9C737.0,716.2 695.7,716.1 683.0,714.9Z M178.0,642.5C232.6,636.6 287.1,620.8 327.0,599.3C331.7,596.7 336.7,594.0 338.2,593.3C341.1,591.8 341.9,589.6 339.8,588.7C337.1,587.6 314.4,577.9 312.5,577.0C305.5,573.9 270.5,559.3 262.8,556.4C229.9,543.7 200.0,536.3 172.0,533.9C157.3,532.6 116.8,533.3 109.5,534.9C106.8,535.5 102.2,536.5 99.5,537.1C83.8,540.5 66.1,548.4 52.4,558.2C38.2,568.2 32.6,577.0 32.6,589.0C32.6,606.9 48.6,622.5 78.0,633.3C87.3,636.7 107.2,641.4 119.4,642.9C129.7,644.3 163.7,644.0 178.0,642.5Z M673.0,613.5C719.9,606.0 759.1,579.9 799.2,529.5C813.4,511.6 814.7,509.0 809.8,509.0C805.3,509.0 796.3,505.7 791.9,502.5C776.7,491.5 777.6,460.7 793.4,444.9C802.3,436.0 812.6,433.0 819.2,437.4C825.7,441.7 826.8,453.3 821.6,464.6C818.3,471.7 809.3,483.0 804.5,486.0C802.6,487.2 801.0,488.5 801.0,489.0C801.0,492.0 815.0,500.0 820.1,500.0C821.8,500.0 836.9,476.6 842.6,465.0C847.1,456.0 853.4,437.2 856.1,424.9C857.9,416.9 858.4,411.2 858.4,400.0L858.5,385.5L855.0,378.5C852.0,372.6 850.8,371.2 846.6,369.1C829.3,360.2 797.4,372.7 760.0,403.0C736.5,422.0 718.2,442.7 698.3,472.5C656.9,534.6 636.5,586.8 645.9,606.4C648.0,610.7 650.1,612.3 656.0,614.3C658.7,615.3 663.3,615.0 673.0,613.5Z M1395.7,612.0C1407.7,608.1 1417.8,601.0 1428.0,589.4C1434.7,581.7 1442.2,570.5 1446.1,562.5C1450.7,552.9 1450.8,553.0 1438.2,553.0C1417.3,552.9 1405.1,548.4 1393.0,536.1C1387.8,530.8 1384.2,525.9 1381.2,520.3C1378.8,515.7 1376.5,511.8 1376.0,511.5C1373.8,510.2 1361.9,534.8 1358.6,547.2C1356.2,556.7 1354.7,572.8 1355.3,583.3C1356.9,609.1 1372.0,619.8 1395.7,612.0Z M1151.4,603.1C1162.2,599.5 1172.0,593.9 1185.7,583.6C1199.6,573.2 1227.9,545.0 1243.2,526.5C1244.5,524.9 1247.3,520.8 1249.2,517.5C1251.2,514.2 1255.5,507.0 1258.9,501.5C1262.2,496.0 1267.7,486.8 1271.1,481.0C1278.2,469.0 1279.8,466.3 1290.7,448.5C1306.4,422.9 1312.9,411.4 1314.5,407.1C1316.7,400.9 1316.5,388.4 1314.1,384.0C1309.9,376.0 1299.4,373.6 1287.6,378.1C1272.3,383.8 1240.2,406.2 1215.8,428.3C1205.6,437.5 1181.1,464.4 1172.2,476.3C1138.8,520.6 1118.0,565.7 1118.1,593.5C1118.1,603.1 1121.7,605.8 1134.6,605.9C1141.0,606.0 1144.5,605.4 1151.4,603.1Z M1454.5,533.9C1461.0,531.6 1463.4,524.1 1465.0,501.3C1466.1,485.4 1465.0,458.6 1462.9,449.1C1462.3,446.6 1461.5,442.7 1461.0,440.5C1458.2,427.5 1455.4,417.7 1454.5,417.4C1453.2,416.8 1426.0,444.3 1404.3,468.0C1397.2,475.8 1385.1,491.0 1383.4,494.3C1382.0,496.9 1382.1,497.5 1386.0,504.8C1393.9,519.5 1405.8,529.8 1420.3,534.5C1425.8,536.3 1448.9,535.9 1454.5,533.9Z M1424.2,325.7C1422.3,323.4 1426.9,318.3 1439.0,309.0C1451.4,299.7 1457.0,293.5 1457.0,289.1C1457.0,286.5 1456.6,286.2 1452.8,285.7C1449.3,285.2 1447.6,284.2 1443.8,280.2C1430.7,266.4 1435.0,241.4 1452.5,230.2C1455.5,228.2 1457.8,227.6 1462.0,227.6C1471.5,227.5 1477.4,233.0 1481.2,245.4C1487.1,264.8 1478.3,287.1 1456.4,308.1C1447.4,316.7 1441.7,320.8 1433.7,324.4C1427.4,327.3 1425.7,327.6 1424.2,325.7Z M734.4,300.5C764.0,294.8 791.4,283.6 834.5,259.5C882.4,232.7 946.0,183.4 987.0,141.4C1009.9,118.0 1026.1,97.8 1032.7,84.5C1039.2,71.6 1040.5,66.5 1040.5,53.5C1040.5,42.4 1040.3,41.1 1037.8,36.4C1033.0,27.3 1025.5,23.0 1014.8,23.0C994.2,23.1 963.1,42.2 914.0,84.8C880.7,113.6 846.9,148.2 813.5,187.5C806.9,195.2 801.1,202.0 800.5,202.6C798.1,205.2 753.4,260.1 742.8,273.5C740.2,276.8 734.2,284.2 729.6,290.0C725.0,295.8 721.4,300.8 721.7,301.2C722.3,302.4 725.6,302.2 734.4,300.5Z"/></svg><span>· Q4 2026</span></div>
+    <div class="deadline"><b id="days">—</b> days to get Burlington's watch service into Google Maps before Christmas Eve</div>
+  </div>
+
+  <div>
+    <h1>What watch search, Maps and ads are worth to Long's in watch sales and service</h1>
+    <p class="lede">Watches bring under 7% of the search clicks that reach longsjewelers.com, and the Burlington flagship's page only ranks for people already typing "Long's." Long's Burlington is a Rolex retailer, Rolex Certified Pre-Owned dealer and Rolex Service Center, yet two local repair shops hold the Google Maps spots for "watch repair near me," and seven other dealers hold page one for "certified pre-owned Rolex." Rolex runs its own ads on Rolex searches, so ranking is how Long's reaches them. Pick a tier, then replace our placeholder rates with Long's own.</p>
+  </div>
+
+  <div class="grid">
+    <section class="panel" aria-label="Assumptions">
+      <div class="sect" style="border-top:0;padding-top:0">Every watch-page visit or ad click</div>
+      <div class="ctl">
+        <div class="row"><label for="inq">Visit to inquiry</label><output id="inqOut" for="inq">1.0%</output></div>
+        <input type="range" id="inq" min="0.3" max="3" step="0.1" value="1">
+        <div class="why">A call, appointment request, chat, form or online CPO order. Placeholder until Long's shares GA4 or call-tracking data.</div>
+      </div>
+      <div class="ctl">
+        <div class="row"><label for="close">Inquiry to sale</label><output id="closeOut" for="close">20%</output></div>
+        <input type="range" id="close" min="5" max="50" step="1" value="20">
+        <div class="why">Placeholder until Long's shares how many watch inquiries become a sale.</div>
+      </div>
+      <div class="ctl">
+        <div class="row"><label for="aov">Average watch sale</label><output id="aovOut" for="aov">$8,000</output></div>
+        <input type="range" id="aov" min="2000" max="25000" step="250" value="8000">
+        <div class="why">Placeholder, kept below Long's own Rolex CPO listings ($12,250–$29,950 on Oct 21, 2026) because TUDOR, OMEGA and other pre-owned pieces sell for less.</div>
+      </div>
+      <div class="sect">Pages that rank: the searches ads can't buy</div>
+      <div class="ctl">
+        <div class="row"><label for="t2">Visits from watch searches Long's ranks 4–20 for</label><output id="t2Out" for="t2">668</output></div>
+        <input type="range" id="t2" min="0" max="1400" step="1" value="668">
+        <div class="why">Half of 13,250 monthly searches ("rolex pre owned" #8, "pre owned watches" #11, "rolex boston" #4) moved into the top three, with an AI Overview haircut (Ahrefs, Oct 21, 2026).</div>
+      </div>
+      <div class="ctl">
+        <div class="row"><label for="t3">Visits from pre-owned Rolex searches</label><output id="t3Out" for="t3">1,516</output></div>
+        <input type="range" id="t3" min="0" max="6000" step="1" value="1516">
+        <div class="why">43,300 monthly searches for "used rolex," "certified pre owned rolex" and similar, where Long's isn't in the top 10, reaching page one (~3.5% of clicks). Rolex runs the Rolex ads, so this is demand only ranking reaches.</div>
+      </div>
+      <div class="ctl">
+        <div class="row"><label for="t4">Visits from brand and category pages</label><output id="t4Out" for="t4">0</output></div>
+        <input type="range" id="t4" min="0" max="20000" step="1" value="0">
+        <div class="why">Kept at 0 in the headline. The ceiling: Mayors-level positions on 212,800 monthly searches for OMEGA, Cartier, TAG Heuer, TUDOR models, men's and luxury watches.</div>
+      </div>
+      <div class="sect">Google Maps: watch repair &amp; service</div>
+      <div class="ctl">
+        <div class="row"><label for="pack">Local repair searches that act on Long's listing</label><output id="packOut" for="pack">12%</output></div>
+        <input type="range" id="pack" min="0" max="30" step="1" value="12">
+        <div class="why">Calls, directions and clicks once Long's is in the Maps 3-pack, out of ~1,030 "watch repair near me" and "rolex service near me" searches a month in Long's six store areas (1.6% of US searches, our estimate). Placeholder until Long's shares Business Profile Insights.</div>
+      </div>
+      <div class="ctl">
+        <div class="row"><label for="job">Become a service job</label><output id="jobOut" for="job">40%</output></div>
+        <input type="range" id="job" min="10" max="80" step="5" value="40">
+        <div class="why">Placeholder.</div>
+      </div>
+      <div class="ctl">
+        <div class="row"><label for="ticket">Average service ticket</label><output id="ticketOut" for="ticket">$250</output></div>
+        <input type="range" id="ticket" min="50" max="1200" step="25" value="250">
+        <div class="why">Placeholder blending battery and strap jobs with full overhauls. Every service visit is also a chance to sell the next watch, which isn't counted.</div>
+      </div>
+      <div class="sect">Ads on the watch searches Long's can bid on</div>
+      <div class="ctl">
+        <div class="row"><label for="adbud">Ad budget a month</label><output id="adbudOut" for="adbud">$1,000</output></div>
+        <input type="range" id="adbud" min="0" max="3000" step="50" value="1000">
+        <div class="band" id="adBand"></div>
+        <div class="why">Searches without Rolex, TUDOR or Patek in them (OMEGA, Cartier, TAG Heuer, luxury and pre-owned watches, watch stores) in Long's six store areas, plus pre-owned watch searches nationally. Rolex Industries runs the Rolex ads that point to longsjewelers.com.</div>
+      </div>
+      <div class="ctl">
+        <div class="row"><label for="cpc">Average cost per click</label><output id="cpcOut" for="cpc">$1.30</output></div>
+        <input type="range" id="cpc" min="0.5" max="5" step="0.05" value="1.3">
+        <div class="why">Ahrefs' guide CPCs for these watch searches run $0.45–$1.70 (Oct 21, 2026). Placeholder until Keyword Planner CPCs for Long's areas are pulled. Ad clicks are assumed to convert at 75% of an organic visit.</div>
+      </div>
+      <div class="presets" role="group" aria-label="Scenarios tied to the plan">
+        <button class="preset" type="button" data-p="1,20,8000,0,0,0,12,40,250,1000,1.3"><b>Tier 1: fix the basics</b>Maps for watch repair at all six stores, hours and tags fixed, $1K a month of ads</button>
+        <button class="preset" type="button" data-p="1,20,8000,668,0,0,12,40,250,1000,1.3"><b>Tier 2: + watch pages that rank</b>Burlington and store pages with timepieces and service, one service hub, CPO page rebuilt</button>
+        <button class="preset" type="button" data-p="1,20,8000,668,1516,0,12,40,250,1000,1.3" aria-pressed="true"><b>Tier 3: + own pre-owned Rolex</b>The headline: CPO family pages and guides on page one for the searches ads can't buy</button>
+        <button class="preset" type="button" data-p="1,20,8000,668,1516,17024,12,40,250,1000,1.3"><b>Tier 4 (ceiling)</b>Brand and category pages at Mayors' positions: the default answer for luxury watches near Boston</button>
+      </div>
+    </section>
+
+    <section class="result" aria-live="polite" aria-label="Outcome">
+      <div>
+        <div class="label">New watch sales &amp; service revenue a year</div>
+        <div class="big" id="rev">$678,417</div>
+        <div class="sub" id="revSub"></div>
+      </div>
+
+      <div class="stats">
+        <div class="stat"><div class="v" id="sales">66</div><div class="l">watch sales a year</div></div>
+        <div class="stat"><div class="v" id="roas">$9.23</div><div class="l">of watch sales per $1 of ads</div></div>
+        <div class="stat"><div class="v" id="jobs">593</div><div class="l">service jobs a year</div></div>
+      </div>
+
+      <div class="bars">
+        <div class="t">Watch sales a month, by channel</div>
+        <div class="bar"><span>From search today</span><div class="fill"><i id="bT"></i></div><span class="n" id="nT">2.7</span></div>
+        <div class="bar"><span>New: ads</span><div class="fill"><i id="bA"></i></div><span class="n" id="nA">1.2</span></div>
+        <div class="bar"><span>New: pages that rank</span><div class="fill"><i id="bO"></i></div><span class="n" id="nO">4.4</span></div>
+      </div>
+
+      <div class="corp">
+        <div class="t">What the new visits would cost as ads, and what ads can reach</div>
+        <div class="stats">
+          <div class="stat"><div class="v" id="peq">$2,839</div><div class="l">a month to buy the new page visits as ads</div></div>
+          <div class="stat"><div class="v" id="vpv">$16.00</div><div class="l">of watch sales per page visit</div></div>
+          <div class="stat"><div class="v" id="share">14%</div><div class="l" id="shareL">of the ~5,590 searches Long's can bid on</div></div>
+        </div>
+      </div>
+
+      <div class="tscroll">
+      <table aria-label="Close-rate sensitivity">
+        <thead><tr><th>If inquiries close at</th><th>Watch sales / yr</th><th>Revenue / yr</th></tr></thead>
+        <tbody id="sens"></tbody>
+      </table>
+      </div>
+    </section>
+  </div>
+
+  <div class="inaction">
+    <h2>What waiting costs</h2>
+    <p>Every month without the plan defers about <b id="perMonth">$56,535</b> of watch sales and service at these rates. Meanwhile Long's search visits are <b>down 36% on last year</b>, in line with Shreve, Crump &amp; Low (−44%), Mayors (−43%) and Lux Bond &amp; Green (−34%), so Long's heads into December, its busiest search month, <b>~14,900 visits behind</b> if the trend holds (Ahrefs, Oct 21, 2026). The market moved for everyone, so the way back is a bigger share of watch searches, which today bring under 7% of Long's search clicks.</p>
+  </div>
+
+  <div class="foot">
+    <div>Demand: Ahrefs, US, Oct 21, 2026. 178,670 monthly watch searches mapped (dealer, brand + Boston, pre-owned and service terms); Long's is in the top 10 for 6,230 of them (3.5%). Watch pages bring ~1,346 search visits a month today. Store-area share: the Boston and Manchester-Nashua metros hold ~5.3M of ~335M people in the US (~1.6%), our estimate for Long's six stores. Click-through: an Advanced Web Ranking-style curve (top three average 17.5%, 11.5% where an AI Overview shows; positions 4–10 average ~3.5% after the AI Overview haircut). Live checks from Lexington, MA on Oct 21, 2026: Google Maps for "watch repair near me" showed Jewelry Rapid Repair, Angela's Jewelry &amp; Watch Repair and Watertown Watch &amp; Clock Repair; "certified pre owned rolex" showed rolex.com, Mayors, Heller, Watches of Switzerland, Betteridge, The 1916 Company and Bucherer. Google's Ads Transparency Center lists ~600 ads to longsjewelers.com from two advertisers, Long's Jewelers and Rolex Industries, Inc.</div>
+    <div>Formula: (new page visits + ad clicks × 75%) × visit-to-inquiry × inquiry-to-sale = new watch sales; × average watch sale; plus ~1,030 local repair searches × share that act on Long's listing × share that become a job × average ticket. All × 12. Watch sales per $1 of ads counts ad revenue only. Revenue is what Long's takes in, before cost of goods. Every revenue figure uses placeholder rates until Long's shares its own.</div>
+    <div>Part of the ROAST × Long's Jewelers watch search, Maps and AI analysis, October 2026. Companion to the <a href="../hawkeye-inspection-value-calculator/">Hawkeye Inspection-Value Calculator</a> and the <a href="../tcl-recovery-calculator/">TCL Recovery Calculator</a>.</div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const $=id=>document.getElementById(id);
+  const SERVICE=1030, BID=5590, CEIL=0.15, PAID=0.75, TODAY=1346;
+  const ids=['inq','close','aov','t2','t3','t4','pack','job','ticket','adbud','cpc'];
+  const els=ids.map($);
+  const fmtI=n=>Math.round(n).toLocaleString('en-US');
+  const fmt1=n=>(Math.round(n*10)/10).toLocaleString('en-US');
+  const fmtD=n=>'$'+Math.round(n).toLocaleString('en-US');
+  const presets=[...document.querySelectorAll('.preset')];
+  const due=new Date(2026,11,24), now=new Date();
+  $('days').textContent=Math.max(0,Math.ceil((due-new Date(now.getFullYear(),now.getMonth(),now.getDate()))/86400000));
+  function model(v){
+    const r=v.inq/100*v.close/100, vpv=r*v.aov;
+    const clicks=v.cpc?v.adbud/v.cpc:0, adS=clicks*r*PAID;
+    const org=v.t2+v.t3+v.t4, orgS=org*r;
+    const jobs=SERVICE*v.pack/100*v.job/100;
+    const rev={a:adS*v.aov,o:orgS*v.aov,s:jobs*v.ticket};
+    const mo=rev.a+rev.o+rev.s;
+    return {vpv,clicks,adS,org,orgS,jobs,rev,mo,yr:mo*12,roas:v.adbud?rev.a/v.adbud:0,peq:org*v.cpc,today:TODAY*r};
+  }
+  function vals(){const v={};ids.forEach((k,i)=>v[k]=+els[i].value);return v;}
+  function render(){
+    const v=vals();
+    $('inqOut').value=v.inq.toFixed(1)+'%'; $('closeOut').value=v.close+'%'; $('aovOut').value=fmtD(v.aov);
+    $('t2Out').value=fmtI(v.t2); $('t3Out').value=fmtI(v.t3); $('t4Out').value=fmtI(v.t4);
+    $('packOut').value=v.pack+'%'; $('jobOut').value=v.job+'%'; $('ticketOut').value=fmtD(v.ticket);
+    $('adbudOut').value=fmtD(v.adbud); $('cpcOut').value='$'+v.cpc.toFixed(2);
+    const o=model(v), cs=o.clicks/BID, band=$('adBand');
+    band.className='band'+(cs>CEIL?' warn':'');
+    band.textContent=v.adbud===0?'No ads: the watch searches Long\'s can bid on go to other dealers':
+      `Buys ~${fmtI(o.clicks)} clicks a month, ~${Math.round(cs*100)}% of the ~${fmtI(BID)} searches Long's can bid on`+(cs>CEIL?'; past ~15%, expect costs to climb':'');
+    $('rev').textContent=fmtD(o.yr);
+    $('revSub').textContent=`${fmt1(o.adS+o.orgS)} watch sales a month (${fmt1(o.adS)} from ads + ${fmt1(o.orgS)} from pages that rank) × ${fmtD(v.aov)}, plus ${fmt1(o.jobs)} service jobs a month from Maps × ${fmtD(v.ticket)}. All × 12.`;
+    $('sales').textContent=fmtI((o.adS+o.orgS)*12); $('roas').textContent=v.adbud?'$'+o.roas.toFixed(2):'—'; $('jobs').textContent=fmtI(o.jobs*12);
+    const mx=Math.max(o.today,o.adS,o.orgS,1)*1.08;
+    [['bT','nT',o.today],['bA','nA',o.adS],['bO','nO',o.orgS]].forEach(([b,n,x])=>{$(b).style.width=(x/mx*100)+'%';$(n).textContent=fmt1(x);});
+    $('peq').textContent=fmtD(o.peq); $('vpv').textContent='$'+o.vpv.toFixed(2);
+    $('share').textContent=Math.round(cs*100)+'%';
+    $('sens').innerHTML=[10,20,30].map(x=>{const m=model(Object.assign({},v,{close:x}));return `<tr><td>${x}%</td><td>${fmtI((m.adS+m.orgS)*12)}</td><td>${fmtD(m.yr)}</td></tr>`;}).join('');
+    $('perMonth').textContent=fmtD(o.mo);
+    presets.forEach(pr=>{const q=pr.dataset.p.split(',').map(Number);pr.setAttribute('aria-pressed',String(q.every((x,k)=>Math.abs(x-+els[k].value)<1e-9)));});
+    try{localStorage.setItem('longs-calc-v1',JSON.stringify(els.map(e=>e.value)));}catch(e){}
+  }
+  els.forEach(el=>el.addEventListener('input',render));
+  presets.forEach(pr=>pr.addEventListener('click',()=>{const q=pr.dataset.p.split(',');els.forEach((el,k)=>el.value=q[k]);render();}));
+  try{const s=JSON.parse(localStorage.getItem('longs-calc-v1'));if(Array.isArray(s)&&s.length===els.length){els.forEach((el,k)=>el.value=s[k]);}}catch(e){}
+  render();
+})();
+</script>
+<!-- layout-guard:start: roast-deck-kit/layout_guard.py -->
+<script>
+(function(){
+  var els=[].slice.call(document.querySelectorAll('.result .big,.stat .v,.funnel .v,.key .v'));
+  if(!els.length) return;
+  function fit(el){
+    el.style.fontSize='';
+    var w=el.clientWidth; if(!w) return;
+    var min=el.classList.contains('big')?28:13;
+    for(var i=0;i<4&&el.scrollWidth>w+0.5;i++){
+      var fs=parseFloat(getComputedStyle(el).fontSize);
+      var next=Math.max(min,fs*w/el.scrollWidth-0.5);
+      if(next>=fs) break;
+      el.style.fontSize=next.toFixed(1)+'px';
+    }
+  }
+  function all(){els.forEach(fit);}
+  var mo=new MutationObserver(all);
+  els.forEach(function(el){mo.observe(el,{childList:true,characterData:true,subtree:true});});
+  var raf=0; function soon(){if(!raf) raf=requestAnimationFrame(function(){raf=0;all();});}
+  window.addEventListener('resize',soon);
+  if(window.ResizeObserver){
+    var last=new WeakMap();
+    var ro=new ResizeObserver(function(entries){
+      var changed=false;
+      entries.forEach(function(e){var w=Math.round(e.contentRect.width);if(last.get(e.target)!==w){last.set(e.target,w);changed=true;}});
+      if(changed) soon();
+    });
+    [].slice.call(document.querySelectorAll('.result,.stat,.funnel .step,.key')).forEach(function(b){ro.observe(b);});
+  }
+  if(document.fonts&&document.fonts.ready) document.fonts.ready.then(all);
+  all();
+})();
+</script>
+<!-- layout-guard:end -->
+</body>
+</html>
