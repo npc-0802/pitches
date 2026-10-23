@@ -1,0 +1,407 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Fairfax &amp; Favor Order-Value Calculator</title>
+<!-- share:start -->
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<meta name="description" content="What category search ads, rebuilt collections and AI answers are worth to Fairfax &amp; Favor in new online orders, at rates you can change.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ROAST">
+<meta property="og:title" content="Fairfax &amp; Favor Order-Value Calculator">
+<meta property="og:description" content="What category search ads, rebuilt collections and AI answers are worth to Fairfax &amp; Favor in new online orders, at rates you can change.">
+<meta property="og:url" content="https://npc-0802.github.io/pitches/fairfaxfavor-order-value-calculator/">
+<meta property="og:image" content="https://npc-0802.github.io/pitches/fairfaxfavor-order-value-calculator/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="ROAST × Fairfax &amp; Favor: Order-Value Calculator">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Fairfax &amp; Favor Order-Value Calculator">
+<meta name="twitter:description" content="What category search ads, rebuilt collections and AI answers are worth to Fairfax &amp; Favor in new online orders, at rates you can change.">
+<meta name="twitter:image" content="https://npc-0802.github.io/pitches/fairfaxfavor-order-value-calculator/og.png">
+<!-- share:end -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;900&family=Public+Sans:wght@400;500;600&display=swap">
+<style>
+:root{
+  --bg:#ffffff; --ink:#111214; --muted:#5b5e66; --line:#e6e4dc; --panel:#f6f5f0;
+  --yellow:#FFD100; --yellow-deep:#e6bc00; --on-yellow:#111214; --on-yellow-muted:#4a4630;
+  --track:#e3e1d8; --ok:#1f7a3a;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){ --bg:#111214; --ink:#f4f3ee; --muted:#a6a79f; --line:#2a2b2f; --panel:#1b1c20; --track:#33343a; color-scheme:dark; }
+}
+:root[data-theme="dark"]{ --bg:#111214; --ink:#f4f3ee; --muted:#a6a79f; --line:#2a2b2f; --panel:#1b1c20; --track:#33343a; color-scheme:dark; }
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Public Sans",system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;font-size:15px;line-height:1.45}
+.wrap{max-width:1440px;margin:0 auto;padding-block:22px 44px;padding-inline:clamp(16px,3vw,40px);display:grid;gap:22px}
+.brand{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-bottom:6px;flex-wrap:wrap}
+.wordmark{display:flex;align-items:center;gap:12px}.wordmark .roast-logo{height:22px;width:auto;display:block;color:var(--ink)}
+.wordmark span{font-family:"Public Sans",sans-serif;font-weight:500;font-size:15px;color:var(--muted);letter-spacing:0}
+.deadline{font-size:13px;color:var(--muted);text-align:right}
+.deadline b{color:var(--ink);font-variant-numeric:tabular-nums}
+h1{font-family:"Archivo",system-ui,sans-serif;font-weight:900;font-size:clamp(28px,3.4vw,46px);line-height:1.05;letter-spacing:-.015em;margin:0;text-wrap:balance;max-width:26ch}
+.lede{color:var(--muted);max-width:78ch;margin:8px 0 0;font-size:clamp(14px,1.1vw,16px)}
+.grid{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,2fr);gap:22px;align-items:start}
+@media (max-width:900px){.grid{grid-template-columns:1fr}}
+.panel{background:var(--panel);border-radius:22px;padding:clamp(18px,2vw,28px) clamp(18px,2vw,28px) 10px;min-width:0;overflow:hidden}
+.ctl{display:grid;gap:8px;padding-block:14px;border-top:1px solid var(--line)}
+.ctl:first-child{border-top:0;padding-top:2px}
+.ctl .row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.ctl label{font-weight:600}
+.ctl output{font-family:"Archivo",sans-serif;font-weight:700;font-size:22px;font-variant-numeric:tabular-nums}
+.ctl output small{font-family:"Public Sans",sans-serif;font-weight:500;font-size:13px;color:var(--muted);margin-left:8px}
+.ctl .why{font-size:13px;color:var(--muted);max-width:72ch}
+.sect{font-family:"Archivo",sans-serif;font-weight:700;font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);padding-top:16px;border-top:1px solid var(--line)}
+.band{font-size:13px;font-weight:600;padding:5px 12px;border-radius:14px;background:var(--yellow);color:var(--on-yellow);width:fit-content;max-width:100%;line-height:1.3}
+.band.low{background:var(--track);color:var(--ink)}
+.band.warn{background:#f3c4bd;color:#5c120a}
+input[type=range]{width:100%;accent-color:var(--ink);height:30px;margin:0}
+input[type=range]:focus-visible{outline:2px solid var(--ink);outline-offset:4px;border-radius:6px}
+.presets{display:flex;flex-wrap:wrap;gap:8px;padding-block:16px;border-top:1px solid var(--line)}
+.preset{border:1.5px solid var(--line);border-radius:12px;padding:8px 12px;font-size:13px;background:transparent;color:var(--ink);cursor:pointer;font-family:inherit;text-align:left;line-height:1.25}
+.preset b{display:block;font-weight:700}
+.preset:hover,.preset:focus-visible{border-color:var(--ink);outline:none}
+.preset[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.result{background:var(--yellow);color:var(--on-yellow);border-radius:22px;padding:clamp(20px,2.2vw,32px);display:grid;gap:18px;min-width:0}
+.result .label{font-weight:600;font-size:14px;color:var(--on-yellow-muted)}
+.result .big{font-family:"Archivo",sans-serif;font-weight:900;font-size:clamp(48px,6vw,88px);line-height:.95;letter-spacing:-.02em;font-variant-numeric:tabular-nums;margin:6px 0}
+.result .sub{font-size:14px;color:var(--on-yellow-muted);max-width:52ch}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+@media (max-width:520px){.stats{grid-template-columns:1fr 1fr}}
+.stat{background:rgba(255,255,255,.5);border-radius:14px;padding:14px 14px 12px;min-width:0}
+.stat .v{font-family:"Archivo",sans-serif;font-weight:700;font-size:clamp(20px,1.8vw,26px);font-variant-numeric:tabular-nums;line-height:1.1}
+.stat .l{font-size:12.5px;color:var(--on-yellow-muted);margin-top:5px;line-height:1.3;text-wrap:balance}
+.bars{display:grid;gap:8px;margin-top:4px}
+.bars .t{font-weight:600;font-size:13px;color:var(--on-yellow-muted)}
+.bar{display:grid;grid-template-columns:minmax(120px,170px) 1fr minmax(64px,auto);gap:10px;align-items:center;font-size:13px}
+@media (max-width:520px){.bar{grid-template-columns:110px 1fr minmax(56px,auto)}}
+.bar .fill{height:14px;border-radius:7px;background:rgba(17,18,20,.25);position:relative;overflow:hidden}
+.bar .fill i{position:absolute;inset:0;width:0;background:var(--on-yellow);border-radius:7px;transition:width .25s ease}
+.bar .fill i.gain{background:#ffffff;left:auto}
+.bar .n{text-align:right;font-variant-numeric:tabular-nums;font-weight:600}
+@media (prefers-reduced-motion: reduce){.bar .fill i{transition:none}}
+.corp{display:grid;gap:8px}
+.corp .t{font-weight:600;font-size:13px;color:var(--on-yellow-muted)}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th,td{text-align:left;padding:7px 4px;border-bottom:1px solid rgba(17,18,20,.18);font-variant-numeric:tabular-nums}
+th{font-size:12px;color:var(--on-yellow-muted);font-weight:600}
+td:last-child,th:last-child{text-align:right;font-weight:700}
+.inaction{background:var(--panel);border-radius:22px;padding:clamp(18px,2vw,28px);display:grid;gap:8px}
+.inaction h2{font-family:"Archivo",sans-serif;font-weight:700;font-size:18px;margin:0}
+.inaction p{margin:0;color:var(--muted);max-width:100ch;font-size:15px;line-height:1.55}
+.inaction b{color:var(--ink)}
+.foot{font-size:13px;color:var(--muted);max-width:110ch;display:grid;gap:6px}
+.foot a{color:var(--ink)}
+@media (min-width:901px){.result{position:sticky;top:16px}}
+.wordmark{flex-wrap:wrap;row-gap:6px}.wordmark .client-logo{height:22px;width:auto;display:block;color:var(--ink)}
+/* layout-guard:start: roast-deck-kit/layout_guard.py; re-run it instead of editing */
+.grid>*,.result>*,.stats>*,.bar>*,.funnel>*,.keys>*{min-width:0}
+.result{grid-template-columns:minmax(0,1fr);container:lgresult/inline-size}
+.stat .l,.funnel .l,.funnel .s,.key .l,.key .s{overflow-wrap:break-word}
+.tscroll{overflow-x:auto;max-width:100%}
+@container lgresult (max-width:400px){
+  .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .stats>.stat:last-child:nth-child(odd){grid-column:1/-1}
+  .funnel{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .funnel .step::after{display:none}
+}
+/* layout-guard:end */
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="brand">
+    <div class="wordmark"><svg class="roast-logo" fill="currentColor" aria-label="ROAST" role="img" viewBox="0 0 931.89 203.5" xmlns="http://www.w3.org/2000/svg" overflow="hidden" xmlns:c2pa="http://c2pa.org/manifest"><metadata><c2pa:manifest>AAAWgmp1bWIAAAAeanVtZGMycGEAEQAQgAAAqgA4m3EDYzJwYQAAABZcanVtYgAAAEdqdW1kYzJtYQARABCAAACqADibcQN1cm46YzJwYTozZDQ3MGE0ZS0yMmVkLTQyMmItYTUyMS03MDBhY2VmMjQ1YzkAAAADl2p1bWIAAAApanVtZGMyYXMAEQAQgAAAqgA4m3EDYzJwYS5hc3NlcnRpb25zAAAAALxqdW1iAAAARGp1bWRjYm9yABEAEIAAAKoAOJtxE2MycGEuaW5ncmVkaWVudC52MwAAAAAYYzJzaA2CgfxpiyX5e10r0s1hRZEAAABwY2JvcqNpZGM6Zm9ybWF0bWltYWdlL3N2Zyt4bWxqaW5zdGFuY2VJRHgseG1wOmlpZDplM2ZmMmVlNi01ZGQ1LTQ1MjItOWQ5Yy0zZGJjNGU4YmI5NWJscmVsYXRpb25zaGlwaHBhcmVudE9mAAAB4mp1bWIAAABBanVtZGNib3IAEQAQgAAAqgA4m3ETYzJwYS5hY3Rpb25zLnYyAAAAABhjMnNokbiFip/0bVcWbCsmWV7bOwAAAZljYm9yomdhY3Rpb25zgqJmYWN0aW9ua2MycGEub3BlbmVkanBhcmFtZXRlcnOha2luZ3JlZGllbnRzgaJjdXJseC1zZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmluZ3JlZGllbnQudjNkaGFzaFggdHVjQhQbTIDc8numuX28WgpAZrXhsoTiscHOU7tUJ9ikZmFjdGlvbngdY29tLmFudGhyb3BpYy5jbGF1ZGUucHJvdmlkZWRqcGFyYW1ldGVyc6F4H2NvbS5hbnRocm9waWMub3JpZ2luLWNvbmZpZGVuY2VndW5rbm93bmtkZXNjcmlwdGlvbnhmQ2xhdWRlIHByb3ZpZGVkIHRoaXMgZmlsZSBhdCB0aGUgcmVxdWVzdCBvZiBhIHVzZXIgYW5kIG1heSBoYXZlIGNyZWF0ZWQgb3IgbW9kaWZpZWQgdGhlIGZpbGUgY29udGVudHMubXNvZnR3YXJlQWdlbnShZG5hbWVmQ2xhdWRlcmFsbEFjdGlvbnNJbmNsdWRlZPUAAADIanVtYgAAAEBqdW1kY2JvcgARABCAAACqADibcRNjMnBhLmhhc2guZGF0YQAAAAAYYzJzaJTTpaWSGw/skOxEaOFCsm0AAACAY2JvcqVjYWxnZnNoYTI1NmNwYWRNAAAAAAAAAAAAAAAAAGRoYXNoWCBFqzodb2N2pJR9ua6fnBJPH/pxrehRy7zC3r72E1+nfmRuYW1lbmp1bWJmIG1hbmlmZXN0amV4Y2x1c2lvbnOBomVzdGFydBjZZmxlbmd0aBkeBAAAAj5qdW1iAAAAJ2p1bWRjMmNsABEAEIAAAKoAOJtxA2MycGEuY2xhaW0udjIAAAACD2Nib3KlY2FsZ2ZzaGEyNTZpc2lnbmF0dXJleE1zZWxmI2p1bWJmPS9jMnBhL3VybjpjMnBhOjNkNDcwYTRlLTIyZWQtNDIyYi1hNTIxLTcwMGFjZWYyNDVjOS9jMnBhLnNpZ25hdHVyZWppbnN0YW5jZUlEeCx4bXA6aWlkOjgyNWJkYzkyLWFhMzAtNGMyYy1iZWFhLWQ2YzVjOWU5YTlmMHJjcmVhdGVkX2Fzc2VydGlvbnODomN1cmx4LXNlbGYjanVtYmY9YzJwYS5hc3NlcnRpb25zL2MycGEuaW5ncmVkaWVudC52M2RoYXNoWCB0dWNCFBtMgNzye6a5fbxaCkBmteGyhOKxwc5Tu1Qn2KJjdXJseCpzZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmFjdGlvbnMudjJkaGFzaFggZb4jeey+/rFWzYf06bWr+PDqqliKesNjNSIAZleW87WiY3VybHgpc2VsZiNqdW1iZj1jMnBhLmFzc2VydGlvbnMvYzJwYS5oYXNoLmRhdGFkaGFzaFggJXgyBv4iaW2DX7SIIoYZDAgDYOBXpYCAOdcJs3U09wJ0Y2xhaW1fZ2VuZXJhdG9yX2luZm+jZG5hbWVvQW50aHJvcGljIEZpbGVzZ3ZlcnNpb25lMS4wLjBrc3BlY1ZlcnNpb25lMi40LjAAABA4anVtYgAAAChqdW1kYzJjcwARABCAAACqADibcQNjMnBhLnNpZ25hdHVyZQAAABAIY2JvctKEWQISogEmGCFZAgowggIGMIIBjaADAgECAhRA5aAK7sI50L64g/oGQgU9Z1UTADAKBggqhkjOPQQDAzBJMRcwFQYDVQQKEw5BbnRocm9waWMsIFBCQzEuMCwGA1UEAxMlQW50aHJvcGljIENvbnRlbnQgQ3JlZGVudGlhbHMgUm9vdCBDQTAeFw0yNjA4MDcxODQzNTZaFw0yODA4MDYxOTQzNTZaMEQxFzAVBgNVBAoTDkFudGhyb3BpYywgUEJDMSkwJwYDVQQDEyBBbnRocm9waWMgQ2xhdWRlIENvbnRlbnQgU2lnbmluZzBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABJh6CmvLUBgFFNU0vUKlOVtE6djd17L5SuwX0LemFisBM3dkd/3cyjxFA3Qo5S46fX0/ihY0VZ7mfb9KF703t5OjWDBWMA4GA1UdDwEB/wQEAwIHgDAVBgNVHSUEDjAMBgorBgEEAYPoXgIBMAwGA1UdEwEB/wQCMAAwHwYDVR0jBBgwFoAUzlHiBIFOZFsj+OPEz5o+nMHXXMIwCgYIKoZIzj0EAwMDZwAwZAIwMXMdFJ4BetLLVY7ORuE9noqbbAZOZn/aArXyTwFAZfKrPzxF2vPoJNf1+UCdg1XGAjBwX1zd9WGqYkqmL5SFqw1QySjr1zJfpJM9+1rdDwSPLMOPOjKuiXjoU/pUUeG9RwmhY3BhZFkNngAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPZYQKQHFmaWWw8/Pc9rbvILoQMoF65ZjbiA82R+olrBgcQbYPjdqnnCCZ2/cDk4w5k3mqsSm4BnOOf3/ZWf0b44t4k=</c2pa:manifest></metadata><path d="M30.4 4.59 0 4.59 0 0 93.33 0C128.29 0 166.29 7.45 166.29 50.73 166.29 85.7 123.42 94.87 101.23 97.45L101.23 98.02C136.19 100.89 154.74 108.05 159.3 145.89L163.56 180.86C165.69 197.77 174.2 198.92 179.37 198.92 184.84 198.92 188.79 197.2 191.84 196.05L193.66 199.78C187.58 201.79 179.98 203.51 168.73 203.51 131.64 203.51 129.51 184.88 125.25 151.92L123.12 134.72C120.99 116.66 115.52 100.32 81.17 100.32L61.41 100.32 61.41 198.92 92.42 198.92 92.42 203.51 0 203.51 0 198.92 30.4 198.92 30.4 4.59ZM61.41 95.73 76.61 95.73C112.48 95.73 133.46 83.98 133.46 50.73 133.46 27.8 125.25 4.58 82.08 4.58L61.41 4.58 61.41 95.73Z" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4"  fill-opacity="1"/><path d="M293.24 0.32C342.65 0.32 385.63 45.32 385.63 101.91 385.63 158.5 342.65 203.5 293.24 203.5 243.83 203.5 200.85 158.5 200.85 101.91 200.85 45.32 243.83 0.32 293.24 0.32ZM293.24 199.09C345.28 199.09 352.3 138.08 352.3 101.91 352.3 65.74 345.28 4.74 293.24 4.74 241.2 4.74 234.18 65.75 234.18 101.91 234.18 138.07 241.2 199.09 293.24 199.09Z" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4"  fill-opacity="1"/><path d="M501.23 135.93 438.66 135.93 424.96 175.38C422.91 180.89 420.57 187.51 420.57 192.19 420.57 196.05 424.08 199.08 433.43 199.08L448.63 199.08 448.63 203.49 388.4 203.49 388.4 199.08 397.76 199.08C406.82 199.08 410.62 198.25 416.18 182.82L480.77 0.32 483.99 0.32 556.81 199.09 581.08 199.09 581.08 203.5 495.42 203.5 495.42 199.09 524.07 199.09 501.24 135.93ZM469.66 48 469.08 48 440.43 131.52 499.78 131.52 469.67 48Z" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4"  fill-opacity="1"/><path d="M598 130.7 602.68 130.7C602.68 177.01 631.63 198.78 666.71 198.78 694.78 198.78 714.95 181.97 714.95 157.16 714.95 128.49 699.16 119.95 665.54 114.99 619.64 108.1 598 100.93 598 54.62 598 23.2 619.93 0.32 652.68 0.32 682.79 0.32 694.2 17.14 704.14 17.13 712.17 17.13 711.74 3.58 712.62-2.84217e-14L717.3-2.84217e-14 717.3 64.54 712.62 64.54C709.99 33.12 691.86 4.73 652.69 4.73 627.84 4.73 610.29 20.17 610.29 45.52 610.29 70.87 620.23 75.84 668.76 84.11 711.45 91.28 728.99 104.23 728.99 140.07 728.99 175.91 707.94 203.19 665.55 203.19 636.31 203.19 620.82 188.78 610 188.86 601.37 188.92 602.69 198.82 602.69 203.51L598.01 203.51 598.01 130.7Z" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4"  fill-opacity="1"/><path d="M752.96 0 752.96 64.54 757.64 64.54C757.64 24.77 766.71 6.75 804.33 4.79L804.33 147.44 829.12 147.44 829.12 4.41 855.73 4.41 855.73 147.44 880.52 147.44 880.52 4.78C918.11 6.71 927.21 24.7 927.21 64.54L931.89 64.54 931.89 0 752.96 0Z" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4"  fill-opacity="1"/></svg><span>×</span><svg class="client-logo" role="img" aria-label="Fairfax & Favor" style="height:34px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 627.7 235.1">
+  <g>
+    <polygon style="fill:currentColor" points="314.4,123.6 271.9,93.2 271.9,33 356.9,33 356.8,93.2"></polygon>
+    <path style="fill:var(--bg)" d="M314.4,124.9l-43.5-31.1V31.9h87.1l-0.1,61.9L314.4,124.9z M273,92.7l41.4,29.6l41.3-29.6l0.1-58.6H273V92.7z"></path>
+    <path fill="#AE8A6B" d="M331,22.9l8.3-14.1c0.9-1.5,1.3-2.9,0.7-3.3c-0.6-0.4-1.9,0.5-2.9,2.1c-1,1.5-1.4,3.1-0.8,3.5
+        c0.1,0,0.1,0.1,0.2,0.1c-2,1.8-4.5,3.7-6,3.7c-2.2-0.1-3.6-2.4-4.2-4c0.5-0.5,0.8-1.7,0.8-3.1c0-1.8-0.6-3.3-1.3-3.3
+        c-0.7,0-1.3,1.5-1.3,3.3c0,1.4,0.3,2.7,0.8,3.1c-0.7,1.5-2.3,4-5,4c-4.3,0-5.5-8.2-5.5-8.2c0.7,0,0.9-1.4,0.9-3.2
+        c0-1.8-0.6-3.3-1.3-3.3h-0.3c-0.7,0-1.3,1.5-1.3,3.3c0,1.8,0.2,3.2,0.9,3.2c0,0-1.1,8.3-5.5,8.2c-2.8,0-4.3-2.5-5-4
+        c0.5-0.5,0.8-1.7,0.8-3.1c0-1.8-0.6-3.3-1.3-3.3c-0.7,0-1.3,1.5-1.3,3.3c0,1.4,0.3,2.7,0.8,3.1c-0.7,1.5-2,3.9-4.2,4
+        c-1.6,0-4-1.8-6-3.7c0.1,0,0.1,0,0.2-0.1c0.6-0.4,0.2-2-0.8-3.5c-1-1.5-2.3-2.4-2.9-2.1c-0.6,0.4-0.3,1.8,0.7,3.3l7.6,14.1
+        L331,22.9z"></path>
+    <path style="fill:currentColor" d="M314.5,129.1l-47.1-33.4V28h94.3l-0.1,67.6L314.5,129.1z M269.7,94.5l44.8,31.8l44.7-31.8l0.1-64.1h-89.7V94.5z"></path>
+    <path style="fill:var(--bg)" d="M320.8,92.2c-0.3,0-0.5,0.1-0.7,0.3l-1.2,0c-1,0-2.2,0-2.7,0c0-2.3,0.1-11.2,0-14.4c0-1.5,0-6.1-0.1-11.4
+        c0-8,0-17.1-0.2-18.8c-0.2-2.9-0.9-5.3-1-5.5l-0.6-1.8l-0.6,1.8c0,0.1-0.8,2.6-1,5.4c-0.1,1.7-0.1,10.7-0.2,18.7
+        c0,5.4,0,10-0.1,11.5c-0.1,3.2-0.1,12.2,0,14.4c-0.7,0-3,0-3.8,0c-0.2-0.2-0.5-0.3-0.8-0.3c-0.6,0-1.2,0.5-1.2,1.2
+        c0,0.6,0.5,1.2,1.2,1.2c0.3,0,0.5-0.1,0.8-0.3l3.9,0.3l0.2,0.1l0,0.3c-0.2,0.2-0.3,0.4-0.3,0.7c0,0.3,0.1,0.5,0.3,0.7l0,1
+        c-0.2,0.2-0.3,0.4-0.3,0.6c0,0.3,0.1,0.5,0.3,0.6l0.2,8.9c0,0.2-0.2,0.8-0.2,1c-0.2,0.3-0.6,0.8-0.6,1.4c0,0.9,0.5,1.2,0.8,1.4
+        c0.1,0.1,0.2,0.1,0.3,0.2c0,0,0,0.1,0,0.1c0,0.5,0.4,0.9,0.9,0.9c0.5,0,0.9-0.4,0.9-0.9c0,0,0-0.1,0-0.1c0.1-0.1,0.3-0.2,0.4-0.3
+        c0.2-0.2,0.7-0.5,0.8-1.4c0-0.7-0.3-1.1-0.6-1.4c-0.1-0.3-0.2-0.9-0.2-1.1l0.2-8.9c0.2-0.2,0.3-0.4,0.3-0.6c0-0.2-0.1-0.5-0.3-0.6
+        l0-1c0.2-0.2,0.3-0.4,0.3-0.7c0-0.3-0.1-0.5-0.3-0.7l0-0.3l0.3-0.1l3.9-0.3c0.2,0.2,0.4,0.3,0.8,0.3c0.6,0,1.2-0.5,1.2-1.2
+        C321.9,92.7,321.4,92.2,320.8,92.2z"></path>
+    <path style="fill:var(--bg)" d="M341.6,82.9c-0.2,0-0.4,0.1-0.6,0.2c-0.6,0-2.7,0-3.3,0c0-1.8,0-9.4,0-12.1c0-1.2,0-5.1-0.1-9.6
+        c0-6.6,0-14.1-0.1-15.5c-0.2-2.4-0.8-4.4-0.8-4.5l-0.4-1.4l-0.4,1.4c0,0.1-0.6,2.1-0.8,4.5c-0.1,1.4-0.1,8.8-0.1,15.3
+        c0,4.4,0,8.6-0.1,9.8c-0.1,2.7,0,10.3,0,12.1c-0.5,0-2.5,0-3.2,0c-0.2-0.2-0.4-0.3-0.6-0.3c-0.5,0-0.9,0.4-0.9,0.9
+        c0,0.5,0.4,0.9,0.9,0.9c0.2,0,0.4-0.1,0.6-0.2l3.2,0.3l0.2,0.1v0.3c-0.1,0.1-0.2,0.3-0.2,0.5c0,0.2,0.1,0.4,0.3,0.6l0,0.9
+        c-0.1,0.1-0.2,0.3-0.2,0.5c0,0.2,0.1,0.4,0.2,0.5l0.2,7.4c0,0-0.1,0.7-0.2,0.9l0,0c-0.2,0.2-0.5,0.6-0.5,1.2c0,0.7,0.4,1,0.6,1.2
+        l0.3,0.2c0,0,0,0.1,0,0.1c0,0.4,0.3,0.7,0.7,0.7c0.4,0,0.7-0.3,0.7-0.7c0,0,0-0.1,0-0.1c0.1-0.1,0.2-0.2,0.3-0.2
+        c0.2-0.1,0.6-0.4,0.6-1.1c0-0.5-0.3-0.9-0.5-1.2c0-0.2-0.2-0.8-0.2-0.8l0.2-7.5c0.2-0.1,0.3-0.3,0.3-0.5c0-0.2-0.1-0.4-0.2-0.5
+        l0-0.9c0.2-0.1,0.3-0.3,0.3-0.5c0-0.2-0.1-0.4-0.3-0.5l0-0.3l0.3-0.1l3.2-0.3c0.1,0.1,0.4,0.2,0.6,0.2c0.5,0,0.9-0.4,0.9-0.9
+        C342.5,83.4,342.1,82.9,341.6,82.9z"></path>
+    <path style="fill:var(--bg)" d="M297.8,83.2c-0.2,0-0.4,0.1-0.6,0.2l-0.7,0c-0.9,0-2.2,0-2.7,0c0-1.8,0-9.4,0-12.1c0-1.3,0-5.2-0.1-9.7
+        c0-6.6,0-14-0.1-15.4c-0.2-2.4-0.8-4.4-0.8-4.5l-0.4-1.4l-0.4,1.4c0,0.1-0.6,2.1-0.8,4.5c-0.1,1.4-0.1,8.9-0.1,15.4
+        c0,4.5,0,8.4-0.1,9.7c-0.1,2.7,0,10.3,0,12.1c-0.5,0-2.5,0-3.2,0c-0.2-0.2-0.4-0.3-0.6-0.3c-0.5,0-0.9,0.4-0.9,0.9
+        c0,0.5,0.4,0.9,0.9,0.9c0.2,0,0.5-0.1,0.6-0.2l3.2,0.3l0.2,0.1l0,0.3c-0.2,0.1-0.2,0.3-0.2,0.5c0,0.2,0.1,0.4,0.3,0.6l0,0.9
+        c-0.1,0.1-0.2,0.3-0.2,0.5c0,0.2,0.1,0.4,0.2,0.5l0.2,7.4c0,0-0.2,0.9-0.2,0.9v0c-0.2,0.2-0.5,0.6-0.5,1.2c0,0.7,0.4,1,0.6,1.2
+        c0.1,0.1,0.2,0.1,0.3,0.2c0,0,0,0.1,0,0.1c0,0.4,0.3,0.7,0.7,0.7s0.7-0.3,0.7-0.7c0,0,0-0.1,0-0.1l0.3-0.2c0.2-0.1,0.6-0.4,0.6-1.1
+        c0-0.5-0.3-0.9-0.5-1.2c0-0.2-0.2-0.8-0.2-0.8l0.2-7.5c0.2-0.1,0.3-0.3,0.3-0.5c0-0.2-0.1-0.4-0.2-0.5l0-0.9
+        c0.2-0.1,0.3-0.3,0.3-0.5c0-0.2-0.1-0.4-0.3-0.5l0-0.3l0.3-0.1l3.2-0.2c0.1,0.1,0.3,0.2,0.6,0.2h0c0.5,0,0.9-0.4,0.9-0.9
+        C298.7,83.6,298.3,83.2,297.8,83.2z"></path>
+  </g>
+  <g style="fill:currentColor">
+    <path d="M8.5,151.9v15.4h18.9v6.6H8.5v22.3H0v-51h30.8v6.6H8.5z"></path>
+    <path d="M73.3,196.2l-6-13.2H45.6l-6,13.2h-8.3l23.8-51.7h3.1l23.8,51.7H73.3z M60.2,167.3c-1.2-2.8-2.2-5.1-3.7-9.1h-0.2
+        c-1.5,4.1-2.4,6.4-3.6,9l-4.3,9.7h16L60.2,167.3z"></path>
+    <path d="M92.4,196.2v-51h8.5v51H92.4z"></path>
+    <path d="M149.1,196.2l-17.6-22.4h-7.9v22.4h-8.4v-51h17.7c7.9,0,16.8,4.6,16.8,14.3c0,6.8-4.4,11.1-9.8,13.1l19.1,23.6H149.1z
+        M131.4,151.8h-7.8v15.5h7.8c5,0,9.9-2.4,9.9-7.8C141.3,154.3,136.4,151.8,131.4,151.8z"></path>
+    <path d="M177.5,151.9v15.4h18.9v6.6h-18.9v22.3H169v-51h30.8v6.6H177.5z"></path>
+    <path d="M240.3,196.2l-6-13.2h-21.7l-6,13.2h-8.3l23.8-51.7h3.1l23.8,51.7H240.3z M227.2,167.3c-1.2-2.8-2.2-5.1-3.7-9.1h-0.2
+        c-1.5,4.1-2.4,6.4-3.6,9l-4.3,9.7h16L227.2,167.3z"></path>
+    <path d="M290.8,196.2l-6.6-9.7c-2.2-3.3-4.8-7.3-6.8-10.5h-0.2c-2,3.2-4.5,7-6.9,10.4l-6.7,9.8h-9l17.8-25.8l-17-25.2h9.6l6.3,9.3
+        c2,3,4.5,6.6,6.4,9.8h0.2c1.9-3.2,4.3-6.7,6.4-9.8l6.4-9.4h9l-17,24.7l17.7,26.3H290.8z"></path>
+    <path d="M371.9,196.2h-10.3l-7-6.9c-4.8,5.3-9.8,8.2-17.4,8.2c-12.8,0-18.6-7.5-18.6-15c0-7.3,6-11.9,12.9-14.9
+        c-3.6-3.5-6.7-7-6.7-12c0-7.9,7.1-12.2,15.2-12.2c7.9,0,14.7,3.9,14.7,11.7c0,6.5-6.1,10.6-11.8,13.4l11.2,10.7l7.1-10.6h8.7
+        l-11,15.6L371.9,196.2z M336.3,171.7c-4.6,2.4-9.5,5.2-9.5,10.6c0,5.1,5.2,9.1,10.7,9.1c5.5,0,9.6-3.4,12.6-6.6L336.3,171.7z
+        M340.1,149.6c-4.1,0-7.5,2.2-7.5,6.1c0,3.4,3.1,6.4,5.6,8.7c3.9-2,8.8-4.5,8.8-9.2C347,151.7,344.1,149.6,340.1,149.6z"></path>
+    <path d="M399.9,151.9v15.4h18.9v6.6h-18.9v22.3h-8.5v-51h30.9v6.6H399.9z"></path>
+    <path d="M463,196.2l-6-13.2h-21.7l-6,13.2h-8.3l23.8-51.7h3.1l23.8,51.7H463z M449.9,167.3c-1.2-2.8-2.2-5.1-3.7-9.1H446
+        c-1.5,4.1-2.4,6.4-3.6,9l-4.3,9.7h16L449.9,167.3z"></path>
+    <path d="M493.9,196.9h-2.7L469,145.2h8.9l6.6,15.4c2.5,6,6.4,15.5,8.4,21h0.2c2-5.4,5.8-14.8,8.4-21l6.6-15.4h8L493.9,196.9z"></path>
+    <path d="M545.3,197.2c-14.9,0-29.5-10-29.5-26.5c0-16.4,14.7-26.5,29.5-26.5c14.9,0,29.5,10.1,29.5,26.5
+        C574.8,187.2,560.2,197.2,545.3,197.2z M545.3,150.9c-10.3,0-21,7.1-21,19.7c0,12.6,10.7,19.8,21,19.8c10.1,0,21-7.2,21-19.8
+        C566.3,158,555.4,150.9,545.3,150.9z"></path>
+    <path d="M617.8,196.2l-17.6-22.4h-7.9v22.4H584v-51h17.7c7.9,0,16.8,4.6,16.8,14.3c0,6.8-4.4,11.1-9.8,13.1l19.1,23.6H617.8z
+        M600.2,151.8h-7.8v15.5h7.8c5,0,9.9-2.4,9.9-7.8C610.1,154.3,605.2,151.8,600.2,151.8z"></path>
+  </g>
+  <g fill="#AE8A6B">
+    <path d="M235.7,234.6v-21.7h11.7v2.8H239v6.6h7v2.8h-7v6.7h9.6v2.8H235.7z"></path>
+    <path d="M272.7,235.1L262.6,224c-0.8-0.9-1.7-1.8-2.5-2.9c-0.9-1-1.7-2-2.4-2.9l-0.1,0c0,1,0.1,1.9,0.1,2.9
+        c0,0.9,0,1.8,0,2.6v10.9h-3.3v-21.7h2.3l9.3,10.2c0.3,0.3,0.7,0.7,1.1,1.2c0.4,0.4,0.8,0.9,1.2,1.3c0.4,0.5,0.8,0.9,1.2,1.4
+        c0.4,0.5,0.8,0.9,1.1,1.3l0.1,0c0-0.8-0.1-1.7-0.1-2.6c0-0.9,0-1.7,0-2.5v-10.3h3.3v22.2H272.7z"></path>
+    <path d="M296.3,234.5c-1.3,0.4-2.8,0.5-4.4,0.5c-1.5,0-2.9-0.2-4.3-0.7c-1.4-0.5-2.7-1.2-3.8-2.1
+        c-1.1-0.9-2-2.1-2.7-3.5c-0.7-1.4-1-3-1-4.9c0-1.9,0.4-3.5,1.1-4.9c0.7-1.4,1.6-2.6,2.8-3.5c1.1-0.9,2.4-1.6,3.8-2.1
+        c1.4-0.5,2.8-0.7,4.1-0.7c1.5,0,2.8,0.2,4,0.5c1.2,0.3,2.2,0.7,3,1.3l-0.6,2.9c-0.8-0.5-1.7-0.9-2.7-1.3c-1-0.3-2.1-0.5-3.3-0.5
+        c-1.1,0-2.1,0.2-3.2,0.5c-1,0.4-2,0.9-2.8,1.6c-0.8,0.7-1.5,1.6-2,2.6c-0.5,1.1-0.8,2.3-0.8,3.7c0,1.4,0.2,2.7,0.7,3.7
+        s1.2,1.9,2,2.6c0.8,0.7,1.8,1.2,2.8,1.6c1.1,0.3,2.1,0.5,3.3,0.5c2,0,3.5-0.4,4.6-1.1v-4.5h-5v-2.7h8.1v8.8
+        C298.8,233.5,297.6,234.1,296.3,234.5z"></path>
+    <path d="M306.7,234.6v-21.7h3.3v18.9h9.6v2.8H306.7z"></path>
+    <path d="M339.8,234.6l-2.3-5.6H329l-2.3,5.6h-3.2l9.2-22h1.2l9.2,22H339.8z M334.2,221.1c-0.2-0.4-0.3-0.8-0.5-1.3
+        c-0.2-0.5-0.3-0.9-0.4-1.4h-0.1c-0.1,0.5-0.3,0.9-0.4,1.4c-0.2,0.5-0.3,0.9-0.5,1.3l-2.1,5.3h6.2L334.2,221.1z"></path>
+    <path d="M367.2,235.1L357.1,224c-0.8-0.9-1.7-1.8-2.5-2.9c-0.9-1-1.7-2-2.4-2.9l-0.1,0c0,1,0.1,1.9,0.1,2.9
+        c0,0.9,0,1.8,0,2.6v10.9h-3.3v-21.7h2.3l9.3,10.2c0.3,0.3,0.7,0.7,1.1,1.2c0.4,0.4,0.8,0.9,1.2,1.3c0.4,0.5,0.8,0.9,1.2,1.4
+        c0.4,0.5,0.8,0.9,1.1,1.3l0.1,0c0-0.8-0.1-1.7-0.1-2.6c0-0.9,0-1.7,0-2.5v-10.3h3.3v22.2H367.2z"></path>
+    <path d="M392.7,228.4c-0.7,1.3-1.5,2.5-2.6,3.4c-1.1,0.9-2.3,1.6-3.7,2.1c-1.4,0.5-2.9,0.7-4.4,0.7h-6.7v-21.7h6.7
+        c1.5,0,3,0.2,4.4,0.7c1.4,0.5,2.7,1.2,3.7,2.1s2,2.1,2.6,3.4c0.7,1.3,1,2.9,1,4.6C393.7,225.5,393.4,227.1,392.7,228.4z
+        M389.7,220.2c-0.5-1-1.1-1.8-1.9-2.5c-0.8-0.7-1.8-1.2-2.8-1.5c-1.1-0.3-2.2-0.5-3.5-0.5h-2.8v16.1h2.8c1.2,0,2.4-0.2,3.5-0.5
+        c1.1-0.3,2-0.8,2.8-1.5c0.8-0.7,1.4-1.5,1.9-2.5c0.5-1,0.7-2.2,0.7-3.6S390.1,221.2,389.7,220.2z"></path>
+  </g>
+</svg><span>· Q4 2026</span></div>
+    <div class="deadline"><b id="days">—</b> <span id="dayslabel">days to Black Friday, the start of peak boot season</span></div>
+  </div>
+
+  <div>
+    <h1>What category search ads, rebuilt collections and AI answers are worth to Fairfax &amp; Favor in new online orders</h1>
+    <p class="lede">Brand searches still find Fairfax &amp; Favor, but the boot, bag and outerwear searches a new customer makes have stopped landing on its site: on the same keywords, category search visits fell from ~21,149 last October to ~1,674 this October (−92%), and "knee high boots" (52,000 searches a month) slid from #7 off page one. Fairfax &amp; Favor's search ads (about £14,000 in September, Similarweb's estimate) are aimed almost entirely at its own name, not these searches, and Google's AI answers for them name ASOS, Dune and Dubarry. Pick a tier, then replace our placeholder rates with your own.</p>
+  </div>
+
+  <div class="grid">
+    <section class="panel" aria-label="Assumptions">
+      <div class="sect" style="border-top:0;padding-top:0">Every category visit or ad click</div>
+      <div class="ctl">
+        <div class="row"><label for="cvr">Category visit to order</label><output id="cvrOut" for="cvr">1.0%</output></div>
+        <input type="range" id="cvr" min="0.3" max="3" step="0.1" value="1.0">
+        <div class="band" id="cvrBand"></div>
+        <div class="why">Placeholder until Fairfax &amp; Favor shares the conversion rate of non-brand visits (brand visits convert higher). Ad clicks convert at 75% of it.</div>
+      </div>
+      <div class="ctl">
+        <div class="row"><label for="aov">Average order</label><output id="aovOut" for="aov">£275</output></div>
+        <input type="range" id="aov" min="100" max="500" step="5" value="275">
+        <div class="why">Placeholder: Regina knee-high boots run £425–£495; bags, belts and accessories bring the average down.</div>
+      </div>
+      <div class="sect">Category Shopping &amp; Search ads (new)</div>
+      <div class="ctl">
+        <div class="row"><label for="budget">Ad budget a month</label><output id="budgetOut" for="budget">£7,500</output></div>
+        <input type="range" id="budget" min="0" max="25000" step="250" value="7500">
+        <div class="band" id="budgetBand"></div>
+        <div class="why">Placeholder for new non-brand Google Shopping &amp; Search. Today's search ads (~£14,400 in September, Similarweb) buy clicks almost entirely on the Fairfax &amp; Favor name, where it already ranks #1: a brand-ad holdout test could fund most of this. The budget stays the same in every tier.</div>
+      </div>
+      <div class="ctl">
+        <div class="row"><label for="cpc">Cost per click</label><output id="cpcOut" for="cpc">£0.45</output></div>
+        <input type="range" id="cpc" min="0.10" max="1.50" step="0.05" value="0.45">
+        <div class="why">Similarweb's UK cost per click for "knee high boots", "ankle boots" and "leather boots" runs £0.44–£0.51 (Jul–Sep 2026); Ahrefs' guide is lower (~£0.20). £0.45 until Keyword Planner or your own account.</div>
+      </div>
+      <div class="sect">Search &amp; AI: the clicks ads can't buy</div>
+      <div class="ctl">
+        <div class="row"><label for="org">New category search visits a month</label><output id="orgOut" for="org">11,488</output></div>
+        <input type="range" id="org" min="0" max="30000" step="1" value="11488">
+        <div class="band" id="orgBand"></div>
+        <div class="why">Half of the ~9,836 category visits a month lost in a year won back (an average month, not last October's peak), striking-distance terms to the top three (2,230), new Chelsea, ankle, country and men's pages (2,486) and US suede boots (1,854) (Ahrefs, 23 Oct 2026).</div>
+      </div>
+      <div class="ctl">
+        <div class="row"><label for="ai">New AI-answer visits a month</label><output id="aiOut" for="ai">789</output></div>
+        <input type="range" id="ai" min="0" max="3000" step="1" value="789">
+        <div class="why">GWI: 19% of UK premium-buying women 35–64 mainly research brands with AI (index 144). × 204,500 category searches × answers naming Fairfax &amp; Favor (0 of 4 checked today; 1 in 10 here) × 20% who click through.</div>
+      </div>
+      <div class="presets" role="group" aria-label="Scenarios tied to the plan">
+        <button class="preset" type="button" data-p="7500,0.45,2459,0,1.0,275"><b>Tier 1: switch on &amp; fix</b>Category Shopping &amp; Search ads live; knee-high back in the menu; dead pages with press links redirected</button>
+        <button class="preset" type="button" data-p="7500,0.45,7148,0,1.0,275"><b>Tiers 1–2: + collections that rank</b>Knee-high, ankle, Chelsea, leather and suede collections rebuilt with fit (wide calf included) and care copy</button>
+        <button class="preset" type="button" data-p="7500,0.45,11488,789,1.0,275" aria-pressed="true"><b>Tiers 1–3: + new pages, the US &amp; AI</b>The headline: Chelsea, ankle, country and men's pages, US suede boots, and named in AI answers</button>
+        <button class="preset" type="button" data-p="7500,0.45,22976,1973,1.0,275"><b>All four (ceiling)</b>Every lost category visit back, every gap theme on page one, named in 1 in 4 AI answers</button>
+      </div>
+    </section>
+
+    <section class="result" aria-live="polite" aria-label="Outcome">
+      <div>
+        <div class="label">New online sales a year from category ads, search and AI answers</div>
+        <div class="big" id="rev">£817,641</div>
+        <div class="sub" id="revSub"></div>
+      </div>
+
+      <div class="stats">
+        <div class="stat"><div class="v" id="orders">248</div><div class="l" id="ordersL">new orders a month on the same ad budget</div></div>
+        <div class="stat"><div class="v" id="roas">£4.58</div><div class="l">of sales per £1 of ads</div></div>
+        <div class="stat"><div class="v" id="newOrders">2,973</div><div class="l">new orders a year</div></div>
+      </div>
+
+      <div class="bars">
+        <div class="t">Orders a month from category searches, by source</div>
+        <div class="bar"><span>Search today</span><div class="fill"><i id="bT"></i></div><span class="n" id="nT">0</span></div>
+        <div class="bar"><span>New: category ads</span><div class="fill"><i id="bA"></i></div><span class="n" id="nA">0</span></div>
+        <div class="bar"><span>New: search</span><div class="fill"><i id="bS"></i></div><span class="n" id="nS">0</span></div>
+        <div class="bar"><span>New: AI answers</span><div class="fill"><i id="bX"></i></div><span class="n" id="nX">0</span></div>
+      </div>
+
+      <div class="corp">
+        <div class="t">Cost per order, and how much of the ad market the budget uses</div>
+        <div class="stats">
+          <div class="stat"><div class="v" id="cpo">£0</div><div class="l" id="cpoL">of ads per order with the plan</div></div>
+          <div class="stat"><div class="v" id="share">0%</div><div class="l" id="shareL">of the clicks ads can win</div></div>
+        </div>
+      </div>
+
+      <div class="tscroll">
+      <table aria-label="Conversion sensitivity">
+        <thead><tr><th>If a category visit orders at</th><th>New orders / yr</th><th>New sales / yr</th></tr></thead>
+        <tbody id="sens"></tbody>
+      </table>
+      </div>
+    </section>
+  </div>
+
+  <div class="inaction">
+    <h2>What waiting costs</h2>
+    <p>Each month without the plan defers about <b id="perMonth">£0</b> of new online sales at these rates. On the same keywords, Fairfax &amp; Favor goes into Black Friday and Christmas with <b>~19,500 fewer category search visits a month than last October</b>, and its search ads are aimed at its own name, not the gap. Meanwhile Holland Cooper's brand searches grew 11% in a year while Fairfax &amp; Favor's fell 13%, and Holland Cooper is cited in AI answers about twice as often (933 vs 425 UK citations).</p>
+  </div>
+
+  <div class="foot">
+    <div>Demand and rankings: Ahrefs, UK, 23 Oct 2026: 46 head category searches, 262,500 a month on a 12-month average (204,500 without "womens trainers"), plus 80 gap searches (200,950 a month) where two or more rivals rank and Fairfax &amp; Favor doesn't. Visits: a quarter (Tier 1) and half (Tier 2) of the ~19,475 category visits lost between Oct 2025 and Oct 2026 on the same keywords, divided by the category searches' own October peak (×1.98) to an average month; half the striking-distance gain to the top three, leaving out keywords already counted as lost (4,460); half the non-knee-high gap searches reaching page one (~3.5% of clicks after an AI Overview haircut); half of four US page-one searches into the top three. The Oct 2025 level was itself a spike (+65% on Oct 2024), so the plan never counts all of it back below the ceiling. Ads: Similarweb UK CPCs for the category searches (Jul–Sep 2026); ads win ~15% of a market's clicks (ROAST assumption), so these searches allow ~58,208 clicks a month (~£26,194 at £0.45). AI: Ahrefs AI citation counts (Brand Radar not licensed) and four live AI Overviews, 23 Oct 2026; GWI Core, Q1 2025–Q2 2026 (UK women 35–64 who always buy premium, a proxy). Today's paid search: Similarweb, UK, Jul–Sep 2026 (modelled; 66 of 70 text ads' top keyword is the brand name, the other 4 Holland Cooper or Penelope Chilvers) and ~200 ads in Google's Ads Transparency Center, 23 Oct 2026. Money: Ahrefs and Similarweb report in US dollars, converted at £1 = $1.34 (23 Oct 2026).</div>
+    <div>Formula: budget ÷ cost per click × visit-to-order × 75% = orders the category ads buy (new: we found almost none on these searches today). (New search visits + AI visits) × visit-to-order = new search &amp; AI orders. All new orders × 12 × average order = new online sales a year, before cost of goods and ad spend. Every figure uses placeholder rates until Fairfax &amp; Favor shares its own; stores, stockists and repeat orders aren't counted.</div>
+    <div>Part of the ROAST × Fairfax &amp; Favor search, paid search and AI visibility analysis, October 2026.</div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const $=id=>document.getElementById(id);
+  const C={"ROOM": 58208, "DISC": 0.75, "CAT_NOW": 1674, "CAT_LY": 21149};
+  const ids=["budget", "cpc", "org", "ai", "cvr", "aov"];
+  const els=ids.map($);
+  const fmtI=n=>Math.round(n).toLocaleString('en-GB');
+  const fmt1=n=>(Math.round(n*10)/10).toLocaleString('en-GB');
+  const fmtO=n=>n>=100?fmtI(n):fmt1(n);
+  const fmtD=n=>'£'+Math.round(n).toLocaleString('en-GB');
+  const fmtD2=n=>'£'+n.toFixed(2);
+  const presets=[...document.querySelectorAll('.preset')];
+  const now=new Date(), today=new Date(now.getFullYear(),now.getMonth(),now.getDate());
+  function blackFriday(y){const d=new Date(y,10,1);const off=(4-d.getDay()+7)%7;return new Date(y,10,1+off+21+1);}
+  let due=blackFriday(today.getFullYear()), label='days to Black Friday, the start of peak boot season';
+  if(today>due){due=new Date(today.getFullYear(),11,25);label='days to Christmas';}
+  if(today>due){due=blackFriday(today.getFullYear()+1);label='days to Black Friday, the start of peak boot season';}
+  $('days').textContent=Math.max(0,Math.ceil((due-today)/86400000)); $('dayslabel').textContent=label;
+  function model(v){
+    const cv=v.cvr/100, clicks=v.cpc?v.budget/v.cpc:0;
+    const oA=clicks*cv*C.DISC, oS=v.org*cv, oX=v.ai*cv, all=oA+oS+oX;
+    const rev=all*12*v.aov;
+    return {clicks,oA,oS,oX,all,rev,roas:v.budget?oA*v.aov/v.budget:0, cpo:all?v.budget/all:0, cpoA:oA?v.budget/oA:0,
+            peq:(v.org+v.ai)*v.cpc, share:clicks/C.ROOM, today:C.CAT_NOW*cv};
+  }
+  function vals(){const v={};ids.forEach((k,i)=>v[k]=+els[i].value);return v;}
+  function render(){
+    const v=vals();
+    $('budgetOut').value=fmtD(v.budget); $('cpcOut').value=fmtD2(v.cpc);
+    $('orgOut').value=fmtI(v.org); $('aiOut').value=fmtI(v.ai); $('cvrOut').value=v.cvr.toFixed(1)+'%'; $('aovOut').value=fmtD(v.aov);
+    const o=model(v);
+    const x=v.cpc?(v.cvr/100*C.DISC*v.aov)/v.cpc:0;
+    $('cvrBand').className='band'+(x<2?' warn':'');
+    $('cvrBand').textContent=x<2?`An ad click earns ${x.toFixed(1)}x its cost: below 2x, ads stop paying`:`An ad click earns ${x.toFixed(1)}x its cost (ads pay at 2x or more)`;
+    const over=o.share>1;
+    $('budgetBand').className='band'+(over?' warn':'');
+    $('budgetBand').textContent=v.budget===0?'No category ads: search and AI only':`Buys ~${fmtI(o.clicks)} clicks a month, ${Math.round(o.share*100)}% of what ads can win`+(over?': past that needs more searches or other channels':'');
+    $('orgBand').className='band'+(v.org===0?' low':'');
+    $('orgBand').textContent=v.org===0?`Nothing new: category search stays at ~${fmtI(C.CAT_NOW)} visits a month`:`${fmtI(C.CAT_NOW+v.org)} category search visits a month in all, from ~${fmtI(C.CAT_NOW)} today`;
+    $('rev').textContent=fmtD(o.rev);
+    $('revSub').textContent=`${fmtO(o.oA)} ad orders + ${fmtO(o.oS+o.oX)} search & AI orders a month × 12 × ${fmtD(v.aov)}.`;
+    $('orders').textContent=fmtO(o.all); $('ordersL').textContent=`new orders a month on the same ad budget, instead of ${fmtO(o.oA)}`;
+    $('roas').textContent=v.budget?fmtD2(o.roas):'—'; $('newOrders').textContent=fmtI(o.all*12);
+    const mx=Math.max(o.today,o.oA,o.oS,o.oX,1)*1.08;
+    [['bT','nT',o.today],['bA','nA',o.oA],['bS','nS',o.oS],['bX','nX',o.oX]].forEach(([b,n,y])=>{$(b).style.width=(y/mx*100)+'%';$(n).textContent=fmtO(y);});
+    $('cpo').textContent=v.budget?fmtD2(o.cpo):'—'; $('cpoL').textContent=v.budget?`of ads per order with the plan, from ${fmtD2(o.cpoA)} with ads alone`:'of ads per order';
+    $('share').textContent=Math.round(o.share*100)+'%';
+    $('shareL').textContent=`of the ~${fmtI(C.ROOM)} clicks a month ads can win`;
+    $('sens').innerHTML=[Math.max(0.3,v.cvr-0.4),v.cvr,Math.min(3,v.cvr+0.5)].map(c=>{const m=model(Object.assign({},v,{cvr:c}));return `<tr><td>${c.toFixed(1)}%</td><td>${fmtI(m.all*12)}</td><td>${fmtD(m.rev)}</td></tr>`;}).join('');
+    $('perMonth').textContent=fmtD(o.rev/12);
+    presets.forEach(pr=>{const q=pr.dataset.p.split(',').map(Number);pr.setAttribute('aria-pressed',String(q.every((x,k)=>x===+els[k].value)));});
+    try{localStorage.setItem('fairfaxfavor-calc-v1',JSON.stringify(els.map(e=>e.value)));}catch(e){}
+  }
+  els.forEach(el=>el.addEventListener('input',render));
+  presets.forEach(pr=>pr.addEventListener('click',()=>{const q=pr.dataset.p.split(',');els.forEach((el,k)=>el.value=q[k]);render();}));
+  try{if(location.hash==='#saved'){const s=JSON.parse(localStorage.getItem('fairfaxfavor-calc-v1'));if(Array.isArray(s)&&s.length===els.length){els.forEach((el,k)=>el.value=s[k]);}}}catch(e){}
+  render();
+})();
+</script>
+<!-- layout-guard:start: roast-deck-kit/layout_guard.py -->
+<script>
+(function(){
+  var els=[].slice.call(document.querySelectorAll('.result .big,.stat .v,.funnel .v,.key .v'));
+  if(!els.length) return;
+  function fit(el){
+    el.style.fontSize='';
+    var w=el.clientWidth; if(!w) return;
+    var min=el.classList.contains('big')?28:13;
+    for(var i=0;i<4&&el.scrollWidth>w+0.5;i++){
+      var fs=parseFloat(getComputedStyle(el).fontSize);
+      var next=Math.max(min,fs*w/el.scrollWidth-0.5);
+      if(next>=fs) break;
+      el.style.fontSize=next.toFixed(1)+'px';
+    }
+  }
+  function all(){els.forEach(fit);}
+  var mo=new MutationObserver(all);
+  els.forEach(function(el){mo.observe(el,{childList:true,characterData:true,subtree:true});});
+  var raf=0; function soon(){if(!raf) raf=requestAnimationFrame(function(){raf=0;all();});}
+  window.addEventListener('resize',soon);
+  if(window.ResizeObserver){
+    var last=new WeakMap();
+    var ro=new ResizeObserver(function(entries){
+      var changed=false;
+      entries.forEach(function(e){var w=Math.round(e.contentRect.width);if(last.get(e.target)!==w){last.set(e.target,w);changed=true;}});
+      if(changed) soon();
+    });
+    [].slice.call(document.querySelectorAll('.result,.stat,.funnel .step,.key')).forEach(function(b){ro.observe(b);});
+  }
+  if(document.fonts&&document.fonts.ready) document.fonts.ready.then(all);
+  all();
+})();
+</script>
+<!-- layout-guard:end -->
+</body>
+</html>

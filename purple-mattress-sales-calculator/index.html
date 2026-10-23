@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Purple Mattress-Sales Calculator</title>
+<!-- share:start -->
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<meta name="description" content="What category ads moved from brand terms, &quot;best for&quot; pages, size guides and AI answers are worth to Purple in new online orders.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ROAST">
+<meta property="og:title" content="Purple Mattress-Sales Calculator">
+<meta property="og:description" content="What category ads moved from brand terms, &quot;best for&quot; pages, size guides and AI answers are worth to Purple in new online orders.">
+<meta property="og:url" content="https://npc-0802.github.io/pitches/purple-mattress-sales-calculator/">
+<meta property="og:image" content="https://npc-0802.github.io/pitches/purple-mattress-sales-calculator/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="ROAST × Purple: Mattress-Sales Calculator">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Purple Mattress-Sales Calculator">
+<meta name="twitter:description" content="What category ads moved from brand terms, &quot;best for&quot; pages, size guides and AI answers are worth to Purple in new online orders.">
+<meta name="twitter:image" content="https://npc-0802.github.io/pitches/purple-mattress-sales-calculator/og.png">
+<!-- share:end -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;900&family=Public+Sans:wght@400;500;600&display=swap">
+<style>
+:root{
+  --bg:#ffffff; --ink:#111214; --muted:#5b5e66; --line:#e6e4dc; --panel:#f6f5f0;
+  --yellow:#FFD100; --yellow-deep:#e6bc00; --on-yellow:#111214; --on-yellow-muted:#4a4630;
+  --track:#e3e1d8; --ok:#1f7a3a;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){ --bg:#111214; --ink:#f4f3ee; --muted:#a6a79f; --line:#2a2b2f; --panel:#1b1c20; --track:#33343a; color-scheme:dark; }
+}
+:root[data-theme="dark"]{ --bg:#111214; --ink:#f4f3ee; --muted:#a6a79f; --line:#2a2b2f; --panel:#1b1c20; --track:#33343a; color-scheme:dark; }
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Public Sans",system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;font-size:15px;line-height:1.45}
+.wrap{max-width:1440px;margin:0 auto;padding-block:22px 44px;padding-inline:clamp(16px,3vw,40px);display:grid;gap:22px}
+.brand{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-bottom:6px;flex-wrap:wrap}
+.wordmark{display:flex;align-items:center;gap:12px}.wordmark .roast-logo{height:22px;width:auto;display:block;color:var(--ink)}
+.wordmark span{font-family:"Public Sans",sans-serif;font-weight:500;font-size:15px;color:var(--muted);letter-spacing:0}
+.deadline{font-size:13px;color:var(--muted);text-align:right}
+.deadline b{color:var(--ink);font-variant-numeric:tabular-nums}
+h1{font-family:"Archivo",system-ui,sans-serif;font-weight:900;font-size:clamp(28px,3.4vw,46px);line-height:1.05;letter-spacing:-.015em;margin:0;text-wrap:balance;max-width:26ch}
+.lede{color:var(--muted);max-width:78ch;margin:8px 0 0;font-size:clamp(14px,1.1vw,16px)}
+.grid{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,2fr);gap:22px;align-items:start}
+@media (max-width:900px){.grid{grid-template-columns:1fr}}
+.panel{background:var(--panel);border-radius:22px;padding:clamp(18px,2vw,28px) clamp(18px,2vw,28px) 10px;min-width:0;overflow:hidden}
+.ctl{display:grid;gap:8px;padding-block:14px;border-top:1px solid var(--line)}
+.ctl:first-child{border-top:0;padding-top:2px}
+.ctl .row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.ctl label{font-weight:600}
+.ctl output{font-family:"Archivo",sans-serif;font-weight:700;font-size:22px;font-variant-numeric:tabular-nums}
+.ctl output small{font-family:"Public Sans",sans-serif;font-weight:500;font-size:13px;color:var(--muted);margin-left:8px}
+.ctl .why{font-size:13px;color:var(--muted);max-width:72ch}
+.sect{font-family:"Archivo",sans-serif;font-weight:700;font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);padding-top:16px;border-top:1px solid var(--line)}
+.band{font-size:13px;font-weight:600;padding:5px 12px;border-radius:14px;background:var(--yellow);color:var(--on-yellow);width:fit-content;max-width:100%;line-height:1.3}
+.band.low{background:var(--track);color:var(--ink)}
+.band.warn{background:#f3c4bd;color:#5c120a}
+input[type=range]{width:100%;accent-color:var(--ink);height:30px;margin:0}
+input[type=range]:focus-visible{outline:2px solid var(--ink);outline-offset:4px;border-radius:6px}
+.presets{display:flex;flex-wrap:wrap;gap:8px;padding-block:16px;border-top:1px solid var(--line)}
+.preset{border:1.5px solid var(--line);border-radius:12px;padding:8px 12px;font-size:13px;background:transparent;color:var(--ink);cursor:pointer;font-family:inherit;text-align:left;line-height:1.25}
+.preset b{display:block;font-weight:700}
+.preset:hover,.preset:focus-visible{border-color:var(--ink);outline:none}
+.preset[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.result{background:var(--yellow);color:var(--on-yellow);border-radius:22px;padding:clamp(20px,2.2vw,32px);display:grid;gap:18px;min-width:0}
+.result .label{font-weight:600;font-size:14px;color:var(--on-yellow-muted)}
+.result .big{font-family:"Archivo",sans-serif;font-weight:900;font-size:clamp(48px,6vw,88px);line-height:.95;letter-spacing:-.02em;font-variant-numeric:tabular-nums;margin:6px 0}
+.result .sub{font-size:14px;color:var(--on-yellow-muted);max-width:52ch}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+@media (max-width:520px){.stats{grid-template-columns:1fr 1fr}}
+.stat{background:rgba(255,255,255,.5);border-radius:14px;padding:14px 14px 12px;min-width:0}
+.stat .v{font-family:"Archivo",sans-serif;font-weight:700;font-size:clamp(20px,1.8vw,26px);font-variant-numeric:tabular-nums;line-height:1.1}
+.stat .l{font-size:12.5px;color:var(--on-yellow-muted);margin-top:5px;line-height:1.3;text-wrap:balance}
+.bars{display:grid;gap:8px;margin-top:4px}
+.bars .t{font-weight:600;font-size:13px;color:var(--on-yellow-muted)}
+.bar{display:grid;grid-template-columns:minmax(120px,170px) 1fr minmax(64px,auto);gap:10px;align-items:center;font-size:13px}
+@media (max-width:520px){.bar{grid-template-columns:110px 1fr minmax(56px,auto)}}
+.bar .fill{height:14px;border-radius:7px;background:rgba(17,18,20,.25);position:relative;overflow:hidden}
+.bar .fill i{position:absolute;inset:0;width:0;background:var(--on-yellow);border-radius:7px;transition:width .25s ease}
+.bar .fill i.gain{background:#ffffff;left:auto}
+.bar .n{text-align:right;font-variant-numeric:tabular-nums;font-weight:600}
+@media (prefers-reduced-motion: reduce){.bar .fill i{transition:none}}
+.corp{display:grid;gap:8px}
+.corp .t{font-weight:600;font-size:13px;color:var(--on-yellow-muted)}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th,td{text-align:left;padding:7px 4px;border-bottom:1px solid rgba(17,18,20,.18);font-variant-numeric:tabular-nums}
+th{font-size:12px;color:var(--on-yellow-muted);font-weight:600}
+td:last-child,th:last-child{text-align:right;font-weight:700}
+.inaction{background:var(--panel);border-radius:22px;padding:clamp(18px,2vw,28px);display:grid;gap:8px}
+.inaction h2{font-family:"Archivo",sans-serif;font-weight:700;font-size:18px;margin:0}
+.inaction p{margin:0;color:var(--muted);max-width:100ch;font-size:15px;line-height:1.55}
+.inaction b{color:var(--ink)}
+.foot{font-size:13px;color:var(--muted);max-width:110ch;display:grid;gap:6px}
+.foot a{color:var(--ink)}
+@media (min-width:901px){.result{position:sticky;top:16px}}
+.wordmark{flex-wrap:wrap;row-gap:6px}.wordmark .client-logo{height:22px;width:auto;display:block;color:var(--ink)}
+/* layout-guard:start: roast-deck-kit/layout_guard.py; re-run it instead of editing */
+.grid>*,.result>*,.stats>*,.bar>*,.funnel>*,.keys>*{min-width:0}
+.result{grid-template-columns:minmax(0,1fr);container:lgresult/inline-size}
+.stat .l,.funnel .l,.funnel .s,.key .l,.key .s{overflow-wrap:break-word}
+.tscroll{overflow-x:auto;max-width:100%}
+@container lgresult (max-width:400px){
+  .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .stats>.stat:last-child:nth-child(odd){grid-column:1/-1}
+  .funnel{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .funnel .step::after{display:none}
+}
+/* layout-guard:end */
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="brand">
+    <div class="wordmark"><svg class="roast-logo" fill="currentColor" aria-label="ROAST" role="img" viewBox="0 0 931.89 203.5" xmlns="http://www.w3.org/2000/svg" overflow="hidden" xmlns:c2pa="http://c2pa.org/manifest"><metadata><c2pa:manifest>AAAWgmp1bWIAAAAeanVtZGMycGEAEQAQgAAAqgA4m3EDYzJwYQAAABZcanVtYgAAAEdqdW1kYzJtYQARABCAAACqADibcQN1cm46YzJwYTozZDQ3MGE0ZS0yMmVkLTQyMmItYTUyMS03MDBhY2VmMjQ1YzkAAAADl2p1bWIAAAApanVtZGMyYXMAEQAQgAAAqgA4m3EDYzJwYS5hc3NlcnRpb25zAAAAALxqdW1iAAAARGp1bWRjYm9yABEAEIAAAKoAOJtxE2MycGEuaW5ncmVkaWVudC52MwAAAAAYYzJzaA2CgfxpiyX5e10r0s1hRZEAAABwY2JvcqNpZGM6Zm9ybWF0bWltYWdlL3N2Zyt4bWxqaW5zdGFuY2VJRHgseG1wOmlpZDplM2ZmMmVlNi01ZGQ1LTQ1MjItOWQ5Yy0zZGJjNGU4YmI5NWJscmVsYXRpb25zaGlwaHBhcmVudE9mAAAB4mp1bWIAAABBanVtZGNib3IAEQAQgAAAqgA4m3ETYzJwYS5hY3Rpb25zLnYyAAAAABhjMnNokbiFip/0bVcWbCsmWV7bOwAAAZljYm9yomdhY3Rpb25zgqJmYWN0aW9ua2MycGEub3BlbmVkanBhcmFtZXRlcnOha2luZ3JlZGllbnRzgaJjdXJseC1zZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmluZ3JlZGllbnQudjNkaGFzaFggdHVjQhQbTIDc8numuX28WgpAZrXhsoTiscHOU7tUJ9ikZmFjdGlvbngdY29tLmFudGhyb3BpYy5jbGF1ZGUucHJvdmlkZWRqcGFyYW1ldGVyc6F4H2NvbS5hbnRocm9waWMub3JpZ2luLWNvbmZpZGVuY2VndW5rbm93bmtkZXNjcmlwdGlvbnhmQ2xhdWRlIHByb3ZpZGVkIHRoaXMgZmlsZSBhdCB0aGUgcmVxdWVzdCBvZiBhIHVzZXIgYW5kIG1heSBoYXZlIGNyZWF0ZWQgb3IgbW9kaWZpZWQgdGhlIGZpbGUgY29udGVudHMubXNvZnR3YXJlQWdlbnShZG5hbWVmQ2xhdWRlcmFsbEFjdGlvbnNJbmNsdWRlZPUAAADIanVtYgAAAEBqdW1kY2JvcgARABCAAACqADibcRNjMnBhLmhhc2guZGF0YQAAAAAYYzJzaJTTpaWSGw/skOxEaOFCsm0AAACAY2JvcqVjYWxnZnNoYTI1NmNwYWRNAAAAAAAAAAAAAAAAAGRoYXNoWCBFqzodb2N2pJR9ua6fnBJPH/pxrehRy7zC3r72E1+nfmRuYW1lbmp1bWJmIG1hbmlmZXN0amV4Y2x1c2lvbnOBomVzdGFydBjZZmxlbmd0aBkeBAAAAj5qdW1iAAAAJ2p1bWRjMmNsABEAEIAAAKoAOJtxA2MycGEuY2xhaW0udjIAAAACD2Nib3KlY2FsZ2ZzaGEyNTZpc2lnbmF0dXJleE1zZWxmI2p1bWJmPS9jMnBhL3VybjpjMnBhOjNkNDcwYTRlLTIyZWQtNDIyYi1hNTIxLTcwMGFjZWYyNDVjOS9jMnBhLnNpZ25hdHVyZWppbnN0YW5jZUlEeCx4bXA6aWlkOjgyNWJkYzkyLWFhMzAtNGMyYy1iZWFhLWQ2YzVjOWU5YTlmMHJjcmVhdGVkX2Fzc2VydGlvbnODomN1cmx4LXNlbGYjanVtYmY9YzJwYS5hc3NlcnRpb25zL2MycGEuaW5ncmVkaWVudC52M2RoYXNoWCB0dWNCFBtMgNzye6a5fbxaCkBmteGyhOKxwc5Tu1Qn2KJjdXJseCpzZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmFjdGlvbnMudjJkaGFzaFggZb4jeey+/rFWzYf06bWr+PDqqliKesNjNSIAZleW87WiY3VybHgpc2VsZiNqdW1iZj1jMnBhLmFzc2VydGlvbnMvYzJwYS5oYXNoLmRhdGFkaGFzaFggJXgyBv4iaW2DX7SIIoYZDAgDYOBXpYCAOdcJs3U09wJ0Y2xhaW1fZ2VuZXJhdG9yX2luZm+jZG5hbWVvQW50aHJvcGljIEZpbGVzZ3ZlcnNpb25lMS4wLjBrc3BlY1ZlcnNpb25lMi40LjAAABA4anVtYgAAAChqdW1kYzJjcwARABCAAACqADibcQNjMnBhLnNpZ25hdHVyZQAAABAIY2JvctKEWQISogEmGCFZAgowggIGMIIBjaADAgECAhRA5aAK7sI50L64g/oGQgU9Z1UTADAKBggqhkjOPQQDAzBJMRcwFQYDVQQKEw5BbnRocm9waWMsIFBCQzEuMCwGA1UEAxMlQW50aHJvcGljIENvbnRlbnQgQ3JlZGVudGlhbHMgUm9vdCBDQTAeFw0yNjA4MDcxODQzNTZaFw0yODA4MDYxOTQzNTZaMEQxFzAVBgNVBAoTDkFudGhyb3BpYywgUEJDMSkwJwYDVQQDEyBBbnRocm9waWMgQ2xhdWRlIENvbnRlbnQgU2lnbmluZzBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABJh6CmvLUBgFFNU0vUKlOVtE6djd17L5SuwX0LemFisBM3dkd/3cyjxFA3Qo5S46fX0/ihY0VZ7mfb9KF703t5OjWDBWMA4GA1UdDwEB/wQEAwIHgDAVBgNVHSUEDjAMBgorBgEEAYPoXgIBMAwGA1UdEwEB/wQCMAAwHwYDVR0jBBgwFoAUzlHiBIFOZFsj+OPEz5o+nMHXXMIwCgYIKoZIzj0EAwMDZwAwZAIwMXMdFJ4BetLLVY7ORuE9noqbbAZOZn/aArXyTwFAZfKrPzxF2vPoJNf1+UCdg1XGAjBwX1zd9WGqYkqmL5SFqw1QySjr1zJfpJM9+1rdDwSPLMOPOjKuiXjoU/pUUeG9RwmhY3BhZFkNngAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPZYQKQHFmaWWw8/Pc9rbvILoQMoF65ZjbiA82R+olrBgcQbYPjdqnnCCZ2/cDk4w5k3mqsSm4BnOOf3/ZWf0b44t4k=</c2pa:manifest></metadata><path d="M30.4 4.59 0 4.59 0 0 93.33 0C128.29 0 166.29 7.45 166.29 50.73 166.29 85.7 123.42 94.87 101.23 97.45L101.23 98.02C136.19 100.89 154.74 108.05 159.3 145.89L163.56 180.86C165.69 197.77 174.2 198.92 179.37 198.92 184.84 198.92 188.79 197.2 191.84 196.05L193.66 199.78C187.58 201.79 179.98 203.51 168.73 203.51 131.64 203.51 129.51 184.88 125.25 151.92L123.12 134.72C120.99 116.66 115.52 100.32 81.17 100.32L61.41 100.32 61.41 198.92 92.42 198.92 92.42 203.51 0 203.51 0 198.92 30.4 198.92 30.4 4.59ZM61.41 95.73 76.61 95.73C112.48 95.73 133.46 83.98 133.46 50.73 133.46 27.8 125.25 4.58 82.08 4.58L61.41 4.58 61.41 95.73Z" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4"  fill-opacity="1"/><path d="M293.24 0.32C342.65 0.32 385.63 45.32 385.63 101.91 385.63 158.5 342.65 203.5 293.24 203.5 243.83 203.5 200.85 158.5 200.85 101.91 200.85 45.32 243.83 0.32 293.24 0.32ZM293.24 199.09C345.28 199.09 352.3 138.08 352.3 101.91 352.3 65.74 345.28 4.74 293.24 4.74 241.2 4.74 234.18 65.75 234.18 101.91 234.18 138.07 241.2 199.09 293.24 199.09Z" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4"  fill-opacity="1"/><path d="M501.23 135.93 438.66 135.93 424.96 175.38C422.91 180.89 420.57 187.51 420.57 192.19 420.57 196.05 424.08 199.08 433.43 199.08L448.63 199.08 448.63 203.49 388.4 203.49 388.4 199.08 397.76 199.08C406.82 199.08 410.62 198.25 416.18 182.82L480.77 0.32 483.99 0.32 556.81 199.09 581.08 199.09 581.08 203.5 495.42 203.5 495.42 199.09 524.07 199.09 501.24 135.93ZM469.66 48 469.08 48 440.43 131.52 499.78 131.52 469.67 48Z" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4"  fill-opacity="1"/><path d="M598 130.7 602.68 130.7C602.68 177.01 631.63 198.78 666.71 198.78 694.78 198.78 714.95 181.97 714.95 157.16 714.95 128.49 699.16 119.95 665.54 114.99 619.64 108.1 598 100.93 598 54.62 598 23.2 619.93 0.32 652.68 0.32 682.79 0.32 694.2 17.14 704.14 17.13 712.17 17.13 711.74 3.58 712.62-2.84217e-14L717.3-2.84217e-14 717.3 64.54 712.62 64.54C709.99 33.12 691.86 4.73 652.69 4.73 627.84 4.73 610.29 20.17 610.29 45.52 610.29 70.87 620.23 75.84 668.76 84.11 711.45 91.28 728.99 104.23 728.99 140.07 728.99 175.91 707.94 203.19 665.55 203.19 636.31 203.19 620.82 188.78 610 188.86 601.37 188.92 602.69 198.82 602.69 203.51L598.01 203.51 598.01 130.7Z" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4"  fill-opacity="1"/><path d="M752.96 0 752.96 64.54 757.64 64.54C757.64 24.77 766.71 6.75 804.33 4.79L804.33 147.44 829.12 147.44 829.12 4.41 855.73 4.41 855.73 147.44 880.52 147.44 880.52 4.78C918.11 6.71 927.21 24.7 927.21 64.54L931.89 64.54 931.89 0 752.96 0Z" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4"  fill-opacity="1"/></svg><span>×</span><svg class="client-logo" role="img" aria-label="Purple" style="height:22px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 88 27.1" fill="currentColor"><path d="M44.9302 5.14789C42.4566 5.14789 40.8287 6.02711 39.7867 8.0792H39.7522V5.76576C39.7522 5.40752 39.4926 5.14746 39.1344 5.14746H35.7484C35.4224 5.14746 35.1279 5.40752 35.1279 5.76576V20.818C35.1279 21.1444 35.4224 21.4376 35.7484 21.4376H39.524C39.8818 21.4376 40.1445 21.1444 40.1445 20.818V14.2376C40.1445 11.5332 41.8362 9.64303 44.2779 9.64303C44.7339 9.64303 45.7122 9.74119 45.7122 9.77435C46.1337 9.83936 46.5259 9.51299 46.5259 9.05659V5.89708C46.5259 5.34251 46.1337 5.14746 44.9298 5.14746L44.9302 5.14789Z"/><path d="M32.5884 5.14795H28.7783C28.455 5.14795 28.1605 5.40801 28.1605 5.76625V14.7264C28.1605 16.2583 26.9222 17.5277 25.3605 17.5277C23.7988 17.5277 22.5605 16.2583 22.5605 14.7264V5.76625C22.5605 5.40801 22.2979 5.14795 21.9745 5.14795H18.1299C17.8062 5.14795 17.5439 5.4106 17.5439 5.73438V6.27389C17.5439 6.58605 17.6421 6.88917 17.8182 7.14708C19.0273 8.9193 19.6809 11.0308 19.6809 13.2276C19.6809 14.8543 19.3282 16.4362 18.6626 17.8725C18.4568 18.3169 18.4679 18.8306 18.7013 19.2611C19.568 20.8611 21.3583 21.8299 23.5685 21.8299C25.9469 21.8299 27.9327 20.6333 28.4868 19.2327H28.5506V20.8193C28.5506 21.1789 28.8132 21.4389 29.1392 21.4389H32.5884C32.9144 21.4389 33.1744 21.1789 33.1744 20.8193V5.76625C33.1744 5.40801 32.9148 5.14795 32.5884 5.14795Z"/><path d="M69.3202 0H65.4757C65.1523 0 64.8896 0.261355 64.8896 0.586434V5.86391C64.8896 6.18942 64.9913 6.50804 65.1863 6.76853C66.5689 8.61481 67.3206 10.8719 67.3206 13.2275C67.3206 15.5831 66.5667 17.8893 65.1807 19.7605C64.9891 20.0193 64.8896 20.3353 64.8896 20.6574V21.2098C64.8896 21.5693 65.1523 21.8294 65.4757 21.8294H69.3202C69.6435 21.8294 69.9062 21.5693 69.9062 21.2098V0.586434C69.9062 0.261355 69.6435 0 69.3202 0Z"/><path d="M8.72557 17.5285C6.41213 17.5285 4.65283 15.6715 4.65283 13.293C4.65283 10.9146 6.41213 9.05754 8.72557 9.05754C11.039 9.05754 12.7983 10.9146 12.7983 13.293C12.7983 15.6715 11.039 17.5285 8.72557 17.5285ZM0.645525 26.9769H4.42505C4.75099 26.9769 5.04421 26.7164 5.04421 26.3905V19.4833H5.10923C5.98888 20.9167 7.87864 21.8291 9.93116 21.8291C14.1994 21.8291 17.7507 17.9195 17.7507 13.2276C17.7507 8.53569 14.2321 4.75659 9.93116 4.75659C7.84592 4.75659 6.05389 5.66897 4.71827 7.42827H4.65326V5.7667C4.65326 5.40847 4.39276 5.14755 4.0341 5.14755H0.645525C0.287292 5.14755 0.0263672 5.40804 0.0263672 5.7667V26.3905C0.0263672 26.7164 0.286861 26.9769 0.645525 26.9769Z"/><path d="M56.3603 17.5285C54.0469 17.5285 52.2876 15.6715 52.2876 13.293C52.2876 10.9146 54.0469 9.05754 56.3603 9.05754C58.6738 9.05754 60.4331 10.9146 60.4331 13.293C60.4331 15.6715 58.6738 17.5285 56.3603 17.5285ZM48.2803 26.9769H52.0598C52.3858 26.9769 52.679 26.7164 52.679 26.3905V19.4833H52.744C53.6236 20.9167 55.5134 21.8291 57.5659 21.8291C61.8341 21.8291 65.3855 17.9195 65.3855 13.2276C65.3855 8.53569 61.8669 4.75659 57.5659 4.75659C55.4807 4.75659 53.6887 5.66897 52.353 7.42827H52.288V5.7667C52.288 5.40847 52.0275 5.14755 51.6689 5.14755H48.2803C47.9221 5.14755 47.6611 5.40804 47.6611 5.7667V26.3905C47.6611 26.7164 47.9216 26.9769 48.2803 26.9769Z"/><path d="M79.3541 8.34064C81.1134 8.34064 82.6773 9.77401 82.6773 11.436H76.0633C76.0633 9.77444 77.5948 8.34064 79.3541 8.34064ZM87.6951 13.1953C87.6951 8.56884 83.9483 4.75659 79.3541 4.75659C74.76 4.75659 71.0459 8.53612 71.0459 13.2603C71.0459 17.9845 74.8904 21.8291 80.0383 21.8291C82.3518 21.8291 84.6975 20.8189 86.4568 19.0596C86.5545 18.9619 86.6196 18.8314 86.6196 18.6687C86.6196 18.4732 86.5218 18.3105 86.3914 18.2127L83.9479 16.4207C83.8174 16.3229 83.6547 16.2579 83.4919 16.2579C83.2964 16.2579 83.1009 16.3557 82.9705 16.4861C81.9931 17.4635 80.983 17.9195 79.8101 17.9195C77.8553 17.9195 76.3565 16.6816 76.0306 14.8241H86.8801C87.336 14.8241 87.6947 14.4659 87.6947 14.0095V13.1949L87.6951 13.1953Z"/></svg><span>· Q4 2026</span></div>
+    <div class="deadline"><b id="days">—</b> <span id="dayslabel">days to Presidents' Day (Feb 15, 2027), when a 90-day test reads out</span></div>
+  </div>
+
+  <div>
+    <h1>What winning the shoppers still choosing is worth to Purple in new online orders</h1>
+    <p class="lede">About four in five of Purple's search visits already know its name, and an estimated 90% of its search-ad spend buys that name (Similarweb). The shoppers still choosing ask "best mattress for side sleepers", "best cooling mattress" or "queen bed dimensions": across 48 of the biggest mattress, pillow and bedding searches (1.84M a month), Purple is in Google's top 100 for 3, and the AI answers name Helix, Brooklyn Bedding, Nectar and Leesa. This calculator moves part of the brand budget onto those searches, adds the pages and AI answers ads can't buy, and counts only new orders. Pick a tier, then replace our placeholder rates with Purple's own.</p>
+  </div>
+
+  <div class="grid">
+    <section class="panel" aria-label="Assumptions">
+      <div class="sect" style="border-top:0;padding-top:0">Every shopping visit or ad click</div>
+      <div class="ctl">
+        <div class="row"><label for="cvr">Shopping visit to online order</label><output id="cvrOut" for="cvr">0.80%</output></div>
+        <input type="range" id="cvr" min="0.3" max="2" step="0.05" value="0.8">
+        <div class="band" id="cvrBand"></div>
+        <div class="why">Placeholder until Purple shares its GA4 rate for visitors from non-branded searches. Ad clicks convert at 75% of it.</div>
+      </div>
+      <div class="ctl">
+        <div class="row"><label for="aov">Average online order</label><output id="aovOut" for="aov">$1,500</output></div>
+        <input type="range" id="aov" min="800" max="3500" step="50" value="1500">
+        <div class="why">Placeholder, mattress-led with pillow-only orders: queens run $999 on sale to $7,999 list (purple.com, Oct 23, 2026).</div>
+      </div>
+      <div class="ctl">
+        <div class="row"><label for="guide">Size-guide visit to order</label><output id="guideOut" for="guide">0.05%</output></div>
+        <input type="range" id="guide" min="0" max="0.2" step="0.01" value="0.05">
+        <div class="why">Bed-size questions ("queen bed dimensions") rarely buy on the spot. Placeholder: 1 in 2,000 visits.</div>
+      </div>
+      <div class="sect">Category ads, moved from brand terms (not new budget)</div>
+      <div class="ctl">
+        <div class="row"><label for="budget">Category ads a month</label><output id="budgetOut" for="budget">$50,000</output></div>
+        <input type="range" id="budget" min="0" max="150000" step="5000" value="50000">
+        <div class="band" id="budgetBand"></div>
+        <div class="why">Re-aimed from the ~$1.35M a month Similarweb estimates Purple spends on its own name; a brand holdout shows how much of that is incremental.</div>
+      </div>
+      <div class="ctl">
+        <div class="row"><label for="cpc">Cost per click</label><output id="cpcOut" for="cpc">$3.00</output></div>
+        <input type="range" id="cpc" min="1" max="6" step="0.1" value="3.0">
+        <div class="why">Ahrefs CPCs for the "best mattress for…", hybrid, cooling and memory-foam terms, weighted by volume (Oct 23, 2026). Keyword Planner to confirm.</div>
+      </div>
+      <div class="ctl">
+        <div class="row"><label for="lift">More orders per click on rebuilt pages</label><output id="liftOut" for="lift">+15%</output></div>
+        <input type="range" id="lift" min="0" max="40" step="5" value="15">
+        <div class="why">Ads that land on a "best mattress for side sleepers" page, not a general one. ROAST assumption: +15% from Tier 2.</div>
+      </div>
+      <div class="sect">Search &amp; AI: the clicks ads can't buy</div>
+      <div class="ctl">
+        <div class="row"><label for="shop">New shopping search visits a month</label><output id="shopOut" for="shop">11,201</output></div>
+        <input type="range" id="shop" min="0" max="60000" step="1" value="11201">
+        <div class="band" id="shopBand"></div>
+        <div class="why">"Best for" and type pages on page one for half of 330,600 monthly searches (5,786), half the commercial striking-distance upside (2,464), and a third of the memory foam vs hybrid page's lost visits (2,951) (Ahrefs, Oct 23, 2026).</div>
+      </div>
+      <div class="ctl">
+        <div class="row"><label for="gd">New size-guide visits a month</label><output id="gdOut" for="gd">33,709</output></div>
+        <input type="range" id="gd" min="0" max="70000" step="1" value="33709">
+        <div class="why">The two king guides each on their own size search (6,760); then queen, twin and full pages on page one for half of 599,900 monthly searches, plus half the size-guide striking distance (26,949 together).</div>
+      </div>
+      <div class="ctl">
+        <div class="row"><label for="ai">New AI-answer visits a month</label><output id="aiOut" for="ai">2,340</output></div>
+        <input type="range" id="ai" min="0" max="6000" step="1" value="2340">
+        <div class="why">GWI: 8.5% of US mattress shoppers find products through AI (index 142). × 1,240,190 shopping searches × 11 more points of ChatGPT citation share (13.8% to Saatva's 24.9%, our proxy for answers naming Purple) × 20% who click.</div>
+      </div>
+      <div class="presets" role="group" aria-label="Scenarios tied to the plan">
+        <button class="preset" type="button" data-p="0.8,1500,0.05,25000,3.0,0,0,6760,0"><b>Tier 1: patch the leaks</b>Dead links and podcast codes redirected, the two king guides split by size, $25K a month moved from brand to category ads with a holdout</button>
+        <button class="preset" type="button" data-p="0.8,1500,0.05,50000,3.0,15,11201,6760,0"><b>Tiers 1–2: + the shortlist pages</b>"Best for" pages for side sleepers, back pain, hot sleepers and couples, with $50K of category ads landing on them</button>
+        <button class="preset" type="button" data-p="0.8,1500,0.05,50000,3.0,15,11201,33709,2340" aria-pressed="true"><b>Tiers 1–3: + sizes, sources &amp; AI</b>The headline: queen, twin and full pages, a real review hub, Purple on the review lists AI quotes</button>
+        <button class="preset" type="button" data-p="0.8,1500,0.05,100000,3.0,20,52763,64038,4470"><b>All four (ceiling)</b>Page one for every shopping search, $100K of category ads, ~35% of the eight brands' AI citations</button>
+      </div>
+    </section>
+
+    <section class="result" aria-live="polite" aria-label="Outcome">
+      <div>
+        <div class="label">New online sales a year from category ads, new pages and AI answers</div>
+        <div class="big" id="rev">$4,323,285</div>
+        <div class="sub" id="revSub"></div>
+      </div>
+
+      <div class="stats">
+        <div class="stat"><div class="v" id="orders">240.2</div><div class="l" id="ordersL">new orders a month</div></div>
+        <div class="stat"><div class="v" id="roas">$3.45</div><div class="l">of sales per $1 of category ads</div></div>
+        <div class="stat"><div class="v" id="newOrders">2,882</div><div class="l">new orders a year</div></div>
+      </div>
+
+      <div class="bars">
+        <div class="t">New orders a month, by source</div>
+        <div class="bar"><span>Category ads</span><div class="fill"><i id="bA"></i></div><span class="n" id="nA">0</span></div>
+        <div class="bar"><span>"Best for" pages</span><div class="fill"><i id="bS"></i></div><span class="n" id="nS">0</span></div>
+        <div class="bar"><span>Size guides</span><div class="fill"><i id="bG"></i></div><span class="n" id="nG">0</span></div>
+        <div class="bar"><span>AI answers</span><div class="fill"><i id="bX"></i></div><span class="n" id="nX">0</span></div>
+      </div>
+
+      <div class="corp">
+        <div class="t">Cost per order, the budget moved, and the ad room used</div>
+        <div class="stats">
+          <div class="stat"><div class="v" id="cpo">$0</div><div class="l" id="cpoL">of ads per new order</div></div>
+          <div class="stat"><div class="v" id="moved">0%</div><div class="l" id="movedL">of today's brand budget moved</div></div>
+          <div class="stat"><div class="v" id="peq">0%</div><div class="l">of what ads can win on these searches</div></div>
+        </div>
+      </div>
+
+      <div class="tscroll">
+      <table aria-label="Order-rate sensitivity">
+        <thead><tr><th>If a shopping visit orders at</th><th>New orders / yr</th><th>New sales / yr</th></tr></thead>
+        <tbody id="sens"></tbody>
+      </table>
+      </div>
+    </section>
+  </div>
+
+  <div class="inaction">
+    <h2>What waiting costs</h2>
+    <p>Each month without the plan defers about <b id="perMonth">$0</b> of new online sales at these rates. Meanwhile <b>an estimated 90% of Purple's search-ad spend keeps buying its own name</b> into Black Friday and Presidents' Day, the AI Overviews for side sleepers, cooling and back pain name Helix, Brooklyn Bedding, Nectar and Saatva, and rivals' ads read "Compare … to Purple". Google shows an AI Overview on 49 of 52 mattress head-term searches, so the clicks that are left go to the brands those answers name.</p>
+  </div>
+
+  <div class="foot">
+    <div>Demand and rankings: Ahrefs, US, Oct 23, 2026: 48 non-branded mattress, pillow, bedding and base searches, 1,835,390 a month; Purple is in the top 100 for 3. Visits: half of the 330,600 monthly "best mattress for…" and type searches reaching page one at ~3.5% of clicks after an AI Overview haircut; half the striking-distance upside (Ahrefs' curve to position 3, untested); a third of lost page traffic won back (the whole sector lost clicks to AI answers); queen, twin and full size pages for 599,900 monthly searches. Ceiling: page one for every shopping search. Search spend: Similarweb, US, Jul–Sep 2026 (~$1.51M a month modeled; ~90% of paid cost on brand terms in its keyword sample). Ads win ~15% of a market's clicks (ROAST assumption): ~$375,814 a month on the shopping searches. AI: Ahrefs AI citation counts (Oct 23 snapshot), GWI USA Q3 2025–Q2 2026, Peec (tracking from Oct 23). Live checks of the site, Google and the Ads Transparency Center, Oct 23, 2026.</div>
+    <div>Formula: budget ÷ cost per click × visit-to-order × 75% × (1 + lift) = category ad orders. New shopping visits and AI visits × visit-to-order, plus size-guide visits × size-guide rate = new search &amp; AI orders. New orders × 12 × average order = new online sales a year, before cost of goods. The category ad budget is moved from brand terms, not added; the model assumes those brand clicks weren't incremental, which a holdout tests. Every figure uses placeholder rates until Purple shares its own.</div>
+    <div>Part of the ROAST × Purple search, AI visibility and paid search analysis, October 2026.</div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const $=id=>document.getElementById(id);
+  const C={"ROOM": 375814, "DISC": 0.75, "BRAND": 1354025, "PPC": 1511189, "GCPC": 0.24, "SHOP_NOW": 3950, "GUIDE_NOW": 27230};
+  const ids=["cvr", "aov", "guide", "budget", "cpc", "lift", "shop", "gd", "ai"];
+  const els=ids.map($);
+  const fmtI=n=>Math.round(n).toLocaleString('en-US');
+  const fmt1=n=>(Math.round(n*10)/10).toLocaleString('en-US');
+  const fmtD=n=>'$'+Math.round(n).toLocaleString('en-US');
+  const fmtD2=n=>'$'+n.toFixed(2);
+  const presets=[...document.querySelectorAll('.preset')];
+  const now=new Date(), today=new Date(now.getFullYear(),now.getMonth(),now.getDate());
+  const due=new Date(2027,1,15);
+  $('days').textContent=Math.max(0,Math.ceil((due-today)/86400000));
+  function model(v){
+    const cv=v.cvr/100, gc=v.guide/100, clicks=v.cpc?v.budget/v.cpc:0;
+    const oA=clicks*cv*C.DISC*(1+v.lift/100), oS=v.shop*cv, oG=v.gd*gc, oX=v.ai*cv;
+    const newO=oA+oS+oG+oX, rev=newO*12*v.aov;
+    return {clicks,oA,oS,oG,oX,newO,rev, roas:v.budget?oA*v.aov/v.budget:0, cpo:newO&&v.budget?v.budget/newO:0,
+            cpoA:oA?v.budget/oA:0, peq:(v.shop+v.ai)*v.cpc+v.gd*C.GCPC, share:v.budget/C.ROOM, moved:v.budget/C.BRAND};
+  }
+  function vals(){const v={};ids.forEach((k,i)=>v[k]=+els[i].value);return v;}
+  function render(){
+    const v=vals();
+    $('cvrOut').value=v.cvr.toFixed(2)+'%'; $('aovOut').value=fmtD(v.aov); $('guideOut').value=v.guide.toFixed(2)+'%';
+    $('budgetOut').value=fmtD(v.budget); $('cpcOut').value=fmtD2(v.cpc); $('liftOut').value='+'+v.lift+'%';
+    $('shopOut').value=fmtI(v.shop); $('gdOut').value=fmtI(v.gd); $('aiOut').value=fmtI(v.ai);
+    const o=model(v);
+    const x=v.cpc?(v.cvr/100*C.DISC*v.aov)/v.cpc:0;
+    $('cvrBand').className='band'+(x<2?' warn':'');
+    $('cvrBand').textContent=x<2?`A category ad click earns ${x.toFixed(1)}x its cost: below 2x, ads stop paying`:`A category ad click earns ${x.toFixed(1)}x its cost (ads pay at 2x or more)`;
+    const over=o.share>1;
+    $('budgetBand').className='band'+(over?' warn':'');
+    $('budgetBand').textContent=v.budget===0?'No category ads: pages and AI only':`Buys ~${fmtI(o.clicks)} clicks a month, ${Math.round(o.share*100)}% of what ads can win on these searches`+(over?': past that needs more searches':'');
+    $('shopBand').className='band'+(v.shop===0?' low':'');
+    $('shopBand').textContent=v.shop===0?'Nothing new: Purple keeps ~3,950 category visits a month':`${fmtI(C.SHOP_NOW+v.shop)} category visits a month in all, from ~${fmtI(C.SHOP_NOW)} today`;
+    $('rev').textContent=fmtD(o.rev);
+    $('revSub').textContent=`${fmt1(o.oA)} ad orders + ${fmt1(o.oS+o.oG+o.oX)} search & AI orders a month × 12 × ${fmtD(v.aov)}.`;
+    $('orders').textContent=fmt1(o.newO); $('ordersL').textContent=v.budget?`new orders a month on the same ad budget, instead of ${fmt1(o.oA)} from ads alone`:'new orders a month';
+    $('roas').textContent=v.budget?fmtD2(o.roas):'—'; $('newOrders').textContent=fmtI(o.newO*12);
+    const mx=Math.max(o.oA,o.oS,o.oG,o.oX,1)*1.08;
+    [['bA','nA',o.oA],['bS','nS',o.oS],['bG','nG',o.oG],['bX','nX',o.oX]].forEach(([b,n,y])=>{$(b).style.width=(y/mx*100)+'%';$(n).textContent=fmt1(y);});
+    $('cpo').textContent=v.budget?fmtD(o.cpo):'—'; $('cpoL').textContent=v.budget?`of ads per new order, from ${fmtD(o.cpoA)} for ads alone`:'of ads per new order';
+    $('moved').textContent=(o.moved*100).toFixed(1)+'%'; $('movedL').textContent=`of today's brand budget moved (${(v.budget/C.PPC*100).toFixed(1)}% of all search ads)`; $('peq').textContent=Math.round(o.share*100)+'%';
+    $('sens').innerHTML=[Math.max(0.3,v.cvr-0.3),v.cvr,Math.min(2,v.cvr+0.4)].map(c=>{const m=model(Object.assign({},v,{cvr:c}));return `<tr><td>${c.toFixed(2)}%</td><td>${fmtI(m.newO*12)}</td><td>${fmtD(m.rev)}</td></tr>`;}).join('');
+    $('perMonth').textContent=fmtD(o.rev/12);
+    presets.forEach(pr=>{const q=pr.dataset.p.split(',').map(Number);pr.setAttribute('aria-pressed',String(q.every((x,k)=>x===+els[k].value)));});
+    try{localStorage.setItem('purple-calc-v1',JSON.stringify(els.map(e=>e.value)));}catch(e){}
+  }
+  els.forEach(el=>el.addEventListener('input',render));
+  presets.forEach(pr=>pr.addEventListener('click',()=>{const q=pr.dataset.p.split(',');els.forEach((el,k)=>el.value=q[k]);render();}));
+  try{const s=JSON.parse(localStorage.getItem('purple-calc-v1'));if(Array.isArray(s)&&s.length===els.length){els.forEach((el,k)=>el.value=s[k]);}}catch(e){}
+  render();
+})();
+</script>
+<!-- layout-guard:start: roast-deck-kit/layout_guard.py -->
+<script>
+(function(){
+  var els=[].slice.call(document.querySelectorAll('.result .big,.stat .v,.funnel .v,.key .v'));
+  if(!els.length) return;
+  function fit(el){
+    el.style.fontSize='';
+    var w=el.clientWidth; if(!w) return;
+    var min=el.classList.contains('big')?28:13;
+    for(var i=0;i<4&&el.scrollWidth>w+0.5;i++){
+      var fs=parseFloat(getComputedStyle(el).fontSize);
+      var next=Math.max(min,fs*w/el.scrollWidth-0.5);
+      if(next>=fs) break;
+      el.style.fontSize=next.toFixed(1)+'px';
+    }
+  }
+  function all(){els.forEach(fit);}
+  var mo=new MutationObserver(all);
+  els.forEach(function(el){mo.observe(el,{childList:true,characterData:true,subtree:true});});
+  var raf=0; function soon(){if(!raf) raf=requestAnimationFrame(function(){raf=0;all();});}
+  window.addEventListener('resize',soon);
+  if(window.ResizeObserver){
+    var last=new WeakMap();
+    var ro=new ResizeObserver(function(entries){
+      var changed=false;
+      entries.forEach(function(e){var w=Math.round(e.contentRect.width);if(last.get(e.target)!==w){last.set(e.target,w);changed=true;}});
+      if(changed) soon();
+    });
+    [].slice.call(document.querySelectorAll('.result,.stat,.funnel .step,.key')).forEach(function(b){ro.observe(b);});
+  }
+  if(document.fonts&&document.fonts.ready) document.fonts.ready.then(all);
+  all();
+})();
+</script>
+<!-- layout-guard:end -->
+</body>
+</html>
