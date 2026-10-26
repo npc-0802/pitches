@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Titan Deal-Flow Calculator</title>
+<!-- share:start -->
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<meta name="description" content="What Google Ads on owner searches, an owner hub and a bigger share of AI answers are worth to Titan in qualified seller conversations, deals and acquired revenue, and what each month of waiting defers.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ROAST">
+<meta property="og:title" content="Titan Deal-Flow Calculator">
+<meta property="og:description" content="What Google Ads on owner searches, an owner hub and a bigger share of AI answers are worth to Titan in qualified seller conversations, deals and acquired revenue, and what each month of waiting defers.">
+<meta property="og:url" content="https://npc-0802.github.io/pitches/titan-deal-flow-calculator/">
+<meta property="og:image" content="https://npc-0802.github.io/pitches/titan-deal-flow-calculator/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="ROAST × Titan: Deal-Flow Calculator">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Titan Deal-Flow Calculator">
+<meta name="twitter:description" content="What Google Ads on owner searches, an owner hub and a bigger share of AI answers are worth to Titan in qualified seller conversations, deals and acquired revenue, and what each month of waiting defers.">
+<meta name="twitter:image" content="https://npc-0802.github.io/pitches/titan-deal-flow-calculator/og.png">
+<!-- share:end -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;900&family=Public+Sans:wght@400;500;600&display=swap">
+<style>
+:root{
+  --bg:#ffffff; --ink:#111214; --muted:#5b5e66; --line:#e6e4dc; --panel:#f6f5f0;
+  --yellow:#FFD100; --yellow-deep:#e6bc00; --on-yellow:#111214; --on-yellow-muted:#4a4630;
+  --track:#e3e1d8; --ok:#1f7a3a;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){ --bg:#111214; --ink:#f4f3ee; --muted:#a6a79f; --line:#2a2b2f; --panel:#1b1c20; --track:#33343a; color-scheme:dark; }
+}
+:root[data-theme="dark"]{ --bg:#111214; --ink:#f4f3ee; --muted:#a6a79f; --line:#2a2b2f; --panel:#1b1c20; --track:#33343a; color-scheme:dark; }
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Public Sans",system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;font-size:15px;line-height:1.45}
+.wrap{max-width:1440px;margin:0 auto;padding-block:22px 44px;padding-inline:clamp(16px,3vw,40px);display:grid;gap:22px}
+.brand{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-bottom:6px;flex-wrap:wrap}
+.wordmark{display:flex;align-items:center;gap:12px}.wordmark .roast-logo{height:22px;width:auto;display:block;color:var(--ink)}
+.wordmark span{font-family:"Public Sans",sans-serif;font-weight:500;font-size:15px;color:var(--muted);letter-spacing:0}
+.deadline{font-size:13px;color:var(--muted);text-align:right}
+.deadline b{color:var(--ink);font-variant-numeric:tabular-nums}
+h1{font-family:"Archivo",system-ui,sans-serif;font-weight:900;font-size:clamp(28px,3.4vw,46px);line-height:1.05;letter-spacing:-.015em;margin:0;text-wrap:balance;max-width:26ch}
+.lede{color:var(--muted);max-width:78ch;margin:8px 0 0;font-size:clamp(14px,1.1vw,16px)}
+.grid{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,2fr);gap:22px;align-items:start}
+@media (max-width:900px){.grid{grid-template-columns:1fr}}
+.panel{background:var(--panel);border-radius:22px;padding:clamp(18px,2vw,28px) clamp(18px,2vw,28px) 10px;min-width:0;overflow:hidden}
+.ctl{display:grid;gap:8px;padding-block:14px;border-top:1px solid var(--line)}
+.ctl:first-child{border-top:0;padding-top:2px}
+.ctl .row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.ctl label{font-weight:600}
+.ctl output{font-family:"Archivo",sans-serif;font-weight:700;font-size:22px;font-variant-numeric:tabular-nums}
+.ctl output small{font-family:"Public Sans",sans-serif;font-weight:500;font-size:13px;color:var(--muted);margin-left:8px}
+.ctl .why{font-size:13px;color:var(--muted);max-width:72ch}
+.sect{font-family:"Archivo",sans-serif;font-weight:700;font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);padding-top:16px;border-top:1px solid var(--line)}
+.band{font-size:13px;font-weight:600;padding:5px 12px;border-radius:14px;background:var(--yellow);color:var(--on-yellow);width:fit-content;max-width:100%;line-height:1.3}
+.band.low{background:var(--track);color:var(--ink)}
+.band.warn{background:#f3c4bd;color:#5c120a}
+input[type=range]{width:100%;accent-color:var(--ink);height:30px;margin:0}
+input[type=range]:focus-visible{outline:2px solid var(--ink);outline-offset:4px;border-radius:6px}
+.presets{display:flex;flex-wrap:wrap;gap:8px;padding-block:16px;border-top:1px solid var(--line)}
+.preset{border:1.5px solid var(--line);border-radius:12px;padding:8px 12px;font-size:13px;background:transparent;color:var(--ink);cursor:pointer;font-family:inherit;text-align:left;line-height:1.25}
+.preset b{display:block;font-weight:700}
+.preset:hover,.preset:focus-visible{border-color:var(--ink);outline:none}
+.preset[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.result{background:var(--yellow);color:var(--on-yellow);border-radius:22px;padding:clamp(20px,2.2vw,32px);display:grid;gap:18px;min-width:0}
+.result .label{font-weight:600;font-size:14px;color:var(--on-yellow-muted)}
+.result .big{font-family:"Archivo",sans-serif;font-weight:900;font-size:clamp(48px,6vw,88px);line-height:.95;letter-spacing:-.02em;font-variant-numeric:tabular-nums;margin:6px 0}
+.result .sub{font-size:14px;color:var(--on-yellow-muted);max-width:52ch}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+@media (max-width:520px){.stats{grid-template-columns:1fr 1fr}}
+.stat{background:rgba(255,255,255,.5);border-radius:14px;padding:14px 14px 12px;min-width:0}
+.stat .v{font-family:"Archivo",sans-serif;font-weight:700;font-size:clamp(20px,1.8vw,26px);font-variant-numeric:tabular-nums;line-height:1.1}
+.stat .l{font-size:12.5px;color:var(--on-yellow-muted);margin-top:5px;line-height:1.3;text-wrap:balance}
+.bars{display:grid;gap:8px;margin-top:4px}
+.bars .t{font-weight:600;font-size:13px;color:var(--on-yellow-muted)}
+.bar{display:grid;grid-template-columns:minmax(120px,170px) 1fr minmax(64px,auto);gap:10px;align-items:center;font-size:13px}
+@media (max-width:520px){.bar{grid-template-columns:110px 1fr minmax(56px,auto)}}
+.bar .fill{height:14px;border-radius:7px;background:rgba(17,18,20,.25);position:relative;overflow:hidden}
+.bar .fill i{position:absolute;inset:0;width:0;background:var(--on-yellow);border-radius:7px;transition:width .25s ease}
+.bar .fill i.gain{background:#ffffff;left:auto}
+.bar .n{text-align:right;font-variant-numeric:tabular-nums;font-weight:600}
+@media (prefers-reduced-motion: reduce){.bar .fill i{transition:none}}
+.corp{display:grid;gap:8px}
+.corp .t{font-weight:600;font-size:13px;color:var(--on-yellow-muted)}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th,td{text-align:left;padding:7px 4px;border-bottom:1px solid rgba(17,18,20,.18);font-variant-numeric:tabular-nums}
+th{font-size:12px;color:var(--on-yellow-muted);font-weight:600}
+td:last-child,th:last-child{text-align:right;font-weight:700}
+.inaction{background:var(--panel);border-radius:22px;padding:clamp(18px,2vw,28px);display:grid;gap:8px}
+.inaction h2{font-family:"Archivo",sans-serif;font-weight:700;font-size:18px;margin:0}
+.inaction p{margin:0;color:var(--muted);max-width:100ch;font-size:15px;line-height:1.55}
+.inaction b{color:var(--ink)}
+.foot{font-size:13px;color:var(--muted);max-width:110ch;display:grid;gap:6px}
+.foot a{color:var(--ink)}
+@media (min-width:901px){.result{position:sticky;top:16px}}
+.wordmark{flex-wrap:wrap;row-gap:6px}.wordmark .client-logo{height:22px;width:auto;display:block;color:var(--ink)}
+/* layout-guard:start: roast-deck-kit/layout_guard.py; re-run it instead of editing */
+.grid>*,.result>*,.stats>*,.bar>*,.funnel>*,.keys>*{min-width:0}
+.result{grid-template-columns:minmax(0,1fr);container:lgresult/inline-size}
+.stat .l,.funnel .l,.funnel .s,.key .l,.key .s{overflow-wrap:break-word}
+.tscroll{overflow-x:auto;max-width:100%}
+@container lgresult (max-width:400px){
+  .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .stats>.stat:last-child:nth-child(odd){grid-column:1/-1}
+  .funnel{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .funnel .step::after{display:none}
+}
+/* layout-guard:end */
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="brand">
+    <div class="wordmark"><svg class="roast-logo" fill="currentColor" aria-label="ROAST" role="img" viewBox="0 0 931.89 203.5" xmlns="http://www.w3.org/2000/svg" overflow="hidden" xmlns:c2pa="http://c2pa.org/manifest"><metadata><c2pa:manifest>AAAWgmp1bWIAAAAeanVtZGMycGEAEQAQgAAAqgA4m3EDYzJwYQAAABZcanVtYgAAAEdqdW1kYzJtYQARABCAAACqADibcQN1cm46YzJwYTozZDQ3MGE0ZS0yMmVkLTQyMmItYTUyMS03MDBhY2VmMjQ1YzkAAAADl2p1bWIAAAApanVtZGMyYXMAEQAQgAAAqgA4m3EDYzJwYS5hc3NlcnRpb25zAAAAALxqdW1iAAAARGp1bWRjYm9yABEAEIAAAKoAOJtxE2MycGEuaW5ncmVkaWVudC52MwAAAAAYYzJzaA2CgfxpiyX5e10r0s1hRZEAAABwY2JvcqNpZGM6Zm9ybWF0bWltYWdlL3N2Zyt4bWxqaW5zdGFuY2VJRHgseG1wOmlpZDplM2ZmMmVlNi01ZGQ1LTQ1MjItOWQ5Yy0zZGJjNGU4YmI5NWJscmVsYXRpb25zaGlwaHBhcmVudE9mAAAB4mp1bWIAAABBanVtZGNib3IAEQAQgAAAqgA4m3ETYzJwYS5hY3Rpb25zLnYyAAAAABhjMnNokbiFip/0bVcWbCsmWV7bOwAAAZljYm9yomdhY3Rpb25zgqJmYWN0aW9ua2MycGEub3BlbmVkanBhcmFtZXRlcnOha2luZ3JlZGllbnRzgaJjdXJseC1zZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmluZ3JlZGllbnQudjNkaGFzaFggdHVjQhQbTIDc8numuX28WgpAZrXhsoTiscHOU7tUJ9ikZmFjdGlvbngdY29tLmFudGhyb3BpYy5jbGF1ZGUucHJvdmlkZWRqcGFyYW1ldGVyc6F4H2NvbS5hbnRocm9waWMub3JpZ2luLWNvbmZpZGVuY2VndW5rbm93bmtkZXNjcmlwdGlvbnhmQ2xhdWRlIHByb3ZpZGVkIHRoaXMgZmlsZSBhdCB0aGUgcmVxdWVzdCBvZiBhIHVzZXIgYW5kIG1heSBoYXZlIGNyZWF0ZWQgb3IgbW9kaWZpZWQgdGhlIGZpbGUgY29udGVudHMubXNvZnR3YXJlQWdlbnShZG5hbWVmQ2xhdWRlcmFsbEFjdGlvbnNJbmNsdWRlZPUAAADIanVtYgAAAEBqdW1kY2JvcgARABCAAACqADibcRNjMnBhLmhhc2guZGF0YQAAAAAYYzJzaJTTpaWSGw/skOxEaOFCsm0AAACAY2JvcqVjYWxnZnNoYTI1NmNwYWRNAAAAAAAAAAAAAAAAAGRoYXNoWCBFqzodb2N2pJR9ua6fnBJPH/pxrehRy7zC3r72E1+nfmRuYW1lbmp1bWJmIG1hbmlmZXN0amV4Y2x1c2lvbnOBomVzdGFydBjZZmxlbmd0aBkeBAAAAj5qdW1iAAAAJ2p1bWRjMmNsABEAEIAAAKoAOJtxA2MycGEuY2xhaW0udjIAAAACD2Nib3KlY2FsZ2ZzaGEyNTZpc2lnbmF0dXJleE1zZWxmI2p1bWJmPS9jMnBhL3VybjpjMnBhOjNkNDcwYTRlLTIyZWQtNDIyYi1hNTIxLTcwMGFjZWYyNDVjOS9jMnBhLnNpZ25hdHVyZWppbnN0YW5jZUlEeCx4bXA6aWlkOjgyNWJkYzkyLWFhMzAtNGMyYy1iZWFhLWQ2YzVjOWU5YTlmMHJjcmVhdGVkX2Fzc2VydGlvbnODomN1cmx4LXNlbGYjanVtYmY9YzJwYS5hc3NlcnRpb25zL2MycGEuaW5ncmVkaWVudC52M2RoYXNoWCB0dWNCFBtMgNzye6a5fbxaCkBmteGyhOKxwc5Tu1Qn2KJjdXJseCpzZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmFjdGlvbnMudjJkaGFzaFggZb4jeey+/rFWzYf06bWr+PDqqliKesNjNSIAZleW87WiY3VybHgpc2VsZiNqdW1iZj1jMnBhLmFzc2VydGlvbnMvYzJwYS5oYXNoLmRhdGFkaGFzaFggJXgyBv4iaW2DX7SIIoYZDAgDYOBXpYCAOdcJs3U09wJ0Y2xhaW1fZ2VuZXJhdG9yX2luZm+jZG5hbWVvQW50aHJvcGljIEZpbGVzZ3ZlcnNpb25lMS4wLjBrc3BlY1ZlcnNpb25lMi40LjAAABA4anVtYgAAAChqdW1kYzJjcwARABCAAACqADibcQNjMnBhLnNpZ25hdHVyZQAAABAIY2JvctKEWQISogEmGCFZAgowggIGMIIBjaADAgECAhRA5aAK7sI50L64g/oGQgU9Z1UTADAKBggqhkjOPQQDAzBJMRcwFQYDVQQKEw5BbnRocm9waWMsIFBCQzEuMCwGA1UEAxMlQW50aHJvcGljIENvbnRlbnQgQ3JlZGVudGlhbHMgUm9vdCBDQTAeFw0yNjA4MDcxODQzNTZaFw0yODA4MDYxOTQzNTZaMEQxFzAVBgNVBAoTDkFudGhyb3BpYywgUEJDMSkwJwYDVQQDEyBBbnRocm9waWMgQ2xhdWRlIENvbnRlbnQgU2lnbmluZzBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABJh6CmvLUBgFFNU0vUKlOVtE6djd17L5SuwX0LemFisBM3dkd/3cyjxFA3Qo5S46fX0/ihY0VZ7mfb9KF703t5OjWDBWMA4GA1UdDwEB/wQEAwIHgDAVBgNVHSUEDjAMBgorBgEEAYPoXgIBMAwGA1UdEwEB/wQCMAAwHwYDVR0jBBgwFoAUzlHiBIFOZFsj+OPEz5o+nMHXXMIwCgYIKoZIzj0EAwMDZwAwZAIwMXMdFJ4BetLLVY7ORuE9noqbbAZOZn/aArXyTwFAZfKrPzxF2vPoJNf1+UCdg1XGAjBwX1zd9WGqYkqmL5SFqw1QySjr1zJfpJM9+1rdDwSPLMOPOjKuiXjoU/pUUeG9RwmhY3BhZFkNngAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPZYQKQHFmaWWw8/Pc9rbvILoQMoF65ZjbiA82R+olrBgcQbYPjdqnnCCZ2/cDk4w5k3mqsSm4BnOOf3/ZWf0b44t4k=</c2pa:manifest></metadata><path d="M30.4 4.59 0 4.59 0 0 93.33 0C128.29 0 166.29 7.45 166.29 50.73 166.29 85.7 123.42 94.87 101.23 97.45L101.23 98.02C136.19 100.89 154.74 108.05 159.3 145.89L163.56 180.86C165.69 197.77 174.2 198.92 179.37 198.92 184.84 198.92 188.79 197.2 191.84 196.05L193.66 199.78C187.58 201.79 179.98 203.51 168.73 203.51 131.64 203.51 129.51 184.88 125.25 151.92L123.12 134.72C120.99 116.66 115.52 100.32 81.17 100.32L61.41 100.32 61.41 198.92 92.42 198.92 92.42 203.51 0 203.51 0 198.92 30.4 198.92 30.4 4.59ZM61.41 95.73 76.61 95.73C112.48 95.73 133.46 83.98 133.46 50.73 133.46 27.8 125.25 4.58 82.08 4.58L61.41 4.58 61.41 95.73Z" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4"  fill-opacity="1"/><path d="M293.24 0.32C342.65 0.32 385.63 45.32 385.63 101.91 385.63 158.5 342.65 203.5 293.24 203.5 243.83 203.5 200.85 158.5 200.85 101.91 200.85 45.32 243.83 0.32 293.24 0.32ZM293.24 199.09C345.28 199.09 352.3 138.08 352.3 101.91 352.3 65.74 345.28 4.74 293.24 4.74 241.2 4.74 234.18 65.75 234.18 101.91 234.18 138.07 241.2 199.09 293.24 199.09Z" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4"  fill-opacity="1"/><path d="M501.23 135.93 438.66 135.93 424.96 175.38C422.91 180.89 420.57 187.51 420.57 192.19 420.57 196.05 424.08 199.08 433.43 199.08L448.63 199.08 448.63 203.49 388.4 203.49 388.4 199.08 397.76 199.08C406.82 199.08 410.62 198.25 416.18 182.82L480.77 0.32 483.99 0.32 556.81 199.09 581.08 199.09 581.08 203.5 495.42 203.5 495.42 199.09 524.07 199.09 501.24 135.93ZM469.66 48 469.08 48 440.43 131.52 499.78 131.52 469.67 48Z" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4"  fill-opacity="1"/><path d="M598 130.7 602.68 130.7C602.68 177.01 631.63 198.78 666.71 198.78 694.78 198.78 714.95 181.97 714.95 157.16 714.95 128.49 699.16 119.95 665.54 114.99 619.64 108.1 598 100.93 598 54.62 598 23.2 619.93 0.32 652.68 0.32 682.79 0.32 694.2 17.14 704.14 17.13 712.17 17.13 711.74 3.58 712.62-2.84217e-14L717.3-2.84217e-14 717.3 64.54 712.62 64.54C709.99 33.12 691.86 4.73 652.69 4.73 627.84 4.73 610.29 20.17 610.29 45.52 610.29 70.87 620.23 75.84 668.76 84.11 711.45 91.28 728.99 104.23 728.99 140.07 728.99 175.91 707.94 203.19 665.55 203.19 636.31 203.19 620.82 188.78 610 188.86 601.37 188.92 602.69 198.82 602.69 203.51L598.01 203.51 598.01 130.7Z" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4"  fill-opacity="1"/><path d="M752.96 0 752.96 64.54 757.64 64.54C757.64 24.77 766.71 6.75 804.33 4.79L804.33 147.44 829.12 147.44 829.12 4.41 855.73 4.41 855.73 147.44 880.52 147.44 880.52 4.78C918.11 6.71 927.21 24.7 927.21 64.54L931.89 64.54 931.89 0 752.96 0Z" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4"  fill-opacity="1"/></svg><span>×</span><picture><source media="(prefers-color-scheme: dark)" srcset="data:image/png;base64,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"><img class="client-logo" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAXsAAABQCAYAAAD4ItVKAAAZaUlEQVR42u1daZRlVXX+vnNfVb1331AUbUcbUEzMIETERnFaxhicEnEJpiVOGBm0xQFURBEx0dWBpXHApUGBBkTBFZdiHBqjJi6zjEYDCwck4BywEdFm6KLqDfdVvXvPlx/3vqpHB+iqe+979YbzLe5arOqqO+xz9nf23mefvVksV6/GCIOEJBZo7VVB0PgCAAPAPtCvA9B0pfJoD3y3hAIApX0uLG8j9I1Wy/8WsKcJwAMQrfdWAOT71ZMt+QJSyxLMOt8louhb4FPt5uJn9yMDdN+zVKlso8wrRC2t95nDM/YwAPa2m+ZtwMK9XXk+mKxL5dobCDxLVFuCl+qZ4u0GutEYXdtoNH6c/PP+5L5eeACicnn2mAh6M6lW2nFK9GTKGH6pVV/4xH7kNKzwAETFavWpsHxrGl3pGUNSbMt672i353/dh7EbOhQIvmikv0AAYUDihwC+kEziByVWAzwU4ouZ8bkx4+MtxXJwrTD7zqXmwjdSED4ByBJHE+Z4yIJp3yWyNwL47H5k0CWlyIpHeDTHpXrm0Iw9INl53++8q9XCg5H96idKT4PxjksrayaMAQKh+LtSqfapICi/C/htK2cSFQB4nnbbSE+HTI1pby2AIGTtVuCQzwC3t0eQ8OPhsjyUTKkr+4whvWjuBJxw3NW4WkMqD69Yrr6UwGaAIaDUqloYg9XMxvyNzjr+JgKwBGCqS5UpNSimWfLJsHZXqVI7K2gsXpTKSiCXIdnk3bx1vkgHwBTJzvoeyQ6Q+plDQvcgyBa0DiUll5LvDhMdSDX2iknjYTA8q1huHENbekEQBL/JkTQsAG9xcfF/S+XaxQDelryzSScrAeChxfLCtnYTn0q+PRw9j45hPvNWFuCxXy597e8R4F2JPKIhIfzuHDIQ3gHysH1tlvXCjNHFdQoyj2d68WAoIulD+FipNHtCoqQmxeBmeh9p3as+x2j8B/3dXnJZQCHBo2QK19RqtQNTzMf9ET4UeR+VdE/yTKZ8XwEUhe2HHIJScu+Rc+qSeZ6T/iqCwTm+X31ehoW037TfTsaquxClukYuTjvMsUSAkNGHS6VNB6UkfIfRg+layITZuhzq3Vj/vs3+vBev3Z6/jeRlJJnBGy8AEsg/u+feynPcHO0umpyy5GWzs7O/P6ReLnsMiNSXI6NcCV+RIbeQnVOQ1edyGMXxtyROniqX/3TFBc9R4cPl8CprbX3Vo8gSwDDn9HoOE074EcEtSx176SFAqQ9jNzRWiUOOE0eSLHQy8NByYiU4wp8c0rCkqXjytvV4fHkgAmA6nebNBvwPkF2LP+17isRRM+Xas7ueg1uoFRljnnm3Xzt/XBdAR/b5y5Mk/2C62jrEWfeTh3gXVFuTuRDmOP4CAGPs++O8gNS6G1uy5JShTtnn5xNN+JIiEm8qlssnJoRfGKcPdGTfF30HvFCHOVFM4GIvEMQj5+bmqsg3q0MA2Gg0vivpC3HuZ+pMGk+SID5/yj/gSOeB3nfBI8yHy+W5IxL5euMzOR36QvgyZsaJYVJte850Op2pPhgRHgCJ9iOAlrCSYZOK1CzASoH2Lb1GivPMIcAcGCG6dNOmTVWMaMaSI/sBWggC73JimESmJwjdvWnTpkYf7h8C8JaazW9CujbhIJte9wVJL0qsezk+WJFLSPJJzfbyh3oWWY7BhznkTvRSk5H5hbOYJg6WBCT9cvfu3e1VSzF3Cx8idyanKTPF7o0xJQ/25N4whgM8SKEhT5kp1U7DsObfO7LfUESxHuLb7fb8HU55Jo8kJFkY840+6pcAsOrP7JJ0I1ZCMmkNE4jU8b7vPwwu7753IfQkgAbvK1WrT0p0e6Rl4wY2Z4uLJGFwUc/kcJb9hFj1AI2En7Sbi59PCCPs0zwzd911V0PAh3sr/qQMWQgwh1oUTnJz9f8RviVQheUny+Xy7yFTaRVH9uOEEKRnFV0T1Ou7MAFV9Bx6iR4C0KHh3wMI+kwKFoA5oOp/BlY/RuZaPBKIMyqVykMwRhuSeXhqACKQfxLBXDIOZN8Z0BUi32Pkw6ToEcApSdd50Kt7lE8j8O6DHPtxsxzV48F5lM4LGgufRw4nXNcSytmzZ09TxMeTNMwsHGANucVanNJDcg5dWUgRaY73/crbknEdSfkUSE4NTDO04m12FWQMLAjGWQ3QNUbh9martQcjUjpWYoWGU4irfw7geSsTYFwyPwjSg1UD1LmtVv0jSNfTIC3ho0B9MrL2HSDnslie8WTliQAuAtDAaNa7759RLEUy5j3lcvmHzWbz6wMc5/zIXsBg6tnLPgIyTwHxQpCFruaPuEXfhuy1kD7SDhpf7lnEhj18EwGAGF1p5X2/3+4pra2JPFzCsSQOw+qm4igTfijoToi7qM7lQSv4HrJtlqaZf16j0bi7VK7uBPl2SGlLNnuIN5aPKFVmnxM0Fv4Fbr/pvos6QAjGwttZKh34Z0Gw93aMWKi2kAzsoPAh3599nGTPBvmSDVB4AUBpaurG1lL0/AwTmrS2Tk7/Kgj2/mafSTEKg28BYLnR+CmAnw7usQ99t++3/8bS7iDNIZAGWWFwZUEziP6xY81nCS6nWeQEmSnaXzebzVsBNHtCH4O29AQANjQ7jadTQGzOtHALkPRWALswgnXu+27dx/H7R8J0LgXwAqzub4zEoljA4Oo/CIBttRZuAPDSYqV2E4XzegTGQSnH/Pz8AoB/z/G+3RitRnACmwHJXcCeZquFK2ZmZ7/Jjr4I4rEY7KaXAKDZbN4M4OYsN1q+7wJvNsiltwDM0tLCraVy5UrAOytp6sF0c0GWxBOL5doLk/aWIxeq6DO82EAxf1kqV3cEzfo5oySjbrGmQVzdDToDoNBuLJ4P8B9AbpS7mGfDlFHdfLQDHPuux1NYWli41UZLx0n4xQZ5Q8xp7LtW3UYrOyPickFZWw1akqR0GnD4NFxmzgMuiqB5e6lUeSFGqMub2SCCiQAwaC7soHRdUlffbsB7ZL1cTHP9CAFMLS0t/YqezgJpe63uQXqZOYz9MIy/BcDlRuPnJK/J2txEkgX51FLp11s3kCOGGfHiJ0k0l0xXDjwcI3LgaqNesGvhh7L2/UnimCPOyUEHgAnq9V2w+g7cZmAeBGQVRhdKWs4uT86AOB2jkT68Ubwpkps9G14yNzc3e5+FwJH9/RI+gehaye4G2O/cZIdhhHB1tjRxh65l2W43vi3oq0nefYbmJhLIF/n+7Fa4EgoPwp2KYPi0YCns7j16Q/7CG0r2CILgDsj8HM66n0yu98yPeueDQ0adivSBbuWODF5CBHJG0JkYk4qPfeNPKSL5Bt+vnowhr38/BJY9JCqgU/jJ1BaLBSeF/IyndrtxLaRvJbH7tBvHcd499deVSuWPMQZFwPqE7ka/LHFB4gkNrazMEAnNYTI5yo19fmRfABAK+LiyhUTjMBCNH4mvdKLdr6ysoTlAtFds3ry5MmTcOnRk7+DgkB0RADPb8j8XF0jLlOVmIEnAy8eh4mOf4UmKAB7ZaLYvwZCmrDqyd3AYL+see7CnKegDyHZYMSnxy0MietvhOlntl/ABRDDmZaVS9QwMYf69GzwHh/EjfLZb9c9B+knG1oUEIErbfd/fAhe737+84nMK7ykWq08dNsJ3A+fgMH5kbwA0ae2VZKYTynEYiObhllMvc6JdI58SPg0/UalUNmOIQjqO7B0cxtS6j+R9xsr+DvHGbabYPaVTEyt1XHsShMjnnE9cJ8nwj0JrdvZ4SBtO+I7sHRzGDysF0gxxdQ48IxgeVizXTsBq1s+4yIkgPZIF5HeS24MUkjy+6FfOwXAcTJMjeweHsbbuzedzOGSl2Lq3p2/ZssXHeBRIEwAj4Wey+rAie56AG5BfYb5CXEXU7PD92nOx8fF7OrJ3cBhjwmdkbsnFUo3z7p96b731PIx+CYUkjVRfKxj7tHZr8U1BUP+7dnPxaAgXJJV4c6pkSs8SlxeLBxy6TsLvehgRwUYOn7zkyN7BYfwt/Pxg7end/xtlopfUsqF5XaPRuDshYAMgDFqLZ8Pab4DMo069ARQRPJgmuvTww9ddNtoAsBKujw9Ep5J5UqGV1zmyd3AYT3gAyIKOyisMEFv3eEqxcsCf9zxjNBc/4qalpYVb0a0FtOqthLKFUyR7O/JpTOLF9e/57Ft3/+bdyfPXWm/IJO7ZlwVFKRdvC5LW4tOO7B0c+guTKPegrm73uQ4AwdqzEl7JauHHh6xopih7KlbLH49g7J6gcH+NXiwA027P32aF7YozdJiT7EICby1VKtsQ33ct3BsCMEtbmt+B8FXEm8jrWXxCkgXJ/nApKPyzI3sHh36yymqznkFdIYBwZmb2kcVydScMngYor9OvJq6ggBdNzc4ehdHeqH0gErcAvOVW/asgdnA1fq+Mz/IEFWTNRZVK5TCsPX4v/BJLirzXS7ojyRoK9/M+in+HBVm7F9QZwN7FgtNHB4f+kUmpVDtaRk9n/xt4xw1MyCqEJ1J2K2gejpicmeMzIoClQsee2QFOxHhWqrUACu3GH723WP7ZE0jvBXHv2UxhKwKISG621lwxh7nnzmO+ju7BtQcnbtNuz9/m+7PHSroS5BGJ2LueB3t+N0mNZUHQb0Xz8qXGwn8B8BzZOzj0j3xnZHQhYZ44KE6k2KP66kfWjEm+5YXTlQMPW27s/ckaCGvUkBy0+r48lLdHVo8m8cfInj7pAQph+KTAD89DC6ev8X4WgGm1Fm6o1WrP6FidC6uTaMyBwn2XWxKQtQ0R/z5l9PZ6ffEXyTMiR/YODvmjACCcrlafScvHA+r2rB1A2FSCVjYb+/G82Lo3xvfUORHAuWNI9l0K9ZrN5p5qtXpyaPlvALpnDLLItaDVhic/aLXqV3Tny1oIf3FxcS+At5TLc1fYKDwGRo8DeFDyxvcKuI4w/xk0F37QXlmc4zi/I3sHh/6EAWginkRDT1I4QF3jABYVJuGhl/v+Qy5ste7+3ZgSfgTAq9fr3y2Vym+HKVyI1ayYrGMkkReUSrWbgmDxeqwt86e7R2KazfmbANy0n2egd0zcBq2DQ+5hDqhcLj+GxPMUh1K8cfxGwBxqzfIpGO8OcxEALwiaHwV0FeP8+zAf+eEAEZfNzs4egLVvdndr+XSzr/b9G69nvmnfhzo4OOTr/svKnA3Q38fKGicwCRm9AdXqpjEnfAEwUx7eBOm6xEvL4cAVIpKPXe7Yj/b8bK1zpZt9pTX+3JG9g0OO8ADI92e3gtyWpDyOa3cnApAhH1ayK1k54xoWtgCwuLi4l4heLWEB+RRNM/GGrXlp0a+elZB03+aLI3sHh3wtQFjoJJDFfivvMHxvspq9AkBpzL/XAig0m83/AcwZcd5LPvn3kAByx0y5fAz6WHfIkb2DQ366JFQqDyF1QrKBOe765cXpneaoUmX2WIx/n9oIgNdu3XuVpA8lnkw+J5OBooG5JOkI1hc5OrJ3cMgxrFG0OA0wXYWdCP0SQMmeDWAK4x+7twAw1yq/E8K3ksrBOdTPQQSaP7QsXNoznxzZOzgMo1VfKpUOAs1pYx6rv59vlyX4hGK5tg2rhb7GmfD5W/y2ZSOeLOgOgB6yp516iPPvj/UrKw1PCnlPUgcHh+x6ZMXplxnyYIxHc4/1wDJudvuKHut+nL/fAvCWlhZuodVrAYU9C0G2eSRFgjnP96vPQ5ziWchzkjo4OKQHAUSbgQpgXylNlFXfRUGShXBMqVQ7EpMRwkry7+u7rNX5yOdQWXwgToAlL53yZx+XEP6UI3sHh+EgezVKlWeT5jGYoFj9/5cEi6DOxGpBrrH3aAB4S0F9h4CvJOGcKI/5RPCgAu0XCrXaExGXqwZWD0x18/HXejmyd3DIQzEBeCLPmQx+ezBZSCC3lUq1J2D0WxeuBd1FzdJ2tgP21wkZZ7XwDaAINI8sRPxKqVx9M1YPcnUbrWgdZG/getA6OGT2jFUs17YZmqORf6zeJm78IOvhZ1n4IpDTIN6I9Z0GHXnrPgiC34g6EUC7ZyHIAg+SJbQJ4AVFv/b9UqX22lK1+uTkxHJ3UVnrJVcIzcEhPbnZLVu2+PcuNE8XV4rNmpwIRAC8pHnGYMxUZeYoA0mgjp+uVh+1XK//AuNZIG1fxPn3jca3in7170jz/qRgWtaspO4pXZF4LMGPyWK5KP2c5dqCpBa4nwETCLJtO/ZsR/YODhnIfn6+/nh65inIJ+Uw8QwSgpf9pYVuAXg7oE6fPZQQ4CMI/BX2ifWu8z4RaSpGeimAHRM0HywAr92qf6DkVx8P8iXIXv8ePWOhpKjeNGkeAwKGXNtfQ4DBBx3ZOzhk0UTD0+KNOWUN4ax6BbL/AWMuhg2/024Fdwzye0rl2g0AH5t8TxqvImldqNf6vr+z1WrtQT59XIcdKz15Cx7e0LE6jDRH5thAhsnCIUAWQvLfft+JgNoAOy5m7+CwfngAVKrVjgZ5fA6HqCwASriT4quCVv1ZQWPh6iAI7kiIojCAazoO5eiDgJiRlCzBh0X0TsNkZSdZAKzX6/fA4HWSXegh3Tw9yn2by6/hktugdXBIoWyxFRfh9SR9ZNuYTchQt0Qwz2m1Fi7HagXJbrw7HMDVAcB2a/qLgG7FarP01DIi8Kqk1ks0YYTvtev175I6OwnJ2WHwbBzZOzikIOiZWu1Rko5TtoJnio1p1UOZbZ3WvT/C6gGaEIPd2Ey+4546gE+RzBJ6MQCsoTk4wtTzJ3B+xBk6jcYlgt0J5lJOwZG9g8NGWPYmwnbSHID0pQFiIiUNyXd0Wgs3JNZ8ZwO/TQCoqHCZtboT2TJpjCSQ9vVYiTVPjjHQ9fbalfqZkv1+cuBqQ2XgyN7BYX36okqlslnAKzLqbvzHVjcHza0Xo6cx9AZbpKbdnr+N1GVJzfZM9yN4ZLFcezHGu7nJAy6c2IOmpf5Wsnt7ZOzI3sFhFKx6a81rDJk1Fi2QFPVe4D/zKqSVF+EDduqiZIMxbThndW9DOH3z5s0VjH8zl/uTpbfcaPyYRq9JFs8NG2NH9g4Oaycv6/v+FhHbMxY8i9PxrP1l2+NXhtGDCYK9twP4dBK7T+txeABE8skLjc4xmMy6QXHBtEbjc4B9XxK/3xAPzpG9g8M6LFWp8NcAH56RuGKrHvwkFhf3Ip96KnmGH+JSB7ZwpaQAmfutCobR6RsdxthoCz+o1HfA6psbRfiO7B0c1o4ZGZ2U0RUXACOru2GXr8JwHjgKAbDdnv9vCV/rSR9MvUgCeHqpVjt6Qq37eMN2D5qy3itltQcbsGntyN7BYf8oALDFcu04Q7M1OUSVyaondXm73d6NbPns/SYosID3JHVe0n4vAVhjzDRCnbnPzyeN8L12e/42A52aLKgDLQXtyN7BYf9kFSE+YXpmRossPilrdSds+JERIDwGi4vXS9qVbC6GaXlGcR7m8Yl1P2mdvLqIAHitVv1fKfwDyIEWiXNk7+CwhjDEtF99NsEnJcWo0ha3EkjCqFsKYVit+q4lagDAyvtEj3WfNjPHAizaCK/v9RwmlPBNq7W4Q9Z+iQOM3zuyd3DYPwoecQZyiNVDioDCp0cklGEBcHlT5euAfoRsG7UGEChtK87NPQKT3NEr+XYqfJ2sfpYYD30nfEf2Dg4PDA+ALRarRwN8RjeMnV7BSQHXtBvz38FqeGjoSQm33x4IvCD59LTfTwARjalwOTx1wvlHABgEwR2y9tWKG55kzHhyZO/gkFkp6fG1JKeR+VCQ2rR674hY9fex7tsPmfsXyX4PWQukxcH7U0ulAw/GZBVI2xdxw5N249siziRXFv++Eb4jeweHB9YN6/uzRwI4IYnVpz3uH5I0FL4eBPXvDcKKy3nB87B7d1swF/X8TGllSvBgeeGpmPCmvcmiWVhqLF4i2asAFtDHPRxH9g4OD0xysNQbARaz6pmkUNKlPd7BKBGdBcApE+0SdAuyx+4F4bRN2FRF+kJy4zLHIgC2YPhmQTckBdP6Et5zZO/gcP96oWKx+HAAz8nYnMQmsfqbg6D+FQxHwbM0ZG8ajcbdAj4NMmtzE5Hc0igtvQyTvVG74jnV6/V7jMJTAd2NPmVpObJ3cLh/QgIK06805EHInhdOSB8cQZLfl/DhKboQVndltO5FADQ8BUARk5t330WSf9/6gaSzkhPLuXt+ZogmUpTxGvX4X7cGduqLpEZ4sme5bM46EQGzc5BOkxT1uNvrvTogIdgb2q365zDavViVENLvQF2cVD/upNRdSOoYmCeUKrPPX28oJ5nnNodr6Ai/3ap/UrL/lIRzwpy+0wLDUl9a8mGMB6U6rOJ1z72MNtVrGjAGUJoFeCZRoKmRDJmQacc+kZ2t5G0ZlnydS3oHx8UtU8MjAEofBRAk+hZixGFD8wnj2TfCmFrqpYvw4k0RnY9Nm/4N99zTWLuqqECm1hUDEIJKQ7qgGr9Vf2fg1x4D4i9yuq8PwBSG4OMgwy9aG/0KwnIKb8MCKBC4vveeI2YxwQjXW9otpJal9cmARATBp+GNIySDeOzl3Snb2Qmhk2Ls49RIotFqzrSAVh7fHmefMGpYq4uRPj0wLngmtqnoqxju07LrsT65tLRwS6lUO1eyR6Qct95R0kwYbl4C6mvwfOJ/M9ota7+YUlck2YLEm4Y0VGb2AovVUK8Jp3G+lN6Iib8VhsSytbjr/wCvWTbDTM7b+gAAAABJRU5ErkJggg==" alt="Titan" height="20" style="height:20px"></picture><span>· Q4 2026</span></div>
+    <div class="deadline"><b id="days">—</b> <span id="dayslabel">days left in 2026</span></div>
+  </div>
+
+  <div>
+    <h1>What being found by MSP owners in Google and AI answers is worth in deals for Titan</h1>
+    <p class="lede">Titan aims to close 20+ deals a year and has closed two. US owners thinking about selling make ~780 searches a month for things like "sell my MSP," "MSP acquisitions" and "MSP valuation multiples," and Titan ranks for none of them. When owners ask AI who is buying MSPs, it names Evergreen, The 20 and New Charter; Titan shows up in ~6% of those answers (Evergreen ~28%). This models Google Ads on the owner searches now, then an owner hub that ranks, and the press, buyer lists and AI answers that name Titan. Pick a tier, then replace our placeholder rates with Titan's own.</p>
+  </div>
+
+  <div class="grid">
+    <section class="panel" aria-label="Assumptions">
+      <div class="sect" style="border-top:0;padding-top:0">Paid search: Google Ads on the 13 owner searches</div>
+      <div class="ctl">
+        <div class="row"><label for="budget">Google Ads budget a month</label><output id="budgetOut" for="budget">$870</output></div>
+        <input type="range" id="budget" min="0" max="3000" step="10" value="870">
+        <div class="band" id="budgetBand"></div>
+        <div class="why">The whole market is ~780 searches a month, so ads top out around $870. Titan runs no ads today; a broker (Roadmap Advisors) bids on "sell my msp."</div>
+      </div>
+      <div class="ctl">
+        <div class="row"><label for="cpc">Cost per click</label><output id="cpcOut" for="cpc">$7.44</output></div>
+        <input type="range" id="cpc" min="2" max="30" step="0.01" value="7.44">
+        <div class="why">Ahrefs' guide averages $7.44 across these searches ($2.50–35); Keyword Planner will confirm.</div>
+      </div>
+      <div class="sect">Organic &amp; AI: titanmsp.ai, the press and the buyer lists</div>
+      <div class="ctl">
+        <div class="row"><label for="search">New owner visits a month from Google</label><output id="searchOut" for="search">72</output></div>
+        <input type="range" id="search" min="0" max="300" step="1" value="72">
+        <div class="band" id="searchBand"></div>
+        <div class="why">An owner hub (selling, valuation, deal structures, the 9-week process) reaching Google's top three for the 13 searches. 72 = all of them; the long tail is extra.</div>
+      </div>
+      <div class="ctl">
+        <div class="row"><label for="ai">New owner arrivals a month from AI answers</label><output id="aiOut" for="ai">90</output></div>
+        <input type="range" id="ai" min="0" max="300" step="1" value="90">
+        <div class="why">~400 owner AI questions a month (GWI: IT entrepreneurs find brands through AI half as often as B2B buyers do through search) × Titan named in 28% of sell-side answers instead of 6% (Peec).</div>
+      </div>
+      <div class="sect">Every deal</div>
+      <div class="ctl">
+        <div class="row"><label for="conv">Owner visit to a qualified seller conversation</label><output id="convOut" for="conv">0.50%</output></div>
+        <input type="range" id="conv" min="0.1" max="2" step="0.05" value="0.5">
+        <div class="why">Placeholder until Titan shares its own: ~2–3% of owners reach out, and ~18% of US MSPs clear the $2M bar (Fox &amp; Crow). Ad clicks convert at three-quarters of this.</div>
+      </div>
+      <div class="ctl">
+        <div class="row"><label for="close">Qualified conversation to a closed deal</label><output id="closeOut" for="close">10%</output></div>
+        <input type="range" id="close" min="2" max="30" step="1" value="10">
+        <div class="why">Placeholder until Titan shares its own (intro call to LOI to close).</div>
+      </div>
+      <div class="ctl">
+        <div class="row"><label for="rev">Revenue of an acquired MSP</label><output id="revOut" for="rev">$4,000,000</output></div>
+        <input type="range" id="rev" min="2000000" max="15000000" step="250000" value="4000000">
+        <div class="why">Placeholder: Titan's bar is $2M+; Shield's partners average ~$11M (Shield, Feb 2026).</div>
+      </div>
+      <div class="presets" role="group" aria-label="Scenarios tied to the plan">
+        <button class="preset" type="button" data-p="870,7.44,0,0,0.5,10,4000000"><b>Tier 1: fix the front door + start ads</b>A seller form instead of a mailto link, FAQ schema, llms.txt, ~$870 a month of ads on the owner searches</button>
+        <button class="preset" type="button" data-p="870,7.44,36,37,0.5,10,4000000"><b>Tier 2: the owner hub</b>Pages on selling, valuation, deal structures and alternatives to PE, half of them in the top three</button>
+        <button class="preset" type="button" data-p="870,7.44,72,90,0.5,10,4000000" aria-pressed="true"><b>Tier 3: named by the press, lists and AI</b>The headline: StoredTech announced, trade press and buyer lists; named in 28% of sell-side AI answers</button>
+        <button class="preset" type="button" data-p="870,7.44,143,158,0.5,10,4000000"><b>Tier 4 (ceiling)</b>The long tail too; named in 45% of sell-side AI answers</button>
+      </div>
+    </section>
+
+    <section class="result" aria-live="polite" aria-label="Outcome">
+      <div>
+        <div class="label">Acquired revenue a year from deals sourced through Google Ads, search and AI</div>
+        <div class="big" id="revT">$0</div>
+        <div class="sub" id="revSub"></div>
+      </div>
+
+      <div class="stats">
+        <div class="stat"><div class="v" id="deals">0</div><div class="l">deals a year</div></div>
+        <div class="stat"><div class="v" id="convs">0</div><div class="l">qualified seller talks a year</div></div>
+        <div class="stat"><div class="v" id="cpq">—</div><div class="l">ad cost per seller talk</div></div>
+      </div>
+
+      <div class="bars">
+        <div class="t">Qualified seller conversations a year, by source</div>
+        <div class="bar"><span>Google Ads</span><div class="fill"><i id="bA"></i></div><span class="n" id="nA">0</span></div>
+        <div class="bar"><span>Google search</span><div class="fill"><i id="bS"></i></div><span class="n" id="nS">0</span></div>
+        <div class="bar"><span>AI answers</span><div class="fill"><i id="bX"></i></div><span class="n" id="nX">0</span></div>
+      </div>
+
+      <div class="corp">
+        <div class="t">What the deals are worth inside Titan (not in the revenue figure)</div>
+        <div class="stats">
+          <div class="stat"><div class="v" id="goal">0%</div><div class="l">of a 20-deal year</div></div>
+          <div class="stat"><div class="v" id="eq">$0</div><div class="l">equity value per deal</div></div>
+          <div class="stat"><div class="v" id="peq">$0</div><div class="l">a month to buy the search clicks</div></div>
+        </div>
+      </div>
+
+      <table aria-label="Conversion sensitivity">
+        <thead><tr><th>If an owner visit converts at</th><th>Deals / yr</th><th>Acquired revenue / yr</th></tr></thead>
+        <tbody id="sens"></tbody>
+      </table>
+    </section>
+  </div>
+
+  <div class="inaction">
+    <h2>What waiting costs</h2>
+    <p>Each month without the plan defers about <b id="perMonth">$0</b> of acquired revenue at these rates, about one deal every <b id="perDeal">0</b> months. Meanwhile <b>Shield has closed 20 MSP deals and Evergreen closed 47 in 2025</b>. Asked who the most active MSP acquirers are, Google's AI answer names Evergreen, The 20, New Charter, Thrive, Ntiva and Dataprise, and Titan's second deal (StoredTech) was never announced, so the AI roll-up trackers still list one. Owners hear about Titan from its outreach and then search its name ("titan msp" is ~1,010 searches a month); the owners who start with a search or an AI question find someone else.</p>
+  </div>
+
+  <div class="foot">
+    <div>Owner searches: Ahrefs, US, 26 Oct 2026: 13 sell-side head terms, 780 searches a month ("msp for sale" and "msp partner program" left out: buyers and vendor programs); Titan ranks top 100 for none of the 47 category searches its audiences make (141,150 a month). CTR curve (ROAST working curve): #1 28%, #2 16%, #3 11%, top-three average with a 50% AI Overview haircut ~9.2%. Ads: Ahrefs CPC guide, volume-weighted $7.44; ads rarely win more than ~15% of a market's clicks (~117 a month here). AI: Peec.ai day-1 baseline, 26 Oct 2026 (95 prompts across ChatGPT, Gemini and Google AI Overviews; one day, so a first read): Titan named in 1.6% of "selling an MSP" answers and 9.7% of "MSP acquirers" answers; Evergreen 23.0% and 32.3%. GWI Core, US, Q4 2025–Q2 2026 (proxy audiences): 55.9% of B2B buyers find new providers through search (index 167); 28.7% of IT/telecoms entrepreneurs find brands through AI (index 258). Site traffic: Similarweb, US, Jul–Sep 2026: ~6,928 visits a month, 40% direct and 38% organic search, 77.5% of search branded, no paid search. Market: ~8,000 US MSPs above $2M revenue (Fox &amp; Crow, Oct 2025); Titan's goal of 20+ deals a year (Titan VP M&amp;A job post, Oct 2026); multiples 5–7x EBITDA for small MSPs and ~12–13x for platforms (Drake Star, 2026).</div>
+    <div>Formula: Google Ads budget ÷ CPC (capped at ~15% of the owner searches) × visit-to-conversation × 0.75 = ad-sourced conversations; (Google visits + AI arrivals) × visit-to-conversation = organic conversations; × 12 = a year; × conversation-to-close = deals; × revenue per acquired MSP = acquired revenue. Equity value per deal = revenue × 15% EBITDA margin (placeholder) × the 5–8 turn gap between small-MSP and platform multiples. Titan pays for what it acquires; this counts what search and AI add to deal flow, not profit. What the search clicks would cost in Google Ads is never added to the revenue. Every revenue figure uses placeholder rates until Titan shares its own funnel.</div>
+    <div>Part of the ROAST × Titan search, AI visibility and deal-flow analysis, October 2026.</div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const $=id=>document.getElementById(id);
+  const C={"OWNER": 780, "SEARCH_ALL": 72, "CAP": 117, "AD_SHARE": 0.15, "PAID": 0.75, "MARGIN": 0.15, "SP_LO": 5, "SP_HI": 8, "GOAL": 20};
+  const ids=["budget", "cpc", "search", "ai", "conv", "close", "rev"];
+  const els=ids.map($);
+  const fmtI=n=>Math.round(n).toLocaleString('en-US');
+  const fmt1=n=>(Math.round(n*10)/10).toLocaleString('en-US');
+  const fmtD=n=>'$'+Math.round(n).toLocaleString('en-US');
+  const fmtM=n=>n>=1e6?'$'+(n/1e6).toFixed(1)+'M':fmtD(n);
+  const presets=[...document.querySelectorAll('.preset')];
+  const now=new Date(), today=new Date(now.getFullYear(),now.getMonth(),now.getDate());
+  let due=new Date(2027,0,1), lab='days left in 2026';
+  if(today>=due){due=new Date(2027,3,1);lab='days to the end of Q1 2027';}
+  $('days').textContent=Math.max(0,Math.ceil((due-today)/86400000)); $('dayslabel').textContent=lab;
+  function model(v){
+    const cv=v.conv/100, cl=v.close/100;
+    const clicks=v.cpc?Math.min(v.budget/v.cpc,C.CAP):0;
+    const qA=clicks*cv*C.PAID*12, qS=v.search*cv*12, qX=v.ai*cv*12, q=qA+qS+qX;
+    const dA=qA*cl, dO=(qS+qX)*cl, deals=dA+dO, rev=deals*v.rev, spend=v.budget*12;
+    return {clicks,qA,qS,qX,q,dA,dO,deals,rev,spend,cpq:qA?spend/qA:0,peq:v.search*v.cpc,
+            eqLo:v.rev*C.MARGIN*C.SP_LO,eqHi:v.rev*C.MARGIN*C.SP_HI};
+  }
+  function vals(){const v={};ids.forEach((k,i)=>v[k]=+els[i].value);return v;}
+  function render(){
+    const v=vals();
+    $('budgetOut').value=fmtD(v.budget); $('cpcOut').value='$'+v.cpc.toFixed(2); $('searchOut').value=fmtI(v.search); $('aiOut').value=fmtI(v.ai);
+    $('convOut').value=v.conv.toFixed(2)+'%'; $('closeOut').value=v.close+'%'; $('revOut').value=fmtD(v.rev);
+    const o=model(v);
+    const raw=v.cpc?v.budget/v.cpc:0, over=raw>C.CAP*1.02;
+    $('budgetBand').className='band'+(over?' warn':'');
+    $('budgetBand').textContent=v.budget===0?'No ads: brokers keep the paid results':
+      `Buys ~${fmtI(o.clicks)} clicks a month, ${Math.round(o.clicks/C.OWNER*100)}% of the owner searches`+(over?'; past ~15% the extra budget buys nothing here':'');
+    const sh=v.search/C.SEARCH_ALL;
+    $('searchBand').className='band'+(sh>1?' warn':'');
+    $('searchBand').textContent=v.search===0?'Nothing new: Titan ranks for none of these today':
+      `${Math.round(sh*100)}% of what top three on all 13 would bring (${fmtI(C.SEARCH_ALL)} a month)`+(sh>1?'; past 100% needs the long tail':'');
+    $('revT').textContent=fmtD(o.rev);
+    $('revSub').textContent=`${fmt1(o.q)} qualified seller conversations a year × ${v.close}% × ${fmtM(v.rev)} per acquired MSP.`;
+    $('deals').textContent=fmt1(o.deals); $('convs').textContent=fmt1(o.q); $('cpq').textContent=o.qA?fmtD(o.cpq):'—';
+    const mx=Math.max(o.qA,o.qS,o.qX,1)*1.08;
+    [['bA','nA',o.qA],['bS','nS',o.qS],['bX','nX',o.qX]].forEach(([b,n,x])=>{$(b).style.width=(x/mx*100)+'%';$(n).textContent=fmt1(x);});
+    $('goal').textContent=Math.round(o.deals/C.GOAL*100)+'%'; $('eq').textContent=fmtM(o.eqLo)+'–'+fmtM(o.eqHi).replace('$',''); $('peq').textContent=fmtD(o.peq);
+    $('sens').innerHTML=[Math.max(0.1,v.conv/2),v.conv,Math.min(2,v.conv*2)].map(x=>{const m=model(Object.assign({},v,{conv:x}));return `<tr><td>${x.toFixed(2)}%</td><td>${fmt1(m.deals)}</td><td>${fmtD(m.rev)}</td></tr>`;}).join('');
+    $('perMonth').textContent=fmtD(o.rev/12); $('perDeal').textContent=o.deals?fmt1(12/o.deals):'—';
+    presets.forEach(pr=>{const q=pr.dataset.p.split(',').map(Number);pr.setAttribute('aria-pressed',String(q.every((x,k)=>x===+els[k].value)));});
+    try{localStorage.setItem('titan-calc-v1',JSON.stringify(els.map(e=>e.value)));}catch(e){}
+  }
+  els.forEach(el=>el.addEventListener('input',render));
+  presets.forEach(pr=>pr.addEventListener('click',()=>{const q=pr.dataset.p.split(',');els.forEach((el,k)=>el.value=q[k]);render();}));
+  try{const s=JSON.parse(localStorage.getItem('titan-calc-v1'));if(Array.isArray(s)&&s.length===els.length){els.forEach((el,k)=>el.value=s[k]);}}catch(e){}
+  render();
+})();
+</script>
+<!-- layout-guard:start: roast-deck-kit/layout_guard.py -->
+<script>
+(function(){
+  var els=[].slice.call(document.querySelectorAll('.result .big,.stat .v,.funnel .v,.key .v'));
+  if(!els.length) return;
+  function fit(el){
+    el.style.fontSize='';
+    var w=el.clientWidth; if(!w) return;
+    var min=el.classList.contains('big')?28:13;
+    for(var i=0;i<4&&el.scrollWidth>w+0.5;i++){
+      var fs=parseFloat(getComputedStyle(el).fontSize);
+      var next=Math.max(min,fs*w/el.scrollWidth-0.5);
+      if(next>=fs) break;
+      el.style.fontSize=next.toFixed(1)+'px';
+    }
+  }
+  function all(){els.forEach(fit);}
+  var mo=new MutationObserver(all);
+  els.forEach(function(el){mo.observe(el,{childList:true,characterData:true,subtree:true});});
+  var raf=0; function soon(){if(!raf) raf=requestAnimationFrame(function(){raf=0;all();});}
+  window.addEventListener('resize',soon);
+  if(window.ResizeObserver){
+    var last=new WeakMap();
+    var ro=new ResizeObserver(function(entries){
+      var changed=false;
+      entries.forEach(function(e){var w=Math.round(e.contentRect.width);if(last.get(e.target)!==w){last.set(e.target,w);changed=true;}});
+      if(changed) soon();
+    });
+    [].slice.call(document.querySelectorAll('.result,.stat,.funnel .step,.key')).forEach(function(b){ro.observe(b);});
+  }
+  if(document.fonts&&document.fonts.ready) document.fonts.ready.then(all);
+  all();
+})();
+</script>
+<!-- layout-guard:end -->
+</body>
+</html>

@@ -45,6 +45,7 @@ Interactive pages that accompany ROAST pitch decks. Static HTML, served with Git
 | HungerRush Pipeline-Value Calculator — what restaurant-tech search pages that rank (pages at positions 4–20 moved up, pizza POS back to #1, money pages for the restaurant-POS, POS-cost and online-ordering searches peers win) and a bigger share of AI answers are worth to HungerRush in demo requests, new customers and first-year revenue, by the three options in ROAST's RFI response, with Spahr Media's Google Ads shown alongside and what each month of waiting defers | `hungerrush-pipeline-value-calculator/` |
 | Fairfax & Favor Order-Value Calculator — what category Shopping & Search ads (partly funded by a brand-ad holdout test), rebuilt boot collections, US pages and AI answers are worth to Fairfax & Favor in new online orders and sales (£), per £1 of ads, and what each month of waiting defers | `fairfaxfavor-order-value-calculator/` |
 | Purple Mattress-Sales Calculator — what category ads moved from brand terms, "best for" pages, size guides and AI answers are worth to Purple in new online orders and sales, per $1 of ads, and what each month of waiting defers | `purple-mattress-sales-calculator/` |
+| Titan Deal-Flow Calculator — what Google Ads on owner searches, an owner hub and a bigger share of AI answers are worth to Titan in qualified seller conversations, deals and acquired revenue, and what each month of waiting defers | `titan-deal-flow-calculator/` |
 
 ## Favicon and link previews
 
