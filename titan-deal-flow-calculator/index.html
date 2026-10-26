@@ -3,24 +3,24 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Titan Deal-Flow Calculator</title>
+<title>Titan Deal-Flow & Managed AI Calculator</title>
 <!-- share:start -->
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="../assets/favicon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
-<meta name="description" content="What Google Ads on owner searches, an owner hub and a bigger share of AI answers are worth to Titan in qualified seller conversations, deals and acquired revenue, and what each month of waiting defers.">
+<meta name="description" content="What warming the owners Titan wants to buy, being found in Google and AI, and launching Managed AI to existing clients is worth in deals and revenue; ~$8.5M a year at placeholder rates.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ROAST">
-<meta property="og:title" content="Titan Deal-Flow Calculator">
-<meta property="og:description" content="What Google Ads on owner searches, an owner hub and a bigger share of AI answers are worth to Titan in qualified seller conversations, deals and acquired revenue, and what each month of waiting defers.">
+<meta property="og:title" content="Titan Deal-Flow &amp; Managed AI Calculator">
+<meta property="og:description" content="What warming the owners Titan wants to buy, being found in Google and AI, and launching Managed AI to existing clients is worth in deals and revenue; ~$8.5M a year at placeholder rates.">
 <meta property="og:url" content="https://npc-0802.github.io/pitches/titan-deal-flow-calculator/">
 <meta property="og:image" content="https://npc-0802.github.io/pitches/titan-deal-flow-calculator/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="ROAST × Titan: Deal-Flow Calculator">
+<meta property="og:image:alt" content="ROAST × Titan: Deal-Flow &amp; Managed AI Calculator">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Titan Deal-Flow Calculator">
-<meta name="twitter:description" content="What Google Ads on owner searches, an owner hub and a bigger share of AI answers are worth to Titan in qualified seller conversations, deals and acquired revenue, and what each month of waiting defers.">
+<meta name="twitter:title" content="Titan Deal-Flow &amp; Managed AI Calculator">
+<meta name="twitter:description" content="What warming the owners Titan wants to buy, being found in Google and AI, and launching Managed AI to existing clients is worth in deals and revenue; ~$8.5M a year at placeholder rates.">
 <meta name="twitter:image" content="https://npc-0802.github.io/pitches/titan-deal-flow-calculator/og.png">
 <!-- share:end -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;900&family=Public+Sans:wght@400;500;600&display=swap">
@@ -121,44 +121,31 @@ td:last-child,th:last-child{text-align:right;font-weight:700}
   </div>
 
   <div>
-    <h1>What being found by MSP owners in Google and AI answers is worth in deals for Titan</h1>
-    <p class="lede">Titan aims to close 20+ deals a year and has closed two. US owners thinking about selling make ~780 searches a month for things like "sell my MSP," "MSP acquisitions" and "MSP valuation multiples," and Titan ranks for none of them. When owners ask AI who is buying MSPs, it names Evergreen, The 20 and New Charter; Titan shows up in ~6% of those answers (Evergreen ~28%). This models Google Ads on the owner searches now, then an owner hub that ranks, and the press, buyer lists and AI answers that name Titan. Pick a tier, then replace our placeholder rates with Titan's own.</p>
+    <h1>What marketing to the owners Titan wants to buy, and the clients it already serves, is worth</h1>
+    <p class="lede">Titan aims to close 20+ deals a year and take Managed AI past 100 customers. Both goals run on lists: ~8,000 US MSPs clear Titan's $2M revenue bar, and its MSPs already serve 400+ clients. Today Titan reaches owners through its own outreach, with no ads, owner content or 2026 trade press behind it, and when owners ask AI who is buying MSPs, it names Evergreen, not Titan. This models three things: warming the owners on Titan's list before its outreach lands, being the buyer owners find in Google and AI, and launching Managed AI to the clients Titan already has. Replace our placeholder rates with Titan's own.</p>
   </div>
 
   <div class="grid">
     <section class="panel" aria-label="Assumptions">
-      <div class="sect" style="border-top:0;padding-top:0">Paid search: Google Ads on the 13 owner searches</div>
+      <div class="sect" style="border-top:0;padding-top:0">Sellers: the ~8,000 MSPs Titan could buy</div>
       <div class="ctl">
-        <div class="row"><label for="budget">Google Ads budget a month</label><output id="budgetOut" for="budget">$870</output></div>
-        <input type="range" id="budget" min="0" max="3000" step="10" value="870">
-        <div class="band" id="budgetBand"></div>
-        <div class="why">The whole market is ~780 searches a month, so ads top out around $870. Titan runs no ads today; a broker (Roadmap Advisors) bids on "sell my msp."</div>
+        <div class="row"><label for="outreach">Seller conversations a year from Titan's outreach</label><output id="outreachOut" for="outreach">15</output></div>
+        <input type="range" id="outreach" min="5" max="300" step="5" value="15">
+        <div class="band" id="outreachBand"></div>
+        <div class="why">Placeholder until Titan shares its own: ~15 a year at a 10% close is about the pace of its two deals in ~16 months. 20 deals takes ~200.</div>
       </div>
       <div class="ctl">
-        <div class="row"><label for="cpc">Cost per click</label><output id="cpcOut" for="cpc">$7.44</output></div>
-        <input type="range" id="cpc" min="2" max="30" step="0.01" value="7.44">
-        <div class="why">Ahrefs' guide averages $7.44 across these searches ($2.50–35); Keyword Planner will confirm.</div>
-      </div>
-      <div class="sect">Organic &amp; AI: titanmsp.ai, the press and the buyer lists</div>
-      <div class="ctl">
-        <div class="row"><label for="search">New owner visits a month from Google</label><output id="searchOut" for="search">72</output></div>
-        <input type="range" id="search" min="0" max="300" step="1" value="72">
-        <div class="band" id="searchBand"></div>
-        <div class="why">An owner hub (selling, valuation, deal structures, the 9-week process) reaching Google's top three for the 13 searches. 72 = all of them; the long tail is extra.</div>
+        <div class="row"><label for="lift">More conversations when owners already know Titan</label><output id="liftOut" for="lift">+25%</output></div>
+        <input type="range" id="lift" min="0" max="100" step="5" value="25">
+        <div class="why">Placeholder: LinkedIn on the named list, posts from people owners know, an owner guide and retargeting before the outreach lands. A 90-day test on half the list measures it.</div>
       </div>
       <div class="ctl">
-        <div class="row"><label for="ai">New owner arrivals a month from AI answers</label><output id="aiOut" for="ai">90</output></div>
-        <input type="range" id="ai" min="0" max="300" step="1" value="90">
-        <div class="why">~400 owner AI questions a month (GWI: IT entrepreneurs find brands through AI half as often as B2B buyers do through search) × Titan named in 28% of sell-side answers instead of 6% (Peec).</div>
-      </div>
-      <div class="sect">Every deal</div>
-      <div class="ctl">
-        <div class="row"><label for="conv">Owner visit to a qualified seller conversation</label><output id="convOut" for="conv">0.50%</output></div>
-        <input type="range" id="conv" min="0.1" max="2" step="0.05" value="0.5">
-        <div class="why">Placeholder until Titan shares its own: ~2–3% of owners reach out, and ~18% of US MSPs clear the $2M bar (Fox &amp; Crow). Ad clicks convert at three-quarters of this.</div>
+        <div class="row"><label for="found">Seller conversations a year from owners who find Titan</label><output id="foundOut" for="found">15</output></div>
+        <input type="range" id="found" min="0" max="60" step="1" value="15">
+        <div class="why">Google Ads on the ~780 owner searches a month (~5 a year), an owner hub in Google's top three and Titan named in 28% of sell-side AI answers instead of 6% (~10 a year), at 0.5% of owner visits.</div>
       </div>
       <div class="ctl">
-        <div class="row"><label for="close">Qualified conversation to a closed deal</label><output id="closeOut" for="close">10%</output></div>
+        <div class="row"><label for="close">Seller conversation to a closed deal</label><output id="closeOut" for="close">10%</output></div>
         <input type="range" id="close" min="2" max="30" step="1" value="10">
         <div class="why">Placeholder until Titan shares its own (intro call to LOI to close).</div>
       </div>
@@ -167,45 +154,61 @@ td:last-child,th:last-child{text-align:right;font-weight:700}
         <input type="range" id="rev" min="2000000" max="15000000" step="250000" value="4000000">
         <div class="why">Placeholder: Titan's bar is $2M+; Shield's partners average ~$11M (Shield, Feb 2026).</div>
       </div>
-      <div class="presets" role="group" aria-label="Scenarios tied to the plan">
-        <button class="preset" type="button" data-p="870,7.44,0,0,0.5,10,4000000"><b>Tier 1: fix the front door + start ads</b>A seller form instead of a mailto link, FAQ schema, llms.txt, ~$870 a month of ads on the owner searches</button>
-        <button class="preset" type="button" data-p="870,7.44,36,37,0.5,10,4000000"><b>Tier 2: the owner hub</b>Pages on selling, valuation, deal structures and alternatives to PE, half of them in the top three</button>
-        <button class="preset" type="button" data-p="870,7.44,72,90,0.5,10,4000000" aria-pressed="true"><b>Tier 3: named by the press, lists and AI</b>The headline: StoredTech announced, trade press and buyer lists; named in 28% of sell-side AI answers</button>
-        <button class="preset" type="button" data-p="870,7.44,143,158,0.5,10,4000000"><b>Tier 4 (ceiling)</b>The long tail too; named in 45% of sell-side AI answers</button>
+      <div class="sect">Clients: Managed AI for the firms Titan's MSPs already serve</div>
+      <div class="ctl">
+        <div class="row"><label for="clients">Portfolio clients</label><output id="clientsOut" for="clients">400</output></div>
+        <input type="range" id="clients" min="100" max="1500" step="50" value="400">
+        <div class="why">Titan's job posts cite 400+ customers; RFA alone says it serves 700+ financial-services firms. Every new deal adds its clients.</div>
+      </div>
+      <div class="ctl">
+        <div class="row"><label for="adopt">Clients who take Managed AI because of the launch</label><output id="adoptOut" for="adopt">10%</output></div>
+        <input type="range" id="adopt" min="0" max="40" step="1" value="10">
+        <div class="band" id="adoptBand"></div>
+        <div class="why">Placeholder: a launch kit per MSP (page, proof, client emails and LinkedIn to client decision-makers, a briefing). Titan's goal is 100+ Managed AI customers.</div>
+      </div>
+      <div class="ctl">
+        <div class="row"><label for="mai">Managed AI revenue per client a month</label><output id="maiOut" for="mai">$2,000</output></div>
+        <input type="range" id="mai" min="500" max="10000" step="250" value="2000">
+        <div class="why">Placeholder until Titan shares its Managed AI pricing.</div>
+      </div>
+      <div class="presets" role="group" aria-label="How much outreach Titan runs">
+        <button class="preset" type="button" data-p="15,25,15,10,4000000,400,10,2000" aria-pressed="true"><b>Today's outreach</b>~15 seller conversations a year: about the pace of Titan's two deals so far</button>
+        <button class="preset" type="button" data-p="60,25,15,10,4000000,400,10,2000"><b>As the M&A team grows</b>~60 a year: four times today, with the new VP of M&A and sourcing hires</button>
+        <button class="preset" type="button" data-p="200,25,15,10,4000000,400,10,2000"><b>At the 20-deal goal</b>~200 a year: what 20 deals takes at a 10% close</button>
       </div>
     </section>
 
     <section class="result" aria-live="polite" aria-label="Outcome">
       <div>
-        <div class="label">Acquired revenue a year from deals sourced through Google Ads, search and AI</div>
-        <div class="big" id="revT">$0</div>
-        <div class="sub" id="revSub"></div>
+        <div class="label">Added revenue a year: acquired revenue from extra deals plus Managed AI revenue</div>
+        <div class="big" id="tot">$0</div>
+        <div class="sub" id="totSub"></div>
       </div>
 
       <div class="stats">
-        <div class="stat"><div class="v" id="deals">0</div><div class="l">deals a year</div></div>
-        <div class="stat"><div class="v" id="convs">0</div><div class="l">qualified seller talks a year</div></div>
-        <div class="stat"><div class="v" id="cpq">—</div><div class="l">ad cost per seller talk</div></div>
+        <div class="stat"><div class="v" id="deals">0</div><div class="l">extra deals a year</div></div>
+        <div class="stat"><div class="v" id="convs">0</div><div class="l">extra seller talks a year</div></div>
+        <div class="stat"><div class="v" id="maic">0</div><div class="l">Managed AI clients</div></div>
       </div>
 
       <div class="bars">
-        <div class="t">Qualified seller conversations a year, by source</div>
-        <div class="bar"><span>Google Ads</span><div class="fill"><i id="bA"></i></div><span class="n" id="nA">0</span></div>
-        <div class="bar"><span>Google search</span><div class="fill"><i id="bS"></i></div><span class="n" id="nS">0</span></div>
-        <div class="bar"><span>AI answers</span><div class="fill"><i id="bX"></i></div><span class="n" id="nX">0</span></div>
+        <div class="t">Seller conversations a year</div>
+        <div class="bar"><span>Outreach today</span><div class="fill"><i id="bB"></i></div><span class="n" id="nB">0</span></div>
+        <div class="bar"><span>Added: warmed list</span><div class="fill"><i id="bW"></i></div><span class="n" id="nW">0</span></div>
+        <div class="bar"><span>Added: found</span><div class="fill"><i id="bF"></i></div><span class="n" id="nF">0</span></div>
       </div>
 
       <div class="corp">
-        <div class="t">What the deals are worth inside Titan (not in the revenue figure)</div>
+        <div class="t">What the extra deals are worth inside Titan (not in the revenue figure)</div>
         <div class="stats">
           <div class="stat"><div class="v" id="goal">0%</div><div class="l">of a 20-deal year</div></div>
           <div class="stat"><div class="v" id="eq">$0</div><div class="l">equity value per deal</div></div>
-          <div class="stat"><div class="v" id="peq">$0</div><div class="l">a month to buy the search clicks</div></div>
+          <div class="stat"><div class="v" id="maip">0%</div><div class="l">of the Managed AI goal</div></div>
         </div>
       </div>
 
-      <table aria-label="Conversion sensitivity">
-        <thead><tr><th>If an owner visit converts at</th><th>Deals / yr</th><th>Acquired revenue / yr</th></tr></thead>
+      <table aria-label="Lift sensitivity">
+        <thead><tr><th>If warming the list lifts outreach by</th><th>Extra deals / yr</th><th>Added revenue / yr</th></tr></thead>
         <tbody id="sens"></tbody>
       </table>
     </section>
@@ -213,67 +216,62 @@ td:last-child,th:last-child{text-align:right;font-weight:700}
 
   <div class="inaction">
     <h2>What waiting costs</h2>
-    <p>Each month without the plan defers about <b id="perMonth">$0</b> of acquired revenue at these rates, about one deal every <b id="perDeal">0</b> months. Meanwhile <b>Shield has closed 20 MSP deals and Evergreen closed 47 in 2025</b>. Asked who the most active MSP acquirers are, Google's AI answer names Evergreen, The 20, New Charter, Thrive, Ntiva and Dataprise, and Titan's second deal (StoredTech) was never announced, so the AI roll-up trackers still list one. Owners hear about Titan from its outreach and then search its name ("titan msp" is ~1,010 searches a month); the owners who start with a search or an AI question find someone else.</p>
+    <p>Each month without the program defers about <b id="perMonth">$0</b> of added revenue at these rates, about one deal every <b id="perDeal">0</b> months. Meanwhile <b>Shield has closed 20 MSP deals and Evergreen closed 47 in 2025</b>, and Shield's backer, Thrive Holdings, took an investment from OpenAI last December. Asked who the most active MSP acquirers are, Google's AI answer names Evergreen, The 20, New Charter, Thrive, Ntiva and Dataprise. Titan's second deal (StoredTech) was never announced, so the AI roll-up trackers still list one.</p>
   </div>
 
   <div class="foot">
-    <div>Owner searches: Ahrefs, US, 26 Oct 2026: 13 sell-side head terms, 780 searches a month ("msp for sale" and "msp partner program" left out: buyers and vendor programs); Titan ranks top 100 for none of the 47 category searches its audiences make (141,150 a month). CTR curve (ROAST working curve): #1 28%, #2 16%, #3 11%, top-three average with a 50% AI Overview haircut ~9.2%. Ads: Ahrefs CPC guide, volume-weighted $7.44; ads rarely win more than ~15% of a market's clicks (~117 a month here). AI: Peec.ai day-1 baseline, 26 Oct 2026 (95 prompts across ChatGPT, Gemini and Google AI Overviews; one day, so a first read): Titan named in 1.6% of "selling an MSP" answers and 9.7% of "MSP acquirers" answers; Evergreen 23.0% and 32.3%. GWI Core, US, Q4 2025–Q2 2026 (proxy audiences): 55.9% of B2B buyers find new providers through search (index 167); 28.7% of IT/telecoms entrepreneurs find brands through AI (index 258). Site traffic: Similarweb, US, Jul–Sep 2026: ~6,928 visits a month, 40% direct and 38% organic search, 77.5% of search branded, no paid search. Market: ~8,000 US MSPs above $2M revenue (Fox &amp; Crow, Oct 2025); Titan's goal of 20+ deals a year (Titan VP M&amp;A job post, Oct 2026); multiples 5–7x EBITDA for small MSPs and ~12–13x for platforms (Drake Star, 2026).</div>
-    <div>Formula: Google Ads budget ÷ CPC (capped at ~15% of the owner searches) × visit-to-conversation × 0.75 = ad-sourced conversations; (Google visits + AI arrivals) × visit-to-conversation = organic conversations; × 12 = a year; × conversation-to-close = deals; × revenue per acquired MSP = acquired revenue. Equity value per deal = revenue × 15% EBITDA margin (placeholder) × the 5–8 turn gap between small-MSP and platform multiples. Titan pays for what it acquires; this counts what search and AI add to deal flow, not profit. What the search clicks would cost in Google Ads is never added to the revenue. Every revenue figure uses placeholder rates until Titan shares its own funnel.</div>
-    <div>Part of the ROAST × Titan search, AI visibility and deal-flow analysis, October 2026.</div>
+    <div>Lists: ~8,000 US MSPs above $2M revenue (Fox &amp; Crow, Oct 2025); Titan's goals of 20+ deals a year (VP M&amp;A job post, Oct 2026) and Managed AI past 100 customers (Head of Growth job post); 400+ customers (Titan job posts) and 700+ financial-services firms (RFA, Aug 2026). Found channels (ROAST model, Oct 26, 2026): Google Ads on 13 owner searches, ~780 a month (Ahrefs, US), ~$870 a month at $7.44 a click, ad clicks at 0.75x; an owner hub in the top three (~9.2% CTR with a 50% AI Overview haircut, ~72 visits a month); AI: ~400 owner AI questions a month (GWI proxy ratio) × Titan named in 28% of sell-side answers instead of 5.6% (Peec.ai day-1 baseline, Oct 26, 2026); 0.5% of owner visits become a qualified conversation (placeholder). Rivals: Shield (Channel Dive, Sep 2026), Evergreen (Omdia via Evergreen, 2026), OpenAI's stake in Thrive Holdings (ChannelE2E, Dec 2025). Multiples: 5–7x EBITDA for small MSPs, ~12–13x for platforms (Drake Star, 2026).</div>
+    <div>Formula: outreach conversations × lift = conversations added by warming the list; + conversations from owners who find Titan = extra conversations; × conversation-to-close = extra deals; × revenue per acquired MSP = acquired revenue. Portfolio clients × Managed AI uptake from the launch = Managed AI clients; × revenue per client × 12 = Managed AI revenue. Equity value per deal = revenue × 15% EBITDA margin (placeholder) × the 5–8 turn gap between small-MSP and platform multiples. Titan pays for what it acquires; this counts what marketing adds to deal flow and Managed AI, not profit. Every figure uses placeholder rates until Titan shares its own.</div>
+    <div>Part of the ROAST × Titan deal-flow and Managed AI analysis, October 2026.</div>
   </div>
 </div>
 
 <script>
 (function(){
   const $=id=>document.getElementById(id);
-  const C={"OWNER": 780, "SEARCH_ALL": 72, "CAP": 117, "AD_SHARE": 0.15, "PAID": 0.75, "MARGIN": 0.15, "SP_LO": 5, "SP_HI": 8, "GOAL": 20};
-  const ids=["budget", "cpc", "search", "ai", "conv", "close", "rev"];
+  const C={"MARGIN": 0.15, "SP_LO": 5, "SP_HI": 8, "GOAL": 20, "MAIGOAL": 100};
+  const ids=["outreach", "lift", "found", "close", "rev", "clients", "adopt", "mai"];
   const els=ids.map($);
   const fmtI=n=>Math.round(n).toLocaleString('en-US');
   const fmt1=n=>(Math.round(n*10)/10).toLocaleString('en-US');
   const fmtD=n=>'$'+Math.round(n).toLocaleString('en-US');
-  const fmtM=n=>n>=1e6?'$'+(n/1e6).toFixed(1)+'M':fmtD(n);
+  const fmtM=n=>n>=1e6?'$'+(n/1e6).toFixed(1)+'M':(n>=1e3?'$'+Math.round(n/1e3)+'K':fmtD(n));
   const presets=[...document.querySelectorAll('.preset')];
   const now=new Date(), today=new Date(now.getFullYear(),now.getMonth(),now.getDate());
   let due=new Date(2027,0,1), lab='days left in 2026';
   if(today>=due){due=new Date(2027,3,1);lab='days to the end of Q1 2027';}
   $('days').textContent=Math.max(0,Math.ceil((due-today)/86400000)); $('dayslabel').textContent=lab;
   function model(v){
-    const cv=v.conv/100, cl=v.close/100;
-    const clicks=v.cpc?Math.min(v.budget/v.cpc,C.CAP):0;
-    const qA=clicks*cv*C.PAID*12, qS=v.search*cv*12, qX=v.ai*cv*12, q=qA+qS+qX;
-    const dA=qA*cl, dO=(qS+qX)*cl, deals=dA+dO, rev=deals*v.rev, spend=v.budget*12;
-    return {clicks,qA,qS,qX,q,dA,dO,deals,rev,spend,cpq:qA?spend/qA:0,peq:v.search*v.cpc,
-            eqLo:v.rev*C.MARGIN*C.SP_LO,eqHi:v.rev*C.MARGIN*C.SP_HI};
+    const cl=v.close/100, warmed=v.outreach*v.lift/100, extra=warmed+v.found, deals=extra*cl, acq=deals*v.rev;
+    const maic=v.clients*v.adopt/100, mair=maic*v.mai*12;
+    return {warmed,extra,deals,acq,maic,mair,tot:acq+mair,base:v.outreach,eqLo:v.rev*C.MARGIN*C.SP_LO,eqHi:v.rev*C.MARGIN*C.SP_HI};
   }
   function vals(){const v={};ids.forEach((k,i)=>v[k]=+els[i].value);return v;}
   function render(){
     const v=vals();
-    $('budgetOut').value=fmtD(v.budget); $('cpcOut').value='$'+v.cpc.toFixed(2); $('searchOut').value=fmtI(v.search); $('aiOut').value=fmtI(v.ai);
-    $('convOut').value=v.conv.toFixed(2)+'%'; $('closeOut').value=v.close+'%'; $('revOut').value=fmtD(v.rev);
+    $('outreachOut').value=fmtI(v.outreach); $('liftOut').value='+'+v.lift+'%'; $('foundOut').value=fmtI(v.found);
+    $('closeOut').value=v.close+'%'; $('revOut').value=fmtD(v.rev); $('clientsOut').value=fmtI(v.clients);
+    $('adoptOut').value=v.adopt+'%'; $('maiOut').value=fmtD(v.mai);
     const o=model(v);
-    const raw=v.cpc?v.budget/v.cpc:0, over=raw>C.CAP*1.02;
-    $('budgetBand').className='band'+(over?' warn':'');
-    $('budgetBand').textContent=v.budget===0?'No ads: brokers keep the paid results':
-      `Buys ~${fmtI(o.clicks)} clicks a month, ${Math.round(o.clicks/C.OWNER*100)}% of the owner searches`+(over?'; past ~15% the extra budget buys nothing here':'');
-    const sh=v.search/C.SEARCH_ALL;
-    $('searchBand').className='band'+(sh>1?' warn':'');
-    $('searchBand').textContent=v.search===0?'Nothing new: Titan ranks for none of these today':
-      `${Math.round(sh*100)}% of what top three on all 13 would bring (${fmtI(C.SEARCH_ALL)} a month)`+(sh>1?'; past 100% needs the long tail':'');
-    $('revT').textContent=fmtD(o.rev);
-    $('revSub').textContent=`${fmt1(o.q)} qualified seller conversations a year × ${v.close}% × ${fmtM(v.rev)} per acquired MSP.`;
-    $('deals').textContent=fmt1(o.deals); $('convs').textContent=fmt1(o.q); $('cpq').textContent=o.qA?fmtD(o.cpq):'—';
-    const mx=Math.max(o.qA,o.qS,o.qX,1)*1.08;
-    [['bA','nA',o.qA],['bS','nS',o.qS],['bX','nX',o.qX]].forEach(([b,n,x])=>{$(b).style.width=(x/mx*100)+'%';$(n).textContent=fmt1(x);});
-    $('goal').textContent=Math.round(o.deals/C.GOAL*100)+'%'; $('eq').textContent=fmtM(o.eqLo)+'–'+fmtM(o.eqHi).replace('$',''); $('peq').textContent=fmtD(o.peq);
-    $('sens').innerHTML=[Math.max(0.1,v.conv/2),v.conv,Math.min(2,v.conv*2)].map(x=>{const m=model(Object.assign({},v,{conv:x}));return `<tr><td>${x.toFixed(2)}%</td><td>${fmt1(m.deals)}</td><td>${fmtD(m.rev)}</td></tr>`;}).join('');
-    $('perMonth').textContent=fmtD(o.rev/12); $('perDeal').textContent=o.deals?fmt1(12/o.deals):'—';
+    $('outreachBand').textContent=`About ${fmt1(v.outreach*v.close/100)} deals a year from outreach on its own`;
+    const g=o.maic/C.MAIGOAL;
+    $('adoptBand').className='band'+(g>=1?'':' ');
+    $('adoptBand').textContent=`${fmtI(o.maic)} Managed AI clients, ${Math.round(g*100)}% of the 100-customer goal`;
+    $('tot').textContent=fmtD(o.tot);
+    $('totSub').textContent=`${fmtM(o.acq)} of acquired revenue from ${fmt1(o.deals)} extra deals + ${fmtM(o.mair)} of Managed AI revenue from ${fmtI(o.maic)} clients.`;
+    $('deals').textContent=fmt1(o.deals); $('convs').textContent=fmt1(o.extra); $('maic').textContent=fmtI(o.maic);
+    const mx=Math.max(o.base,o.warmed,v.found,1)*1.08;
+    [['bB','nB',o.base],['bW','nW',o.warmed],['bF','nF',v.found]].forEach(([b,n,x])=>{$(b).style.width=(x/mx*100)+'%';$(n).textContent=fmt1(x);});
+    $('goal').textContent=Math.round(o.deals/C.GOAL*100)+'%'; $('eq').textContent=fmtM(o.eqLo)+'–'+fmtM(o.eqHi).replace('$','');
+    $('maip').textContent=Math.round(g*100)+'%';
+    $('sens').innerHTML=[10,25,50].map(x=>{const m=model(Object.assign({},v,{lift:x}));return `<tr><td>+${x}%</td><td>${fmt1(m.deals)}</td><td>${fmtD(m.tot)}</td></tr>`;}).join('');
+    $('perMonth').textContent=fmtD(o.tot/12); $('perDeal').textContent=o.deals?fmt1(12/o.deals):'—';
     presets.forEach(pr=>{const q=pr.dataset.p.split(',').map(Number);pr.setAttribute('aria-pressed',String(q.every((x,k)=>x===+els[k].value)));});
-    try{localStorage.setItem('titan-calc-v1',JSON.stringify(els.map(e=>e.value)));}catch(e){}
+    try{localStorage.setItem('titan-calc-v2',JSON.stringify(els.map(e=>e.value)));}catch(e){}
   }
   els.forEach(el=>el.addEventListener('input',render));
   presets.forEach(pr=>pr.addEventListener('click',()=>{const q=pr.dataset.p.split(',');els.forEach((el,k)=>el.value=q[k]);render();}));
-  try{const s=JSON.parse(localStorage.getItem('titan-calc-v1'));if(Array.isArray(s)&&s.length===els.length){els.forEach((el,k)=>el.value=s[k]);}}catch(e){}
+  try{const s=JSON.parse(localStorage.getItem('titan-calc-v2'));if(Array.isArray(s)&&s.length===els.length){els.forEach((el,k)=>el.value=s[k]);}}catch(e){}
   render();
 })();
 </script>
