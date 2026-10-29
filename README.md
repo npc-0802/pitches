@@ -46,6 +46,7 @@ Interactive pages that accompany ROAST pitch decks. Static HTML, served with Git
 | Fairfax & Favor Order-Value Calculator — what category Shopping & Search ads (partly funded by a brand-ad holdout test), rebuilt boot collections, US pages and AI answers are worth to Fairfax & Favor in new online orders and sales (£), per £1 of ads, and what each month of waiting defers | `fairfaxfavor-order-value-calculator/` |
 | Purple Mattress-Sales Calculator — what category ads moved from brand terms, "best for" pages, size guides and AI answers are worth to Purple in new online orders and sales, per $1 of ads, and what each month of waiting defers | `purple-mattress-sales-calculator/` |
 | Titan Deal-Flow & Managed AI Calculator — what warming the owners Titan wants to buy, being found in Google and AI, and launching Managed AI to existing clients are worth in seller conversations, deals, acquired revenue and Managed AI revenue, and what each month of waiting defers | `titan-deal-flow-calculator/` |
+| Onward Disclosure-Sales Calculator — what Google Ads on California's disclosure-form and how-to searches, and the form pages they land on, are worth to Onward in disclosure sales and buyers, per $1 of ads, and what each month of waiting forgoes | `onward-disclosure-sales-calculator/` |
 
 ## Favicon and link previews
 
