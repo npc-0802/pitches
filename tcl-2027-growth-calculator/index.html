@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>TCL 2027 Growth Calculator</title>
+<!-- share:start -->
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<meta name="description" content="What fixing the migration, building TCL&#x27;s category pages and winning AI answers are worth in 2027 DTC revenue on us.tcl.com, by phase, per $1 of plan.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ROAST">
+<meta property="og:title" content="TCL 2027 Growth Calculator">
+<meta property="og:description" content="What fixing the migration, building TCL&#x27;s category pages and winning AI answers are worth in 2027 DTC revenue on us.tcl.com, by phase, per $1 of plan.">
+<meta property="og:url" content="https://npc-0802.github.io/pitches/tcl-2027-growth-calculator/">
+<meta property="og:image" content="https://npc-0802.github.io/pitches/tcl-2027-growth-calculator/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="ROAST × TCL: TCL 2027 Growth Calculator">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="TCL 2027 Growth Calculator">
+<meta name="twitter:description" content="What fixing the migration, building TCL&#x27;s category pages and winning AI answers are worth in 2027 DTC revenue on us.tcl.com, by phase, per $1 of plan.">
+<meta name="twitter:image" content="https://npc-0802.github.io/pitches/tcl-2027-growth-calculator/og.png">
+<!-- share:end -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;900&family=Public+Sans:wght@400;500;600&display=swap">
+<style>
+:root{
+  --bg:#ffffff; --ink:#111214; --muted:#5b5e66; --line:#e6e4dc; --panel:#f6f5f0;
+  --yellow:#FFD100; --yellow-deep:#e6bc00; --on-yellow:#111214; --on-yellow-muted:#4a4630;
+  --track:#e3e1d8; --ok:#1f7a3a;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){ --bg:#111214; --ink:#f4f3ee; --muted:#a6a79f; --line:#2a2b2f; --panel:#1b1c20; --track:#33343a; color-scheme:dark; }
+}
+:root[data-theme="dark"]{ --bg:#111214; --ink:#f4f3ee; --muted:#a6a79f; --line:#2a2b2f; --panel:#1b1c20; --track:#33343a; color-scheme:dark; }
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Public Sans",system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;font-size:15px;line-height:1.45}
+.wrap{max-width:1440px;margin:0 auto;padding-block:22px 44px;padding-inline:clamp(16px,3vw,40px);display:grid;gap:22px}
+.brand{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-bottom:6px}
+.wordmark{display:flex;align-items:center;gap:12px}.wordmark .roast-logo{height:22px;width:auto;display:block;color:var(--ink)}
+.wordmark span{font-family:"Public Sans",sans-serif;font-weight:500;font-size:15px;color:var(--muted);letter-spacing:0}
+.deadline{font-size:13px;color:var(--muted);text-align:right}
+.deadline b{color:var(--ink);font-variant-numeric:tabular-nums}
+h1{font-family:"Archivo",system-ui,sans-serif;font-weight:900;font-size:clamp(28px,3.4vw,46px);line-height:1.05;letter-spacing:-.015em;margin:0;text-wrap:balance;max-width:26ch}
+.lede{color:var(--muted);max-width:78ch;margin:8px 0 0;font-size:clamp(14px,1.1vw,16px)}
+.grid{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,2fr);gap:22px;align-items:start}
+@media (max-width:900px){.grid{grid-template-columns:1fr}}
+.panel{background:var(--panel);border-radius:22px;padding:clamp(18px,2vw,28px) clamp(18px,2vw,28px) 10px;min-width:0;overflow:hidden}
+.ctl{display:grid;gap:8px;padding-block:14px;border-top:1px solid var(--line)}
+.ctl:first-child{border-top:0;padding-top:2px}
+.ctl .row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.ctl label{font-weight:600}
+.ctl output{font-family:"Archivo",sans-serif;font-weight:700;font-size:22px;font-variant-numeric:tabular-nums}
+.ctl output small{font-family:"Public Sans",sans-serif;font-weight:500;font-size:13px;color:var(--muted);margin-left:8px}
+.ctl .why{font-size:13px;color:var(--muted);max-width:72ch}
+.band{font-size:13px;font-weight:600;padding:5px 12px;border-radius:14px;background:var(--yellow);color:var(--on-yellow);width:fit-content;max-width:100%;line-height:1.3}
+.band.low{background:var(--track);color:var(--ink)}
+input[type=range]{width:100%;accent-color:var(--ink);height:30px;margin:0}
+input[type=range]:focus-visible{outline:2px solid var(--ink);outline-offset:4px;border-radius:6px}
+.presets{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;padding-block:16px;border-top:1px solid var(--line)}
+@media (max-width:520px){.presets{grid-template-columns:minmax(0,1fr)}}
+.preset{border:1.5px solid var(--line);border-radius:12px;padding:8px 12px;font-size:13px;background:transparent;color:var(--ink);cursor:pointer;font-family:inherit;text-align:left;line-height:1.25}
+.preset b{display:block;font-weight:700}
+.preset:hover,.preset:focus-visible{border-color:var(--ink);outline:none}
+.preset[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.result{background:var(--yellow);color:var(--on-yellow);border-radius:22px;padding:clamp(20px,2.2vw,32px);display:grid;gap:18px;min-width:0}
+.result .label{font-weight:600;font-size:14px;color:var(--on-yellow-muted)}
+.result .big{font-family:"Archivo",sans-serif;font-weight:900;font-size:clamp(48px,6vw,88px);line-height:.95;letter-spacing:-.02em;font-variant-numeric:tabular-nums;margin:6px 0}
+.result .sub{font-size:14px;color:var(--on-yellow-muted);max-width:52ch}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+@media (max-width:520px){.stats{grid-template-columns:1fr 1fr}}
+.stat{background:rgba(255,255,255,.5);border-radius:14px;padding:14px 14px 12px;min-width:0}
+.stat .v{font-family:"Archivo",sans-serif;font-weight:700;font-size:clamp(20px,1.8vw,26px);font-variant-numeric:tabular-nums;line-height:1.1}
+.stat .l{font-size:12.5px;color:var(--on-yellow-muted);margin-top:5px;line-height:1.3;text-wrap:balance}
+.bars{display:grid;gap:8px;margin-top:4px}
+.bars .t{font-weight:600;font-size:13px;color:var(--on-yellow-muted)}
+.bar{display:grid;grid-template-columns:minmax(120px,160px) 1fr minmax(64px,auto);gap:10px;align-items:center;font-size:13px}
+@media (max-width:520px){.bar{grid-template-columns:110px 1fr minmax(56px,auto)}}
+.bar .fill{height:14px;border-radius:7px;background:rgba(17,18,20,.25);position:relative;overflow:hidden}
+.bar .fill i{position:absolute;inset:0;width:0;background:var(--on-yellow);border-radius:7px;transition:width .25s ease}
+.bar .fill i.gain{background:#ffffff;left:auto}
+.bar .n{text-align:right;font-variant-numeric:tabular-nums;font-weight:600}
+@media (prefers-reduced-motion: reduce){.bar .fill i{transition:none}}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th,td{text-align:left;padding:7px 4px;border-bottom:1px solid rgba(17,18,20,.18);font-variant-numeric:tabular-nums}
+th{font-size:12px;color:var(--on-yellow-muted);font-weight:600}
+td:last-child,th:last-child{text-align:right;font-weight:700}
+.inaction{background:var(--panel);border-radius:22px;padding:clamp(18px,2vw,28px);display:grid;gap:8px}
+.inaction h2{font-family:"Archivo",sans-serif;font-weight:700;font-size:18px;margin:0}
+.inaction p{margin:0;color:var(--muted);max-width:100ch;font-size:15px;line-height:1.55}
+.inaction b{color:var(--ink)}
+.foot{font-size:13px;color:var(--muted);max-width:110ch;display:grid;gap:6px}
+.foot a{color:var(--ink)}
+@media (min-width:901px){.result{position:sticky;top:16px}}
+.wordmark{flex-wrap:wrap;row-gap:6px}.wordmark .client-logo{height:22px;width:auto;display:block;color:var(--ink)}
+.wordmark .logo-dark{display:none}@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .wordmark .logo-light{display:none}:root:not([data-theme="light"]) .wordmark .logo-dark{display:block}}:root[data-theme="dark"] .wordmark .logo-light{display:none}:root[data-theme="dark"] .wordmark .logo-dark{display:block}
+
+.result .tscroll table{margin-top:2px}
+/* layout-guard:start: roast-deck-kit/layout_guard.py; re-run it instead of editing */
+.grid>*,.result>*,.stats>*,.bar>*,.funnel>*,.keys>*{min-width:0}
+.result{grid-template-columns:minmax(0,1fr);container:lgresult/inline-size}
+.stat .l,.funnel .l,.funnel .s,.key .l,.key .s{overflow-wrap:break-word}
+.tscroll{overflow-x:auto;max-width:100%}
+@container lgresult (max-width:400px){
+  .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .stats>.stat:last-child:nth-child(odd){grid-column:1/-1}
+  .funnel{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .funnel .step::after{display:none}
+}
+/* layout-guard:end */
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="brand">
+    <div class="wordmark"><svg class="roast-logo" fill="currentColor" aria-label="ROAST" role="img" viewBox="0 0 931.89 203.5" xmlns="http://www.w3.org/2000/svg" overflow="hidden" xmlns:c2pa="http://c2pa.org/manifest"><path d="M30.4 4.59 0 4.59 0 0 93.33 0C128.29 0 166.29 7.45 166.29 50.73 166.29 85.7 123.42 94.87 101.23 97.45L101.23 98.02C136.19 100.89 154.74 108.05 159.3 145.89L163.56 180.86C165.69 197.77 174.2 198.92 179.37 198.92 184.84 198.92 188.79 197.2 191.84 196.05L193.66 199.78C187.58 201.79 179.98 203.51 168.73 203.51 131.64 203.51 129.51 184.88 125.25 151.92L123.12 134.72C120.99 116.66 115.52 100.32 81.17 100.32L61.41 100.32 61.41 198.92 92.42 198.92 92.42 203.51 0 203.51 0 198.92 30.4 198.92 30.4 4.59ZM61.41 95.73 76.61 95.73C112.48 95.73 133.46 83.98 133.46 50.73 133.46 27.8 125.25 4.58 82.08 4.58L61.41 4.58 61.41 95.73Z" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4"  fill-opacity="1"/><path d="M293.24 0.32C342.65 0.32 385.63 45.32 385.63 101.91 385.63 158.5 342.65 203.5 293.24 203.5 243.83 203.5 200.85 158.5 200.85 101.91 200.85 45.32 243.83 0.32 293.24 0.32ZM293.24 199.09C345.28 199.09 352.3 138.08 352.3 101.91 352.3 65.74 345.28 4.74 293.24 4.74 241.2 4.74 234.18 65.75 234.18 101.91 234.18 138.07 241.2 199.09 293.24 199.09Z" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4"  fill-opacity="1"/><path d="M501.23 135.93 438.66 135.93 424.96 175.38C422.91 180.89 420.57 187.51 420.57 192.19 420.57 196.05 424.08 199.08 433.43 199.08L448.63 199.08 448.63 203.49 388.4 203.49 388.4 199.08 397.76 199.08C406.82 199.08 410.62 198.25 416.18 182.82L480.77 0.32 483.99 0.32 556.81 199.09 581.08 199.09 581.08 203.5 495.42 203.5 495.42 199.09 524.07 199.09 501.24 135.93ZM469.66 48 469.08 48 440.43 131.52 499.78 131.52 469.67 48Z" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4"  fill-opacity="1"/><path d="M598 130.7 602.68 130.7C602.68 177.01 631.63 198.78 666.71 198.78 694.78 198.78 714.95 181.97 714.95 157.16 714.95 128.49 699.16 119.95 665.54 114.99 619.64 108.1 598 100.93 598 54.62 598 23.2 619.93 0.32 652.68 0.32 682.79 0.32 694.2 17.14 704.14 17.13 712.17 17.13 711.74 3.58 712.62-2.84217e-14L717.3-2.84217e-14 717.3 64.54 712.62 64.54C709.99 33.12 691.86 4.73 652.69 4.73 627.84 4.73 610.29 20.17 610.29 45.52 610.29 70.87 620.23 75.84 668.76 84.11 711.45 91.28 728.99 104.23 728.99 140.07 728.99 175.91 707.94 203.19 665.55 203.19 636.31 203.19 620.82 188.78 610 188.86 601.37 188.92 602.69 198.82 602.69 203.51L598.01 203.51 598.01 130.7Z" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4"  fill-opacity="1"/><path d="M752.96 0 752.96 64.54 757.64 64.54C757.64 24.77 766.71 6.75 804.33 4.79L804.33 147.44 829.12 147.44 829.12 4.41 855.73 4.41 855.73 147.44 880.52 147.44 880.52 4.78C918.11 6.71 927.21 24.7 927.21 64.54L931.89 64.54 931.89 0 752.96 0Z" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4"  fill-opacity="1"/></svg><span>×</span><img class="client-logo" style="height:22px" src="data:image/png;base64,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" alt="TCL" height="22"><span>· 2027 plan</span></div>
+    <div class="deadline"><b id="days">—</b> days to Black Friday 2027 (Nov 26)</div>
+  </div>
+
+  <div>
+    <h1>What a full year of search, AI and PR work is worth to TCL in 2027</h1>
+    <p class="lede">Since the January 2026 move to us.tcl.com, US organic traffic runs at about half its 2025 pace (Ahrefs: ~207K visits a month in Sep 2025, ~100K in Sep 2026), and old tcl.com/us links still 302 to the homepage. Outside its own name, search sends us.tcl.com about 1.4K visits a month across every category it sells. Pick a phase (we recommend Phases 1–3), set how much of the loss comes back and how much category demand TCL wins by December, then replace our placeholder rates with TCL's own.</p>
+  </div>
+
+  <div class="grid">
+    <section class="panel" aria-label="Assumptions">
+
+      <div class="ctl">
+        <div class="row"><label for="rec">Share of the migration loss recovered</label><output id="recOut" for="rec">50%<small id="phaseLbl">Phases 1–3</small></output></div>
+        <input type="range" id="rec" min="0" max="100" step="5" value="50">
+        <div class="band" id="band">Redirects live in February, full effect by May</div>
+        <div class="why">The loss is ~107K visits a month against the 2025 pace. 301s for the ~3,500 sites still linking to tcl.com/us, schema and stock fixes return part of it; 40–60% is realistic in year one.</div>
+      </div>
+
+      <div class="ctl">
+        <div class="row"><label for="cap">Share of TV category searches won by December</label><output id="capOut" for="cap">1.0%</output></div>
+        <input type="range" id="cap" min="0" max="3" step="0.1" value="1">
+        <div class="why">Of ~1.4M non-branded TV searches a month (sizes, technology, deals, gaming). Home Comfort and sound bars scale with it from their launch months; phones, tablets and monitors only in Phase 4.</div>
+      </div>
+
+      <div class="ctl">
+        <div class="row"><label for="ai">AI-assistant visits a month by December</label><output id="aiOut" for="ai">16,000</output></div>
+        <input type="range" id="ai" min="4000" max="40000" step="1000" value="16000">
+        <div class="why">About 4,000 today (0.75% of visits, Similarweb), likely 8,000 by December as the channel grows. The plan's comparison pages, feeds and citations aim for twice that.</div>
+      </div>
+
+      <div class="ctl">
+        <div class="row"><label for="cvr">Site conversion rate</label><output id="cvrOut" for="cvr">1.0%</output></div>
+        <input type="range" id="cvr" min="0.4" max="3" step="0.1" value="1">
+        <div class="why">Placeholder until TCL shares its Shopify figure (consumer-electronics sites run 1.4–1.8%). Category searchers convert at 0.8× this; AI visitors at 1.3× (Adobe, 2025–26).</div>
+      </div>
+
+      <div class="ctl">
+        <div class="row"><label for="aov">Average order value (blended)</label><output id="aovOut" for="aov">$750</output></div>
+        <input type="range" id="aov" min="300" max="1500" step="25" value="750">
+        <div class="why">Placeholder. TVs carry 1.2× this ($900: QM7L from $699, QM8L 65" at $1,199 on sale); Home Comfort, audio and mobile carry less.</div>
+      </div>
+
+      <div class="presets" role="group" aria-label="Phases of the plan">
+        <button class="preset" type="button" data-p="50,0,8000" data-sec="0" data-fee="307727" data-name="Phase 1"><b>Phase 1: fix the move</b>301s, schema, index cleanup · ~$308K</button>
+        <button class="preset" type="button" data-p="50,1,8000" data-sec="0" data-fee="841747" data-name="Phases 1–2"><b>Phases 1–2: + build the shelf</b>Category pages, PDPs, size tool · ~$842K</button>
+        <button class="preset" type="button" data-p="50,1,16000" data-sec="0" data-fee="1101240" data-name="Phases 1–3" aria-pressed="true"><b>Phases 1–3 (recommended)</b>+ AI answers, feeds and PR · ~$1.10M</button>
+        <button class="preset" type="button" data-p="50,1,16000" data-sec="1" data-fee="1268201" data-name="Phases 1–4"><b>Phases 1–4: decided at the Q2 review</b>Every PDP, phones, monitors · ~$1.27M</button>
+      </div>
+    </section>
+
+    <section class="result" aria-live="polite" aria-label="Outcome">
+      <div>
+        <div class="label">Incremental DTC revenue on us.tcl.com in 2027</div>
+        <div class="big" id="rev">$5.93M</div>
+        <div class="sub" id="revSub"></div>
+      </div>
+
+      <div class="stats">
+        <div class="stat"><div class="v" id="vis">890K</div><div class="l">added visits in 2027</div></div>
+        <div class="stat"><div class="v" id="ord">8,108</div><div class="l">added orders</div></div>
+        <div class="stat"><div class="v" id="roi">$5.38</div><div class="l" id="roiL">revenue per $1 of plan (~$1.10M)</div></div>
+      </div>
+
+      <div class="bars">
+        <div class="t">US organic visits a year (Ahrefs)</div>
+        <div class="bar"><span>2027, no action</span><div class="fill"><i id="baseBar"></i></div><span class="n" id="baseN">1.34M</span></div>
+        <div class="bar"><span>2027 with the plan</span><div class="fill"><i id="baseBar2"></i><i class="gain" id="gainBar"></i></div><span class="n" id="withN">2.22M</span></div>
+        <div class="bar"><span>2025 pace</span><div class="fill"><i id="preBar"></i></div><span class="n" id="preN">2.76M</span></div>
+      </div>
+
+      <div class="bars">
+        <div class="t">Non-branded visits a month (Ahrefs, Nov 2026)</div>
+        <div class="bar"><span>TCL today</span><div class="fill"><i id="nbT"></i></div><span class="n">1.4K</span></div>
+        <div class="bar"><span>TCL, Dec 2027</span><div class="fill"><i id="nbP"></i></div><span class="n" id="nbPN">29K</span></div>
+        <div class="bar"><span>Hisense</span><div class="fill"><i id="nbH"></i></div><span class="n">6.1K</span></div>
+        <div class="bar"><span>LG</span><div class="fill"><i id="nbL"></i></div><span class="n">85K</span></div>
+      </div>
+
+      <div class="tscroll">
+        <table aria-label="Revenue by source">
+          <thead><tr><th>Source</th><th>Visits, 2027</th><th>Revenue, 2027</th></tr></thead>
+          <tbody id="bySrc"></tbody>
+        </table>
+      </div>
+
+      <div class="tscroll">
+        <table aria-label="Conversion-rate sensitivity">
+          <thead><tr><th>If conversion is</th><th>Orders</th><th>Revenue, 2027</th></tr></thead>
+          <tbody id="sens"></tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+
+  <div class="inaction">
+    <h2>What’s at stake</h2>
+    <p>Half of US smart-TV shoppers (<b>50%</b>) research on search engines and <b>23%</b> now use AI assistants, about 1.5 times the US average (GWI, Q1 2025–Q3 2026). Across the categories TCL sells, Americans run about <b>5.5M non-branded searches a month</b>, and us.tcl.com gets about <b>1.4K</b> of those visits; Hisense gets 6.1K, LG 85K and Samsung 203K. TCL's own name works for retailers more than for TCL: TCL-branded searches total about <b>1.6M a month</b>, and us.tcl.com receives about 157K of those visits. In AI answers, Samsung is cited 126K times and TCL 2.8K. TCL is the top choice for 10% of US smart-TV intenders, against 55% for Samsung (GWI Consumer Tech, Q3 2026). At these rates a visit to us.tcl.com is worth about <b id="perVisit">$7.50</b>, roughly eight times the $0.92 TCL pays per paid visit, so paid search should keep running; organic adds the visits ads can't buy, from AI answers to the model searches retailers win today. By December the plan is worth about <b id="perMonth">$742K</b> a month at run-rate.</p>
+  </div>
+
+  <div class="foot">
+    <div>Traffic and benchmarks: Ahrefs, US, pulled Nov 2, 2026 (us.tcl.com 159K organic visits a month, 1.4K non-branded, DR 81, 2.8K AI responses; Samsung US 3.7M / 203K non-branded; LG US 1.1M / 85K; Hisense 84K / 6.1K). History: Ahrefs, ~207K a month in Sep 2025, 312K peak in Nov 2025, ~100K in Sep 2026. Demand: Ahrefs Keywords Explorer, US monthly averages, non-branded and excluding accessories: TVs ~1.42M, Home Comfort ~1.36M (window and portable AC, dehumidifiers), monitors ~608K, tablets ~400K, phones ~290K, sound bars ~203K; appliances and projectors (~1.2M) sit in an optional module and are not counted. Audience: GWI Core and Consumer Tech, US. Paid: Similarweb, Jun–Aug 2026 (~$79K a month at $0.92 per paid visit). AI conversion: Adobe Digital Insights (AI visits converted 31–40% better, 2025–26). Seasonality curves are estimates until Ahrefs volume history is pulled.</div>
+    <div>Formula: recovered visits = 2027 no-action baseline × 1.07 (the gap to the 2025 pace) × share recovered, ramping from February to full in May; category visits = addressable searches × seasonality × share won, ramping over 3–5 months from each launch month (TVs and Home Comfort in February, audio in June, phones, tablets and monitors in August), × 0.6 where some SKUs are sold only at retailers; AI visits = (December target − 8,000) phased in evenly over the year. Revenue = visits × conversion × order value. Counts only sales on us.tcl.com; retailer sales influenced by TCL's pages (63% of shoppers who buy elsewhere visit the brand site first, Simon-Kucher 2025) are on top. Draft investment by phase, at ROAST's 2026 US rate card with 15% project management, link spend, PR campaigns, copy and tools at cost: Phase 1 ~$308K, Phase 2 ~$534K, Phase 3 ~$259K, Phase 4 ~$167K. We recommend Phases 1–3 (~$1.10M): each returns at least ~$1.95 per $1 in 2027 revenue, while Phase 4 returns ~$0.15, so it is decided at the Q2 review on real data.</div>
+    <div>Part of the ROAST × TCL 2027 SEO, GEO, digital PR and link program, November 2026. Follows the <a href="../tcl-recovery-calculator/">TCL Recovery Calculator</a> (Black Friday 2026).</div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const $=id=>document.getElementById(id);
+  const SEAS={tv:[1.05,1.05,0.90,0.85,0.85,0.85,0.95,0.85,0.85,1.00,1.60,1.20],
+    audio:[1.00,0.95,0.85,0.85,0.85,0.85,0.95,0.85,0.85,1.00,1.70,1.25],
+    home:[0.30,0.30,0.50,0.80,1.60,2.20,2.40,1.60,0.80,0.60,0.45,0.45],
+    mobile:[0.95,0.90,0.90,0.90,0.90,0.95,1.00,1.25,1.00,0.95,1.20,1.10]};
+  const BASE=[115e3,110e3,100e3,100e3,100e3,100e3,105e3,100e3,100e3,115e3,160e3,130e3];
+  const GAP=207/100-1, REC_S=2, REC_F=5, NB=0.8, AIR=1.3, AI_BASE=8000, PAIDCPV=0.92;
+  let SEC=0, FEE=1101240, PNAME='Phases 1–3';
+  const NB_TODAY=1400, HISENSE=6100, LG=84700;
+  const CATS=[['TVs',1420000,1,2,5,'tv',1.2,1],['Home Comfort',1360000,0.75,2,3,'home',0.533,0.6],['Sound bars',203000,0.5,6,5,'audio',0.333,1],
+    ['Phones',290000,1,8,5,'mobile',0.2,0.5,1],['Tablets',400000,0.3,8,5,'mobile',0.293,1,1],['Monitors',608000,0.3,8,5,'mobile',0.333,1,1]];
+  const rec=$('rec'),cap=$('cap'),ai=$('ai'),cvr=$('cvr'),aov=$('aov');
+  const els=[rec,cap,ai,cvr,aov], pels=[rec,cap,ai];
+  const fmtI=n=>Math.round(n).toLocaleString('en-US');
+  const fmtK=n=>n>=1e6?(n/1e6).toFixed(2)+'M':n>=1e4?Math.round(n/1e3)+'K':n>=1e3?(n/1e3).toFixed(1)+'K':fmtI(n);
+  const fmtM=n=>n>=1e6?'$'+(n/1e6).toFixed(2)+'M':n>=1e3?'$'+Math.round(n/1e3)+'K':'$'+Math.round(n);
+  const presets=[...document.querySelectorAll('.preset')];
+  const bf=new Date(2027,10,26), now=new Date();
+  $('days').textContent=Math.max(0,Math.ceil((bf-new Date(now.getFullYear(),now.getMonth(),now.getDate()))/86400000)).toLocaleString('en-US');
+  const ramp=(m,s,f)=>m<s?0:m>=f?1:(m-s+1)/(f-s+1);
+  function model(r,cp,a,cv,ao){
+    const c=cv/100; let recV=0,recR=0,aiV=0,aiR=0,ord=0; const cats=[]; let decR=0,nbDec=0;
+    for(let i=0;i<12;i++){const m=i+1;const v=BASE[i]*GAP*r/100*ramp(m,REC_S,REC_F);recV+=v;recR+=v*c*ao;ord+=v*c;
+      const av=Math.max(0,a-AI_BASE)*m/12;aiV+=av;aiR+=av*c*AIR*ao;ord+=av*c*AIR;
+      if(i===11) decR+=v*c*ao+av*c*AIR*ao;}
+    CATS.forEach(([lab,dem,capr,L,rp,s,aovr,dtc,p4])=>{let V=0,Rv=0;const on=p4?SEC:1;for(let i=0;i<12;i++){const v=dem*SEAS[s][i]*(cp/100)*capr*on*ramp(i+1,L,L+rp-1);V+=v;Rv+=v*c*NB*ao*aovr*dtc;ord+=v*c*NB*dtc;
+      if(i===11){decR+=v*c*NB*ao*aovr*dtc;nbDec+=v;}}cats.push([lab,V,Rv]);});
+    const vis=recV+aiV+cats.reduce((x,y)=>x+y[1],0), rev=recR+aiR+cats.reduce((x,y)=>x+y[2],0);
+    return {recV,recR,aiV,aiR,cats,vis,rev,ord,decR,nbDec};
+  }
+  function band(r,cp,a){
+    if(r===0&&cp===0) return ['low','Nothing changes','Nothing changes: the 2027 baseline, at about half the 2025 pace'];
+    if(cp===0) return ['',PNAME,'Phase 1: legacy 301s, schema, stock signals and index cleanup live in February, full effect by May; no new category pages'];
+    return ['',PNAME,'Redirects live in February, full effect by May; category pages from February'+(SEC?'; phone, tablet and monitor pages from August':'')];
+  }
+  function render(){
+    const r=+rec.value,cp=+cap.value,a=+ai.value,cv=+cvr.value,ao=+aov.value;
+    $('recOut').firstChild.textContent=r+'%';
+    const [cls,lbl,msg]=band(r,cp,a); $('phaseLbl').textContent=lbl; $('band').className='band '+cls; $('band').textContent=msg;
+    $('capOut').value=cp.toFixed(1)+'%'; $('aiOut').value=fmtI(a); $('cvrOut').value=cv.toFixed(1)+'%'; $('aovOut').value='$'+fmtI(ao);
+    const m=model(r,cp,a,cv,ao);
+    $('rev').textContent=fmtM(m.rev);
+    $('revSub').textContent=`${fmtI(m.vis)} added visits × ${cv.toFixed(1)}% conversion × order values from $${fmtI(ao*0.2)} (phones) to $${fmtI(ao*1.2)} (TVs). Recovered traffic brings ${fmtM(m.recR)}, category pages ${fmtM(m.cats.reduce((x,y)=>x+y[2],0))} and AI answers ${fmtM(m.aiR)}.`;
+    $('vis').textContent=fmtK(m.vis); $('ord').textContent=fmtI(m.ord); $('roi').textContent='$'+(m.rev/FEE).toFixed(2); $('roiL').textContent='revenue per $1 of plan (~'+fmtM(FEE)+')';
+    const base=BASE.reduce((x,y)=>x+y,0), pre=base*(1+GAP), withV=base+m.vis, max=Math.max(pre,withV)*1.04;
+    $('baseN').textContent=fmtK(base); $('withN').textContent=fmtK(withV); $('preN').textContent=fmtK(pre);
+    const bb=base/max*100; $('baseBar').style.width=bb+'%'; $('baseBar2').style.width=bb+'%';
+    const g=$('gainBar'); g.style.left=bb+'%'; g.style.width=Math.max(0,withV/max*100-bb)+'%'; $('preBar').style.width=(pre/max*100)+'%';
+    const nbP=NB_TODAY+m.nbDec, nmax=Math.max(LG,nbP)*1.04;
+    $('nbPN').textContent=fmtK(nbP); $('nbT').style.width=(NB_TODAY/nmax*100)+'%'; $('nbP').style.width=(nbP/nmax*100)+'%';
+    $('nbH').style.width=(HISENSE/nmax*100)+'%'; $('nbL').style.width=(LG/nmax*100)+'%';
+    const rows=[['Recovered traffic',m.recV,m.recR]].concat(m.cats.filter(x=>x[1]>0)).concat([['AI assistants',m.aiV,m.aiR]]);
+    $('bySrc').innerHTML=rows.map(x=>`<tr><td>${x[0]}</td><td>${fmtI(x[1])}</td><td>${fmtM(x[2])}</td></tr>`).join('');
+    $('sens').innerHTML=[Math.max(0.4,cv-0.5),cv,cv+0.5].map(x=>{const mm=model(r,cp,a,x,ao);return `<tr><td>${x.toFixed(1)}%</td><td>${fmtI(mm.ord)}</td><td>${fmtM(mm.rev)}</td></tr>`;}).join('');
+    $('perVisit').textContent='$'+(cv/100*ao).toFixed(2); $('perMonth').textContent=fmtM(m.decR);
+    presets.forEach(pr=>{const q=pr.dataset.p.split(',').map(Number);pr.setAttribute('aria-pressed',String(q.every((x,i)=>x===+pels[i].value)&&+pr.dataset.sec===SEC));});
+    try{localStorage.setItem('tcl-2027-calc-v2',JSON.stringify({v:els.map(e=>e.value),sec:SEC,fee:FEE,name:PNAME}));}catch(e){}
+  }
+  els.forEach(el=>el.addEventListener('input',render));
+  presets.forEach(pr=>pr.addEventListener('click',()=>{const q=pr.dataset.p.split(',');pels.forEach((el,i)=>el.value=q[i]);SEC=+pr.dataset.sec;FEE=+pr.dataset.fee;PNAME=pr.dataset.name;render();}));
+  try{const s=JSON.parse(localStorage.getItem('tcl-2027-calc-v2'));if(s&&Array.isArray(s.v)&&s.v.length===els.length){els.forEach((el,i)=>el.value=s.v[i]);SEC=+s.sec||0;FEE=+s.fee||FEE;PNAME=s.name||PNAME;}}catch(e){}
+  render();
+})();
+</script>
+
+<!-- layout-guard:start: roast-deck-kit/layout_guard.py -->
+<script>
+(function(){
+  var els=[].slice.call(document.querySelectorAll('.result .big,.stat .v,.funnel .v,.key .v'));
+  if(!els.length) return;
+  function fit(el){
+    el.style.fontSize='';
+    var w=el.clientWidth; if(!w) return;
+    var min=el.classList.contains('big')?28:13;
+    for(var i=0;i<4&&el.scrollWidth>w+0.5;i++){
+      var fs=parseFloat(getComputedStyle(el).fontSize);
+      var next=Math.max(min,fs*w/el.scrollWidth-0.5);
+      if(next>=fs) break;
+      el.style.fontSize=next.toFixed(1)+'px';
+    }
+  }
+  function all(){els.forEach(fit);}
+  var mo=new MutationObserver(all);
+  els.forEach(function(el){mo.observe(el,{childList:true,characterData:true,subtree:true});});
+  var raf=0; function soon(){if(!raf) raf=requestAnimationFrame(function(){raf=0;all();});}
+  window.addEventListener('resize',soon);
+  if(window.ResizeObserver){
+    var last=new WeakMap();
+    var ro=new ResizeObserver(function(entries){
+      var changed=false;
+      entries.forEach(function(e){var w=Math.round(e.contentRect.width);if(last.get(e.target)!==w){last.set(e.target,w);changed=true;}});
+      if(changed) soon();
+    });
+    [].slice.call(document.querySelectorAll('.result,.stat,.funnel .step,.key')).forEach(function(b){ro.observe(b);});
+  }
+  if(document.fonts&&document.fonts.ready) document.fonts.ready.then(all);
+  all();
+})();
+</script>
+<!-- layout-guard:end -->
+</body>
+</html>
