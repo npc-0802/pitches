@@ -50,7 +50,7 @@ Interactive pages that accompany ROAST pitch decks. Static HTML, served with Git
 | Onward Disclosure-Sales Calculator — what Google Ads on California's disclosure-form and how-to searches, and the form pages they land on, are worth to Onward in disclosure sales and buyers, per $1 of ads, and what each month of waiting forgoes | `onward-disclosure-sales-calculator/` |
 | Evolve Owner-Lead Value Calculator — what AI answers on fees and "manager or DIY?" and owner pages that answer the objections AI repeats are worth to Evolve in qualified owner leads, signed homes and first-year management fees on the same owner media, with new-channel holdout tests shown apart | `evolve-owner-lead-value-calculator/` |
 | Stannah Install-Value Calculator — what readable pages, town pages and the Maps pack in the direct-mail pilot states, the category and caregiver searches, AI answers and better ad landing pages are worth to Stannah in free assessments, installed stairlifts and media cost per lead on the same Google Ads budget | `stannah-install-value-calculator/` |
-| TCL 2027 Growth Calculator — what fixing the us.tcl.com migration, building TCL's TV and Home Comfort category pages and winning AI answers are worth in 2027 DTC revenue, by phase (Phases 1–3 recommended), per $1 of plan | `tcl-2027-growth-calculator/` |
+| TCL 2027 Growth Calculator — what fixing the us.tcl.com migration, building TCL's TV and Home Comfort category pages and winning AI answers are worth in 2027 DTC revenue, by phase (three phases, all recommended), per $1 of plan | `tcl-2027-growth-calculator/` |
 
 ## Favicon and link previews
 

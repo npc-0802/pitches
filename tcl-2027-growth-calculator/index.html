@@ -60,6 +60,7 @@ h1{font-family:"Archivo",system-ui,sans-serif;font-weight:900;font-size:clamp(28
 input[type=range]{width:100%;accent-color:var(--ink);height:30px;margin:0}
 input[type=range]:focus-visible{outline:2px solid var(--ink);outline-offset:4px;border-radius:6px}
 .presets{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;padding-block:16px;border-top:1px solid var(--line)}
+.presets .preset:nth-child(3){grid-column:1/-1}
 @media (max-width:520px){.presets{grid-template-columns:minmax(0,1fr)}}
 .preset{border:1.5px solid var(--line);border-radius:12px;padding:8px 12px;font-size:13px;background:transparent;color:var(--ink);cursor:pointer;font-family:inherit;text-align:left;line-height:1.25}
 .preset b{display:block;font-weight:700}
@@ -137,7 +138,7 @@ td:last-child,th:last-child{text-align:right;font-weight:700}
       <div class="ctl">
         <div class="row"><label for="cap">Share of TV category searches won by December</label><output id="capOut" for="cap">1.0%</output></div>
         <input type="range" id="cap" min="0" max="3" step="0.1" value="1">
-        <div class="why">Of ~1.4M non-branded TV searches a month (sizes, technology, deals, gaming). Home Comfort and sound bars scale with it from their launch months; phones, tablets and monitors only in Phase 4.</div>
+        <div class="why">Of ~1.4M non-branded TV searches a month (sizes, technology, deals, gaming). Home Comfort and sound bars scale with it from their launch months.</div>
       </div>
 
       <div class="ctl">
@@ -155,14 +156,13 @@ td:last-child,th:last-child{text-align:right;font-weight:700}
       <div class="ctl">
         <div class="row"><label for="aov">Average order value (blended)</label><output id="aovOut" for="aov">$750</output></div>
         <input type="range" id="aov" min="300" max="1500" step="25" value="750">
-        <div class="why">Placeholder. TVs carry 1.2× this ($900: QM7L from $699, QM8L 65" at $1,199 on sale); Home Comfort, audio and mobile carry less.</div>
+        <div class="why">Placeholder. TVs carry 1.2× this ($900: QM7L from $699, QM8L 65" at $1,199 on sale); Home Comfort and audio carry less.</div>
       </div>
 
       <div class="presets" role="group" aria-label="Phases of the plan">
         <button class="preset" type="button" data-p="50,0,8000" data-sec="0" data-fee="307727" data-name="Phase 1"><b>Phase 1: fix the move</b>301s, schema, index cleanup · ~$308K</button>
         <button class="preset" type="button" data-p="50,1,8000" data-sec="0" data-fee="841747" data-name="Phases 1–2"><b>Phases 1–2: + build the shelf</b>Category pages, PDPs, size tool · ~$842K</button>
-        <button class="preset" type="button" data-p="50,1,16000" data-sec="0" data-fee="1101240" data-name="Phases 1–3" aria-pressed="true"><b>Phases 1–3 (recommended)</b>+ AI answers, feeds and PR · ~$1.10M</button>
-        <button class="preset" type="button" data-p="50,1,16000" data-sec="1" data-fee="1268201" data-name="Phases 1–4"><b>Phases 1–4: decided at the Q2 review</b>Every PDP, phones, monitors · ~$1.27M</button>
+        <button class="preset" type="button" data-p="50,1,16000" data-sec="0" data-fee="1101240" data-name="Phases 1–3" aria-pressed="true"><b>Phases 1–3: the recommended plan</b>+ AI answers, feeds and PR · ~$1.10M</button>
       </div>
     </section>
 
@@ -216,8 +216,8 @@ td:last-child,th:last-child{text-align:right;font-weight:700}
   </div>
 
   <div class="foot">
-    <div>Traffic and benchmarks: Ahrefs, US, pulled Nov 2, 2026 (us.tcl.com 159K organic visits a month, 1.4K non-branded, DR 81, 2.8K AI responses; Samsung US 3.7M / 203K non-branded; LG US 1.1M / 85K; Hisense 84K / 6.1K). History: Ahrefs, ~207K a month in Sep 2025, 312K peak in Nov 2025, ~100K in Sep 2026. Demand: Ahrefs Keywords Explorer, US monthly averages, non-branded and excluding accessories: TVs ~1.42M, Home Comfort ~1.36M (window and portable AC, dehumidifiers), monitors ~608K, tablets ~400K, phones ~290K, sound bars ~203K; appliances and projectors (~1.2M) sit in an optional module and are not counted. Audience: GWI Core and Consumer Tech, US. Paid: Similarweb, Jun–Aug 2026 (~$79K a month at $0.92 per paid visit). AI conversion: Adobe Digital Insights (AI visits converted 31–40% better, 2025–26). Seasonality curves are estimates until Ahrefs volume history is pulled.</div>
-    <div>Formula: recovered visits = 2027 no-action baseline × 1.07 (the gap to the 2025 pace) × share recovered, ramping from February to full in May; category visits = addressable searches × seasonality × share won, ramping over 3–5 months from each launch month (TVs and Home Comfort in February, audio in June, phones, tablets and monitors in August), × 0.6 where some SKUs are sold only at retailers; AI visits = (December target − 8,000) phased in evenly over the year. Revenue = visits × conversion × order value. Counts only sales on us.tcl.com; retailer sales influenced by TCL's pages (63% of shoppers who buy elsewhere visit the brand site first, Simon-Kucher 2025) are on top. Draft investment by phase, at ROAST's 2026 US rate card with 15% project management, link spend, PR campaigns, copy and tools at cost: Phase 1 ~$308K, Phase 2 ~$534K, Phase 3 ~$259K, Phase 4 ~$167K. We recommend Phases 1–3 (~$1.10M): each returns at least ~$1.95 per $1 in 2027 revenue, while Phase 4 returns ~$0.15, so it is decided at the Q2 review on real data.</div>
+    <div>Traffic and benchmarks: Ahrefs, US, pulled Nov 2, 2026 (us.tcl.com 159K organic visits a month, 1.4K non-branded, DR 81, 2.8K AI responses; Samsung US 3.7M / 203K non-branded; LG US 1.1M / 85K; Hisense 84K / 6.1K). History: Ahrefs, ~207K a month in Sep 2025, 312K peak in Nov 2025, ~100K in Sep 2026. Demand: Ahrefs Keywords Explorer, US monthly averages, non-branded and excluding accessories: TVs ~1.42M, Home Comfort ~1.36M (window and portable AC, dehumidifiers), sound bars ~203K; phones, tablets and monitors (~1.3M) and appliances and projectors (~1.2M) are outside the plan and not counted. Audience: GWI Core and Consumer Tech, US. Paid: Similarweb, Jun–Aug 2026 (~$79K a month at $0.92 per paid visit). AI conversion: Adobe Digital Insights (AI visits converted 31–40% better, 2025–26). Seasonality curves are estimates until Ahrefs volume history is pulled.</div>
+    <div>Formula: recovered visits = 2027 no-action baseline × 1.07 (the gap to the 2025 pace) × share recovered, ramping from February to full in May; category visits = addressable searches × seasonality × share won, ramping over 3–5 months from each launch month (TVs and Home Comfort in February, sound bars in June), × 0.6 where some SKUs are sold only at retailers; AI visits = (December target − 8,000) phased in evenly over the year. Revenue = visits × conversion × order value. Counts only sales on us.tcl.com; retailer sales influenced by TCL's pages (63% of shoppers who buy elsewhere visit the brand site first, Simon-Kucher 2025) are on top. Draft investment by phase, at ROAST's 2026 US rate card with 15% project management, link spend, PR campaigns, copy and tools at cost: Phase 1 ~$308K, Phase 2 ~$534K, Phase 3 ~$259K (~$1.10M in all). Each phase returns at least ~$1.95 per $1 in 2027 revenue. Stretching the plan to every remaining product page plus phones, tablets and monitors would add ~$167K for ~$0.15 per $1, so we do not recommend it.</div>
     <div>Part of the ROAST × TCL 2027 SEO, GEO, digital PR and link program, November 2026. Follows the <a href="../tcl-recovery-calculator/">TCL Recovery Calculator</a> (Black Friday 2026).</div>
   </div>
 </div>
@@ -233,8 +233,7 @@ td:last-child,th:last-child{text-align:right;font-weight:700}
   const GAP=207/100-1, REC_S=2, REC_F=5, NB=0.8, AIR=1.3, AI_BASE=8000, PAIDCPV=0.92;
   let SEC=0, FEE=1101240, PNAME='Phases 1–3';
   const NB_TODAY=1400, HISENSE=6100, LG=84700;
-  const CATS=[['TVs',1420000,1,2,5,'tv',1.2,1],['Home Comfort',1360000,0.75,2,3,'home',0.533,0.6],['Sound bars',203000,0.5,6,5,'audio',0.333,1],
-    ['Phones',290000,1,8,5,'mobile',0.2,0.5,1],['Tablets',400000,0.3,8,5,'mobile',0.293,1,1],['Monitors',608000,0.3,8,5,'mobile',0.333,1,1]];
+  const CATS=[['TVs',1420000,1,2,5,'tv',1.2,1],['Home Comfort',1360000,0.75,2,3,'home',0.533,0.6],['Sound bars',203000,0.5,6,5,'audio',0.333,1]];
   const rec=$('rec'),cap=$('cap'),ai=$('ai'),cvr=$('cvr'),aov=$('aov');
   const els=[rec,cap,ai,cvr,aov], pels=[rec,cap,ai];
   const fmtI=n=>Math.round(n).toLocaleString('en-US');
@@ -257,7 +256,7 @@ td:last-child,th:last-child{text-align:right;font-weight:700}
   function band(r,cp,a){
     if(r===0&&cp===0) return ['low','Nothing changes','Nothing changes: the 2027 baseline, at about half the 2025 pace'];
     if(cp===0) return ['',PNAME,'Phase 1: legacy 301s, schema, stock signals and index cleanup live in February, full effect by May; no new category pages'];
-    return ['',PNAME,'Redirects live in February, full effect by May; category pages from February'+(SEC?'; phone, tablet and monitor pages from August':'')];
+    return ['',PNAME,'Redirects live in February, full effect by May; category pages from February, sound bars from June'];
   }
   function render(){
     const r=+rec.value,cp=+cap.value,a=+ai.value,cv=+cvr.value,ao=+aov.value;
@@ -266,7 +265,7 @@ td:last-child,th:last-child{text-align:right;font-weight:700}
     $('capOut').value=cp.toFixed(1)+'%'; $('aiOut').value=fmtI(a); $('cvrOut').value=cv.toFixed(1)+'%'; $('aovOut').value='$'+fmtI(ao);
     const m=model(r,cp,a,cv,ao);
     $('rev').textContent=fmtM(m.rev);
-    $('revSub').textContent=`${fmtI(m.vis)} added visits × ${cv.toFixed(1)}% conversion × order values from $${fmtI(ao*0.2)} (phones) to $${fmtI(ao*1.2)} (TVs). Recovered traffic brings ${fmtM(m.recR)}, category pages ${fmtM(m.cats.reduce((x,y)=>x+y[2],0))} and AI answers ${fmtM(m.aiR)}.`;
+    $('revSub').textContent=`${fmtI(m.vis)} added visits × ${cv.toFixed(1)}% conversion × order values from $${fmtI(ao*0.333)} (sound bars) to $${fmtI(ao*1.2)} (TVs). Recovered traffic brings ${fmtM(m.recR)}, category pages ${fmtM(m.cats.reduce((x,y)=>x+y[2],0))} and AI answers ${fmtM(m.aiR)}.`;
     $('vis').textContent=fmtK(m.vis); $('ord').textContent=fmtI(m.ord); $('roi').textContent='$'+(m.rev/FEE).toFixed(2); $('roiL').textContent='revenue per $1 of plan (~'+fmtM(FEE)+')';
     const base=BASE.reduce((x,y)=>x+y,0), pre=base*(1+GAP), withV=base+m.vis, max=Math.max(pre,withV)*1.04;
     $('baseN').textContent=fmtK(base); $('withN').textContent=fmtK(withV); $('preN').textContent=fmtK(pre);
@@ -280,11 +279,11 @@ td:last-child,th:last-child{text-align:right;font-weight:700}
     $('sens').innerHTML=[Math.max(0.4,cv-0.5),cv,cv+0.5].map(x=>{const mm=model(r,cp,a,x,ao);return `<tr><td>${x.toFixed(1)}%</td><td>${fmtI(mm.ord)}</td><td>${fmtM(mm.rev)}</td></tr>`;}).join('');
     $('perVisit').textContent='$'+(cv/100*ao).toFixed(2); $('perMonth').textContent=fmtM(m.decR);
     presets.forEach(pr=>{const q=pr.dataset.p.split(',').map(Number);pr.setAttribute('aria-pressed',String(q.every((x,i)=>x===+pels[i].value)&&+pr.dataset.sec===SEC));});
-    try{localStorage.setItem('tcl-2027-calc-v2',JSON.stringify({v:els.map(e=>e.value),sec:SEC,fee:FEE,name:PNAME}));}catch(e){}
+    try{localStorage.setItem('tcl-2027-calc-v3',JSON.stringify({v:els.map(e=>e.value),sec:SEC,fee:FEE,name:PNAME}));}catch(e){}
   }
   els.forEach(el=>el.addEventListener('input',render));
   presets.forEach(pr=>pr.addEventListener('click',()=>{const q=pr.dataset.p.split(',');pels.forEach((el,i)=>el.value=q[i]);SEC=+pr.dataset.sec;FEE=+pr.dataset.fee;PNAME=pr.dataset.name;render();}));
-  try{const s=JSON.parse(localStorage.getItem('tcl-2027-calc-v2'));if(s&&Array.isArray(s.v)&&s.v.length===els.length){els.forEach((el,i)=>el.value=s.v[i]);SEC=+s.sec||0;FEE=+s.fee||FEE;PNAME=s.name||PNAME;}}catch(e){}
+  try{const s=JSON.parse(localStorage.getItem('tcl-2027-calc-v3'));if(s&&Array.isArray(s.v)&&s.v.length===els.length){els.forEach((el,i)=>el.value=s.v[i]);SEC=+s.sec||0;FEE=+s.fee||FEE;PNAME=s.name||PNAME;}}catch(e){}
   render();
 })();
 </script>
