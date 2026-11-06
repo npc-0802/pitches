@@ -101,6 +101,10 @@ td:last-child,th:last-child{text-align:right;font-weight:700}
 .aovgrid .ctl{margin-bottom:6px}
 .themes td,.themes th{white-space:nowrap}
 .themes td:first-child{white-space:normal}
+.toggle{display:flex;gap:10px;align-items:flex-start;margin:4px 0 12px;cursor:pointer;font-weight:600}
+.toggle input{width:18px;height:18px;margin-top:2px;flex:none;accent-color:var(--ink,#111)}
+.toggle small{display:block;font-weight:400;opacity:.75;margin-top:2px}
+.camp.off .ctl{opacity:.45}
 .wordmark{flex-wrap:wrap;row-gap:6px}.wordmark .client-logo{height:22px;width:auto;display:block;color:var(--ink)}
 /* layout-guard:start: roast-deck-kit/layout_guard.py; re-run it instead of editing */
 .grid>*,.result>*,.stats>*,.bar>*,.funnel>*,.keys>*{min-width:0}
@@ -236,6 +240,12 @@ td:last-child,th:last-child{text-align:right;font-weight:700}
       <div class="ctl"><div class="row"><label for="cpc">Cost per click</label><output id="cpcOut" for="cpc">£1.90</output></div><input type="range" id="cpc" min="0.5" max="5" step="0.05" value="1.9"><div class="why">Placeholder: ~$2.50, an agency average across ChatGPT campaigns (Oct 2026); OpenAI suggests $3–5 starting bids, and auctions clear below them.</div></div>
       <div class="ctl"><div class="row"><label for="adcvr">Ad click to order</label><output id="adcvrOut" for="adcvr">1.0%</output></div><input type="range" id="adcvr" min="0.3" max="3" step="0.1" value="1.0"><div class="why">Placeholder until the pixel reads real orders; ~17 orders over the test is a directional read.</div></div>
       <div class="ctl"><div class="row"><label for="weeks">Weeks of ChatGPT ads in year one</label><output id="weeksOut" for="weeks">6</output></div><input type="range" id="weeks" min="0" max="52" step="1" value="6"><div class="why">The test is six weeks, decided at week 6. Slide further to see a longer run if it clears the bar (management ~£2,041 a month after the test).</div></div>
+      <div class="sect">Digital PR campaigns (optional, if there's budget)</div>
+      <div class="camp off" id="camp">
+        <label class="toggle"><input type="checkbox" id="prOn"><span>Add two data-led PR campaigns (£15,000 each, £30,000 in all)<small>E.g. the race-day boot report in spring and Britain’s calf-width gap in autumn. Off by default: not in the headline or the plan we recommend.</small></span></label>
+        <div class="ctl"><div class="row"><label for="prai">New AI-assistant visits a month from the campaigns</label><output id="praiOut" for="prai">500</output></div><input type="range" id="prai" min="0" max="3000" step="50" value="500"><div class="band" id="praiBand"></div><div class="why">Placeholder until our Digital PR team’s campaign benchmarks: coverage on the sites ChatGPT reads for boot answers, which name rivals today (Horse &amp; Hound, Vogue, The Independent, Glamour, Who What Wear).</div></div>
+        <div class="ctl"><div class="row"><label for="prseo">New Google search visits a month from their links</label><output id="prseoOut" for="prseo">511</output></div><input type="range" id="prseo" min="0" max="3000" step="1" value="511"><div class="band" id="prseoBand"></div><div class="why">Placeholder until our Digital PR team’s link benchmarks: links from the coverage win back some of the category searches the three phases leave on the table (Ahrefs, Oct 2026).</div></div>
+      </div>
       <div class="presets" role="group" aria-label="Scenarios tied to the plan">
         <button class="preset" type="button" data-fee="22292" data-p="600,984,1.0,405,250,265,365,515,75,1.9,1.0,6"><b>Phase 1 only: open the doors to AI</b>technical analysis and Shopify site optimisation, calf sizes and fit facts in the feeds, PLP page and content optimisation · ~£22K</button><button class="preset" type="button" data-fee="59385" data-p="1900,3443,1.0,405,250,265,365,515,75,1.9,1.0,6"><b>Phases 1 and 2: + answer the questions buyers ask</b>12 answer pages, answer blocks on six collections and a wide-calf collection, fit facts on 20 product pages · ~£59K</button><button class="preset" type="button" data-fee="112060" data-p="4300,4722,1.0,405,250,265,365,515,75,1.9,1.0,6" aria-pressed="true"><b>All three phases: + win the sources AI trusts (recommended)</b>reactive digital PR from month 1 (two stories a month in the titles ChatGPT reads), source briefs for F&amp;F’s teams, the monthly AI read · ~£112K</button>
       </div>
@@ -283,7 +293,7 @@ td:last-child,th:last-child{text-align:right;font-weight:700}
 
   <div class="foot">
     <div>Sources: Peec (Fairfax &amp; Favor project, 114 prompts, UK and US, ChatGPT, Gemini and AI Overviews, 23 Oct–5 Nov 2026); live ChatGPT checks, logged out, 5 Nov 2026 (7 answers); Similarweb, Jul–Sep 2026, Gen AI channel (modelled); Ahrefs, UK, 23 Oct 2026 (category search visits on the same 500 keywords, de-seasoned; AI citation counts); GWI Core, Q1 2025–Q2 2026 (UK and US women 35–64 who always buy premium, a proxy); fairfaxandfavor.com catalogue (products.json), 5 Nov 2026; ChatGPT ads pricing and minimums from published 2026 guides (OpenAI publishes no rate card).</div>
-    <div>Formula: AI orders = new AI visits × visit-to-order × 1.3; Google orders = new Google visits × visit-to-order; each × the order value of its category mix (AI: knee-high 30%, ankle &amp; Chelsea 20%, bags 20%, country 15%, US 15%; Google: 40/25/15/10/10) × 12 = new online sales a year once the work is live (by month 12, not a ramped year). ChatGPT ads: the budget a day × 7 × the weeks set ÷ cost per click × click-to-order × the knee-high order value. Sales per £1 of plan = all of it ÷ draft fees for the phases picked (ROAST UK rate card + 15% PM, reactive digital PR at £3,450 a month incl. PM in Phase 3, Peec at cost: Phase 1 only ~£22K, Phases 1 and 2 ~£59K, all three ~£112K) + the test’s fees after the waiver (set-up and the first month of management are waived with a six-month AEO commitment; after that ~£2,041 a month, so ~£1,021 for weeks 5–6) + the ad spend. Before cost of goods and returns; stores, stockists, repeat orders, the brand searches AI mentions prompt and two optional PR campaigns aren't counted. Every rate is a placeholder until Fairfax &amp; Favor shares its own.</div>
+    <div>Formula: AI orders = new AI visits × visit-to-order × 1.3; Google orders = new Google visits × visit-to-order; each × the order value of its category mix (AI: knee-high 30%, ankle &amp; Chelsea 20%, bags 20%, country 15%, US 15%; Google: 40/25/15/10/10) × 12 = new online sales a year once the work is live (by month 12, not a ramped year). ChatGPT ads: the budget a day × 7 × the weeks set ÷ cost per click × click-to-order × the knee-high order value. Sales per £1 of plan = all of it ÷ draft fees for the phases picked (ROAST UK rate card + 15% PM, reactive digital PR at £3,450 a month incl. PM in Phase 3, Peec at cost: Phase 1 only ~£22K, Phases 1 and 2 ~£59K, all three ~£112K) + the test’s fees after the waiver (set-up and the first month of management are waived with a six-month AEO commitment; after that ~£2,041 a month, so ~£1,021 for weeks 5–6) + the ad spend. Optional PR campaigns (off by default): their new AI and Google visits are valued the same way, for £30,000 (two campaigns at £15,000 each, all in), and only count when switched on. Before cost of goods and returns; stores, stockists, repeat orders and the brand searches AI mentions prompt aren't counted. Every rate is a placeholder until Fairfax &amp; Favor shares its own.</div>
     <div>Part of the ROAST × Fairfax &amp; Favor AI answers &amp; ChatGPT ads proposal, November 2026.</div>
   </div>
 </div>
@@ -291,7 +301,7 @@ td:last-child,th:last-child{text-align:right;font-weight:700}
 <script>
 (function(){
   const $=id=>document.getElementById(id);
-  const C={"AI_REL": 1.3, "AI_MIX": {"kh": 0.3, "ac": 0.2, "bg": 0.2, "cr": 0.15, "us": 0.15}, "SEO_MIX": {"kh": 0.4, "ac": 0.25, "bg": 0.15, "cr": 0.1, "us": 0.1}, "SITE_AOV": 275, "MGMT_MO": 2041.25, "AI_TODAY": 1031, "HC": 5855, "CAT_NOW": 1674, "CAT_LOST": 9836, "THEMES": [["Knee-high & riding boots", "uk", 0.6, 1.0, "kh"], ["Wide calf (the Sporting fit)", "uk", 0.4, 1.0, "kh"]]};
+  const C={"PR_ADDON": 30000, "CAT_LEFT": 5114, "AI_REL": 1.3, "AI_MIX": {"kh": 0.3, "ac": 0.2, "bg": 0.2, "cr": 0.15, "us": 0.15}, "SEO_MIX": {"kh": 0.4, "ac": 0.25, "bg": 0.15, "cr": 0.1, "us": 0.1}, "SITE_AOV": 275, "MGMT_MO": 2041.25, "AI_TODAY": 1031, "HC": 5855, "CAT_NOW": 1674, "CAT_LOST": 9836, "THEMES": [["Knee-high & riding boots", "uk", 0.6, 1.0, "kh"], ["Wide calf (the Sporting fit)", "uk", 0.4, 1.0, "kh"]]};
   const ids=["ai", "seo", "cvr", "kh", "ac", "bg", "cr", "us", "daily", "cpc", "adcvr", "weeks"];
   const els=ids.map($);
   const CATS=['kh','ac','bg','cr','us'];
@@ -318,9 +328,13 @@ td:last-child,th:last-child{text-align:right;font-weight:700}
     const aeo=(oAI*aiA+oSEO*seoA)*12;
     const adOrd=days?adOrdT*30/days:0;
     const testFee=media?C.MGMT_MO*Math.max(0,v.weeks/4-1):0;   // set-up and month 1 waived with a six-month AEO commitment
-    return {aiA,seoA,oAI,oSEO,aeo,ads,rev:aeo+ads,adOrd,adOrdT,media,testFee,roas:media?ads/media:0,rows,byCat};
+    const pAI=v.prOn?v.prai*c*C.AI_REL:0, pSEO=v.prOn?v.prseo*c:0;   // the optional PR campaigns, valued like any other visits
+    const pr=(pAI*aiA+pSEO*seoA)*12;
+    CATS.forEach((k,i)=>byCat[i]+=(pAI*C.AI_MIX[k]+pSEO*C.SEO_MIX[k])*v[k]*12);
+    const prCost=v.prOn?C.PR_ADDON:0;
+    return {aiA,seoA,oAI,oSEO,aeo,ads,pr,pAI,pSEO,prCost,rev:aeo+ads+pr,adOrd,adOrdT,media,testFee,roas:media?ads/media:0,rows,byCat};
   }
-  function vals(){const v={};ids.forEach((k,i)=>v[k]=+els[i].value);return v;}
+  function vals(){const v={};ids.forEach((k,i)=>v[k]=+els[i].value);v.prOn=$('prOn').checked;v.prai=+$('prai').value;v.prseo=+$('prseo').value;return v;}
   function render(){
     const v=vals(), o=model(v);
     $('aiOut').value=fmtI(v.ai); $('seoOut').value=fmtI(v.seo); $('cvrOut').value=v.cvr.toFixed(1)+'%';
@@ -330,24 +344,31 @@ td:last-child,th:last-child{text-align:right;font-weight:700}
     $('seoBand').textContent=v.seo?`${Math.round(v.seo/C.CAT_LOST*100)}% of the ~${fmtI(C.CAT_LOST)} category visits a month lost in a year`:'No Google effect counted';
     const x=o.roas; $('dailyBand').className='band'+(x<2?' warn':'');
     $('dailyBand').textContent=o.media?`${fmtD(o.media)} of media over ${v.weeks} week${v.weeks===1?'':'s'}; £1 returns ~${fmtD2(x)} in sales at these rates`+(x<2?': below 2x, keep it a test':' (pays at 2x or more)'):'No ChatGPT ads';
+    $('praiOut').value=fmtI(v.prai); $('prseoOut').value=fmtI(v.prseo); $('camp').className='camp'+(v.prOn?'':' off');
+    const prRoi=v.prai||v.prseo?(o.pr||(v.prai*v.cvr/100*C.AI_REL*o.aiA+v.prseo*v.cvr/100*o.seoA)*12)/C.PR_ADDON:0;
+    const beAI=C.PR_ADDON/(v.cvr/100*C.AI_REL*o.aiA*12);
+    $('praiBand').textContent=`${v.prOn?'Adds':'Would add'} ~${fmtK((v.prai*v.cvr/100*C.AI_REL*o.aiA+v.prseo*v.cvr/100*o.seoA)*12)} a year for ${fmtD(C.PR_ADDON)}: ~${fmtD2(prRoi)} per £1; pays back at ~${fmtI(beAI)} AI visits a month`;
+    $('praiBand').className='band'+(prRoi<1?' warn':'');
+    $('prseoBand').textContent=v.prseo?`${Math.round(v.prseo/C.CAT_LEFT*100)}% of the ~${fmtI(C.CAT_LEFT)} category visits a month still lost after the three phases`:'No Google effect counted';
     $('rev').textContent=fmtD(o.rev);
-    $('revSub').textContent=`AI answers ${fmtK(o.oAI*o.aiA*12)} + Google ${fmtK(o.oSEO*o.seoA*12)} a year by month 12 + ChatGPT ads ${fmtK(o.ads)} over ${v.weeks} week${v.weeks===1?'':'s'}.`;
-    $('orders').textContent=fmtO(o.oAI+o.oSEO); $('ordersL').textContent=`new orders a month from AI and Google, plus ${fmtO(o.adOrdT)} from ads over ${v.weeks} week${v.weeks===1?'':'s'}`;
+    $('revSub').textContent=`AI answers ${fmtK(o.oAI*o.aiA*12)} + Google ${fmtK(o.oSEO*o.seoA*12)} a year by month 12 + ChatGPT ads ${fmtK(o.ads)} over ${v.weeks} week${v.weeks===1?'':'s'}`+(v.prOn?` + PR campaigns ${fmtK(o.pr)} a year.`:'.');
+    $('orders').textContent=fmtO(o.oAI+o.oSEO+o.pAI+o.pSEO); $('ordersL').textContent=`new orders a month from AI and Google, plus ${fmtO(o.adOrdT)} from ads over ${v.weeks} week${v.weeks===1?'':'s'}`;
     $('aiv').textContent=fmtI(C.AI_TODAY+v.ai); $('aivL').textContent=`AI visits a month by month 12, from ~${fmtI(C.AI_TODAY)} today`;
     $('roas').textContent=o.media?fmtD2(o.roas):'—';
     const fees=presets.map(pr=>({a:+pr.dataset.p.split(',')[0],f:+pr.dataset.fee}));
     const fee=(fees.find(z=>v.ai<=z.a+0.5)||fees[fees.length-1]).f;
-    const plan=fee+o.testFee+o.media;
+    const plan=fee+o.testFee+o.media+o.prCost;
     $('roi').textContent=plan&&o.rev?fmtD2(o.rev/plan):'—';
     const mx=Math.max(...o.byCat,1)*1.08;
     o.byCat.forEach((y,i)=>{$('b'+i).style.width=(y/mx*100)+'%';$('n'+i).textContent=fmtK(y);});
     $('themes').innerHTML=o.rows.map(r=>`<tr><td>${r.n}</td><td>${fmtD(r.b)}</td><td>${fmt1(r.o)}</td><td>${r.b?fmtD2(r.s/r.b):'—'}</td></tr>`).join('');
-    $('sens').innerHTML=[Math.max(0.3,v.cvr-0.4),v.cvr,Math.min(3,v.cvr+0.5)].map(c=>{const m=model(Object.assign({},v,{cvr:c}));return `<tr><td>${c.toFixed(1)}%</td><td>${fmtI((m.oAI+m.oSEO)*12+m.adOrdT)}</td><td>${fmtD(m.rev)}</td></tr>`;}).join('');
-    $('perMonth').textContent=fmtD(o.aeo/12);
+    $('sens').innerHTML=[Math.max(0.3,v.cvr-0.4),v.cvr,Math.min(3,v.cvr+0.5)].map(c=>{const m=model(Object.assign({},v,{cvr:c}));return `<tr><td>${c.toFixed(1)}%</td><td>${fmtI((m.oAI+m.oSEO+m.pAI+m.pSEO)*12+m.adOrdT)}</td><td>${fmtD(m.rev)}</td></tr>`;}).join('');
+    $('perMonth').textContent=fmtD((o.aeo+o.pr)/12);
     presets.forEach(pr=>{const q=pr.dataset.p.split(',').map(Number);pr.setAttribute('aria-pressed',String(q.every((z,k)=>Math.abs(z-(+els[k].value))<1e-9)));});
     try{localStorage.setItem('fairfaxfavor-ai-calc',JSON.stringify(els.map(e=>e.value)));}catch(e){}
   }
   els.forEach(el=>el.addEventListener('input',render));
+  ['prOn','prai','prseo'].forEach(id=>$(id).addEventListener('input',render)); $('prOn').addEventListener('change',render);
   presets.forEach(pr=>pr.addEventListener('click',()=>{const q=pr.dataset.p.split(',');els.forEach((el,k)=>el.value=q[k]);render();}));
   try{if(location.hash==='#saved'){const s=JSON.parse(localStorage.getItem('fairfaxfavor-ai-calc'));if(Array.isArray(s)&&s.length===els.length){els.forEach((el,k)=>el.value=s[k]);}}}catch(e){}
   render();
