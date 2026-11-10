@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SoulCycle Rider-Value Calculator</title>
+<!-- share:start -->
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<meta name="description" content="What being the studio Google, reviews and AI answers pick is worth to SoulCycle in new riders, by phase.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ROAST">
+<meta property="og:title" content="SoulCycle Rider-Value Calculator">
+<meta property="og:description" content="What being the studio Google, reviews and AI answers pick is worth to SoulCycle in new riders, by phase.">
+<meta property="og:url" content="https://npc-0802.github.io/pitches/soulcycle-rider-value-calculator/">
+<meta property="og:image" content="https://npc-0802.github.io/pitches/soulcycle-rider-value-calculator/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="ROAST × SoulCycle: Rider-Value Calculator">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="SoulCycle Rider-Value Calculator">
+<meta name="twitter:description" content="What being the studio Google, reviews and AI answers pick is worth to SoulCycle in new riders, by phase.">
+<meta name="twitter:image" content="https://npc-0802.github.io/pitches/soulcycle-rider-value-calculator/og.png">
+<!-- share:end -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;900&family=Public+Sans:wght@400;500;600&display=swap">
+<style>
+:root{
+  --bg:#ffffff; --ink:#111214; --muted:#5b5e66; --line:#e6e4dc; --panel:#f6f5f0;
+  --yellow:#FFD100; --yellow-deep:#e6bc00; --on-yellow:#111214; --on-yellow-muted:#4a4630;
+  --track:#e3e1d8; --ok:#1f7a3a;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){ --bg:#111214; --ink:#f4f3ee; --muted:#a6a79f; --line:#2a2b2f; --panel:#1b1c20; --track:#33343a; color-scheme:dark; }
+}
+:root[data-theme="dark"]{ --bg:#111214; --ink:#f4f3ee; --muted:#a6a79f; --line:#2a2b2f; --panel:#1b1c20; --track:#33343a; color-scheme:dark; }
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Public Sans",system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;font-size:15px;line-height:1.45}
+.wrap{max-width:1440px;margin:0 auto;padding-block:22px 44px;padding-inline:clamp(16px,3vw,40px);display:grid;gap:22px}
+.brand{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-bottom:6px;flex-wrap:wrap}
+.wordmark{display:flex;align-items:center;gap:12px}.wordmark .roast-logo{height:22px;width:auto;display:block;color:var(--ink)}
+.wordmark span{font-family:"Public Sans",sans-serif;font-weight:500;font-size:15px;color:var(--muted);letter-spacing:0}
+.deadline{font-size:13px;color:var(--muted);text-align:right}
+.deadline b{color:var(--ink);font-variant-numeric:tabular-nums}
+h1{font-family:"Archivo",system-ui,sans-serif;font-weight:900;font-size:clamp(28px,3.4vw,46px);line-height:1.05;letter-spacing:-.015em;margin:0;text-wrap:balance;max-width:26ch}
+.lede{color:var(--muted);max-width:78ch;margin:8px 0 0;font-size:clamp(14px,1.1vw,16px)}
+.grid{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,2fr);gap:22px;align-items:start}
+@media (max-width:900px){.grid{grid-template-columns:1fr}}
+.panel{background:var(--panel);border-radius:22px;padding:clamp(18px,2vw,28px) clamp(18px,2vw,28px) 10px;min-width:0;overflow:hidden}
+.ctl{display:grid;gap:8px;padding-block:14px;border-top:1px solid var(--line)}
+.ctl:first-child{border-top:0;padding-top:2px}
+.ctl .row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.ctl label{font-weight:600}
+.ctl output{font-family:"Archivo",sans-serif;font-weight:700;font-size:22px;font-variant-numeric:tabular-nums}
+.ctl output small{font-family:"Public Sans",sans-serif;font-weight:500;font-size:13px;color:var(--muted);margin-left:8px}
+.ctl .why{font-size:13px;color:var(--muted);max-width:72ch}
+.sect{font-family:"Archivo",sans-serif;font-weight:700;font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);padding-top:16px;border-top:1px solid var(--line)}
+.band{font-size:13px;font-weight:600;padding:5px 12px;border-radius:14px;background:var(--yellow);color:var(--on-yellow);width:fit-content;max-width:100%;line-height:1.3}
+.band.low{background:var(--track);color:var(--ink)}
+.band.warn{background:#f3c4bd;color:#5c120a}
+input[type=range]{width:100%;accent-color:var(--ink);height:30px;margin:0}
+input[type=range]:focus-visible{outline:2px solid var(--ink);outline-offset:4px;border-radius:6px}
+.presets{display:flex;flex-wrap:wrap;gap:8px;padding-block:16px;border-top:1px solid var(--line)}
+.preset{border:1.5px solid var(--line);border-radius:12px;padding:8px 12px;font-size:13px;background:transparent;color:var(--ink);cursor:pointer;font-family:inherit;text-align:left;line-height:1.25}
+.preset b{display:block;font-weight:700}
+.preset:hover,.preset:focus-visible{border-color:var(--ink);outline:none}
+.preset[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.result{background:var(--yellow);color:var(--on-yellow);border-radius:22px;padding:clamp(20px,2.2vw,32px);display:grid;gap:18px;min-width:0}
+.result .label{font-weight:600;font-size:14px;color:var(--on-yellow-muted)}
+.result .big{font-family:"Archivo",sans-serif;font-weight:900;font-size:clamp(48px,6vw,88px);line-height:.95;letter-spacing:-.02em;font-variant-numeric:tabular-nums;margin:6px 0}
+.result .sub{font-size:14px;color:var(--on-yellow-muted);max-width:52ch}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+@media (max-width:520px){.stats{grid-template-columns:1fr 1fr}}
+.stat{background:rgba(255,255,255,.5);border-radius:14px;padding:14px 14px 12px;min-width:0}
+.stat .v{font-family:"Archivo",sans-serif;font-weight:700;font-size:clamp(20px,1.8vw,26px);font-variant-numeric:tabular-nums;line-height:1.1}
+.stat .l{font-size:12.5px;color:var(--on-yellow-muted);margin-top:5px;line-height:1.3;text-wrap:balance}
+.bars{display:grid;gap:8px;margin-top:4px}
+.bars .t{font-weight:600;font-size:13px;color:var(--on-yellow-muted)}
+.bar{display:grid;grid-template-columns:minmax(120px,170px) 1fr minmax(64px,auto);gap:10px;align-items:center;font-size:13px}
+@media (max-width:520px){.bar{grid-template-columns:110px 1fr minmax(56px,auto)}}
+.bar .fill{height:14px;border-radius:7px;background:rgba(17,18,20,.25);position:relative;overflow:hidden}
+.bar .fill i{position:absolute;inset:0;width:0;background:var(--on-yellow);border-radius:7px;transition:width .25s ease}
+.bar .fill i.gain{background:#ffffff;left:auto}
+.bar .n{text-align:right;font-variant-numeric:tabular-nums;font-weight:600}
+@media (prefers-reduced-motion: reduce){.bar .fill i{transition:none}}
+.corp{display:grid;gap:8px}
+.corp .t{font-weight:600;font-size:13px;color:var(--on-yellow-muted)}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th,td{text-align:left;padding:7px 4px;border-bottom:1px solid rgba(17,18,20,.18);font-variant-numeric:tabular-nums}
+th{font-size:12px;color:var(--on-yellow-muted);font-weight:600}
+td:last-child,th:last-child{text-align:right;font-weight:700}
+.inaction{background:var(--panel);border-radius:22px;padding:clamp(18px,2vw,28px);display:grid;gap:8px}
+.inaction h2{font-family:"Archivo",sans-serif;font-weight:700;font-size:18px;margin:0}
+.inaction p{margin:0;color:var(--muted);max-width:100ch;font-size:15px;line-height:1.55}
+.inaction b{color:var(--ink)}
+.foot{font-size:13px;color:var(--muted);max-width:110ch;display:grid;gap:6px}
+.foot a{color:var(--ink)}
+@media (min-width:901px){.result{position:sticky;top:16px}}
+.wordmark{flex-wrap:wrap;row-gap:6px}.wordmark .client-logo{height:22px;width:auto;display:block;color:var(--ink)}
+/* layout-guard:start: roast-deck-kit/layout_guard.py; re-run it instead of editing */
+.grid>*,.result>*,.stats>*,.bar>*,.funnel>*,.keys>*{min-width:0}
+.result{grid-template-columns:minmax(0,1fr);container:lgresult/inline-size}
+.stat .l,.funnel .l,.funnel .s,.key .l,.key .s{overflow-wrap:break-word}
+.tscroll{overflow-x:auto;max-width:100%}
+@container lgresult (max-width:400px){
+  .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .stats>.stat:last-child:nth-child(odd){grid-column:1/-1}
+  .funnel{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .funnel .step::after{display:none}
+}
+/* layout-guard:end */
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="brand">
+    <div class="wordmark"><svg class="roast-logo" fill="currentColor" aria-label="ROAST" role="img" viewBox="0 0 931.89 203.5" xmlns="http://www.w3.org/2000/svg" overflow="hidden" xmlns:c2pa="http://c2pa.org/manifest"><metadata><c2pa:manifest>AAAWgmp1bWIAAAAeanVtZGMycGEAEQAQgAAAqgA4m3EDYzJwYQAAABZcanVtYgAAAEdqdW1kYzJtYQARABCAAACqADibcQN1cm46YzJwYTozZDQ3MGE0ZS0yMmVkLTQyMmItYTUyMS03MDBhY2VmMjQ1YzkAAAADl2p1bWIAAAApanVtZGMyYXMAEQAQgAAAqgA4m3EDYzJwYS5hc3NlcnRpb25zAAAAALxqdW1iAAAARGp1bWRjYm9yABEAEIAAAKoAOJtxE2MycGEuaW5ncmVkaWVudC52MwAAAAAYYzJzaA2CgfxpiyX5e10r0s1hRZEAAABwY2JvcqNpZGM6Zm9ybWF0bWltYWdlL3N2Zyt4bWxqaW5zdGFuY2VJRHgseG1wOmlpZDplM2ZmMmVlNi01ZGQ1LTQ1MjItOWQ5Yy0zZGJjNGU4YmI5NWJscmVsYXRpb25zaGlwaHBhcmVudE9mAAAB4mp1bWIAAABBanVtZGNib3IAEQAQgAAAqgA4m3ETYzJwYS5hY3Rpb25zLnYyAAAAABhjMnNokbiFip/0bVcWbCsmWV7bOwAAAZljYm9yomdhY3Rpb25zgqJmYWN0aW9ua2MycGEub3BlbmVkanBhcmFtZXRlcnOha2luZ3JlZGllbnRzgaJjdXJseC1zZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmluZ3JlZGllbnQudjNkaGFzaFggdHVjQhQbTIDc8numuX28WgpAZrXhsoTiscHOU7tUJ9ikZmFjdGlvbngdY29tLmFudGhyb3BpYy5jbGF1ZGUucHJvdmlkZWRqcGFyYW1ldGVyc6F4H2NvbS5hbnRocm9waWMub3JpZ2luLWNvbmZpZGVuY2VndW5rbm93bmtkZXNjcmlwdGlvbnhmQ2xhdWRlIHByb3ZpZGVkIHRoaXMgZmlsZSBhdCB0aGUgcmVxdWVzdCBvZiBhIHVzZXIgYW5kIG1heSBoYXZlIGNyZWF0ZWQgb3IgbW9kaWZpZWQgdGhlIGZpbGUgY29udGVudHMubXNvZnR3YXJlQWdlbnShZG5hbWVmQ2xhdWRlcmFsbEFjdGlvbnNJbmNsdWRlZPUAAADIanVtYgAAAEBqdW1kY2JvcgARABCAAACqADibcRNjMnBhLmhhc2guZGF0YQAAAAAYYzJzaJTTpaWSGw/skOxEaOFCsm0AAACAY2JvcqVjYWxnZnNoYTI1NmNwYWRNAAAAAAAAAAAAAAAAAGRoYXNoWCBFqzodb2N2pJR9ua6fnBJPH/pxrehRy7zC3r72E1+nfmRuYW1lbmp1bWJmIG1hbmlmZXN0amV4Y2x1c2lvbnOBomVzdGFydBjZZmxlbmd0aBkeBAAAAj5qdW1iAAAAJ2p1bWRjMmNsABEAEIAAAKoAOJtxA2MycGEuY2xhaW0udjIAAAACD2Nib3KlY2FsZ2ZzaGEyNTZpc2lnbmF0dXJleE1zZWxmI2p1bWJmPS9jMnBhL3VybjpjMnBhOjNkNDcwYTRlLTIyZWQtNDIyYi1hNTIxLTcwMGFjZWYyNDVjOS9jMnBhLnNpZ25hdHVyZWppbnN0YW5jZUlEeCx4bXA6aWlkOjgyNWJkYzkyLWFhMzAtNGMyYy1iZWFhLWQ2YzVjOWU5YTlmMHJjcmVhdGVkX2Fzc2VydGlvbnODomN1cmx4LXNlbGYjanVtYmY9YzJwYS5hc3NlcnRpb25zL2MycGEuaW5ncmVkaWVudC52M2RoYXNoWCB0dWNCFBtMgNzye6a5fbxaCkBmteGyhOKxwc5Tu1Qn2KJjdXJseCpzZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmFjdGlvbnMudjJkaGFzaFggZb4jeey+/rFWzYf06bWr+PDqqliKesNjNSIAZleW87WiY3VybHgpc2VsZiNqdW1iZj1jMnBhLmFzc2VydGlvbnMvYzJwYS5oYXNoLmRhdGFkaGFzaFggJXgyBv4iaW2DX7SIIoYZDAgDYOBXpYCAOdcJs3U09wJ0Y2xhaW1fZ2VuZXJhdG9yX2luZm+jZG5hbWVvQW50aHJvcGljIEZpbGVzZ3ZlcnNpb25lMS4wLjBrc3BlY1ZlcnNpb25lMi40LjAAABA4anVtYgAAAChqdW1kYzJjcwARABCAAACqADibcQNjMnBhLnNpZ25hdHVyZQAAABAIY2JvctKEWQISogEmGCFZAgowggIGMIIBjaADAgECAhRA5aAK7sI50L64g/oGQgU9Z1UTADAKBggqhkjOPQQDAzBJMRcwFQYDVQQKEw5BbnRocm9waWMsIFBCQzEuMCwGA1UEAxMlQW50aHJvcGljIENvbnRlbnQgQ3JlZGVudGlhbHMgUm9vdCBDQTAeFw0yNjA4MDcxODQzNTZaFw0yODA4MDYxOTQzNTZaMEQxFzAVBgNVBAoTDkFudGhyb3BpYywgUEJDMSkwJwYDVQQDEyBBbnRocm9waWMgQ2xhdWRlIENvbnRlbnQgU2lnbmluZzBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABJh6CmvLUBgFFNU0vUKlOVtE6djd17L5SuwX0LemFisBM3dkd/3cyjxFA3Qo5S46fX0/ihY0VZ7mfb9KF703t5OjWDBWMA4GA1UdDwEB/wQEAwIHgDAVBgNVHSUEDjAMBgorBgEEAYPoXgIBMAwGA1UdEwEB/wQCMAAwHwYDVR0jBBgwFoAUzlHiBIFOZFsj+OPEz5o+nMHXXMIwCgYIKoZIzj0EAwMDZwAwZAIwMXMdFJ4BetLLVY7ORuE9noqbbAZOZn/aArXyTwFAZfKrPzxF2vPoJNf1+UCdg1XGAjBwX1zd9WGqYkqmL5SFqw1QySjr1zJfpJM9+1rdDwSPLMOPOjKuiXjoU/pUUeG9RwmhY3BhZFkNngAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPZYQKQHFmaWWw8/Pc9rbvILoQMoF65ZjbiA82R+olrBgcQbYPjdqnnCCZ2/cDk4w5k3mqsSm4BnOOf3/ZWf0b44t4k=</c2pa:manifest></metadata><path d="M30.4 4.59 0 4.59 0 0 93.33 0C128.29 0 166.29 7.45 166.29 50.73 166.29 85.7 123.42 94.87 101.23 97.45L101.23 98.02C136.19 100.89 154.74 108.05 159.3 145.89L163.56 180.86C165.69 197.77 174.2 198.92 179.37 198.92 184.84 198.92 188.79 197.2 191.84 196.05L193.66 199.78C187.58 201.79 179.98 203.51 168.73 203.51 131.64 203.51 129.51 184.88 125.25 151.92L123.12 134.72C120.99 116.66 115.52 100.32 81.17 100.32L61.41 100.32 61.41 198.92 92.42 198.92 92.42 203.51 0 203.51 0 198.92 30.4 198.92 30.4 4.59ZM61.41 95.73 76.61 95.73C112.48 95.73 133.46 83.98 133.46 50.73 133.46 27.8 125.25 4.58 82.08 4.58L61.41 4.58 61.41 95.73Z" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4"  fill-opacity="1"/><path d="M293.24 0.32C342.65 0.32 385.63 45.32 385.63 101.91 385.63 158.5 342.65 203.5 293.24 203.5 243.83 203.5 200.85 158.5 200.85 101.91 200.85 45.32 243.83 0.32 293.24 0.32ZM293.24 199.09C345.28 199.09 352.3 138.08 352.3 101.91 352.3 65.74 345.28 4.74 293.24 4.74 241.2 4.74 234.18 65.75 234.18 101.91 234.18 138.07 241.2 199.09 293.24 199.09Z" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4"  fill-opacity="1"/><path d="M501.23 135.93 438.66 135.93 424.96 175.38C422.91 180.89 420.57 187.51 420.57 192.19 420.57 196.05 424.08 199.08 433.43 199.08L448.63 199.08 448.63 203.49 388.4 203.49 388.4 199.08 397.76 199.08C406.82 199.08 410.62 198.25 416.18 182.82L480.77 0.32 483.99 0.32 556.81 199.09 581.08 199.09 581.08 203.5 495.42 203.5 495.42 199.09 524.07 199.09 501.24 135.93ZM469.66 48 469.08 48 440.43 131.52 499.78 131.52 469.67 48Z" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4"  fill-opacity="1"/><path d="M598 130.7 602.68 130.7C602.68 177.01 631.63 198.78 666.71 198.78 694.78 198.78 714.95 181.97 714.95 157.16 714.95 128.49 699.16 119.95 665.54 114.99 619.64 108.1 598 100.93 598 54.62 598 23.2 619.93 0.32 652.68 0.32 682.79 0.32 694.2 17.14 704.14 17.13 712.17 17.13 711.74 3.58 712.62-2.84217e-14L717.3-2.84217e-14 717.3 64.54 712.62 64.54C709.99 33.12 691.86 4.73 652.69 4.73 627.84 4.73 610.29 20.17 610.29 45.52 610.29 70.87 620.23 75.84 668.76 84.11 711.45 91.28 728.99 104.23 728.99 140.07 728.99 175.91 707.94 203.19 665.55 203.19 636.31 203.19 620.82 188.78 610 188.86 601.37 188.92 602.69 198.82 602.69 203.51L598.01 203.51 598.01 130.7Z" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4"  fill-opacity="1"/><path d="M752.96 0 752.96 64.54 757.64 64.54C757.64 24.77 766.71 6.75 804.33 4.79L804.33 147.44 829.12 147.44 829.12 4.41 855.73 4.41 855.73 147.44 880.52 147.44 880.52 4.78C918.11 6.71 927.21 24.7 927.21 64.54L931.89 64.54 931.89 0 752.96 0Z" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4"  fill-opacity="1"/></svg><span>×</span><svg class="client-logo" role="img" aria-label="SoulCycle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 356 48" xmlns:c2pa="http://c2pa.org/manifest"><path fill="currentColor" fill-rule="evenodd" d="M12.551 37.755c.9.649 1.955 1.129 3.168 1.444 1.212.312 2.466.468 3.763.468.879 0 1.819-.072 2.822-.218a9.773 9.773 0 0 0 2.823-.848 6.118 6.118 0 0 0 2.195-1.725c.586-.73.879-1.662.879-2.791 0-1.211-.388-2.195-1.160-2.947-.775-.752-1.788-1.379-3.043-1.881-1.254-.502-2.676-.941-4.265-1.318-1.59-.375-3.198-.793-4.829-1.254a42.707 42.707 0 0 1-4.893-1.537c-1.589-.606-3.010-1.389-4.264-2.352a11.066 11.066 0 0 1-3.042-3.605c-.775-1.444-1.160-3.190-1.160-5.238 0-2.299.491-4.297 1.473-5.991A13.349 13.349 0 0 1 6.876 3.730c1.588-1.129 3.386-1.965 5.393-2.508a22.899 22.899 0 0 1 6.022-.816c2.342 0 4.589.261 6.742.783 2.153.523 4.066 1.371 5.739 2.541a12.869 12.869 0 0 1 3.983 4.484c.982 1.819 1.473 4.026 1.473 6.617h-9.533c-.084-1.337-.366-2.447-.847-3.324-.481-.879-1.119-1.568-1.913-2.070-.795-.502-1.704-.856-2.728-1.067a16.885 16.885 0 0 0-3.356-.312c-.794 0-1.589.084-2.382.250a6.404 6.404 0 0 0-2.165.879 5.422 5.422 0 0 0-1.599 1.568c-.418.627-.627 1.422-.627 2.383 0 .877.167 1.588.502 2.133.334.543.992 1.045 1.975 1.504.982.461 2.341.920 4.078 1.381a654.07 654.07 0 0 0 6.804 1.756c.836.167 1.996.470 3.482.910 1.483.437 2.957 1.138 4.421 2.099 1.463.963 2.728 2.248 3.794 3.858 1.067 1.611 1.600 3.670 1.600 6.177 0 2.051-.398 3.952-1.191 5.709-.795 1.756-1.977 3.272-3.544 4.547-1.569 1.276-3.513 2.268-5.833 2.979-2.321.711-5.008 1.066-8.060 1.066-2.468 0-4.861-.305-7.181-.910-2.321-.605-4.370-1.557-6.147-2.853-1.777-1.295-3.189-2.948-4.233-4.956C.499 36.533-.003 34.148.039 31.390h9.534c0 1.504.271 2.781.815 3.824.543 1.047 1.264 1.893 2.163 2.541zm37.720-8.217c.440 1.780 1.139 3.377 2.102 4.799.961 1.422 2.216 2.561 3.762 3.418 1.547.858 3.429 1.285 5.646 1.285 2.215 0 4.097-.427 5.644-1.285 1.546-.857 2.801-1.996 3.763-3.418.962-1.422 1.662-3.019 2.102-4.799.438-1.775.658-3.605.658-5.488 0-1.965-.220-3.867-.658-5.707-.440-1.840-1.140-3.480-2.102-4.924a10.69 10.69 0 0 0-3.763-3.449c-1.547-.855-3.429-1.285-5.644-1.285-2.217 0-4.099.430-5.646 1.285a10.678 10.678 0 0 0-3.762 3.449c-.963 1.444-1.662 3.084-2.102 4.924a24.56 24.56 0 0 0-.658 5.707c0 1.883.220 3.713.658 5.488zm-9-14.8c1.004-2.866 2.445-5.364 4.327-7.496 1.882-2.133 4.193-3.805 6.931-5.018C55.267 1.013 58.351.406 61.781.406c3.470 0 6.563.607 9.282 1.818 2.718 1.213 5.018 2.885 6.900 5.018 1.880 2.132 3.324 4.630 4.327 7.496 1.004 2.863 1.505 5.968 1.505 9.312 0 3.262-.501 6.305-1.505 9.127-1.003 2.822-2.447 5.279-4.327 7.369-1.882 2.092-4.182 3.733-6.900 4.924-2.719 1.192-5.812 1.787-9.282 1.787-3.430 0-6.514-.595-9.252-1.787-2.738-1.191-5.049-2.832-6.931-4.924-1.882-2.090-3.323-4.547-4.327-7.369s-1.506-5.865-1.506-9.127c0-3.344.502-6.449 1.506-9.312zm79.028 28.097c-3.387 2.948-8.071 4.422-14.050 4.422-6.064 0-10.756-1.463-14.080-4.390-3.325-2.926-4.987-7.442-4.987-13.547V1.472h9.847V29.320c0 1.213.104 2.404.314 3.574.209 1.172.647 2.207 1.317 3.105.668.899 1.600 1.631 2.791 2.196 1.191.564 2.791.845 4.798.845 3.512 0 5.936-.783 7.276-2.351 1.337-1.569 2.007-4.024 2.007-7.369V1.472h9.847V29.320c0 6.062-1.694 10.568-5.080 13.515m19.618-41.363v36.502h21.826v8.279H130.070V1.472h9.847m52.295 11.947a9.963 9.963 0 0 0-2.196-2.476 10.167 10.167 0 0 0-2.980-1.662 10.24 10.24 0 0 0-3.481-.596c-2.216 0-4.097.430-5.645 1.285a10.681 10.681 0 0 0-3.763 3.449c-.963 1.444-1.661 3.084-2.101 4.924a24.613 24.613 0 0 0-.658 5.707c0 1.883.221 3.713.658 5.488.440 1.780 1.138 3.377 2.101 4.799.961 1.422 2.217 2.561 3.763 3.418 1.548.858 3.429 1.285 5.645 1.285 3.012 0 5.364-.918 7.057-2.759 1.693-1.838 2.729-4.264 3.104-7.276h9.533c-.250 2.803-.899 5.332-1.944 7.590-1.046 2.258-2.425 4.182-4.140 5.770-1.715 1.589-3.721 2.802-6.020 3.638-2.301.836-4.830 1.254-7.590 1.254-3.429 0-6.512-.595-9.250-1.787-2.739-1.191-5.050-2.832-6.931-4.924-1.881-2.090-3.324-4.547-4.328-7.369-1.004-2.822-1.506-5.865-1.506-9.127 0-3.344.502-6.449 1.506-9.312 1.004-2.866 2.447-5.364 4.328-7.496 1.881-2.133 4.192-3.805 6.931-5.018 2.738-1.211 5.821-1.818 9.250-1.818 2.467 0 4.799.355 6.995 1.066 2.193.711 4.160 1.746 5.894 3.104 1.734 1.359 3.168 3.043 4.297 5.048 1.129 2.008 1.840 4.309 2.131 6.901h-9.531a8.056 8.056 0 0 0-1.129-3.106m9.144-11.947h11.037l10.475 17.688 10.410-17.688h10.977l-16.620 27.596v17.185h-9.847V28.818L201.356 1.472m69.692 11.947a9.924 9.924 0 0 0-2.196-2.476 10.141 10.141 0 0 0-2.980-1.662 10.22 10.22 0 0 0-3.479-.596c-2.218 0-4.099.430-5.646 1.285a10.67 10.67 0 0 0-3.762 3.449c-.963 1.444-1.662 3.084-2.101 4.924a24.452 24.452 0 0 0-.659 5.707c0 1.883.219 3.713.659 5.488.439 1.780 1.138 3.377 2.101 4.799.961 1.422 2.215 2.561 3.762 3.418 1.547.858 3.428 1.285 5.646 1.285 3.010 0 5.362-.918 7.057-2.759 1.691-1.838 2.726-4.264 3.103-7.276h9.534c-.252 2.803-.901 5.332-1.944 7.590-1.047 2.258-2.427 4.182-4.140 5.770-1.715 1.589-3.723 2.802-6.022 3.638-2.301.836-4.830 1.254-7.588 1.254-3.431 0-6.513-.595-9.252-1.787-2.740-1.191-5.049-2.832-6.931-4.924-1.881-2.090-3.323-4.547-4.326-7.369-1.004-2.822-1.506-5.865-1.506-9.127 0-3.344.502-6.449 1.506-9.312 1.003-2.866 2.445-5.364 4.326-7.496 1.882-2.133 4.191-3.805 6.931-5.018 2.739-1.211 5.821-1.818 9.252-1.818 2.467 0 4.797.355 6.992 1.066 2.196.711 4.161 1.746 5.897 3.104 1.734 1.359 3.168 3.043 4.297 5.048 1.127 2.008 1.840 4.309 2.131 6.901h-9.534a8.039 8.039 0 0 0-1.128-3.106m25.101-11.947v36.502h21.826v8.279h-31.674V1.472h9.848m58.981 0v8.279h-23.645v9.596h21.699v7.652h-21.699v10.975h24.147v8.279h-33.995V1.472h33.493"/></svg><span>· Q4 2026</span></div>
+    <div class="deadline"><b id="days">—</b> <span id="dayslabel">days to January, SoulCycle’s busiest month online</span></div>
+  </div>
+
+  <div>
+    <h1>What being the studio Google, reviews and AI answers pick is worth to SoulCycle in new riders</h1>
+    <p class="lede">Americans search for a spin or cycling class ~42,000 times a month, and soul-cycle.com already ranks in the top 3 for the biggest of those searches. Where riders pick a studio, though, Google’s map pack shows rivals rated 4.8–5.0 stars, several with 2–15x the reviews: none of SoulCycle’s 7 Boston and LA studios is in the pack for “best spin class” (Google US, Nov 10, 2026), a typical studio has ~70 Google reviews, and AI assistants send soul-cycle.com ~105 visits a month. Pick how much of the plan to model (we recommend all three phases; past them, each $1 returns much less), then replace our placeholder rates with your own.</p>
+  </div>
+
+  <div class="grid">
+    <section class="panel" aria-label="Assumptions">
+      <div class="sect" style="border-top:0;padding-top:0">New activity once the work is live (by month 12)</div>
+      <div class="ctl"><div class="row"><label for="act">New Business Profile actions a month, all studios</label><output id="actOut" for="act">560</output></div><input type="range" id="act" min="0" max="3000" step="1" value="560"><div class="band" id="actBand"></div><div class="why">Website clicks, calls and directions from category searches (“spin class near me”). BrightLocal’s average profile gets 59 actions a month; we count half as discovery, for 51 studios out of the pack half the time, and a 93% lift once in the 3-pack (SOCi).</div></div>
+      <div class="ctl"><div class="row"><label for="wv">New Google visits a month to city, studio and guide pages</label><output id="wvOut" for="wv">801</output></div><input type="range" id="wv" min="0" max="3000" step="1" value="801"><div class="why">From ~42K class searches a month near SoulCycle’s studios and ~5.3K first-timer questions (“what is a spin class”), Ahrefs US. Guide visits book at a quarter of the rate.</div></div>
+      <div class="ctl"><div class="row"><label for="ai">New AI-assistant visits a month</label><output id="aiOut" for="ai">312</output></div><input type="range" id="ai" min="0" max="1500" step="1" value="312"><div class="band" id="aiBand"></div><div class="why">ChatGPT, Gemini, Copilot and Perplexity referrals: ~105 a month today; at the 0.25% average of SoulCycle, CycleBar, Barry’s, [solidcore] and Orangetheory it would be ~417 (Similarweb). AI-referred visits book at 1.5x (they arrive with a recommendation).</div></div>
+      <div class="ctl"><div class="row"><label for="off">First-ride rate lift on studio pages</label><output id="offOut" for="off">+0.5 pt</output></div><input type="range" id="off" min="0" max="2" step="0.1" value="0.5"><div class="why">Once studio and city pages show the New Rider offer and reviews, on ~5,983 new visitors a month who land on them from search today (Similarweb, Oct 2026). Placeholder.</div></div>
+      <div class="sect">Your rates (placeholders until SoulCycle shares its own)</div>
+      <div class="ctl"><div class="row"><label for="a2f">Profile action to a first ride</label><output id="a2fOut" for="a2f">8.0%</output></div><input type="range" id="a2f" min="2" max="20" step="0.5" value="8.0"><div class="why">Placeholder: a website click, call or directions request that ends in a booked first ride. Business Profile Insights and booking data replace it.</div></div>
+      <div class="ctl"><div class="row"><label for="v2f">Visit to a first ride</label><output id="v2fOut" for="v2f">3.0%</output></div><input type="range" id="v2f" min="1" max="8" step="0.5" value="3.0"><div class="why">Placeholder for first-time, non-branded visitors (the intro-offer rate we used for btone FITNESS).</div></div>
+      <div class="ctl"><div class="row"><label for="f2r">First ride to a regular rider</label><output id="f2rOut" for="f2r">25%</output></div><input type="range" id="f2r" min="5" max="60" step="1" value="25.0"><div class="why">Placeholder. A first rider spends ~$50 on the intro offer (New Rider $25 or a three-pack, NYC prices).</div></div>
+      <div class="ctl"><div class="row"><label for="mo">A regular’s monthly spend</label><output id="moOut" for="mo">$135</output></div><input type="range" id="mo" min="60" max="400" step="5" value="135"><div class="why">Placeholder: a four-class monthly plan is ~$134 in NYC (soul-cycle.com, Nov 10, 2026).</div></div>
+      <div class="ctl"><div class="row"><label for="mon">Months a new regular rides in their first year</label><output id="monOut" for="mon">8</output></div><input type="range" id="mon" min="2" max="12" step="1" value="8"><div class="why">Placeholder. Set it to 12 for riders who stay all year.</div></div>
+      <div class="sect">Optional: local search &amp; Maps ads (shown apart from the plan)</div>
+      <div class="ctl"><div class="row"><label for="ads">Ad budget a month</label><output id="adsOut" for="ads">$2,000</output></div><input type="range" id="ads" min="0" max="10000" step="250" value="2000"><div class="why">Category ads around each studio (“spin class near me”). Similarweb estimates ~$4,779 a month of Google Ads today, on SoulCycle’s own name.</div></div>
+      <div class="ctl"><div class="row"><label for="cpc">Cost per click</label><output id="cpcOut" for="cpc">$1.60</output></div><input type="range" id="cpc" min="0.5" max="6" step="0.1" value="1.6"><div class="why">Ahrefs’ CPC for “spin class near me” (Similarweb shows ~$3.48; we use the lower one). Paid clicks book at 0.75x the visit rate.</div></div>
+      <div class="presets" role="group" aria-label="Scenarios tied to the plan">
+        <button class="preset" type="button" data-i="0" data-fee="44422" data-p="420,0,0,0.0,8.0,3.0,25.0,135,8,2000,1.6"><b>Phase 1 only: profiles & reviews</b>51 Business Profiles named and kept current, a review ask after every ride, studio-page fixes and closed-studio redirects · ~$44K</button><button class="preset" type="button" data-i="1" data-fee="98357" data-p="420,801,0,0.5,8.0,3.0,25.0,135,8,2000,1.6"><b>Phases 1 and 2: + city & studio pages</b>~20 city and region pages, 51 studio pages that show the first-ride offer and reviews, ~10 first-timer guides · ~$98K</button><button class="preset" type="button" data-i="2" data-fee="143849" data-p="560,801,312,0.5,8.0,3.0,25.0,135,8,2000,1.6" aria-pressed="true"><b>All three phases: + AI answers & PR (recommended)</b>Peec tracking of ~100 city prompts, citations on ClassPass, Yelp and Reddit, city best-of lists and PR · ~$144K</button>
+      </div>
+    </section>
+
+    <section class="result" aria-live="polite" aria-label="Outcome">
+      <div>
+        <div class="label">New rider revenue a year from the plan, once the work is live</div>
+        <div class="big" id="rev">$412,000</div>
+        <div class="sub" id="revSub"></div>
+      </div>
+      <div class="stats" style="grid-template-columns:repeat(2,minmax(0,1fr))">
+        <div class="stat"><div class="v" id="first">0</div><div class="l">new first rides a month</div></div>
+        <div class="stat"><div class="v" id="reg">0</div><div class="l">new regular riders a year</div></div>
+        <div class="stat"><div class="v" id="roi">$0</div><div class="l">rider revenue per $1 of plan</div></div>
+        <div class="stat"><div class="v" id="adsx">$0</div><div class="l" id="adsL">per $1 of ads</div></div>
+      </div>
+      <div class="bars">
+        <div class="t">New rider revenue a year by source</div>
+        <div class="bar"><span>Business Profiles &amp; reviews</span><div class="fill"><i id="b0"></i></div><span class="n" id="n0">0</span></div>
+        <div class="bar"><span>City, studio &amp; guide pages</span><div class="fill"><i id="b1"></i></div><span class="n" id="n1">0</span></div>
+        <div class="bar"><span>First-ride offer on studio pages</span><div class="fill"><i id="b2"></i></div><span class="n" id="n2">0</span></div>
+        <div class="bar"><span>AI answers</span><div class="fill"><i id="b3"></i></div><span class="n" id="n3">0</span></div>
+        <div class="bar"><span>Local ads (optional, not in the total)</span><div class="fill"><i id="b4"></i></div><span class="n" id="n4">0</span></div>
+      </div>
+      <div class="tscroll">
+      <table aria-label="Sensitivity to the profile action rate">
+        <thead><tr><th>If a profile action books at</th><th>First rides / mo</th><th>Rider revenue / yr</th></tr></thead>
+        <tbody id="sens"></tbody>
+      </table>
+      </div>
+    </section>
+  </div>
+
+  <div class="inaction">
+    <h2>What's at stake</h2>
+    <p><b>60%</b> of US dance and exercise class-goers research on search engines, <b>half</b> read consumer reviews and <b>1 in 5</b> already use AI tools like ChatGPT (GWI, a proxy for SoulCycle’s riders). They search for a spin or cycling class ~42,000 times a month. Where they choose a studio, Google’s map pack shows studios rated 4.8–5.0, several with 2–15x the reviews; SoulCycle’s have ~70, rated 4.1–4.8, and for “best spin class” in Boston and LA none of its 7 studios makes the pack. Google’s AI and ChatGPT cite Barry’s and [solidcore]’s sites ~1,100 times each, and SoulCycle’s 549 (Ahrefs). At these rates the plan you pick is worth about <b id="perMonth">$0</b> a month in new rider revenue once the work is live.</p>
+  </div>
+
+  <div class="foot">
+    <div>Sources: Similarweb (US, Aug–Oct 2026: traffic, search performance, landing pages, marketing channels and AI referrals for SoulCycle, CycleBar, Barry’s, [solidcore] and Orangetheory; modeled); Ahrefs (US, Nov 10, 2026: keyword volumes, non-branded traffic and AI responses citing each site; modeled); live Google and ChatGPT checks, US, Nov 10, 2026 (results vary by location, account and over time); soul-cycle.com page source and sitemap, Nov 10, 2026; BrightLocal and SOCi Business Profile benchmarks; GWI Core (US dance and exercise class participants, a proxy for SoulCycle’s riders).</div>
+    <div>Formula: first rides a month = new profile actions × action-to-first-ride + new page visits × visit-to-first-ride (guide visits at a quarter of it) + studio-page visitors × the offer lift + new AI visits × visit-to-first-ride × 1.5. Rider revenue a year = first rides × 12 × ($50 intro spend + first-ride-to-regular × monthly spend × months), counted by month 12, not as a ramped year. Ads: budget ÷ CPC × visit-to-first-ride × 0.75, shown apart from the plan’s total. Rider revenue per $1 of plan = revenue ÷ draft fees for the phases picked (ROAST 2026 US rate card + 15% project management, tools and PR distribution at cost: Phase 1 only ~$44K, Phases 1 and 2 ~$98K, all three ~$144K). Revenue, not margin. Every rate is a placeholder until SoulCycle shares its Business Profile Insights and booking data.</div>
+    <div>Part of the ROAST × SoulCycle local search, AI &amp; rider growth proposal, November 2026.</div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const $=id=>document.getElementById(id);
+  const C={"INFO": [0, 0.298, 0.298], "FEES": [44422, 98357, 143849], "INFO_REL": 0.25, "AI_REL": 1.5, "AI_TODAY": 105, "INTRO": 50, "STUDIO_VISITS": 5983, "PAID_REL": 0.75, "STUDIOS": 51};
+  const ids=["act", "wv", "ai", "off", "a2f", "v2f", "f2r", "mo", "mon", "ads", "cpc"];
+  const els=ids.map($);
+  const fmtI=n=>Math.round(n).toLocaleString('en-US');
+  const fmtD=n=>'$'+Math.round(n).toLocaleString('en-US');
+  const fmtK=n=>n>=1e6?'$'+(n/1e6).toFixed(2)+'M':n>=1e4?'$'+Math.round(n/1e3)+'K':fmtD(n);
+  const fmtD2=n=>'$'+n.toFixed(2);
+  const presets=[...document.querySelectorAll('.preset')];
+  let active=2;
+  const now=new Date(), today=new Date(now.getFullYear(),now.getMonth(),now.getDate());
+  let due=new Date(today.getFullYear(),0,1); if(today>=due) due=new Date(today.getFullYear()+1,0,1);
+  $('days').textContent=Math.max(0,Math.ceil((due-today)/86400000));
+  function model(v,share){
+    const a=v.a2f/100, r=v.v2f/100;
+    const fM=v.act*a, fW=v.wv*(1-share)*r+v.wv*share*r*C.INFO_REL, fO=C.STUDIO_VISITS*v.off/100, fA=v.ai*r*C.AI_REL;
+    const val=C.INTRO+(v.f2r/100)*v.mo*v.mon, k=12*val;
+    const fAds=v.cpc>0?v.ads/v.cpc*r*C.PAID_REL:0;
+    const first=fM+fW+fO+fA;
+    return {fM,fW,fO,fA,first,val,rev:first*k,parts:[fM*k,fW*k,fO*k,fA*k,fAds*k],fAds,adsRev:fAds*k};
+  }
+  function vals(){const v={};ids.forEach((k,i)=>v[k]=+els[i].value);return v;}
+  function render(){
+    const v=vals(), share=C.INFO[active], o=model(v,share);
+    $('actOut').value=fmtI(v.act); $('wvOut').value=fmtI(v.wv); $('aiOut').value=fmtI(v.ai); $('offOut').value='+'+v.off.toFixed(1)+' pt';
+    $('a2fOut').value=v.a2f.toFixed(1)+'%'; $('v2fOut').value=v.v2f.toFixed(1)+'%'; $('f2rOut').value=v.f2r.toFixed(0)+'%';
+    $('moOut').value=fmtD(v.mo); $('monOut').value=v.mon.toFixed(0); $('adsOut').value=fmtD(v.ads); $('cpcOut').value='$'+v.cpc.toFixed(2);
+    $('actBand').textContent=`~${fmtI(v.act/C.STUDIOS)} more a studio a month`;
+    $('aiBand').textContent=`${fmtI(C.AI_TODAY+v.ai)} AI visits a month in all, from ~${fmtI(C.AI_TODAY)} today`;
+    $('rev').textContent=fmtD(o.rev);
+    $('revSub').textContent=`${fmtI(o.first)} first rides a month at ${fmtD(o.val)} of first-year revenue each (${fmtD(C.INTRO)} intro + ${v.f2r.toFixed(0)}% becoming regulars at ${fmtD(v.mo)} a month for ${v.mon} months).`;
+    $('first').textContent=fmtI(o.first); $('reg').textContent=fmtI(o.first*12*v.f2r/100);
+    const fee=C.FEES[active]; $('roi').textContent=fee&&o.rev?fmtD2(o.rev/fee):'—';
+    $('adsx').textContent=v.ads?fmtD2(o.adsRev/(v.ads*12)):'—';
+    $('adsL').textContent=v.ads?`per $1 of ads: +${fmtI(o.fAds)} first rides a month, ${fmtI(o.first+o.fAds)} with the plan`:'per $1 of ads (no ad budget set)';
+    const mx=Math.max(...o.parts,1)*1.08;
+    o.parts.forEach((y,i)=>{$('b'+i).style.width=(y/mx*100)+'%';$('n'+i).textContent=fmtK(y);});
+    $('sens').innerHTML=[Math.max(2,v.a2f-4),v.a2f,Math.min(20,v.a2f+4)].map(c=>{const m=model(Object.assign({},v,{a2f:c}),share);return `<tr><td>${c.toFixed(1)}%</td><td>${fmtI(m.first)}</td><td>${fmtD(m.rev)}</td></tr>`;}).join('');
+    $('perMonth').textContent=fmtD(o.rev/12);
+    presets.forEach(pr=>{const q=pr.dataset.p.split(',').map(Number);pr.setAttribute('aria-pressed',String(q.slice(0,4).every((z,k)=>Math.abs(z-(+els[k].value))<1e-9)));});
+    try{localStorage.setItem('soulcycle-rider-calc',JSON.stringify(els.map(e=>e.value)));}catch(e){}
+  }
+  els.forEach(el=>el.addEventListener('input',render));
+  presets.forEach(pr=>pr.addEventListener('click',()=>{const q=pr.dataset.p.split(',');[0,1,2,3].forEach(k=>els[k].value=q[k]);active=+pr.dataset.i;render();}));
+  try{if(location.hash==='#saved'){const s=JSON.parse(localStorage.getItem('soulcycle-rider-calc'));if(Array.isArray(s)&&s.length===els.length){els.forEach((el,k)=>el.value=s[k]);}}}catch(e){}
+  render();
+})();
+</script>
+<!-- layout-guard:start: roast-deck-kit/layout_guard.py -->
+<script>
+(function(){
+  var els=[].slice.call(document.querySelectorAll('.result .big,.stat .v,.funnel .v,.key .v'));
+  if(!els.length) return;
+  function fit(el){
+    el.style.fontSize='';
+    var w=el.clientWidth; if(!w) return;
+    var min=el.classList.contains('big')?28:13;
+    for(var i=0;i<4&&el.scrollWidth>w+0.5;i++){
+      var fs=parseFloat(getComputedStyle(el).fontSize);
+      var next=Math.max(min,fs*w/el.scrollWidth-0.5);
+      if(next>=fs) break;
+      el.style.fontSize=next.toFixed(1)+'px';
+    }
+  }
+  function all(){els.forEach(fit);}
+  var mo=new MutationObserver(all);
+  els.forEach(function(el){mo.observe(el,{childList:true,characterData:true,subtree:true});});
+  var raf=0; function soon(){if(!raf) raf=requestAnimationFrame(function(){raf=0;all();});}
+  window.addEventListener('resize',soon);
+  if(window.ResizeObserver){
+    var last=new WeakMap();
+    var ro=new ResizeObserver(function(entries){
+      var changed=false;
+      entries.forEach(function(e){var w=Math.round(e.contentRect.width);if(last.get(e.target)!==w){last.set(e.target,w);changed=true;}});
+      if(changed) soon();
+    });
+    [].slice.call(document.querySelectorAll('.result,.stat,.funnel .step,.key')).forEach(function(b){ro.observe(b);});
+  }
+  if(document.fonts&&document.fonts.ready) document.fonts.ready.then(all);
+  all();
+})();
+</script>
+<!-- layout-guard:end -->
+</body>
+</html>
