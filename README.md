@@ -56,6 +56,7 @@ Interactive pages that accompany ROAST pitch decks. Static HTML, served with Git
 | Evolve Owner-Lead Value Calculator — what AI answers on fees and "manager or DIY?" and owner pages that answer the objections AI repeats are worth to Evolve in qualified owner leads, signed homes and first-year management fees on the same owner media, with new-channel holdout tests shown apart | `evolve-owner-lead-value-calculator/` |
 | Stannah Install-Value Calculator — what readable pages, town pages and the Maps pack in the direct-mail pilot states, the category and caregiver searches, AI answers and better ad landing pages are worth to Stannah in free assessments, installed stairlifts and media cost per lead on the same Google Ads budget | `stannah-install-value-calculator/` |
 | TCL 2027 Growth Calculator — what fixing the us.tcl.com migration, building TCL's TV and Home Comfort category pages and winning AI answers are worth in 2027 DTC revenue, by phase (three phases, all recommended), per $1 of plan | `tcl-2027-growth-calculator/` |
+| Meridia One-Site Break-Even Calculator — when moving Meridia Living's 32 property sites onto meridialiving.com pays for itself against buying the same growth with ads: break-even month, three-year saving, the organic gain it needs and what's at risk, moving in three waves (recommended) or all at once | `meridia-one-site-breakeven-calculator/` |
 
 ## Favicon and link previews
 
