@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>WHOOP Member-Value Calculator</title>
+<!-- share:start -->
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<meta name="description" content="What being the tracker Google and AI recommend is worth in new WHOOP members: category and comparison pages, The Locker and AI answers; all three phases recommended at ~$5.16 per $1">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ROAST">
+<meta property="og:title" content="WHOOP Member-Value Calculator">
+<meta property="og:description" content="What being the tracker Google and AI recommend is worth in new WHOOP members: category and comparison pages, The Locker and AI answers; all three phases recommended at ~$5.16 per $1">
+<meta property="og:url" content="https://npc-0802.github.io/pitches/whoop-member-value-calculator/">
+<meta property="og:image" content="https://npc-0802.github.io/pitches/whoop-member-value-calculator/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="ROAST × WHOOP: Member-Value Calculator">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="WHOOP Member-Value Calculator">
+<meta name="twitter:description" content="What being the tracker Google and AI recommend is worth in new WHOOP members: category and comparison pages, The Locker and AI answers; all three phases recommended at ~$5.16 per $1">
+<meta name="twitter:image" content="https://npc-0802.github.io/pitches/whoop-member-value-calculator/og.png">
+<!-- share:end -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;900&family=Public+Sans:wght@400;500;600&display=swap">
+<style>
+:root{
+  --bg:#ffffff; --ink:#111214; --muted:#5b5e66; --line:#e6e4dc; --panel:#f6f5f0;
+  --yellow:#FFD100; --yellow-deep:#e6bc00; --on-yellow:#111214; --on-yellow-muted:#4a4630;
+  --track:#e3e1d8; --ok:#1f7a3a;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){ --bg:#111214; --ink:#f4f3ee; --muted:#a6a79f; --line:#2a2b2f; --panel:#1b1c20; --track:#33343a; color-scheme:dark; }
+}
+:root[data-theme="dark"]{ --bg:#111214; --ink:#f4f3ee; --muted:#a6a79f; --line:#2a2b2f; --panel:#1b1c20; --track:#33343a; color-scheme:dark; }
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Public Sans",system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;font-size:15px;line-height:1.45}
+.wrap{max-width:1440px;margin:0 auto;padding-block:22px 44px;padding-inline:clamp(16px,3vw,40px);display:grid;gap:22px}
+.brand{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-bottom:6px;flex-wrap:wrap}
+.wordmark{display:flex;align-items:center;gap:12px}.wordmark .roast-logo{height:22px;width:auto;display:block;color:var(--ink)}
+.wordmark span{font-family:"Public Sans",sans-serif;font-weight:500;font-size:15px;color:var(--muted);letter-spacing:0}
+.deadline{font-size:13px;color:var(--muted);text-align:right}
+.deadline b{color:var(--ink);font-variant-numeric:tabular-nums}
+h1{font-family:"Archivo",system-ui,sans-serif;font-weight:900;font-size:clamp(28px,3.4vw,46px);line-height:1.05;letter-spacing:-.015em;margin:0;text-wrap:balance;max-width:26ch}
+.lede{color:var(--muted);max-width:78ch;margin:8px 0 0;font-size:clamp(14px,1.1vw,16px)}
+.grid{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,2fr);gap:22px;align-items:start}
+@media (max-width:900px){.grid{grid-template-columns:1fr}}
+.panel{background:var(--panel);border-radius:22px;padding:clamp(18px,2vw,28px) clamp(18px,2vw,28px) 10px;min-width:0;overflow:hidden}
+.ctl{display:grid;gap:8px;padding-block:14px;border-top:1px solid var(--line)}
+.ctl:first-child{border-top:0;padding-top:2px}
+.ctl .row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.ctl label{font-weight:600}
+.ctl output{font-family:"Archivo",sans-serif;font-weight:700;font-size:22px;font-variant-numeric:tabular-nums}
+.ctl output small{font-family:"Public Sans",sans-serif;font-weight:500;font-size:13px;color:var(--muted);margin-left:8px}
+.ctl .why{font-size:13px;color:var(--muted);max-width:72ch}
+.sect{font-family:"Archivo",sans-serif;font-weight:700;font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);padding-top:16px;border-top:1px solid var(--line)}
+.band{font-size:13px;font-weight:600;padding:5px 12px;border-radius:14px;background:var(--yellow);color:var(--on-yellow);width:fit-content;max-width:100%;line-height:1.3}
+.band.low{background:var(--track);color:var(--ink)}
+.band.warn{background:#f3c4bd;color:#5c120a}
+input[type=range]{width:100%;accent-color:var(--ink);height:30px;margin:0}
+input[type=range]:focus-visible{outline:2px solid var(--ink);outline-offset:4px;border-radius:6px}
+.presets{display:flex;flex-wrap:wrap;gap:8px;padding-block:16px;border-top:1px solid var(--line)}
+.preset{border:1.5px solid var(--line);border-radius:12px;padding:8px 12px;font-size:13px;background:transparent;color:var(--ink);cursor:pointer;font-family:inherit;text-align:left;line-height:1.25}
+.preset b{display:block;font-weight:700}
+.preset:hover,.preset:focus-visible{border-color:var(--ink);outline:none}
+.preset[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.result{background:var(--yellow);color:var(--on-yellow);border-radius:22px;padding:clamp(20px,2.2vw,32px);display:grid;gap:18px;min-width:0}
+.result .label{font-weight:600;font-size:14px;color:var(--on-yellow-muted)}
+.result .big{font-family:"Archivo",sans-serif;font-weight:900;font-size:clamp(48px,6vw,88px);line-height:.95;letter-spacing:-.02em;font-variant-numeric:tabular-nums;margin:6px 0}
+.result .sub{font-size:14px;color:var(--on-yellow-muted);max-width:52ch}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+@media (max-width:520px){.stats{grid-template-columns:1fr 1fr}}
+.stat{background:rgba(255,255,255,.5);border-radius:14px;padding:14px 14px 12px;min-width:0}
+.stat .v{font-family:"Archivo",sans-serif;font-weight:700;font-size:clamp(20px,1.8vw,26px);font-variant-numeric:tabular-nums;line-height:1.1}
+.stat .l{font-size:12.5px;color:var(--on-yellow-muted);margin-top:5px;line-height:1.3;text-wrap:balance}
+.bars{display:grid;gap:8px;margin-top:4px}
+.bars .t{font-weight:600;font-size:13px;color:var(--on-yellow-muted)}
+.bar{display:grid;grid-template-columns:minmax(120px,170px) 1fr minmax(64px,auto);gap:10px;align-items:center;font-size:13px}
+@media (max-width:520px){.bar{grid-template-columns:110px 1fr minmax(56px,auto)}}
+.bar .fill{height:14px;border-radius:7px;background:rgba(17,18,20,.25);position:relative;overflow:hidden}
+.bar .fill i{position:absolute;inset:0;width:0;background:var(--on-yellow);border-radius:7px;transition:width .25s ease}
+.bar .fill i.gain{background:#ffffff;left:auto}
+.bar .n{text-align:right;font-variant-numeric:tabular-nums;font-weight:600}
+@media (prefers-reduced-motion: reduce){.bar .fill i{transition:none}}
+.corp{display:grid;gap:8px}
+.corp .t{font-weight:600;font-size:13px;color:var(--on-yellow-muted)}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th,td{text-align:left;padding:7px 4px;border-bottom:1px solid rgba(17,18,20,.18);font-variant-numeric:tabular-nums}
+th{font-size:12px;color:var(--on-yellow-muted);font-weight:600}
+td:last-child,th:last-child{text-align:right;font-weight:700}
+.inaction{background:var(--panel);border-radius:22px;padding:clamp(18px,2vw,28px);display:grid;gap:8px}
+.inaction h2{font-family:"Archivo",sans-serif;font-weight:700;font-size:18px;margin:0}
+.inaction p{margin:0;color:var(--muted);max-width:100ch;font-size:15px;line-height:1.55}
+.inaction b{color:var(--ink)}
+.foot{font-size:13px;color:var(--muted);max-width:110ch;display:grid;gap:6px}
+.foot a{color:var(--ink)}
+@media (min-width:901px){.result{position:sticky;top:16px}}
+.wordmark{flex-wrap:wrap;row-gap:6px}.wordmark .client-logo{height:22px;width:auto;display:block;color:var(--ink)}
+/* layout-guard:start: roast-deck-kit/layout_guard.py; re-run it instead of editing */
+.grid>*,.result>*,.stats>*,.bar>*,.funnel>*,.keys>*{min-width:0}
+.result{grid-template-columns:minmax(0,1fr);container:lgresult/inline-size}
+.stat .l,.funnel .l,.funnel .s,.key .l,.key .s{overflow-wrap:break-word}
+.tscroll{overflow-x:auto;max-width:100%}
+@container lgresult (max-width:400px){
+  .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .stats>.stat:last-child:nth-child(odd){grid-column:1/-1}
+  .funnel{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .funnel .step::after{display:none}
+}
+/* layout-guard:end */
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="brand">
+    <div class="wordmark"><svg class="roast-logo" fill="currentColor" aria-label="ROAST" role="img" viewBox="0 0 931.89 203.5" xmlns="http://www.w3.org/2000/svg" overflow="hidden" xmlns:c2pa="http://c2pa.org/manifest"><metadata><c2pa:manifest>AAAWgmp1bWIAAAAeanVtZGMycGEAEQAQgAAAqgA4m3EDYzJwYQAAABZcanVtYgAAAEdqdW1kYzJtYQARABCAAACqADibcQN1cm46YzJwYTozZDQ3MGE0ZS0yMmVkLTQyMmItYTUyMS03MDBhY2VmMjQ1YzkAAAADl2p1bWIAAAApanVtZGMyYXMAEQAQgAAAqgA4m3EDYzJwYS5hc3NlcnRpb25zAAAAALxqdW1iAAAARGp1bWRjYm9yABEAEIAAAKoAOJtxE2MycGEuaW5ncmVkaWVudC52MwAAAAAYYzJzaA2CgfxpiyX5e10r0s1hRZEAAABwY2JvcqNpZGM6Zm9ybWF0bWltYWdlL3N2Zyt4bWxqaW5zdGFuY2VJRHgseG1wOmlpZDplM2ZmMmVlNi01ZGQ1LTQ1MjItOWQ5Yy0zZGJjNGU4YmI5NWJscmVsYXRpb25zaGlwaHBhcmVudE9mAAAB4mp1bWIAAABBanVtZGNib3IAEQAQgAAAqgA4m3ETYzJwYS5hY3Rpb25zLnYyAAAAABhjMnNokbiFip/0bVcWbCsmWV7bOwAAAZljYm9yomdhY3Rpb25zgqJmYWN0aW9ua2MycGEub3BlbmVkanBhcmFtZXRlcnOha2luZ3JlZGllbnRzgaJjdXJseC1zZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmluZ3JlZGllbnQudjNkaGFzaFggdHVjQhQbTIDc8numuX28WgpAZrXhsoTiscHOU7tUJ9ikZmFjdGlvbngdY29tLmFudGhyb3BpYy5jbGF1ZGUucHJvdmlkZWRqcGFyYW1ldGVyc6F4H2NvbS5hbnRocm9waWMub3JpZ2luLWNvbmZpZGVuY2VndW5rbm93bmtkZXNjcmlwdGlvbnhmQ2xhdWRlIHByb3ZpZGVkIHRoaXMgZmlsZSBhdCB0aGUgcmVxdWVzdCBvZiBhIHVzZXIgYW5kIG1heSBoYXZlIGNyZWF0ZWQgb3IgbW9kaWZpZWQgdGhlIGZpbGUgY29udGVudHMubXNvZnR3YXJlQWdlbnShZG5hbWVmQ2xhdWRlcmFsbEFjdGlvbnNJbmNsdWRlZPUAAADIanVtYgAAAEBqdW1kY2JvcgARABCAAACqADibcRNjMnBhLmhhc2guZGF0YQAAAAAYYzJzaJTTpaWSGw/skOxEaOFCsm0AAACAY2JvcqVjYWxnZnNoYTI1NmNwYWRNAAAAAAAAAAAAAAAAAGRoYXNoWCBFqzodb2N2pJR9ua6fnBJPH/pxrehRy7zC3r72E1+nfmRuYW1lbmp1bWJmIG1hbmlmZXN0amV4Y2x1c2lvbnOBomVzdGFydBjZZmxlbmd0aBkeBAAAAj5qdW1iAAAAJ2p1bWRjMmNsABEAEIAAAKoAOJtxA2MycGEuY2xhaW0udjIAAAACD2Nib3KlY2FsZ2ZzaGEyNTZpc2lnbmF0dXJleE1zZWxmI2p1bWJmPS9jMnBhL3VybjpjMnBhOjNkNDcwYTRlLTIyZWQtNDIyYi1hNTIxLTcwMGFjZWYyNDVjOS9jMnBhLnNpZ25hdHVyZWppbnN0YW5jZUlEeCx4bXA6aWlkOjgyNWJkYzkyLWFhMzAtNGMyYy1iZWFhLWQ2YzVjOWU5YTlmMHJjcmVhdGVkX2Fzc2VydGlvbnODomN1cmx4LXNlbGYjanVtYmY9YzJwYS5hc3NlcnRpb25zL2MycGEuaW5ncmVkaWVudC52M2RoYXNoWCB0dWNCFBtMgNzye6a5fbxaCkBmteGyhOKxwc5Tu1Qn2KJjdXJseCpzZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmFjdGlvbnMudjJkaGFzaFggZb4jeey+/rFWzYf06bWr+PDqqliKesNjNSIAZleW87WiY3VybHgpc2VsZiNqdW1iZj1jMnBhLmFzc2VydGlvbnMvYzJwYS5oYXNoLmRhdGFkaGFzaFggJXgyBv4iaW2DX7SIIoYZDAgDYOBXpYCAOdcJs3U09wJ0Y2xhaW1fZ2VuZXJhdG9yX2luZm+jZG5hbWVvQW50aHJvcGljIEZpbGVzZ3ZlcnNpb25lMS4wLjBrc3BlY1ZlcnNpb25lMi40LjAAABA4anVtYgAAAChqdW1kYzJjcwARABCAAACqADibcQNjMnBhLnNpZ25hdHVyZQAAABAIY2JvctKEWQISogEmGCFZAgowggIGMIIBjaADAgECAhRA5aAK7sI50L64g/oGQgU9Z1UTADAKBggqhkjOPQQDAzBJMRcwFQYDVQQKEw5BbnRocm9waWMsIFBCQzEuMCwGA1UEAxMlQW50aHJvcGljIENvbnRlbnQgQ3JlZGVudGlhbHMgUm9vdCBDQTAeFw0yNjA4MDcxODQzNTZaFw0yODA4MDYxOTQzNTZaMEQxFzAVBgNVBAoTDkFudGhyb3BpYywgUEJDMSkwJwYDVQQDEyBBbnRocm9waWMgQ2xhdWRlIENvbnRlbnQgU2lnbmluZzBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABJh6CmvLUBgFFNU0vUKlOVtE6djd17L5SuwX0LemFisBM3dkd/3cyjxFA3Qo5S46fX0/ihY0VZ7mfb9KF703t5OjWDBWMA4GA1UdDwEB/wQEAwIHgDAVBgNVHSUEDjAMBgorBgEEAYPoXgIBMAwGA1UdEwEB/wQCMAAwHwYDVR0jBBgwFoAUzlHiBIFOZFsj+OPEz5o+nMHXXMIwCgYIKoZIzj0EAwMDZwAwZAIwMXMdFJ4BetLLVY7ORuE9noqbbAZOZn/aArXyTwFAZfKrPzxF2vPoJNf1+UCdg1XGAjBwX1zd9WGqYkqmL5SFqw1QySjr1zJfpJM9+1rdDwSPLMOPOjKuiXjoU/pUUeG9RwmhY3BhZFkNngAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPZYQKQHFmaWWw8/Pc9rbvILoQMoF65ZjbiA82R+olrBgcQbYPjdqnnCCZ2/cDk4w5k3mqsSm4BnOOf3/ZWf0b44t4k=</c2pa:manifest></metadata><path d="M30.4 4.59 0 4.59 0 0 93.33 0C128.29 0 166.29 7.45 166.29 50.73 166.29 85.7 123.42 94.87 101.23 97.45L101.23 98.02C136.19 100.89 154.74 108.05 159.3 145.89L163.56 180.86C165.69 197.77 174.2 198.92 179.37 198.92 184.84 198.92 188.79 197.2 191.84 196.05L193.66 199.78C187.58 201.79 179.98 203.51 168.73 203.51 131.64 203.51 129.51 184.88 125.25 151.92L123.12 134.72C120.99 116.66 115.52 100.32 81.17 100.32L61.41 100.32 61.41 198.92 92.42 198.92 92.42 203.51 0 203.51 0 198.92 30.4 198.92 30.4 4.59ZM61.41 95.73 76.61 95.73C112.48 95.73 133.46 83.98 133.46 50.73 133.46 27.8 125.25 4.58 82.08 4.58L61.41 4.58 61.41 95.73Z" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4"  fill-opacity="1"/><path d="M293.24 0.32C342.65 0.32 385.63 45.32 385.63 101.91 385.63 158.5 342.65 203.5 293.24 203.5 243.83 203.5 200.85 158.5 200.85 101.91 200.85 45.32 243.83 0.32 293.24 0.32ZM293.24 199.09C345.28 199.09 352.3 138.08 352.3 101.91 352.3 65.74 345.28 4.74 293.24 4.74 241.2 4.74 234.18 65.75 234.18 101.91 234.18 138.07 241.2 199.09 293.24 199.09Z" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4"  fill-opacity="1"/><path d="M501.23 135.93 438.66 135.93 424.96 175.38C422.91 180.89 420.57 187.51 420.57 192.19 420.57 196.05 424.08 199.08 433.43 199.08L448.63 199.08 448.63 203.49 388.4 203.49 388.4 199.08 397.76 199.08C406.82 199.08 410.62 198.25 416.18 182.82L480.77 0.32 483.99 0.32 556.81 199.09 581.08 199.09 581.08 203.5 495.42 203.5 495.42 199.09 524.07 199.09 501.24 135.93ZM469.66 48 469.08 48 440.43 131.52 499.78 131.52 469.67 48Z" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4"  fill-opacity="1"/><path d="M598 130.7 602.68 130.7C602.68 177.01 631.63 198.78 666.71 198.78 694.78 198.78 714.95 181.97 714.95 157.16 714.95 128.49 699.16 119.95 665.54 114.99 619.64 108.1 598 100.93 598 54.62 598 23.2 619.93 0.32 652.68 0.32 682.79 0.32 694.2 17.14 704.14 17.13 712.17 17.13 711.74 3.58 712.62-2.84217e-14L717.3-2.84217e-14 717.3 64.54 712.62 64.54C709.99 33.12 691.86 4.73 652.69 4.73 627.84 4.73 610.29 20.17 610.29 45.52 610.29 70.87 620.23 75.84 668.76 84.11 711.45 91.28 728.99 104.23 728.99 140.07 728.99 175.91 707.94 203.19 665.55 203.19 636.31 203.19 620.82 188.78 610 188.86 601.37 188.92 602.69 198.82 602.69 203.51L598.01 203.51 598.01 130.7Z" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4"  fill-opacity="1"/><path d="M752.96 0 752.96 64.54 757.64 64.54C757.64 24.77 766.71 6.75 804.33 4.79L804.33 147.44 829.12 147.44 829.12 4.41 855.73 4.41 855.73 147.44 880.52 147.44 880.52 4.78C918.11 6.71 927.21 24.7 927.21 64.54L931.89 64.54 931.89 0 752.96 0Z" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4"  fill-opacity="1"/></svg><span>×</span><svg class="client-logo" role="img" aria-label="WHOOP" style="height:18px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 422.32 68.84" fill="currentColor"><rect x="107.68" y="0.09" width="8.4" height="68.74"></rect><rect x="124.47" y="30.27" width="24.11" height="8.4"></rect><rect x="156.97" y="0.09" width="8.4" height="68.74"></rect><polygon points="351.93 68.84 360.33 68.84 360.33 0.1 360.33 0.09 351.93 0.09 351.93 68.84"></polygon><path d="M380,.09H368.73V8.26H380a15.29,15.29,0,0,1,0,30.57H368.73V47H380A23.45,23.45,0,1,0,380,.09"></path><path d="M216.37.09a34.37,34.37,0,1,0,34.37,34.37A34.41,34.41,0,0,0,216.37.09m0,60.63a26.26,26.26,0,1,1,26.26-26.26,26.28,26.28,0,0,1-26.26,26.26"></path><path d="M299.85.09a34.37,34.37,0,1,0,34.37,34.37A34.4,34.4,0,0,0,299.85.09m0,60.63a26.26,26.26,0,1,1,26.26-26.26,26.28,26.28,0,0,1-26.26,26.26"></path><polygon points="66.82 55.45 57.89 26.06 49.74 26.06 62.75 68.84 62.75 68.84 70.9 68.84 91.82 0.09 83.67 0.09 66.82 55.45"></polygon><polygon points="8.15 0.09 0 0.09 13.01 42.86 21.16 42.86 8.15 0.09"></polygon><polygon points="41.83 0.09 20.92 68.84 29.06 68.84 49.99 0.09 41.83 0.09"></polygon></svg><span>· Q4 2026</span></div>
+    <div class="deadline"><b id="days">—</b> <span id="dayslabel">days until Black Friday (Nov 27, 2026)</span></div>
+  </div>
+
+  <div>
+    <h1>What being the tracker Google and AI recommend is worth in new WHOOP members</h1>
+    <p class="lede">About 95% of WHOOP’s Google visits come from people who already typed “WHOOP” (Similarweb, US). The ~247K searches a month where people choose a tracker (“fitness tracker”, “best fitness tracker”, “sleep tracker”, “screenless fitness tracker”) send whoop.com almost no organic clicks, and Google’s and ChatGPT’s answers name Fitbit Air, Garmin and Oura instead; in ChatGPT, WHOOP shows up only as a sponsored card (live checks, Nov 17, 2026). Pick how much of the plan to model (we recommend all three phases; past them, each $1 returns much less), then replace our placeholder rates with your own.</p>
+  </div>
+
+  <div class="grid">
+    <section class="panel" aria-label="Assumptions">
+      <div class="sect" style="border-top:0;padding-top:0">New visits a month once the work is live (by month 12)</div>
+      <div class="ctl"><div class="row"><label for="bv">New visits from people choosing a tracker</label><output id="bvOut" for="bv">21,001</output></div><input type="range" id="bv" min="0" max="60000" step="1" value="21001"><div class="why">Category and comparison pages. Buyer searches (“fitness tracker” 104K, “smart ring” 46K, “heart rate monitor” 12K, “best fitness tracker”, “sleep tracker”, “screenless fitness tracker” and 58 more) run ~247K a month in the US; we count ~8.5% of their clicks (Similarweb).</div></div>
+      <div class="ctl"><div class="row"><label for="iv">New visits to The Locker from health questions</label><output id="ivOut" for="iv">16,689</output></div><input type="range" id="iv" min="0" max="80000" step="1" value="16689"><div class="why">HRV, REM sleep, resting heart rate, zone 2 and sleep debt: ~1.7M searches a month, where The Locker ranks #6 to #34 today. We count 1% more of their clicks. These readers join at a tenth of the rate.</div></div>
+      <div class="ctl"><div class="row"><label for="ai">New AI-assistant visits a month</label><output id="aiOut" for="ai">15,000</output></div><input type="range" id="ai" min="0" max="40000" step="1" value="15000"><div class="band" id="aiBand"></div><div class="why">ChatGPT, Perplexity, Gemini and Copilot referrals: ~17K a month today; ouraring.com gets ~24K (Similarweb, directional). AI-referred visits join at 1.5x the rate: they arrive with a recommendation.</div></div>
+      <div class="sect">Your rates (placeholders until WHOOP shares its own)</div>
+      <div class="ctl"><div class="row"><label for="jr">Buyer visit to new member (incl. free trials that convert)</label><output id="jrOut" for="jr">1.50%</output></div><input type="range" id="jr" min="0.25" max="5" step="0.25" value="1.5"><div class="why">Placeholder for a first-time visitor on a category or comparison page.</div></div>
+      <div class="ctl"><div class="row"><label for="mv">First-year membership value per new member</label><output id="mvOut" for="mv">$239</output></div><input type="range" id="mv" min="199" max="359" step="10" value="239"><div class="why">Peak, the middle plan, at $239 a year (One $199, Life $359, whoop.com, Nov 17, 2026). Year one only: renewals and Advanced Labs come on top.</div></div>
+      <div class="presets" role="group" aria-label="Scenarios tied to the plan">
+        <button class="preset" type="button" data-i="0" data-fee="45824" data-p="1235,0,2000,1.5,239"><b>Phase 1 only: make WHOOP easy to read</b>Product and plan markup, the category words on the home page, named experts on The Locker, a facts page AI can quote · ~$46K in year one</button><button class="preset" type="button" data-i="1" data-fee="212132" data-p="13589,16689,6000,1.5,239"><b>Phases 1 and 2: + pages for the searches buyers make</b>12 category and comparison pages (screenless, recovery, sleep, WHOOP vs Oura and Garmin) and the top 40 Locker pages rebuilt · ~$212K in year one</button><button class="preset" type="button" data-i="2" data-fee="376429" data-p="21001,16689,15000,1.5,239" aria-pressed="true"><b>All three phases: + get named in the lists AI reads (recommended)</b>Reviewers and “best fitness tracker” lists, data stories from WHOOP’s member data, Reddit and YouTube · ~$376K in year one</button>
+      </div>
+    </section>
+
+    <section class="result" aria-live="polite" aria-label="Outcome">
+      <div>
+        <div class="label">First-year membership from new members a year, once the work is live</div>
+        <div class="big" id="rev">$1,943,209</div>
+        <div class="sub" id="revSub"></div>
+      </div>
+      <div class="stats" style="grid-template-columns:repeat(2,minmax(0,1fr))">
+        <div class="stat"><div class="v" id="mem">0</div><div class="l">new members a month</div></div>
+        <div class="stat"><div class="v" id="memy">0</div><div class="l">new members a year</div></div>
+        <div class="stat"><div class="v" id="roi">$0</div><div class="l">membership per $1 of plan</div></div>
+        <div class="stat"><div class="v" id="peq">$0</div><div class="l">same Google visits in ads, a month</div></div>
+      </div>
+      <div class="bars">
+        <div class="t">First-year membership a year by source</div>
+        <div class="bar"><span>Category &amp; comparison pages</span><div class="fill"><i id="b0"></i></div><span class="n" id="n0">0</span></div>
+        <div class="bar"><span>The Locker</span><div class="fill"><i id="b1"></i></div><span class="n" id="n1">0</span></div>
+        <div class="bar"><span>AI answers</span><div class="fill"><i id="b2"></i></div><span class="n" id="n2">0</span></div>
+      </div>
+      <div class="tscroll">
+      <table aria-label="Sensitivity to the buyer visit to member rate">
+        <thead><tr><th>If a buyer visit joins at</th><th>Members / yr</th><th>Membership / yr</th></tr></thead>
+        <tbody id="sens"></tbody>
+      </table>
+      </div>
+    </section>
+  </div>
+
+  <div class="inaction">
+    <h2>What's at stake</h2>
+    <p>People choose a tracker in Google ~<b>247K</b> times a month and ask health questions WHOOP measures ~<b>1.7M</b> times (Similarweb, US). Google’s AI Overview for “best fitness tracker” names Google Fitbit Air the best screenless tracker, the category WHOOP started, and doesn’t name WHOOP; on page one for “screenless fitness tracker”, Reddit recommends WHOOP but whoop.com isn’t there. ChatGPT’s five best trackers leave WHOOP out, and its HRV answer puts Oura first. Oura is cited in ~10.5K AI answers to WHOOP’s ~7.1K (ChatGPT 535 vs 269) and buys ~458K paid search visits a month to WHOOP’s ~68K. WHOOP’s Google visits fell ~106K a month over six months (Ahrefs). At these rates the plan you pick is worth about <b id="perMonth">$0</b> a month in first-year membership once the work is live.</p>
+  </div>
+
+  <div class="foot">
+    <div>Sources: Similarweb (US, Aug–Oct 2026: traffic, marketing channels and AI referrals for whoop.com, ouraring.com, ultrahuman.com, polar.com and garmin.com; search overview; website keywords and US search volumes; modeled, AI referrals directional); Ahrefs (US, Nov 17, 2026: organic traffic, branded vs non-branded, AI answers citing each site; modeled); live Google (US, signed in) and ChatGPT (logged out) checks, Nov 17, 2026 (results vary by account, location and over time); whoop.com membership page (One $199, Peak $239, Life $359 a year), Nov 17, 2026.</div>
+    <div>Formula: new members a month = buyer visits × visit-to-member + Locker visits × visit-to-member × 0.1 + AI visits × visit-to-member × 1.5. First-year membership a year = members × 12 × first-year value, counted by month 12, not as a ramped year. Same Google visits in ads = buyer visits × $1.68 (volume-weighted CPC of the buyer searches) + Locker visits × $0.50. Membership per $1 of plan = the total ÷ draft fees for the phases picked (ROAST 2026 US rate card + 15% project management, tracking tools and PR costs at cost: Phase 1 only ~$46K, Phases 1 and 2 ~$212K, all three ~$376K). Revenue, not margin. Every rate is a placeholder until WHOOP shares its own.</div>
+    <div>Part of the ROAST × WHOOP search and AI visibility proposal, November 2026.</div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const $=id=>document.getElementById(id);
+  const C={"FEES": [45824, 212132, 376429], "AI_REL": 1.5, "INFO_REL": 0.1, "AI_TODAY": 16567, "CPC": 1.68, "INFO_CPC": 0.5, "MOMENTS": [["2026-11-27", "Black Friday"], ["2027-01-01", "New Year\u2019s resolution season"], ["2027-05-01", "the summer training season"]]};
+  const ids=["bv", "iv", "ai", "jr", "mv"];
+  const els=ids.map($);
+  const fmtI=n=>Math.round(n).toLocaleString('en-US');
+  const fmtD=n=>'$'+Math.round(n).toLocaleString('en-US');
+  const fmtK=n=>n>=1e6?'$'+(n/1e6).toFixed(2)+'M':n>=1e4?'$'+Math.round(n/1e3)+'K':fmtD(n);
+  const fmtD2=n=>'$'+n.toFixed(2);
+  const presets=[...document.querySelectorAll('.preset')];
+  let active=2;
+  const now=new Date(), today=new Date(now.getFullYear(),now.getMonth(),now.getDate());
+  const next=C.MOMENTS.map(([d,t])=>[new Date(d+'T00:00:00'),t]).find(([d])=>d>=today);
+  if(next){$('days').textContent=Math.ceil((next[0]-today)/86400000);$('dayslabel').textContent=`days until ${next[1]} (${next[0].toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})})`;}
+  function model(v){
+    const r=v.jr/100;
+    const mB=v.bv*r, mI=v.iv*r*C.INFO_REL, mA=v.ai*r*C.AI_REL;
+    const mem=mB+mI+mA, k=12*v.mv;
+    return {mem,memy:mem*12,rev:mem*k,parts:[mB*k,mI*k,mA*k],peq:v.bv*C.CPC+v.iv*C.INFO_CPC};
+  }
+  function vals(){const v={};ids.forEach((k,i)=>v[k]=+els[i].value);return v;}
+  function render(){
+    const v=vals(), o=model(v);
+    $('bvOut').value=fmtI(v.bv); $('ivOut').value=fmtI(v.iv); $('aiOut').value=fmtI(v.ai);
+    $('jrOut').value=v.jr.toFixed(2)+'%'; $('mvOut').value=fmtD(v.mv);
+    $('aiBand').textContent=`${fmtI(C.AI_TODAY+v.ai)} AI visits a month in all, from ~${fmtI(C.AI_TODAY)} today`;
+    $('rev').textContent=fmtD(o.rev);
+    $('revSub').textContent=`${fmtI(o.memy)} more members a year (${fmtI(o.mem)} a month), at ${fmtD(v.mv)} of first-year membership each.`;
+    $('mem').textContent=fmtI(o.mem); $('memy').textContent=fmtI(o.memy);
+    const fee=C.FEES[active]; $('roi').textContent=fee&&o.rev?fmtD2(o.rev/fee):'—';
+    $('peq').textContent=fmtK(o.peq);
+    const mx=Math.max(...o.parts,1)*1.08;
+    o.parts.forEach((y,i)=>{$('b'+i).style.width=(y/mx*100)+'%';$('n'+i).textContent=fmtK(y);});
+    $('sens').innerHTML=[Math.max(0.25,v.jr-0.5),v.jr,Math.min(5,v.jr+0.5)].map(c=>{const m=model(Object.assign({},v,{jr:c}));return `<tr><td>${c.toFixed(2)}%</td><td>${fmtI(m.memy)}</td><td>${fmtD(m.rev)}</td></tr>`;}).join('');
+    $('perMonth').textContent=fmtD(o.rev/12);
+    presets.forEach(pr=>{const q=pr.dataset.p.split(',').map(Number);pr.setAttribute('aria-pressed',String(q.slice(0,3).every((z,k)=>Math.abs(z-(+els[k].value))<1e-9)));});
+    try{localStorage.setItem('whoop-member-calc',JSON.stringify(els.map(e=>e.value)));}catch(e){}
+  }
+  els.forEach(el=>el.addEventListener('input',render));
+  presets.forEach(pr=>pr.addEventListener('click',()=>{const q=pr.dataset.p.split(',');[0,1,2].forEach(k=>els[k].value=q[k]);active=+pr.dataset.i;render();}));
+  try{if(location.hash==='#saved'){const s=JSON.parse(localStorage.getItem('whoop-member-calc'));if(Array.isArray(s)&&s.length===els.length){els.forEach((el,k)=>el.value=s[k]);}}}catch(e){}
+  render();
+})();
+</script>
+<!-- layout-guard:start: roast-deck-kit/layout_guard.py -->
+<script>
+(function(){
+  var els=[].slice.call(document.querySelectorAll('.result .big,.stat .v,.funnel .v,.key .v'));
+  if(!els.length) return;
+  function fit(el){
+    el.style.fontSize='';
+    var w=el.clientWidth; if(!w) return;
+    var min=el.classList.contains('big')?28:13;
+    for(var i=0;i<4&&el.scrollWidth>w+0.5;i++){
+      var fs=parseFloat(getComputedStyle(el).fontSize);
+      var next=Math.max(min,fs*w/el.scrollWidth-0.5);
+      if(next>=fs) break;
+      el.style.fontSize=next.toFixed(1)+'px';
+    }
+  }
+  function all(){els.forEach(fit);}
+  var mo=new MutationObserver(all);
+  els.forEach(function(el){mo.observe(el,{childList:true,characterData:true,subtree:true});});
+  var raf=0; function soon(){if(!raf) raf=requestAnimationFrame(function(){raf=0;all();});}
+  window.addEventListener('resize',soon);
+  if(window.ResizeObserver){
+    var last=new WeakMap();
+    var ro=new ResizeObserver(function(entries){
+      var changed=false;
+      entries.forEach(function(e){var w=Math.round(e.contentRect.width);if(last.get(e.target)!==w){last.set(e.target,w);changed=true;}});
+      if(changed) soon();
+    });
+    [].slice.call(document.querySelectorAll('.result,.stat,.funnel .step,.key')).forEach(function(b){ro.observe(b);});
+  }
+  if(document.fonts&&document.fonts.ready) document.fonts.ready.then(all);
+  all();
+})();
+</script>
+<!-- layout-guard:end -->
+</body>
+</html>
